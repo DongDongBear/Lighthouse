@@ -2,7 +2,8 @@
   --vp-c-brand-1: #ff6b35;
   --vp-c-brand-2: #ff8c5a;
   --vp-c-brand-3: #ff6b35;
-  --vp-c-brand-soft: rgba(255, 107, 53, 0.14);
+  --vp-c-brand-soft: rgba(255, 107, 53, 0.12);
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'PingFang SC', 'Noto Sans SC', sans-serif;
   --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 }
 
@@ -10,69 +11,63 @@
   --vp-c-brand-1: #ff8c5a;
   --vp-c-brand-2: #ffab80;
   --vp-c-brand-3: #ff8c5a;
-  --vp-c-brand-soft: rgba(255, 140, 90, 0.14);
 }
 
-/* Clean, spacious layout like caicai.me */
-.VPDoc .container {
-  max-width: 780px;
-}
+/* 更接近 caicai 的简洁留白感 */
+.VPContent.is-home { padding-top: 28px !important; }
+.VPHome { max-width: 980px; margin: 0 auto; }
 
-.vp-doc h1 {
-  letter-spacing: -0.02em;
-  font-weight: 700;
-}
-
-.vp-doc h2 {
-  letter-spacing: -0.01em;
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--vp-c-divider);
-}
-
-/* Better code blocks */
-.vp-doc div[class*='language-'] {
-  border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
-}
-
-.vp-doc div[class*='language-'] code {
-  font-family: var(--vp-font-family-mono);
-  font-size: 0.875rem;
-  line-height: 1.7;
-}
-
-/* Refined hero */
 .VPHero .name {
+  font-size: clamp(42px, 8vw, 66px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
   font-weight: 800;
-  letter-spacing: -0.03em;
 }
-
+.VPHero .text {
+  font-size: clamp(20px, 3vw, 30px);
+  letter-spacing: -0.02em;
+}
 .VPHero .tagline {
-  font-size: 1.1rem;
-  opacity: 0.7;
+  max-width: 680px;
+  font-size: 16px;
+  opacity: 0.72;
 }
 
-/* Feature cards */
-.VPFeature {
+/* 文档区更干净 */
+.VPDoc .container { max-width: 760px; }
+.vp-doc h1 { letter-spacing: -0.025em; font-weight: 760; }
+.vp-doc h2 {
+  margin-top: 2.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--vp-c-divider);
+  letter-spacing: -0.01em;
+}
+.vp-doc p { line-height: 1.86; }
+
+/* 代码块更柔和 */
+.vp-doc div[class*='language-'] {
   border-radius: 12px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 4px 20px rgba(0,0,0,.04);
 }
 
+/* 卡片降低“组件感” */
+.VPFeature {
+  border-radius: 14px;
+  border: 1px solid var(--vp-c-divider);
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 65%, transparent);
+}
 .VPFeature:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: all .2s ease;
 }
 
-/* Sidebar refinement */
+/* sidebar 紧凑一点 */
 .VPSidebar .group + .group {
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
+  margin-top: .45rem;
+  padding-top: .45rem;
 }
 
-/* Mobile friendly */
 @media (max-width: 768px) {
-  .VPDoc .container {
-    padding: 0 1rem;
-  }
+  .VPDoc .container { padding: 0 12px; }
 }
