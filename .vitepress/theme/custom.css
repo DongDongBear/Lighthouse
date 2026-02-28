@@ -890,3 +890,30 @@
     border-radius: 8px;
   }
 }
+
+/* mobile horizontal overflow fix */
+html, body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 960px) {
+  .VPHome .container,
+  .lh-landing,
+  .lh-home-grid,
+  .lh-card,
+  .lh-card-media {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .lh-home-grid {
+    overflow-x: clip;
+  }
+
+  .lh-card-media img {
+    max-width: min(140px, 45vw) !important;
+    height: auto !important;
+  }
+}
