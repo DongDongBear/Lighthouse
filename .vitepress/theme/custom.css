@@ -1284,3 +1284,14 @@ html, body {
   padding-top: 6px !important;
   padding-bottom: 6px !important;
 }
+
+/* precise target per user: sidebar aria label nav */
+nav[aria-labelledby="sidebar-aria-label"] {
+  margin-top: 12px !important;
+}
+
+@media (max-width: 960px) {
+  nav[aria-labelledby="sidebar-aria-label"] {
+    margin-top: 50px !important;
+  }
+}
