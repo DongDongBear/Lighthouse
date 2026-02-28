@@ -1243,3 +1243,19 @@ html, body {
     margin-top: 0 !important;
   }
 }
+
+/* user-requested fix: sidebar top offset + remove large group gap */
+@media (max-width: 960px) {
+  [aria-label="sidebar navigation"] {
+    margin-top: 50px !important;
+  }
+
+  .VPSidebarItem.level-0 {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+    margin-top: 8px !important;
+  }
+}
