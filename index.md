@@ -1,8 +1,9 @@
 <div class="lh-landing">
 <section class="lh-intro">
 <h1>嗨！这里是 LightHouse</h1>
-<h2>Unity / Electron 学习资料库</h2>
-<p>我把自己从 0 到 1 学习和实战过的内容整理成了结构化教程，目标是“可读、可练、可复用”。这里先放两条核心路线：Unity 3D 与 Electron 桌面开发，后续会持续更新更多专题。</p>
+<h2>从 BellLab 出发，记录面向 AI 时代的工程实践</h2>
+<p>LightHouse 是 BellLab 的学习与方法论分支。BellLab 这个名字致敬贝尔实验室——一个把科学突破、工程实现和长期主义放在一起的地方。这里不做“教程堆砌”，而是持续沉淀一套可复用的工作方式：如何和 AI 协作、如何把想法快速做成产品、如何在复杂系统里做正确的技术决策。</p>
+<p>当前先聚焦两条主线：Unity 3D 与 Electron。前者关注交互与世界构建，后者关注桌面端产品化与工程稳定性。后续还会加入更多 AI 应用开发、自动化与系统设计专题。</p>
 </section>
 <section class="lh-products">
 <div class="lh-products-head">
