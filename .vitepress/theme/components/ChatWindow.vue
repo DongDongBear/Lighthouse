@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, nextTick, watch } from 'vue'
+import { ref, nextTick, watch, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps<{ visible: boolean }>()
 const emit = defineEmits(['close'])
@@ -8,6 +8,7 @@ interface Msg {
   role: 'user' | 'bot'
   content: string
   time: string
+  quote?: string
 }
 
 const messages = ref<Msg[]>([
@@ -16,6 +17,7 @@ const messages = ref<Msg[]>([
 const input = ref('')
 const loading = ref(false)
 const listEl = ref<HTMLElement | null>(null)
+const selectedText = ref('')
 
 const API_BASE = typeof window !== 'undefined'
   ? (window.location.hostname === 'localhost' ? 'http://localhost:3456' : '/Lighthouse')
@@ -31,13 +33,61 @@ function scrollBottom() {
   })
 }
 
-watch(() => props.visible, (v) => { if (v) scrollBottom() })
+watch(() => props.visible, (v) => { if (v) { captureSelection(); scrollBottom() } })
+
+function captureSelection() {
+  if (typeof window === 'undefined') return
+  const sel = window.getSelection()?.toString().trim() || ''
+  // Only capture selection from the doc content, not from our chat widget
+  if (sel && sel.length > 0 && sel.length < 3000) {
+    selectedText.value = sel
+  }
+}
+
+// Listen for mouseup to capture selection in real-time
+function onDocMouseUp() {
+  if (typeof window === 'undefined') return
+  const sel = window.getSelection()
+  if (!sel || sel.isCollapsed) { selectedText.value = ''; return }
+  const text = sel.toString().trim()
+  // Make sure the selection is from the doc, not our chat
+  const anchor = sel.anchorNode?.parentElement
+  if (anchor?.closest('.cw')) return
+  if (text && text.length < 3000) {
+    selectedText.value = text
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('mouseup', onDocMouseUp)
+  document.addEventListener('selectionchange', () => {
+    const sel = window.getSelection()
+    if (!sel || sel.isCollapsed) selectedText.value = ''
+  })
+})
+
+onUnmounted(() => {
+  document.removeEventListener('mouseup', onDocMouseUp)
+})
+
+function clearSelection() {
+  selectedText.value = ''
+}
 
 async function send() {
   const text = input.value.trim()
   if (!text || loading.value) return
-  messages.value.push({ role: 'user', content: text, time: now() })
+
+  const quote = selectedText.value || undefined
+  // Build the actual message sent to AI, including quoted context
+  let fullMessage = text
+  if (quote) {
+    fullMessage = `[用户选中了以下文档内容]\n\`\`\`\n${quote}\n\`\`\`\n\n${text}`
+  }
+
+  messages.value.push({ role: 'user', content: text, time: now(), quote })
   input.value = ''
+  selectedText.value = ''
   loading.value = true
   scrollBottom()
 
@@ -50,7 +100,7 @@ async function send() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        message: text,
+        message: fullMessage,
         history: messages.value.slice(0, -2).map(m => ({
           role: m.role === 'user' ? 'user' : 'assistant',
           content: m.content
@@ -115,6 +165,10 @@ function renderMd(text: string): string {
     .replace(/\n/g, '<br>')
 }
 
+function truncate(text: string, max: number) {
+  return text.length > max ? text.slice(0, max) + '…' : text
+}
+
 function onKeydown(e: KeyboardEvent) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() }
 }
@@ -136,9 +190,7 @@ function onKeydown(e: KeyboardEvent) {
           </div>
           <div class="cw-header-info">
             <span class="cw-header-name">LightHouse</span>
-            <span class="cw-header-status">
-              <i class="cw-dot" />在线
-            </span>
+            <span class="cw-header-status"><i class="cw-dot" />在线</span>
           </div>
         </div>
         <button class="cw-close" @click="emit('close')">
@@ -151,6 +203,7 @@ function onKeydown(e: KeyboardEvent) {
         <div class="cw-welcome" v-if="messages.length <= 1">
           <div class="cw-welcome-icon">🏠</div>
           <p>我是文档助手，可以帮你解答<br/>阅读过程中遇到的问题。</p>
+          <p class="cw-welcome-tip">💡 选中文档文字后提问，我能更好地帮你理解。</p>
         </div>
         <template v-for="(msg, i) in messages" :key="i">
           <div :class="['cw-row', msg.role]">
@@ -160,6 +213,11 @@ function onKeydown(e: KeyboardEvent) {
               </svg>
             </div>
             <div class="cw-msg-wrap">
+              <!-- Quote block if user selected text -->
+              <div v-if="msg.quote" class="cw-quote">
+                <div class="cw-quote-label">📎 引用文档内容</div>
+                <div class="cw-quote-text">{{ truncate(msg.quote, 120) }}</div>
+              </div>
               <div :class="['cw-bubble', msg.role]" v-html="renderMd(msg.content)" />
               <span class="cw-time">{{ msg.time }}</span>
             </div>
@@ -177,13 +235,24 @@ function onKeydown(e: KeyboardEvent) {
         </div>
       </div>
 
+      <!-- Selection indicator -->
+      <Transition name="cw-sel-fade">
+        <div v-if="selectedText" class="cw-selection-bar">
+          <div class="cw-sel-content">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span class="cw-sel-text">{{ truncate(selectedText, 60) }}</span>
+          </div>
+          <button class="cw-sel-clear" @click="clearSelection">✕</button>
+        </div>
+      </Transition>
+
       <!-- Input -->
       <div class="cw-footer">
         <div class="cw-input-wrap">
           <textarea
             v-model="input"
             @keydown="onKeydown"
-            placeholder="输入消息..."
+            :placeholder="selectedText ? '针对选中内容提问...' : '输入消息...'"
             rows="1"
           />
           <button @click="send" :disabled="loading || !input.trim()" class="cw-send">
@@ -213,322 +282,178 @@ function onKeydown(e: KeyboardEvent) {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,.03),
-    0 2px 4px rgba(0,0,0,.04),
-    0 12px 40px rgba(0,0,0,.1);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.03), 0 2px 4px rgba(0,0,0,.04), 0 12px 40px rgba(0,0,0,.1);
   z-index: 2000;
   font-family: var(--vp-font-family-base);
 }
-.dark .cw {
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.06),
-    0 2px 4px rgba(0,0,0,.2),
-    0 12px 40px rgba(0,0,0,.45);
-}
+.dark .cw { box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 2px 4px rgba(0,0,0,.2), 0 12px 40px rgba(0,0,0,.45); }
 
-/* ─── Header ─── */
 .cw-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 18px;
-  border-bottom: 1px solid var(--vp-c-divider-light);
-  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px; border-bottom: 1px solid var(--vp-c-divider-light); flex-shrink: 0;
 }
-.cw-header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.cw-header-left { display: flex; align-items: center; gap: 10px; }
 .cw-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--vp-c-text-1);
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-divider);
+  display: flex; align-items: center; justify-content: center; color: var(--vp-c-text-1);
 }
-.cw-header-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.cw-header-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  letter-spacing: -.01em;
-}
-.cw-header-status {
-  font-size: 11px;
-  color: var(--vp-c-text-3);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.cw-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #34c759;
-  display: inline-block;
-}
+.cw-header-info { display: flex; flex-direction: column; gap: 2px; }
+.cw-header-name { font-size: 14px; font-weight: 600; color: var(--vp-c-text-1); letter-spacing: -.01em; }
+.cw-header-status { font-size: 11px; color: var(--vp-c-text-3); display: flex; align-items: center; gap: 4px; }
+.cw-dot { width: 6px; height: 6px; border-radius: 50%; background: #34c759; display: inline-block; }
 .cw-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--vp-c-text-3);
-  padding: 6px;
-  border-radius: 8px;
-  transition: all .15s;
-  display: flex;
+  background: none; border: none; cursor: pointer; color: var(--vp-c-text-3);
+  padding: 6px; border-radius: 8px; transition: all .15s; display: flex;
 }
-.cw-close:hover {
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-}
+.cw-close:hover { background: var(--vp-c-bg-soft); color: var(--vp-c-text-1); }
 
-/* ─── Body ─── */
 .cw-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 16px;
 }
 .cw-body::-webkit-scrollbar { width: 4px; }
-.cw-body::-webkit-scrollbar-thumb {
-  background: var(--vp-c-divider);
-  border-radius: 4px;
-}
+.cw-body::-webkit-scrollbar-thumb { background: var(--vp-c-divider); border-radius: 4px; }
 
-.cw-welcome {
-  text-align: center;
-  padding: 24px 16px 8px;
-  color: var(--vp-c-text-3);
-}
-.cw-welcome-icon {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-.cw-welcome p {
-  font-size: 13px;
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* ─── Messages ─── */
-.cw-row {
-  display: flex;
-  gap: 8px;
-  align-items: flex-end;
-}
-.cw-row.user {
-  flex-direction: row-reverse;
-}
-.cw-msg-avatar {
-  width: 26px;
-  height: 26px;
+.cw-welcome { text-align: center; padding: 24px 16px 8px; color: var(--vp-c-text-3); }
+.cw-welcome-icon { font-size: 32px; margin-bottom: 10px; }
+.cw-welcome p { font-size: 13px; line-height: 1.7; margin: 0; }
+.cw-welcome-tip {
+  margin-top: 12px !important;
+  padding: 8px 14px;
+  background: var(--vp-c-bg-soft);
   border-radius: 8px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.cw-row { display: flex; gap: 8px; align-items: flex-end; }
+.cw-row.user { flex-direction: row-reverse; }
+.cw-msg-avatar {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-divider-light);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--vp-c-text-2);
+}
+.cw-msg-wrap { max-width: 78%; display: flex; flex-direction: column; gap: 3px; }
+.cw-row.user .cw-msg-wrap { align-items: flex-end; }
+
+/* ─── Quote ─── */
+.cw-quote {
   background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-divider-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  border-radius: 10px;
+  padding: 8px 11px;
+  margin-bottom: 4px;
+  max-width: 100%;
+}
+.cw-quote-label {
+  font-size: 10px;
+  color: var(--vp-c-text-3);
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+.cw-quote-text {
+  font-size: 12px;
   color: var(--vp-c-text-2);
-}
-.cw-msg-wrap {
-  max-width: 78%;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.cw-row.user .cw-msg-wrap {
-  align-items: flex-end;
+  line-height: 1.5;
+  word-break: break-word;
 }
 
 .cw-bubble {
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-size: 13.5px;
-  line-height: 1.65;
-  word-break: break-word;
+  padding: 10px 14px; border-radius: 14px;
+  font-size: 13.5px; line-height: 1.65; word-break: break-word;
 }
-.cw-bubble.bot {
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  border-bottom-left-radius: 4px;
-}
-.cw-bubble.user {
-  background: var(--vp-c-text-1);
-  color: var(--vp-c-bg);
-  border-bottom-right-radius: 4px;
-}
+.cw-bubble.bot { background: var(--vp-c-bg-soft); color: var(--vp-c-text-1); border-bottom-left-radius: 4px; }
+.cw-bubble.user { background: var(--vp-c-text-1); color: var(--vp-c-bg); border-bottom-right-radius: 4px; }
 
-.cw-bubble :deep(code) {
-  background: rgba(0,0,0,.06);
-  padding: 1px 5px;
-  border-radius: 4px;
-  font-size: 12.5px;
-  font-family: var(--vp-font-family-mono);
-}
-.dark .cw-bubble :deep(code) {
-  background: rgba(255,255,255,.1);
-}
-.cw-bubble.user :deep(code) {
-  background: rgba(255,255,255,.15);
-}
-.dark .cw-bubble.user :deep(code) {
-  background: rgba(0,0,0,.12);
-}
-.cw-bubble :deep(pre) {
-  background: rgba(0,0,0,.04);
-  border-radius: 8px;
-  padding: 10px 12px;
-  margin: 6px 0;
-  overflow-x: auto;
-  font-size: 12px;
-  line-height: 1.5;
-}
-.dark .cw-bubble :deep(pre) {
-  background: rgba(255,255,255,.06);
-}
-.cw-bubble :deep(blockquote) {
-  border-left: 2px solid var(--vp-c-divider);
-  padding-left: 10px;
-  margin: 4px 0;
-  color: var(--vp-c-text-2);
-  font-size: 13px;
-}
-.cw-bubble :deep(strong) {
-  font-weight: 600;
-}
+.cw-bubble :deep(code) { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; font-size: 12.5px; font-family: var(--vp-font-family-mono); }
+.dark .cw-bubble :deep(code) { background: rgba(255,255,255,.1); }
+.cw-bubble.user :deep(code) { background: rgba(255,255,255,.15); }
+.dark .cw-bubble.user :deep(code) { background: rgba(0,0,0,.12); }
+.cw-bubble :deep(pre) { background: rgba(0,0,0,.04); border-radius: 8px; padding: 10px 12px; margin: 6px 0; overflow-x: auto; font-size: 12px; line-height: 1.5; }
+.dark .cw-bubble :deep(pre) { background: rgba(255,255,255,.06); }
+.cw-bubble :deep(blockquote) { border-left: 2px solid var(--vp-c-divider); padding-left: 10px; margin: 4px 0; color: var(--vp-c-text-2); font-size: 13px; }
+.cw-bubble :deep(strong) { font-weight: 600; }
 
-.cw-time {
-  font-size: 10px;
-  color: var(--vp-c-text-3);
-  padding: 0 4px;
-  opacity: 0;
-  transition: opacity .2s;
-}
-.cw-row:hover .cw-time {
-  opacity: 1;
-}
+.cw-time { font-size: 10px; color: var(--vp-c-text-3); padding: 0 4px; opacity: 0; transition: opacity .2s; }
+.cw-row:hover .cw-time { opacity: 1; }
 
-/* ─── Typing ─── */
-.cw-typing {
-  display: flex;
-  gap: 5px;
-  padding: 14px 18px;
-}
-.cw-typing span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--vp-c-text-3);
-  animation: cwBounce .5s infinite alternate;
-}
+.cw-typing { display: flex; gap: 5px; padding: 14px 18px; }
+.cw-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--vp-c-text-3); animation: cwBounce .5s infinite alternate; }
 .cw-typing span:nth-child(2) { animation-delay: .12s; }
 .cw-typing span:nth-child(3) { animation-delay: .24s; }
-@keyframes cwBounce {
-  to { opacity: .25; transform: translateY(-3px); }
-}
+@keyframes cwBounce { to { opacity: .25; transform: translateY(-3px); } }
 
-/* ─── Footer ─── */
-.cw-footer {
-  padding: 12px 16px 14px;
-  border-top: 1px solid var(--vp-c-divider-light);
-  flex-shrink: 0;
-}
-.cw-input-wrap {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-  padding: 4px 4px 4px 14px;
-  transition: border-color .15s;
-}
-.cw-input-wrap:focus-within {
-  border-color: var(--vp-c-text-3);
-}
-.cw-input-wrap textarea {
-  flex: 1;
-  resize: none;
-  border: none;
-  background: none;
-  font-size: 13.5px;
-  font-family: var(--vp-font-family-base);
-  color: var(--vp-c-text-1);
-  outline: none;
-  line-height: 1.5;
-  padding: 8px 0;
-  max-height: 80px;
-}
-.cw-input-wrap textarea::placeholder {
-  color: var(--vp-c-text-3);
-}
-.cw-send {
-  width: 34px;
-  height: 34px;
-  border: none;
-  border-radius: 10px;
-  background: var(--vp-c-text-1);
-  color: var(--vp-c-bg);
-  cursor: pointer;
+/* ─── Selection bar ─── */
+.cw-selection-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: color-mix(in srgb, var(--vp-c-brand-soft) 60%, var(--vp-c-bg-soft));
+  border-top: 1px solid var(--vp-c-divider-light);
   flex-shrink: 0;
-  transition: all .15s;
+  gap: 8px;
 }
-.cw-send:disabled {
-  opacity: .25;
-  cursor: not-allowed;
+.cw-sel-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+  color: var(--vp-c-text-2);
 }
-.cw-send:not(:disabled):hover {
-  opacity: .8;
-  transform: scale(1.04);
+.cw-sel-content svg { flex-shrink: 0; opacity: .5; }
+.cw-sel-text {
+  font-size: 11.5px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.cw-send:not(:disabled):active {
-  transform: scale(.96);
+.cw-sel-clear {
+  background: none; border: none; cursor: pointer;
+  color: var(--vp-c-text-3); font-size: 12px;
+  padding: 2px 4px; border-radius: 4px;
+  transition: all .15s; flex-shrink: 0;
 }
+.cw-sel-clear:hover { color: var(--vp-c-text-1); background: var(--vp-c-bg-soft); }
 
-.cw-footer-hint {
-  text-align: center;
-  font-size: 10px;
-  color: var(--vp-c-text-3);
-  margin-top: 8px;
-  opacity: .6;
-}
+.cw-sel-fade-enter-active, .cw-sel-fade-leave-active { transition: all .2s ease; }
+.cw-sel-fade-enter-from, .cw-sel-fade-leave-to { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; }
 
-/* ─── Transition ─── */
-.chat-slide-enter-active,
-.chat-slide-leave-active {
-  transition: all .28s cubic-bezier(.4,0,.2,1);
+/* ─── Footer ─── */
+.cw-footer { padding: 12px 16px 14px; border-top: 1px solid var(--vp-c-divider-light); flex-shrink: 0; }
+.cw-input-wrap {
+  display: flex; align-items: flex-end; gap: 8px;
+  background: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-divider);
+  border-radius: 12px; padding: 4px 4px 4px 14px; transition: border-color .15s;
 }
-.chat-slide-enter-from,
-.chat-slide-leave-to {
-  opacity: 0;
-  transform: translateY(12px) scale(.97);
+.cw-input-wrap:focus-within { border-color: var(--vp-c-text-3); }
+.cw-input-wrap textarea {
+  flex: 1; resize: none; border: none; background: none;
+  font-size: 13.5px; font-family: var(--vp-font-family-base);
+  color: var(--vp-c-text-1); outline: none; line-height: 1.5;
+  padding: 8px 0; max-height: 80px;
 }
+.cw-input-wrap textarea::placeholder { color: var(--vp-c-text-3); }
+.cw-send {
+  width: 34px; height: 34px; border: none; border-radius: 10px;
+  background: var(--vp-c-text-1); color: var(--vp-c-bg); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all .15s;
+}
+.cw-send:disabled { opacity: .25; cursor: not-allowed; }
+.cw-send:not(:disabled):hover { opacity: .8; transform: scale(1.04); }
+.cw-send:not(:disabled):active { transform: scale(.96); }
 
-/* ─── Mobile ─── */
+.cw-footer-hint { text-align: center; font-size: 10px; color: var(--vp-c-text-3); margin-top: 8px; opacity: .6; }
+
+.chat-slide-enter-active, .chat-slide-leave-active { transition: all .28s cubic-bezier(.4,0,.2,1); }
+.chat-slide-enter-from, .chat-slide-leave-to { opacity: 0; transform: translateY(12px) scale(.97); }
+
 @media (max-width: 500px) {
-  .cw {
-    right: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
-  }
+  .cw { right: 0; bottom: 0; width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; }
 }
 </style>
