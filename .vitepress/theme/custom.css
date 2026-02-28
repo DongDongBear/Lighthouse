@@ -221,3 +221,20 @@
 .vp-doc h3 { font-weight: 520; }
 .vp-doc p,
 .vp-doc li { font-weight: 320; }
+
+/* widen article content */
+:root {
+  --vp-layout-max-width: 1520px;
+}
+
+.VPDoc .container { max-width: 980px !important; }
+.VPDoc.has-sidebar .content-container { max-width: 980px !important; }
+.VPDoc:not(.has-sidebar) .content-container { max-width: 980px !important; }
+
+@media (max-width: 1280px) {
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: 920px !important;
+  }
+}
