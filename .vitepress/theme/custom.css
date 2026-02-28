@@ -1295,3 +1295,8 @@ nav[aria-labelledby="sidebar-aria-label"] {
     margin-top: 50px !important;
   }
 }
+
+/* user-requested: remove VPSidebarItem bottom padding */
+.VPSidebarItem {
+  padding-bottom: 0 !important;
+}
