@@ -227,15 +227,15 @@
   --vp-layout-max-width: 1520px;
 }
 
-.VPDoc .container { max-width: 980px !important; }
-.VPDoc.has-sidebar .content-container { max-width: 980px !important; }
-.VPDoc:not(.has-sidebar) .content-container { max-width: 980px !important; }
+.VPDoc .container { max-width: 1100px !important; }
+.VPDoc.has-sidebar .content-container { max-width: 1100px !important; }
+.VPDoc:not(.has-sidebar) .content-container { max-width: 1100px !important; }
 
 @media (max-width: 1280px) {
   .VPDoc .container,
   .VPDoc.has-sidebar .content-container,
   .VPDoc:not(.has-sidebar) .content-container {
-    max-width: 920px !important;
+    max-width: 1040px !important;
   }
 }
 

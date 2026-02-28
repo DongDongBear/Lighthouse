@@ -6,6 +6,7 @@ export default defineConfig({
   lang: 'zh-CN',
   base: '/Lighthouse/',
   head: [
+    ['link', { rel: 'icon', href: '/Lighthouse/lighthouse-icon.svg' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@300;400;500;700&family=Shippori+Mincho:wght@600&display=swap' }],
   ],
   markdown: {
@@ -24,7 +25,7 @@ export default defineConfig({
     }]
   },
   themeConfig: {
-    logo: 'LightHouse',
+    logo: '/lighthouse-icon.svg',
     nav: [
       { text: '首页', link: '/' },
       { text: 'Unity 3D', link: '/unity-tutorial/' },
