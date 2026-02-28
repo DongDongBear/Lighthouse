@@ -5,8 +5,10 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// ─── Secret (server-side only) ───
+// ─── Config ───
 const SECRET_PHRASE = 'I AM DONGDONG SEND'
+const OPENCLAW_URL = 'http://127.0.0.1:18789/v1/chat/completions'
+const OPENCLAW_TOKEN = 'fb135e830bb0bf534e0ace8d7a01a17933834234beabef7d'
 
 // ─── Verify endpoint ───
 app.post('/api/verify', (req, res) => {
@@ -17,18 +19,118 @@ app.post('/api/verify', (req, res) => {
   return res.json({ ok: false })
 })
 
-// ─── Chat endpoint (mock — replace with real AI later) ───
+// ─── Chat endpoint (streaming via SSE) ───
 app.post('/api/chat', async (req, res) => {
   const { message, history } = req.body
   if (!message) return res.status(400).json({ error: 'message required' })
 
-  // ──────────────────────────────────────────────
-  // TODO: Replace this mock with real AI API call
-  // e.g. OpenAI, Claude, or proxy to OpenClaw
-  // ──────────────────────────────────────────────
-  const reply = `收到你的问题：「${message}」\n\n这是一条 mock 回复。接入真实 AI 后，这里会返回智能回答。\n\n> 当前对话历史长度：${(history || []).length} 条`
+  // Build messages array for OpenAI-compatible API
+  const messages = [
+    {
+      role: 'system',
+      content: '你是 LightHouse 文档助手。用户正在阅读 LightHouse 学习资料库的文档，请帮助他们解答技术问题。回复简洁、准确，使用中文。支持 Markdown 格式。'
+    }
+  ]
 
-  res.json({ reply })
+  // Add history
+  if (Array.isArray(history)) {
+    for (const h of history.slice(-20)) {
+      messages.push({
+        role: h.role === 'user' ? 'user' : 'assistant',
+        content: h.content
+      })
+    }
+  }
+
+  messages.push({ role: 'user', content: message })
+
+  // SSE streaming
+  res.setHeader('Content-Type', 'text/event-stream')
+  res.setHeader('Cache-Control', 'no-cache')
+  res.setHeader('Connection', 'keep-alive')
+
+  try {
+    const response = await fetch(OPENCLAW_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENCLAW_TOKEN}`,
+        'Content-Type': 'application/json',
+        'x-openclaw-agent-id': 'main'
+      },
+      body: JSON.stringify({
+        model: 'openclaw:main',
+        messages,
+        stream: true,
+        user: 'lighthouse-chat'
+      })
+    })
+
+    if (!response.ok) {
+      const err = await response.text()
+      console.error('OpenClaw error:', response.status, err)
+      res.write(`data: ${JSON.stringify({ error: 'AI 服务暂时不可用' })}\n\n`)
+      res.write('data: [DONE]\n\n')
+      return res.end()
+    }
+
+    const reader = response.body
+    const decoder = new TextDecoder()
+
+    for await (const chunk of reader) {
+      const text = typeof chunk === 'string' ? chunk : decoder.decode(chunk, { stream: true })
+      // Forward SSE events directly
+      const lines = text.split('\n')
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          res.write(line + '\n\n')
+          if (line.trim() === 'data: [DONE]') {
+            return res.end()
+          }
+        }
+      }
+    }
+    res.write('data: [DONE]\n\n')
+    res.end()
+  } catch (err) {
+    console.error('Chat error:', err)
+    res.write(`data: ${JSON.stringify({ error: '连接失败' })}\n\n`)
+    res.write('data: [DONE]\n\n')
+    res.end()
+  }
+})
+
+// ─── Non-streaming fallback ───
+app.post('/api/chat-sync', async (req, res) => {
+  const { message, history } = req.body
+  if (!message) return res.status(400).json({ error: 'message required' })
+
+  const messages = [
+    { role: 'system', content: '你是 LightHouse 文档助手。用户正在阅读文档，请帮助解答技术问题。回复简洁准确，用中文，支持 Markdown。' }
+  ]
+  if (Array.isArray(history)) {
+    for (const h of history.slice(-20)) {
+      messages.push({ role: h.role === 'user' ? 'user' : 'assistant', content: h.content })
+    }
+  }
+  messages.push({ role: 'user', content: message })
+
+  try {
+    const response = await fetch(OPENCLAW_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENCLAW_TOKEN}`,
+        'Content-Type': 'application/json',
+        'x-openclaw-agent-id': 'main'
+      },
+      body: JSON.stringify({ model: 'openclaw:main', messages, stream: false, user: 'lighthouse-chat' })
+    })
+    const data = await response.json()
+    const reply = data.choices?.[0]?.message?.content || '抱歉，无法获取回复。'
+    res.json({ reply })
+  } catch (err) {
+    console.error('Chat sync error:', err)
+    res.json({ reply: '⚠️ 服务暂时不可用，请稍后再试。' })
+  }
 })
 
 const PORT = process.env.PORT || 3456

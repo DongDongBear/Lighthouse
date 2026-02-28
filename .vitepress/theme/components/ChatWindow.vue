@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, nextTick, watch, onMounted } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 
 const props = defineProps<{ visible: boolean }>()
 const emit = defineEmits(['close'])
@@ -17,7 +17,7 @@ const loading = ref(false)
 const listEl = ref<HTMLElement | null>(null)
 
 const API_BASE = typeof window !== 'undefined'
-  ? (window.location.hostname === 'localhost' ? 'http://localhost:3456' : '/api-chat')
+  ? (window.location.hostname === 'localhost' ? 'http://localhost:3456' : '')
   : ''
 
 function scrollBottom() {
@@ -36,26 +36,82 @@ async function send() {
   loading.value = true
   scrollBottom()
 
+  // Add a bot message placeholder for streaming
+  const botMsg: Msg = { role: 'bot', content: '' }
+  messages.value.push(botMsg)
+  const botIdx = messages.value.length - 1
+
   try {
     const res = await fetch(`${API_BASE}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         message: text,
-        history: messages.value.slice(0, -1).map(m => ({ role: m.role, content: m.content }))
+        history: messages.value.slice(0, -2).map(m => ({
+          role: m.role === 'user' ? 'user' : 'assistant',
+          content: m.content
+        }))
       })
     })
-    const data = await res.json()
-    messages.value.push({ role: 'bot', content: data.reply || '抱歉，服务暂时不可用。' })
+
+    if (!res.ok) {
+      messages.value[botIdx].content = '⚠️ 服务暂时不可用。'
+      loading.value = false
+      scrollBottom()
+      return
+    }
+
+    const reader = res.body?.getReader()
+    const decoder = new TextDecoder()
+
+    if (!reader) {
+      // Fallback: non-streaming
+      const data = await res.json()
+      messages.value[botIdx].content = data.reply || '抱歉，无法获取回复。'
+      loading.value = false
+      scrollBottom()
+      return
+    }
+
+    let buffer = ''
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+
+      const lines = buffer.split('\n')
+      buffer = lines.pop() || ''
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue
+        const data = line.slice(6).trim()
+        if (data === '[DONE]') break
+        try {
+          const parsed = JSON.parse(data)
+          if (parsed.error) {
+            messages.value[botIdx].content = `⚠️ ${parsed.error}`
+            break
+          }
+          const delta = parsed.choices?.[0]?.delta?.content
+          if (delta) {
+            messages.value[botIdx].content += delta
+            scrollBottom()
+          }
+        } catch {}
+      }
+    }
+
+    if (!messages.value[botIdx].content) {
+      messages.value[botIdx].content = '抱歉，没有收到回复。'
+    }
   } catch {
-    messages.value.push({ role: 'bot', content: '⚠️ 网络错误，请稍后再试。' })
+    messages.value[botIdx].content = '⚠️ 网络错误，请稍后再试。'
   }
   loading.value = false
   scrollBottom()
 }
 
 function renderMd(text: string): string {
-  // Lightweight markdown: bold, italic, code, blockquote, newlines
   return text
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -88,7 +144,7 @@ function onKeydown(e: KeyboardEvent) {
         >
           <div class="chat-bubble" v-html="renderMd(msg.content)" />
         </div>
-        <div v-if="loading" class="chat-msg bot">
+        <div v-if="loading && messages[messages.length-1]?.content === ''" class="chat-msg bot">
           <div class="chat-bubble typing">
             <span class="dot" /><span class="dot" /><span class="dot" />
           </div>
@@ -218,7 +274,6 @@ function onKeydown(e: KeyboardEvent) {
   color: var(--vp-c-text-2);
 }
 
-/* typing animation */
 .typing {
   display: flex;
   gap: 4px;
@@ -289,7 +344,6 @@ function onKeydown(e: KeyboardEvent) {
   opacity: .85;
 }
 
-/* slide transition */
 .chat-slide-enter-active,
 .chat-slide-leave-active {
   transition: all .25s cubic-bezier(.4,0,.2,1);
