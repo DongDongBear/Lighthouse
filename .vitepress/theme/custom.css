@@ -80,7 +80,7 @@
   color: #111;
 }
 .VPButton.alt {
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #e8e8e8;
   background: transparent;
 }
 
@@ -284,7 +284,7 @@
 .VPFeature:hover {
   transform: none !important;
   box-shadow: 0 4px 14px rgba(0,0,0,.04);
-  border-color: #dddddd;
+  border-color: #d6d6d6;
 }
 .dark .VPFeature:hover {
   box-shadow: 0 4px 14px rgba(0,0,0,.25);
@@ -344,3 +344,9 @@
     padding-left: 28px;
   }
 }
+
+
+/* remove heading hash anchor */
+.vp-doc .header-anchor { display: none !important; }
+
+.VPFeature, .VPFeature:hover { border-width: 1px !important; }
