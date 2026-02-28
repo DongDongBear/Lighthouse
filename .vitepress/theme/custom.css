@@ -1,73 +1,119 @@
 :root {
-  --vp-c-brand-1: #ff6b35;
-  --vp-c-brand-2: #ff8c5a;
-  --vp-c-brand-3: #ff6b35;
-  --vp-c-brand-soft: rgba(255, 107, 53, 0.12);
+  --vp-c-brand-1: #2563eb;
+  --vp-c-brand-2: #3b82f6;
+  --vp-c-brand-3: #1d4ed8;
+  --vp-c-brand-soft: rgba(37, 99, 235, 0.12);
   --vp-font-family-base: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'PingFang SC', 'Noto Sans SC', sans-serif;
   --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 }
 
 .dark {
-  --vp-c-brand-1: #ff8c5a;
-  --vp-c-brand-2: #ffab80;
-  --vp-c-brand-3: #ff8c5a;
+  --vp-c-brand-1: #60a5fa;
+  --vp-c-brand-2: #93c5fd;
+  --vp-c-brand-3: #3b82f6;
 }
 
-/* 更接近 caicai 的简洁留白感 */
-.VPContent.is-home { padding-top: 28px !important; }
-.VPHome { max-width: 980px; margin: 0 auto; }
-
+.VPContent.is-home { padding-top: 20px !important; }
+.VPHome { max-width: 1040px; margin: 0 auto; }
+.VPHero { padding-top: 18px !important; }
 .VPHero .name {
-  font-size: clamp(42px, 8vw, 66px);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  font-weight: 800;
+  font-size: clamp(48px, 8vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 760;
 }
 .VPHero .text {
-  font-size: clamp(20px, 3vw, 30px);
-  letter-spacing: -0.02em;
+  font-size: clamp(24px, 3.3vw, 36px);
+  letter-spacing: -0.028em;
+  font-weight: 520;
 }
 .VPHero .tagline {
-  max-width: 680px;
-  font-size: 16px;
+  max-width: 760px;
+  font-size: 15px;
+  line-height: 1.8;
   opacity: 0.72;
 }
 
-/* 文档区更干净 */
 .VPDoc .container { max-width: 760px; }
-.vp-doc h1 { letter-spacing: -0.025em; font-weight: 760; }
-.vp-doc h2 {
-  margin-top: 2.2rem;
-  padding-top: 1.2rem;
-  border-top: 1px solid var(--vp-c-divider);
+.vp-doc { color: rgba(0,0,0,.82); }
+.dark .vp-doc { color: rgba(255,255,255,.84); }
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3 {
+  font-family: 'Noto Serif SC', 'Shippori Mincho', serif;
+  font-weight: 500;
   letter-spacing: -0.01em;
+  color: #000;
 }
-.vp-doc p { line-height: 1.86; }
+.dark .vp-doc h1,
+.dark .vp-doc h2,
+.dark .vp-doc h3 { color: rgba(255,255,255,1); }
 
-/* 代码块更柔和 */
+.vp-doc h1 {
+  font-size: clamp(34px, 4.5vw, 44px);
+  line-height: 1.18;
+  margin-top: 0.2rem;
+}
+.vp-doc h2 {
+  font-size: 30px;
+  line-height: 1.25;
+  margin-top: 2.6rem;
+  margin-bottom: 1rem;
+  padding-top: 0;
+  border-top: 0;
+}
+.vp-doc h3 {
+  font-size: 26px;
+  line-height: 1.3;
+  margin-top: 2rem;
+}
+
+.vp-doc p,
+.vp-doc li {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  line-height: 1.75;
+  font-weight: 300;
+  margin: 0 0 20px;
+}
+
+.vp-doc a {
+  color: #3b82f6;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.vp-doc blockquote {
+  border-left: 2px solid rgba(0,0,0,.12);
+  margin: 18px 0;
+  padding: 4px 0 4px 16px;
+  color: rgba(0,0,0,.72);
+}
+.dark .vp-doc blockquote {
+  border-left-color: rgba(255,255,255,.2);
+  color: rgba(255,255,255,.72);
+}
+
 .vp-doc div[class*='language-'] {
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid var(--vp-c-divider);
-  box-shadow: 0 4px 20px rgba(0,0,0,.04);
+  box-shadow: none;
 }
 
-/* 卡片降低“组件感” */
 .VPFeature {
-  border-radius: 14px;
+  border-radius: 10px;
   border: 1px solid var(--vp-c-divider);
-  background: color-mix(in srgb, var(--vp-c-bg-soft) 65%, transparent);
+  background: transparent;
 }
 .VPFeature:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   transition: all .2s ease;
 }
 
-/* sidebar 紧凑一点 */
-.VPSidebar .group + .group {
-  margin-top: .45rem;
-  padding-top: .45rem;
-}
-
 @media (max-width: 768px) {
-  .VPDoc .container { padding: 0 12px; }
+  .VPDoc .container { padding: 0 14px; }
+  .vp-doc p,.vp-doc li { font-size: 17px; }
+  .vp-doc h2 { font-size: 26px; }
+  .vp-doc h3 { font-size: 22px; }
 }

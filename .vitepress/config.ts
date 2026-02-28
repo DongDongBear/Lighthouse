@@ -6,7 +6,7 @@ export default defineConfig({
   lang: 'zh-CN',
   base: '/Lighthouse/',
   head: [
-    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@300;400;500;700&family=Shippori+Mincho:wght@600&display=swap' }],
   ],
   markdown: {
     breaks: true,
