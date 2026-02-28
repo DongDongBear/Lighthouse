@@ -986,3 +986,75 @@ html, body {
     min-height: 320px !important;
   }
 }
+
+/* ===== Desktop sidebar redesign ===== */
+@media (min-width: 961px) {
+  .VPSidebar {
+    background: transparent !important;
+    padding-top: 18px !important;
+    padding-right: 14px !important;
+  }
+
+  .VPSidebar .group {
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .VPSidebar .group .title {
+    font-size: 11px !important;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--vp-c-text-3) !important;
+    font-weight: 600 !important;
+    margin: 0 0 8px !important;
+  }
+
+  .VPSidebar .item {
+    margin: 0 !important;
+  }
+
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    border-radius: 8px;
+    padding: 7px 10px !important;
+    margin: 2px 0 !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+    color: var(--vp-c-text-2) !important;
+    transition: background-color .16s ease, color .16s ease;
+  }
+
+  .VPSidebar .item .item:hover,
+  .VPSidebar .item .link:hover {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 86%, transparent);
+    color: var(--vp-c-text-1) !important;
+  }
+
+  .VPSidebar .item.is-active > .item,
+  .VPSidebar .item.is-active > .link {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 100%, transparent);
+    color: var(--vp-c-text-1) !important;
+    font-weight: 560;
+  }
+
+  /* nested levels cleaner indentation */
+  .VPSidebar .items .items {
+    padding-left: 10px !important;
+    margin-top: 2px !important;
+    border-left: 1px solid var(--vp-c-divider-light);
+  }
+
+  .VPSidebar .item.level-0 > .item,
+  .VPSidebar .item.level-0 > .link {
+    font-weight: 560;
+    color: var(--vp-c-text-1) !important;
+  }
+
+  .VPSidebar .item.level-1 > .item,
+  .VPSidebar .item.level-1 > .link,
+  .VPSidebar .item.level-2 > .item,
+  .VPSidebar .item.level-2 > .link {
+    font-weight: 470;
+  }
+}
