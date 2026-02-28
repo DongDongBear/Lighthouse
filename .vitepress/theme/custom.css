@@ -697,3 +697,33 @@
 
 /* user preference: no top navbar line */
 .VPNavBar, .VPNavBar.has-sidebar { border-bottom: 0 !important; box-shadow: none !important; }
+
+/* force remove nav divider line (all variants) */
+.VPNav,
+.VPNavBar,
+.VPNavBar.has-sidebar,
+.VPNavBar.top,
+.VPNavBar:not(.home),
+.VPNavBar:not(.home).top {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.VPNavBar::before,
+.VPNavBar::after,
+.VPNav::before,
+.VPNav::after,
+.VPNavBar.has-sidebar::before,
+.VPNavBar.has-sidebar::after {
+  border: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  content: none !important;
+}
+
+.VPNavBar .divider,
+.VPNavBarDivider,
+.VPNavBarMenu .divider {
+  display: none !important;
+}
