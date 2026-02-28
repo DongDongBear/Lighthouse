@@ -175,3 +175,28 @@
   .vp-doc h2 { font-size: 26px; }
   .vp-doc h3 { font-size: 22px; }
 }
+
+
+/* 修正首页标题蓝色渐变 + 溢出 */
+.VPHero .name,
+.VPHero .name .clip {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--vp-c-text-1) !important;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* 全站（非正文）字体统一 */
+.VPNav,
+.VPSidebar,
+.VPFooter,
+.VPLink,
+.VPDocAside,
+.VPLocalNav {
+  font-family: var(--vp-font-family-base);
+}
+
+/* 首页避免超宽 */
+.VPHero .name { font-size: clamp(40px, 7vw, 62px); }

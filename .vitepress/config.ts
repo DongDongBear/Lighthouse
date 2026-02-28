@@ -116,6 +116,5 @@ export default defineConfig({
     search: { provider: 'local' },
     outline: { level: [2, 3], label: '目录' },
     docFooter: { prev: '上一篇', next: '下一篇' },
-    footer: { message: 'BellLab — 致敬贝尔实验室', copyright: '© 2026 DongDong' },
   },
 })
