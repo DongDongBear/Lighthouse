@@ -1,9 +1,9 @@
 ---
 layout: home
 hero:
-  name: BellLab
+  name: LightHouse
   text: 探索、学习、创造
-  tagline: 致敬贝尔实验室 — 动动的个人学习实验室
+  tagline: 动动的个人学习资料库
   actions:
     - theme: brand
       text: Unity 3D 教程 →
@@ -22,5 +22,5 @@ features:
     link: /electron-tutorial/
   - icon: 🔬
     title: 更多实验进行中…
-    details: BellLab 是一个持续生长的学习库。新的教程和实验正在路上。
+    details: LightHouse 是一个持续生长的学习库。新的教程和实验正在路上。
 ---

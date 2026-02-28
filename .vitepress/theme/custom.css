@@ -200,3 +200,24 @@
 
 /* 首页避免超宽 */
 .VPHero .name { font-size: clamp(40px, 7vw, 62px); }
+
+/* caicai-like details */
+.VPNavBarMenuLink,
+.VPNavBarExtra,
+.VPNavBarMenu .VPLink {
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 450;
+}
+
+.VPNavBarTitle .title {
+  font-size: 14px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.vp-doc h2 { font-weight: 520; }
+.vp-doc h3 { font-weight: 520; }
+.vp-doc p,
+.vp-doc li { font-weight: 320; }

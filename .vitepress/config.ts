@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'BellLab',
-  description: '动动的学习实验室 — 探索、学习、创造',
+  title: 'LightHouse',
+  description: 'LightHouse 学习资料库 — 探索、学习、创造',
   lang: 'zh-CN',
   base: '/Lighthouse/',
   head: [
@@ -24,7 +24,7 @@ export default defineConfig({
     }]
   },
   themeConfig: {
-    logo: '🔔',
+    logo: 'LightHouse',
     nav: [
       { text: '首页', link: '/' },
       { text: 'Unity 3D', link: '/unity-tutorial/' },
@@ -112,7 +112,7 @@ export default defineConfig({
         ]},
       ],
     },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/DongDongBear/BellLab' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/DongDongBear/Lighthouse' }],
     search: { provider: 'local' },
     outline: { level: [2, 3], label: '目录' },
     docFooter: { prev: '上一篇', next: '下一篇' },
