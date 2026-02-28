@@ -727,3 +727,16 @@
 .VPNavBarMenu .divider {
   display: none !important;
 }
+
+/* sidebar background same as main background */
+.VPSidebar,
+.VPSidebarNav,
+.VPSidebar.open {
+  background: var(--vp-c-bg) !important;
+}
+
+@media (max-width: 960px) {
+  .VPSidebar {
+    background: var(--vp-c-bg) !important;
+  }
+}
