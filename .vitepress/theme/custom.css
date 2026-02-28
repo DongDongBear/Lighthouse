@@ -1175,3 +1175,60 @@ html, body {
     font-weight: 580;
   }
 }
+
+/* ===== requested polish: frosted top nav ===== */
+.VPNavBar {
+  background: color-mix(in srgb, var(--vp-c-bg) 78%, transparent) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* ===== sidebar spacing + ugly block fix ===== */
+/* this block is VitePress auto-generated link group (.items > .VPSidebarItem...) */
+.VPSidebar .items {
+  margin-top: 8px !important;
+}
+
+/* create breathing room under logo area */
+.VPSidebar .items:first-child {
+  margin-top: 14px !important;
+}
+
+/* tighten gaps between groups */
+.VPSidebar .group,
+.VPSidebar .group + .group {
+  margin-top: 6px !important;
+  padding-top: 6px !important;
+}
+
+/* level-1 entries less cramped and less ugly */
+.VPSidebarItem.level-1 .item {
+  min-height: 38px !important;
+  padding: 4px 8px !important;
+  margin: 2px 0 !important;
+  border-radius: 8px;
+}
+
+/* section rows (基础篇/核心技能...) compact and aligned */
+.VPSidebarItem.level-0 .item {
+  min-height: 42px !important;
+  padding: 6px 8px !important;
+  margin: 3px 0 !important;
+  border-radius: 8px;
+}
+
+/* subtle row bg to avoid giant blank card feeling */
+.VPSidebarItem.level-0 .item,
+.VPSidebarItem.level-1 .item {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, transparent) !important;
+}
+
+.VPSidebarItem.level-0 .item:hover,
+.VPSidebarItem.level-1 .item:hover {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 95%, transparent) !important;
+}
+
+/* active item cleaner */
+.VPSidebarItem.is-active > .item {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 100%, transparent) !important;
+}
