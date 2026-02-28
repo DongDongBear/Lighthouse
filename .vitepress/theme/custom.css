@@ -523,3 +523,34 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* layout: fixed side paddings instead of max-width */
+@media (min-width: 1440px) {
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 200px !important;
+    padding-right: 200px !important;
+  }
+
+  .VPHome {
+    max-width: none !important;
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 120px !important;
+    padding-right: 120px !important;
+  }
+}
