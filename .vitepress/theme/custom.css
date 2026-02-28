@@ -1311,3 +1311,8 @@ nav[aria-labelledby="sidebar-aria-label"] {
     margin-top: 50px !important;
   }
 }
+
+/* user final: desktop sidebar nav top margin = 50px */
+nav[aria-labelledby="sidebar-aria-label"] {
+  margin-top: 50px !important;
+}
