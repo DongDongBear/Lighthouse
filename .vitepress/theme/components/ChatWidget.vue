@@ -6,36 +6,50 @@ const STORAGE_KEY = 'lh-chat-activated'
 const activated = ref(false)
 const open = ref(false)
 const selectedText = ref('')
+let lastGoodSelection = ''
 
-// Provide selectedText to ChatWindow
 provide('selectedText', selectedText)
 
 const API_BASE = typeof window !== 'undefined'
   ? (window.location.hostname === 'localhost' ? 'http://localhost:3456' : 'http://43.130.41.3/Lighthouse')
   : ''
 
-// Continuously track document selection (even when chat is closed)
-function trackSelection() {
-  if (typeof window === 'undefined') return
+function grabSelection(): string {
+  if (typeof window === 'undefined') return ''
   const sel = window.getSelection()
-  if (!sel || sel.isCollapsed) return // Don't clear - keep last selection
+  if (!sel || sel.isCollapsed) return ''
   const text = sel.toString().trim()
   // Ignore selections inside our chat widget
   const anchor = sel.anchorNode?.parentElement
-  if (anchor?.closest('.cw') || anchor?.closest('.cw-widget')) return
-  if (text && text.length > 0 && text.length < 3000) {
-    selectedText.value = text
-  }
+  if (anchor?.closest('.cw') || anchor?.closest('.cw-widget')) return ''
+  if (text && text.length > 0 && text.length < 3000) return text
+  return ''
 }
 
-function onMouseUp() {
-  // Small delay to let selection finalize
-  setTimeout(trackSelection, 10)
+function onMouseUp(e: MouseEvent) {
+  // Only track selection from document area, ignore clicks inside chat
+  const target = e.target as HTMLElement
+  if (target?.closest('.cw') || target?.closest('.cw-widget') || target?.closest('.cw-fab')) return
+  
+  setTimeout(() => {
+    const text = grabSelection()
+    if (text) {
+      selectedText.value = text
+      lastGoodSelection = text
+    }
+  }, 10)
 }
 
 function onFabMouseDown() {
-  // Capture selection RIGHT NOW before click clears it
-  trackSelection()
+  // Snapshot current selection before click clears it
+  const text = grabSelection()
+  if (text) {
+    selectedText.value = text
+    lastGoodSelection = text
+  } else if (lastGoodSelection) {
+    // Restore last known good selection
+    selectedText.value = lastGoodSelection
+  }
 }
 
 onMounted(() => {
@@ -84,11 +98,10 @@ async function handleGlobalKeydown(e: KeyboardEvent) {
   <ClientOnly>
     <div v-if="activated" class="cw-widget">
       <ChatWindow :visible="open" @close="open = false" />
-
       <button
         class="cw-fab"
         :class="{ open }"
-        @mousedown="onFabMouseDown"
+        @mousedown.prevent="onFabMouseDown"
         @click="open = !open"
         aria-label="打开助手"
       >
@@ -104,7 +117,6 @@ async function handleGlobalKeydown(e: KeyboardEvent) {
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </Transition>
-        <!-- Selection indicator dot on FAB -->
         <span v-if="!open && selectedText" class="cw-fab-dot" />
       </button>
     </div>
@@ -112,46 +124,26 @@ async function handleGlobalKeydown(e: KeyboardEvent) {
 </template>
 
 <style scoped>
-.cw-widget {
-  position: fixed; bottom: 0; right: 0; z-index: 1999; pointer-events: none;
-}
+.cw-widget { position: fixed; bottom: 0; right: 0; z-index: 1999; pointer-events: none; }
 .cw-widget > * { pointer-events: auto; }
-
 .cw-fab {
-  position: fixed; bottom: 24px; right: 24px;
-  width: 52px; height: 52px; border-radius: 16px;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg); color: var(--vp-c-text-1);
+  position: fixed; bottom: 24px; right: 24px; width: 52px; height: 52px; border-radius: 16px;
+  border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg); color: var(--vp-c-text-1);
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   z-index: 2001; transition: all .2s cubic-bezier(.4,0,.2,1);
   box-shadow: 0 0 0 1px rgba(0,0,0,.03), 0 1px 3px rgba(0,0,0,.06), 0 6px 16px rgba(0,0,0,.08);
 }
-.dark .cw-fab {
-  box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 1px 3px rgba(0,0,0,.2), 0 6px 16px rgba(0,0,0,.3);
-}
-.cw-fab:hover { transform: scale(1.05); box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 2px 6px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.12); }
+.dark .cw-fab { box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 1px 3px rgba(0,0,0,.2), 0 6px 16px rgba(0,0,0,.3); }
+.cw-fab:hover { transform: scale(1.05); }
 .cw-fab:active { transform: scale(.97); }
-.cw-fab.open {
-  background: var(--vp-c-text-1); color: var(--vp-c-bg);
-  border-color: var(--vp-c-text-1); border-radius: 14px;
-}
-
+.cw-fab.open { background: var(--vp-c-text-1); color: var(--vp-c-bg); border-color: var(--vp-c-text-1); border-radius: 14px; }
 .cw-fab-dot {
-  position: absolute; top: -3px; right: -3px;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: #34c759; border: 2px solid var(--vp-c-bg);
-  animation: cwPulse 1.5s infinite;
+  position: absolute; top: -3px; right: -3px; width: 10px; height: 10px; border-radius: 50%;
+  background: #34c759; border: 2px solid var(--vp-c-bg); animation: cwPulse 1.5s infinite;
 }
-@keyframes cwPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
+@keyframes cwPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 .cw-fab-icon-enter-active, .cw-fab-icon-leave-active { transition: all .18s ease; }
 .cw-fab-icon-enter-from { opacity: 0; transform: rotate(-90deg) scale(.5); }
 .cw-fab-icon-leave-to { opacity: 0; transform: rotate(90deg) scale(.5); }
-
-@media (max-width: 500px) {
-  .cw-fab { bottom: 16px; right: 16px; width: 48px; height: 48px; border-radius: 14px; }
-}
+@media (max-width: 500px) { .cw-fab { bottom: 16px; right: 16px; width: 48px; height: 48px; border-radius: 14px; } }
 </style>
