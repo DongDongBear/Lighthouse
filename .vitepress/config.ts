@@ -11,6 +11,7 @@ export default defineConfig({
   ],
   markdown: {
     breaks: true,
+    html: true,
   },
   vite: {
     plugins: [{
