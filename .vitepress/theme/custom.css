@@ -780,3 +780,113 @@
   border-bottom: 0 !important;
   box-shadow: none !important;
 }
+
+/* ===== mobile optimization pass ===== */
+@media (max-width: 960px) {
+  /* overall spacing */
+  .VPContent,
+  .VPDoc,
+  .VPHome {
+    padding-top: 6px !important;
+  }
+
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* top nav compact */
+  .VPNavBar {
+    height: 54px !important;
+    padding: 0 12px !important;
+  }
+  .VPNavBarTitle .title {
+    font-size: 13px !important;
+    letter-spacing: .08em;
+  }
+
+  /* homepage text rhythm */
+  .lh-intro {
+    margin-bottom: 24px;
+  }
+  .lh-intro h1 {
+    font-size: 30px !important;
+    line-height: 1.18;
+    margin-bottom: 4px;
+  }
+  .lh-intro h2 {
+    font-size: 24px !important;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .lh-intro p {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .lh-products-head h3 { font-size: 15px; }
+  .lh-products-head p { font-size: 12px; line-height: 1.6; }
+
+  .lh-tabs {
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 2px;
+    margin-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lh-tabs::-webkit-scrollbar { display: none; }
+
+  .lh-home-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .lh-card-media {
+    height: 260px !important;
+    min-height: 260px !important;
+    padding: 18px !important;
+    margin-bottom: 12px;
+  }
+
+  .lh-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 6px;
+  }
+
+  .lh-desc h4 {
+    font-size: 13px;
+    line-height: 1.72;
+    margin-bottom: 7px;
+  }
+
+  /* article readability on mobile */
+  .vp-doc h1 {
+    font-size: 30px !important;
+    line-height: 1.2;
+  }
+  .vp-doc h2 {
+    font-size: 24px !important;
+    line-height: 1.28;
+    margin-top: 2.1rem;
+  }
+  .vp-doc h3 {
+    font-size: 20px !important;
+    line-height: 1.32;
+  }
+  .vp-doc p,
+  .vp-doc li {
+    font-size: 16px !important;
+    line-height: 1.86 !important;
+  }
+
+  /* code blocks fit screen */
+  .vp-doc div[class*='language-'] {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 8px;
+  }
+}
