@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, nextTick, watch, onMounted, onUnmounted } from 'vue'
+import { ref, inject, nextTick, watch, type Ref } from 'vue'
 
 const props = defineProps<{ visible: boolean }>()
 const emit = defineEmits(['close'])
+const selectedText = inject<Ref<string>>('selectedText', ref(''))
 
 interface Msg {
   role: 'user' | 'bot'
@@ -17,7 +18,7 @@ const messages = ref<Msg[]>([
 const input = ref('')
 const loading = ref(false)
 const listEl = ref<HTMLElement | null>(null)
-const selectedText = ref('')
+
 
 const API_BASE = typeof window !== 'undefined'
   ? (window.location.hostname === 'localhost' ? 'http://localhost:3456' : '/Lighthouse')
@@ -33,42 +34,11 @@ function scrollBottom() {
   })
 }
 
-watch(() => props.visible, (v) => { if (v) { captureSelection(); scrollBottom() } })
 
-function captureSelection() {
-  if (typeof window === 'undefined') return
-  const sel = window.getSelection()?.toString().trim() || ''
-  // Only capture selection from the doc content, not from our chat widget
-  if (sel && sel.length > 0 && sel.length < 3000) {
-    selectedText.value = sel
-  }
-}
 
 // Listen for mouseup to capture selection in real-time
-function onDocMouseUp() {
-  if (typeof window === 'undefined') return
-  const sel = window.getSelection()
-  if (!sel || sel.isCollapsed) { selectedText.value = ''; return }
-  const text = sel.toString().trim()
-  // Make sure the selection is from the doc, not our chat
-  const anchor = sel.anchorNode?.parentElement
-  if (anchor?.closest('.cw')) return
-  if (text && text.length < 3000) {
-    selectedText.value = text
-  }
-}
 
-onMounted(() => {
-  document.addEventListener('mouseup', onDocMouseUp)
-  document.addEventListener('selectionchange', () => {
-    const sel = window.getSelection()
-    if (!sel || sel.isCollapsed) selectedText.value = ''
-  })
-})
 
-onUnmounted(() => {
-  document.removeEventListener('mouseup', onDocMouseUp)
-})
 
 function clearSelection() {
   selectedText.value = ''
