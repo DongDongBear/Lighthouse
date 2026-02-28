@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" fill="none">
+  <rect width="1200" height="700" fill="#F3F3F3"/>
+  <rect x="70" y="70" width="1060" height="560" rx="18" fill="#FFFFFF" stroke="#DCDCDC"/>
+  <rect x="120" y="130" width="320" height="14" rx="7" fill="#D9D9D9"/>
+  <rect x="120" y="168" width="200" height="10" rx="5" fill="#E4E4E4"/>
+  <rect x="120" y="220" width="420" height="300" rx="14" fill="#F7F7F7" stroke="#E3E3E3"/>
+  <path d="M330 280L430 335V445L330 500L230 445V335L330 280Z" stroke="#111" stroke-width="12"/>
+  <path d="M330 280V380M430 335L330 380M230 335L330 380" stroke="#111" stroke-width="10"/>
+  <rect x="590" y="230" width="450" height="20" rx="10" fill="#CFCFCF"/>
+  <rect x="590" y="270" width="390" height="14" rx="7" fill="#E1E1E1"/>
+  <rect x="590" y="306" width="430" height="14" rx="7" fill="#E1E1E1"/>
+  <rect x="590" y="342" width="360" height="14" rx="7" fill="#E1E1E1"/>
+  <rect x="590" y="410" width="220" height="42" rx="21" fill="#111"/>
+  <text x="700" y="438" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#fff">Unity 3D</text>
+  <text x="120" y="585" font-family="Inter, sans-serif" font-size="28" fill="#111" font-weight="600">Open World Mobile Game</text>
+</svg>
