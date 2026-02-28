@@ -1125,3 +1125,53 @@ html, body {
     padding-left: 8px !important;
   }
 }
+
+/* restore nicer hover + tighter item spacing */
+@media (min-width: 961px) {
+  /* kill line under title block specifically */
+  .VPNavBarTitle.has-sidebar,
+  .VPNavBarTitle,
+  .VPNavBarTitle .title {
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    background-image: none !important;
+  }
+
+  .VPNavBarTitle.has-sidebar::before,
+  .VPNavBarTitle.has-sidebar::after,
+  .VPNavBarTitle::before,
+  .VPNavBarTitle::after,
+  .VPNavBarTitle .title::before,
+  .VPNavBarTitle .title::after {
+    content: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* sidebar item spacing: closer */
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    padding: 5px 8px !important;
+    margin: 0 !important;
+    border-radius: 7px;
+  }
+
+  .VPSidebar .items .item + .item {
+    margin-top: 1px !important;
+  }
+
+  /* bring back subtle hover you liked */
+  .VPSidebar .item .item:hover,
+  .VPSidebar .item .link:hover {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 90%, transparent) !important;
+    color: var(--vp-c-text-1) !important;
+  }
+
+  .VPSidebar .item.is-active > .item,
+  .VPSidebar .item.is-active > .link {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 100%, transparent) !important;
+    color: var(--vp-c-text-1) !important;
+    font-weight: 580;
+  }
+}
