@@ -2,15 +2,24 @@ const express = require('express')
 const cors = require('cors')
 
 const app = express()
-app.use(cors())
+
+// CORS: allow GitHub Pages + local dev
+app.use(cors({
+  origin: [
+    'https://dongdongbear.github.io',
+    'http://localhost:5173',
+    'http://localhost:4173',
+    'http://43.130.41.3',
+  ],
+  methods: ['POST', 'GET', 'OPTIONS'],
+  credentials: false,
+}))
 app.use(express.json())
 
-// ─── Config ───
 const SECRET_PHRASE = 'I AM DONGDONG SEND'
 const OPENCLAW_URL = 'http://127.0.0.1:18789/v1/chat/completions'
 const OPENCLAW_TOKEN = 'fb135e830bb0bf534e0ace8d7a01a17933834234beabef7d'
 
-// ─── Verify endpoint ───
 app.post('/api/verify', (req, res) => {
   const { phrase } = req.body
   if (phrase && phrase.trim().toUpperCase() === SECRET_PHRASE) {
@@ -19,32 +28,23 @@ app.post('/api/verify', (req, res) => {
   return res.json({ ok: false })
 })
 
-// ─── Chat endpoint (streaming via SSE) ───
 app.post('/api/chat', async (req, res) => {
   const { message, history } = req.body
   if (!message) return res.status(400).json({ error: 'message required' })
 
-  // Build messages array for OpenAI-compatible API
   const messages = [
     {
       role: 'system',
       content: '你是 LightHouse 文档助手。用户正在阅读 LightHouse 学习资料库的文档，请帮助他们解答技术问题。回复简洁、准确，使用中文。支持 Markdown 格式。'
     }
   ]
-
-  // Add history
   if (Array.isArray(history)) {
     for (const h of history.slice(-20)) {
-      messages.push({
-        role: h.role === 'user' ? 'user' : 'assistant',
-        content: h.content
-      })
+      messages.push({ role: h.role === 'user' ? 'user' : 'assistant', content: h.content })
     }
   }
-
   messages.push({ role: 'user', content: message })
 
-  // SSE streaming
   res.setHeader('Content-Type', 'text/event-stream')
   res.setHeader('Cache-Control', 'no-cache')
   res.setHeader('Connection', 'keep-alive')
@@ -57,12 +57,7 @@ app.post('/api/chat', async (req, res) => {
         'Content-Type': 'application/json',
         'x-openclaw-agent-id': 'main'
       },
-      body: JSON.stringify({
-        model: 'openclaw:main',
-        messages,
-        stream: true,
-        user: 'lighthouse-chat'
-      })
+      body: JSON.stringify({ model: 'openclaw:main', messages, stream: true, user: 'lighthouse-chat' })
     })
 
     if (!response.ok) {
@@ -75,17 +70,13 @@ app.post('/api/chat', async (req, res) => {
 
     const reader = response.body
     const decoder = new TextDecoder()
-
     for await (const chunk of reader) {
       const text = typeof chunk === 'string' ? chunk : decoder.decode(chunk, { stream: true })
-      // Forward SSE events directly
       const lines = text.split('\n')
       for (const line of lines) {
         if (line.startsWith('data: ')) {
           res.write(line + '\n\n')
-          if (line.trim() === 'data: [DONE]') {
-            return res.end()
-          }
+          if (line.trim() === 'data: [DONE]') return res.end()
         }
       }
     }
@@ -96,40 +87,6 @@ app.post('/api/chat', async (req, res) => {
     res.write(`data: ${JSON.stringify({ error: '连接失败' })}\n\n`)
     res.write('data: [DONE]\n\n')
     res.end()
-  }
-})
-
-// ─── Non-streaming fallback ───
-app.post('/api/chat-sync', async (req, res) => {
-  const { message, history } = req.body
-  if (!message) return res.status(400).json({ error: 'message required' })
-
-  const messages = [
-    { role: 'system', content: '你是 LightHouse 文档助手。用户正在阅读文档，请帮助解答技术问题。回复简洁准确，用中文，支持 Markdown。' }
-  ]
-  if (Array.isArray(history)) {
-    for (const h of history.slice(-20)) {
-      messages.push({ role: h.role === 'user' ? 'user' : 'assistant', content: h.content })
-    }
-  }
-  messages.push({ role: 'user', content: message })
-
-  try {
-    const response = await fetch(OPENCLAW_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${OPENCLAW_TOKEN}`,
-        'Content-Type': 'application/json',
-        'x-openclaw-agent-id': 'main'
-      },
-      body: JSON.stringify({ model: 'openclaw:main', messages, stream: false, user: 'lighthouse-chat' })
-    })
-    const data = await response.json()
-    const reply = data.choices?.[0]?.message?.content || '抱歉，无法获取回复。'
-    res.json({ reply })
-  } catch (err) {
-    console.error('Chat sync error:', err)
-    res.json({ reply: '⚠️ 服务暂时不可用，请稍后再试。' })
   }
 })
 

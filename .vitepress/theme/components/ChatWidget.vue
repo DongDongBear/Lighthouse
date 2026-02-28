@@ -11,7 +11,7 @@ const selectedText = ref('')
 provide('selectedText', selectedText)
 
 const API_BASE = typeof window !== 'undefined'
-  ? (window.location.hostname === 'localhost' ? 'http://localhost:3456' : '/Lighthouse')
+  ? (window.location.hostname === 'localhost' ? 'http://localhost:3456' : 'http://43.130.41.3/Lighthouse')
   : ''
 
 // Continuously track document selection (even when chat is closed)
