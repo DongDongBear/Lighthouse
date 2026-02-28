@@ -3,7 +3,7 @@
 <div class="lh-subtitle">探索、学习、创造</div>
 
 <div class="lh-home-grid">
-  <a class="lh-card group" href="./unity-tutorial/" title="查看 Unity 教程">
+  <a class="lh-card group" href="unity-tutorial/" title="查看 Unity 教程">
     <div class="lh-card-media">
       <div class="lh-media-inner">
         <img src="/unity-logo.svg" alt="Unity 3D" />
@@ -16,7 +16,7 @@
     </div>
   </a>
 
-  <a class="lh-card group" href="./electron-tutorial/" title="查看 Electron 教程">
+  <a class="lh-card group" href="electron-tutorial/" title="查看 Electron 教程">
     <div class="lh-card-media">
       <div class="lh-media-inner">
         <img src="/electron-logo.svg" alt="Electron" />
