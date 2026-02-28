@@ -2,6 +2,20 @@
 
 <div class="lh-subtitle">探索、学习、创造</div>
 
+<div class="lh-home-top">
+  <div class="lh-hero-note">
+    <h2>你的学习资料库</h2>
+    <p>围绕 Unity 3D 与 Electron 的系统化学习路径，持续更新、持续迭代。</p>
+  </div>
+  <div class="lh-quick-stats">
+    <div><strong>56+</strong><span>教程章节</span></div>
+    <div><strong>2</strong><span>核心方向</span></div>
+    <div><strong>持续</strong><span>周更维护</span></div>
+  </div>
+</div>
+
+<div class="lh-section-title">核心学习模块</div>
+
 <div class="lh-home-grid">
   <a class="lh-card group" href="unity-tutorial/" title="查看 Unity 教程">
     <div class="lh-card-media">

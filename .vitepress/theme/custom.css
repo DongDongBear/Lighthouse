@@ -554,3 +554,76 @@
     padding-right: 120px !important;
   }
 }
+
+/* ===== final layout fixes (home + doc separation) ===== */
+/* 文章页：恢复正常，不要 200px 固定大 padding */
+@media (min-width: 1024px) {
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    max-width: 1200px !important;
+  }
+}
+
+/* 首页：用固定左右留白，但不影响文章页 */
+@media (min-width: 1440px) {
+  .VPHome .container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 200px !important;
+    padding-right: 200px !important;
+  }
+}
+
+/* home structure */
+.lh-home-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+.lh-hero-note {
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  padding: 18px 20px;
+}
+.lh-hero-note h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.lh-hero-note p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  line-height: 1.7;
+}
+.lh-quick-stats {
+  border: 1px solid var(--vp-c-divider);
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  background: var(--vp-c-bg);
+}
+.lh-quick-stats div { display:flex; align-items: baseline; justify-content: space-between; }
+.lh-quick-stats strong { font-size: 16px; font-weight: 650; }
+.lh-quick-stats span { font-size: 12px; color: var(--vp-c-text-2); }
+.lh-section-title {
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  margin-bottom: 10px;
+}
+
+/* card hover: only lift */
+.lh-card h3 { color: rgba(0,0,0,1) !important; }
+.dark .lh-card h3 { color: rgba(255,255,255,1) !important; }
+.lh-card:hover h3 { color: rgba(0,0,0,1) !important; }
+.dark .lh-card:hover h3 { color: rgba(255,255,255,1) !important; }
+
+@media (max-width: 1100px) {
+  .lh-home-top { grid-template-columns: 1fr; }
+}
