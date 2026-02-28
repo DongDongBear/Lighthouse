@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/DongDongBear/BellLab/issues"
   },
-  "homepage": "https://github.com/DongDongBear/BellLab#readme"
+  "homepage": "https://github.com/DongDongBear/BellLab#readme",
+  "dependencies": {
+    "marked": "^17.0.3"
+  }
 }
