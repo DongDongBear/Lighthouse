@@ -740,3 +740,43 @@
     background: var(--vp-c-bg) !important;
   }
 }
+
+/* remove sidebar right border line and top split line */
+.VPSidebar,
+.VPSidebarNav,
+.VPSidebar.open,
+.VPSidebarCurtain {
+  border-right: 0 !important;
+  box-shadow: none !important;
+}
+
+.VPSidebar::before,
+.VPSidebar::after,
+.VPSidebarNav::before,
+.VPSidebarNav::after,
+.VPSidebar.open::before,
+.VPSidebar.open::after {
+  border: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  background: transparent !important;
+  content: none !important;
+}
+
+/* top split line above sidebar header */
+.VPSidebarItem.level-0.is-link + .group,
+.VPSidebarItem + .group,
+.VPSidebar .group,
+.VPSidebar .group + .group,
+.VPSidebarNav .group,
+.VPSidebarNav .group + .group {
+  border-top: 0 !important;
+}
+
+/* remove local-nav top border on mobile */
+.VPLocalNav,
+.VPLocalNavOutlineDropdown {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
