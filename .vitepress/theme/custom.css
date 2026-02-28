@@ -238,3 +238,21 @@
     max-width: 920px !important;
   }
 }
+
+/* hero heading spacing tune */
+.VPHero .heading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.VPHero .name {
+  margin-bottom: 6px;
+}
+.VPHero .text {
+  margin-top: 4px;
+  line-height: 1.22;
+}
+
+@media (max-width: 768px) {
+  .VPHero .heading { gap: 10px; }
+}
