@@ -7,8 +7,8 @@
 </section>
 <section class="lh-products">
 <div class="lh-products-head">
-<h3>学习模块</h3>
-<p>优先阅读两条主线，先搭骨架再补细节。</p>
+<h3>AI 时代的构建模块</h3>
+<p>在 AI 驱动的软件范式里，能力不再只来自代码量，而来自模型协作、系统设计与持续迭代。</p>
 </div>
 <div class="lh-tabs"><span class="active">全部</span><span>游戏开发</span><span>桌面开发</span><span>实战案例</span></div>
 <div class="lh-home-grid">
