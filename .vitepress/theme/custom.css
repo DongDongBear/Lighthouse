@@ -917,3 +917,64 @@ html, body {
     height: auto !important;
   }
 }
+
+/* ===== mobile sidebar redesign (compact + no blank gaps) ===== */
+@media (max-width: 960px) {
+  .VPSidebar {
+    padding-top: 10px !important;
+  }
+
+  .VPSidebar .group {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .VPSidebar .group + .group {
+    margin-top: 8px !important;
+    padding-top: 8px !important;
+  }
+
+  .VPSidebar .items,
+  .VPSidebar .items .items,
+  .VPSidebar .group .items {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .VPSidebar .item {
+    margin: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .VPSidebar .item .link,
+  .VPSidebar .item .item,
+  .VPSidebar .item .text {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* section title row */
+  .VPSidebar .item.level-0 .item,
+  .VPSidebar .item.level-0 .link {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+  }
+
+  /* nested links */
+  .VPSidebar .item.level-1 .item,
+  .VPSidebar .item.level-1 .link,
+  .VPSidebar .item.level-2 .item,
+  .VPSidebar .item.level-2 .link {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+
+  /* prevent phantom spacing from collapsible containers */
+  .VPSidebar [style*="height"] {
+    height: auto !important;
+  }
+}
