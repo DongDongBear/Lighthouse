@@ -693,3 +693,7 @@
   .lh-intro h1 { font-size: 34px; }
   .lh-intro h2 { font-size: 28px; }
 }
+
+
+/* user preference: no top navbar line */
+.VPNavBar, .VPNavBar.has-sidebar { border-bottom: 0 !important; box-shadow: none !important; }

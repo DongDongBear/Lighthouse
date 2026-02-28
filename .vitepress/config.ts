@@ -29,8 +29,6 @@ export default defineConfig({
     logo: '/lighthouse-icon.svg',
     nav: [
       { text: '首页', link: '/' },
-      { text: 'Unity 3D', link: '/unity-tutorial/' },
-      { text: 'Electron', link: '/electron-tutorial/' },
     ],
     sidebar: {
       '/unity-tutorial/': [
