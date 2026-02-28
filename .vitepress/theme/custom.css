@@ -350,3 +350,61 @@
 .vp-doc .header-anchor { display: none !important; }
 
 .VPFeature, .VPFeature:hover { border-width: 1px !important; }
+
+/* custom home cards */
+.lh-subtitle {
+  margin-top: -8px;
+  margin-bottom: 34px;
+  color: var(--vp-c-text-2);
+  font-size: 18px;
+}
+
+.lh-home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.lh-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lh-card-media {
+  height: 260px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  transition: transform .2s ease;
+}
+
+.lh-card:hover .lh-card-media {
+  transform: translateY(-4px);
+}
+
+.lh-card-media img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+}
+
+.lh-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 560;
+}
+
+.lh-card p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .lh-home-grid { grid-template-columns: 1fr; }
+  .lh-card-media { height: 220px; }
+}
