@@ -4,7 +4,7 @@ export default defineConfig({
   title: 'BellLab',
   description: '动动的学习实验室 — 探索、学习、创造',
   lang: 'zh-CN',
-  base: '/BellLab-Docs/',
+  base: '/Lighthouse/',
   head: [
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap' }],
   ],
