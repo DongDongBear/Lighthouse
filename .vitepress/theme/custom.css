@@ -313,3 +313,34 @@
 }
 
 .dark .VPButton.alt:hover { border-color: #2a2a2a; }
+
+/* widen gutters after content width increase */
+@media (min-width: 1280px) {
+  .VPDoc.has-aside .content-container {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .VPSidebar {
+    padding-right: 22px;
+  }
+
+  .VPDocAside {
+    padding-left: 22px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .VPDoc.has-aside .content-container {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+
+  .VPSidebar {
+    padding-right: 28px;
+  }
+
+  .VPDocAside {
+    padding-left: 28px;
+  }
+}
