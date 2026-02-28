@@ -112,7 +112,6 @@ export default defineConfig({
         ]},
       ],
     },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/DongDongBear/Lighthouse' }],
     search: { provider: 'local' },
     outline: { level: [2, 3], label: '目录' },
     docFooter: { prev: '上一篇', next: '下一篇' },

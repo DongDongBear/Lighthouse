@@ -256,3 +256,56 @@
 @media (max-width: 768px) {
   .VPHero .heading { gap: 10px; }
 }
+
+/* refine hover effects: less jump, cleaner underline */
+.VPNavBarMenuLink,
+.VPLink {
+  transition: color .18s ease, opacity .18s ease;
+}
+
+.VPNavBarMenuLink:hover,
+.VPLink:hover {
+  color: var(--vp-c-text-1);
+  opacity: .86;
+}
+
+/* nav active/hover subtle underline */
+.VPNavBarMenuLink::after {
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* buttons: remove heavy transform */
+.VPButton,
+.VPFeature {
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+
+.VPFeature:hover {
+  transform: none !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,.04);
+  border-color: #cfcfcf;
+}
+.dark .VPFeature:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  border-color: #333;
+}
+
+.VPButton.brand:hover {
+  transform: none !important;
+  opacity: .92;
+}
+
+.VPButton.alt:hover {
+  transform: none !important;
+  background: var(--vp-c-bg-soft);
+}
+
+/* article links hover less aggressive */
+.vp-doc a {
+  transition: color .16s ease, text-decoration-color .16s ease;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-text-1) 45%, transparent);
+}
+.vp-doc a:hover {
+  color: var(--vp-c-text-1);
+  text-decoration-color: var(--vp-c-text-1);
+}
