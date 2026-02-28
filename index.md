@@ -8,7 +8,10 @@
       <img src="/unity-cover.jpg" alt="Unity Tutorial" />
     </div>
     <h3>Unity 3D 从零到精通</h3>
-    <p>28 章系统教程，从安装 Unity 到做出 3D 开放世界手游，面向有前端经验的开发者。</p>
+    <div class="lh-desc">
+      <h4>在 3D 开放世界手游方向上，这套教程从 Unity 安装到核心系统实现，完整覆盖开发链路。</h4>
+      <h4>内容强调可实战落地：角色控制、战斗、任务、地形、优化与发布，适合前端背景开发者迁移学习。</h4>
+    </div>
   </a>
 
   <a class="lh-card" href="/electron-tutorial/" title="查看 Electron 教程">
@@ -16,6 +19,9 @@
       <img src="/electron-cover.jpg" alt="Electron Tutorial" />
     </div>
     <h3>Electron 桌面开发</h3>
-    <p>从基础到实战，覆盖进程模型、窗口管理、热更新与打包发布，附 OpenClaw 桌面案例。</p>
+    <div class="lh-desc">
+      <h4>从 Electron 基础能力到桌面工程化，逐步讲清进程模型、窗口管理、数据存储和打包发布。</h4>
+      <h4>同时覆盖热更新与 OpenClaw 桌面端实战，帮助你搭建可维护、可迭代的桌面应用体系。</h4>
+    </div>
   </a>
 </div>
