@@ -1058,3 +1058,70 @@ html, body {
     font-weight: 470;
   }
 }
+
+/* ultra-minimal desktop sidebar + nuke top line */
+@media (min-width: 961px) {
+  /* kill any top divider line in sidebar area */
+  .VPSidebar,
+  .VPSidebarNav,
+  .VPSidebarOpen,
+  .VPSidebar .curtain,
+  .VPSidebar .content {
+    border-top: 0 !important;
+    border-right: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .VPSidebar::before,
+  .VPSidebar::after,
+  .VPSidebarNav::before,
+  .VPSidebarNav::after,
+  .VPSidebar .content::before,
+  .VPSidebar .content::after,
+  .VPSidebar .group::before,
+  .VPSidebar .group::after {
+    content: none !important;
+    border: 0 !important;
+    border-top: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* more minimal look */
+  .VPSidebar .group .title {
+    font-size: 10px !important;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--vp-c-text-3) !important;
+    margin-bottom: 6px !important;
+  }
+
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 6px;
+    padding: 6px 8px !important;
+    margin: 1px 0 !important;
+    font-size: 13px !important;
+    color: var(--vp-c-text-2) !important;
+  }
+
+  .VPSidebar .item .item:hover,
+  .VPSidebar .item .link:hover {
+    background: transparent !important;
+    color: var(--vp-c-text-1) !important;
+  }
+
+  .VPSidebar .item.is-active > .item,
+  .VPSidebar .item.is-active > .link {
+    background: transparent !important;
+    color: var(--vp-c-text-1) !important;
+    font-weight: 600;
+  }
+
+  .VPSidebar .items .items {
+    border-left: 0 !important;
+    padding-left: 8px !important;
+  }
+}
