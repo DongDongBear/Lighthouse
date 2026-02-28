@@ -408,3 +408,25 @@
   .lh-home-grid { grid-template-columns: 1fr; }
   .lh-card-media { height: 220px; }
 }
+
+
+/* card text no underline */
+.lh-card,
+.lh-card:hover,
+.lh-card h3,
+.lh-card p {
+  text-decoration: none !important;
+}
+
+/* exact cover ratio 464 x 320 */
+.lh-card-media {
+  aspect-ratio: 464 / 320;
+  height: auto;
+  min-height: 320px;
+}
+
+.lh-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
