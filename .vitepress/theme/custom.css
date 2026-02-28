@@ -502,3 +502,24 @@
     gap: 20px !important;
   }
 }
+
+
+/* widen cards */
+.VPHome { max-width: 1240px !important; }
+.lh-home-grid {
+  grid-template-columns: repeat(2, minmax(520px, 1fr)) !important;
+  gap: 28px !important;
+}
+.lh-card-media {
+  height: 340px !important;
+  min-height: 340px !important;
+}
+.lh-card-media img {
+  max-width: 220px !important;
+  max-height: 180px !important;
+}
+@media (max-width: 1180px) {
+  .lh-home-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
