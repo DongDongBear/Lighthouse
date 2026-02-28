@@ -1259,3 +1259,28 @@ html, body {
     margin-top: 8px !important;
   }
 }
+
+/* kill remaining nav divider line explicitly */
+.VPNavBar .divider,
+.VPNavBar .divider-line,
+.VPNav .divider,
+.VPNav .divider-line {
+  display: none !important;
+  height: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* tighten sidebar groups globally (pc + mobile) */
+.VPSidebar .group,
+.VPSidebar .group + .group {
+  margin-top: 4px !important;
+  padding-top: 4px !important;
+}
+
+.VPSidebar .item .item,
+.VPSidebar .item .link {
+  margin: 0 !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
