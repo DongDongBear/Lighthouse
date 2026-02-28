@@ -978,3 +978,11 @@ html, body {
     height: auto !important;
   }
 }
+
+/* keep PC card media height unchanged (user request) */
+@media (min-width: 901px) {
+  .lh-card-media {
+    height: 320px !important;
+    min-height: 320px !important;
+  }
+}
