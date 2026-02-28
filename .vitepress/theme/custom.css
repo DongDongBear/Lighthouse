@@ -1300,3 +1300,14 @@ nav[aria-labelledby="sidebar-aria-label"] {
 .VPSidebarItem {
   padding-bottom: 0 !important;
 }
+
+/* user correction: remove desktop nav top margin */
+nav[aria-labelledby="sidebar-aria-label"] {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 960px) {
+  nav[aria-labelledby="sidebar-aria-label"] {
+    margin-top: 50px !important;
+  }
+}
