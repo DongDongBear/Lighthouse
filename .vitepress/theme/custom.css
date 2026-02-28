@@ -1210,3 +1210,36 @@ html, body {
     min-height: 0 !important;
   }
 }
+
+/* mobile sidebar spacing final tuning (based on screenshot) */
+@media (max-width: 960px) {
+  /* push first items block down from logo */
+  .VPSidebar .items:first-child {
+    margin-top: 18px !important;
+  }
+
+  /* tighten gap between groups/sections */
+  .VPSidebar .group,
+  .VPSidebar .group + .group,
+  .VPSidebar .item,
+  .VPSidebar .items {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+    margin: 0 !important;
+  }
+
+  /* specifically reduce section split distance */
+  .VPSidebarItem.level-0 {
+    margin-top: 8px !important;
+  }
+
+  .VPSidebarItem.level-1 {
+    margin-top: 0 !important;
+  }
+}
