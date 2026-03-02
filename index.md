@@ -29,7 +29,7 @@
 </div>
 </a>
 <a class="lh-card group" href="ai-product-analysis/" title="查看 AI 产品分析">
-<div class="lh-card-media"><div class="lh-media-inner"><span style="font-size:64px">🔬</span></div></div>
+<div class="lh-card-media"><div class="lh-media-inner"><img src="/ai-analysis-logo.svg" alt="AI 产品分析" /></div></div>
 <h3>AI 产品分析</h3>
 <div class="lh-desc">
 <h4>深度拆解值得关注的 AI 产品——从产品定位、技术架构到商业模式，用工程视角理解 AI 时代的产品设计。</h4>
