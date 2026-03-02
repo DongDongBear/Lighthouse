@@ -29,6 +29,7 @@ export default defineConfig({
     logo: '/lighthouse-icon.svg',
     nav: [
       { text: '首页', link: '/' },
+      { text: 'AI 产品分析', link: '/ai-product-analysis/' },
     ],
     sidebar: {
       '/unity-tutorial/': [
@@ -109,6 +110,12 @@ export default defineConfig({
           { text: '08. 配置管理', link: '/electron-tutorial/03-openclaw-desktop/08-config-management' },
           { text: '09. 自动更新', link: '/electron-tutorial/03-openclaw-desktop/09-auto-update' },
           { text: '10. 打包与发布', link: '/electron-tutorial/03-openclaw-desktop/10-packaging-release' },
+        ]},
+      ],
+      '/ai-product-analysis/': [
+        { text: 'AI 产品分析', items: [
+          { text: '栏目总览', link: '/ai-product-analysis/' },
+          { text: 'EvoMap', link: '/ai-product-analysis/evomap' },
         ]},
       ],
     },
