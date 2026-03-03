@@ -9,7 +9,7 @@
 .lh-prose h3,
 .lh-prose h4 {
   letter-spacing: -0.015em;
-  font-weight: 650;
+  font-weight: 500;
   color: var(--vp-c-text-1);
 }
 
@@ -27,7 +27,7 @@
   margin-bottom: 1rem;
   padding-top: 0;
   border-top: 0;
-  font-weight: 520;
+  font-weight: 500;
 }
 
 .lh-prose h3 {
@@ -35,7 +35,7 @@
   line-height: 1.25;
   margin-top: 2rem;
   margin-bottom: .75rem;
-  font-weight: 520;
+  font-weight: 500;
 }
 
 .lh-prose p,
@@ -172,7 +172,7 @@
 
 .lh-prose th {
   background: var(--vp-c-bg-soft);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* hr */
@@ -190,7 +190,7 @@
 
 /* strong / em */
 .lh-prose strong {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--vp-c-text-1);
 }
 

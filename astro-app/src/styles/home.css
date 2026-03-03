@@ -11,7 +11,7 @@
   font-size: 40px;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  font-weight: 620;
+  font-weight: 500;
   color: var(--vp-c-text-1);
 }
 .lh-intro h2 {
@@ -19,7 +19,7 @@
   font-size: 34px;
   line-height: 1.24;
   letter-spacing: -0.02em;
-  font-weight: 520;
+  font-weight: 500;
   color: var(--vp-c-text-1);
 }
 .lh-intro p {
@@ -36,7 +36,7 @@
 .lh-products-head h3 {
   margin: 0 0 6px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--vp-c-text-1);
 }
 .lh-products-head p {
@@ -57,7 +57,7 @@
 }
 .lh-tabs .active {
   color: var(--vp-c-text-1);
-  font-weight: 550;
+  font-weight: 500;
 }
 
 /* card grid */

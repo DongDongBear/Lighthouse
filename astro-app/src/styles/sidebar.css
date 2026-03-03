@@ -24,10 +24,10 @@
 }
 
 .lh-sidebar-group-title {
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: .04em;
   color: var(--vp-c-text-1);
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 8px;
   padding: 0 8px;
   cursor: pointer;
@@ -137,7 +137,7 @@
 
   .lh-sidebar-group-title {
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
   }
 }
 

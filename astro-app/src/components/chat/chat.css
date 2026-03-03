@@ -52,7 +52,7 @@
   display: flex; align-items: center; justify-content: center; color: var(--vp-c-text-1);
 }
 .cw-header-info { display: flex; flex-direction: column; gap: 2px; }
-.cw-header-name { font-size: 14px; font-weight: 600; color: var(--vp-c-text-1); letter-spacing: -.01em; }
+.cw-header-name { font-size: 14px; font-weight: 500; color: var(--vp-c-text-1); letter-spacing: -.01em; }
 .cw-header-status { font-size: 11px; color: var(--vp-c-text-3); display: flex; align-items: center; gap: 4px; }
 .cw-dot { width: 6px; height: 6px; border-radius: 50%; background: #34c759; display: inline-block; }
 .cw-close {
@@ -117,7 +117,7 @@
 .cw-bubble pre { background: rgba(0,0,0,.04); border-radius: 8px; padding: 10px 12px; margin: 6px 0; overflow-x: auto; font-size: 12px; line-height: 1.5; }
 .dark .cw-bubble pre { background: rgba(255,255,255,.06); }
 .cw-bubble blockquote { border-left: 2px solid var(--vp-c-divider); padding-left: 10px; margin: 4px 0; color: var(--vp-c-text-2); font-size: 13px; }
-.cw-bubble strong { font-weight: 600; }
+.cw-bubble strong { font-weight: 500; }
 
 .cw-time { font-size: 10px; color: var(--vp-c-text-3); padding: 0 4px; opacity: 0; transition: opacity .2s; }
 .cw-row:hover .cw-time { opacity: 1; }

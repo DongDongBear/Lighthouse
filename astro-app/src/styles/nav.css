@@ -38,7 +38,7 @@
   font-size: 14px;
   letter-spacing: .12em;
   text-transform: uppercase;
-  font-weight: 650;
+  font-weight: 500;
   color: var(--vp-c-text-1);
 }
 
@@ -65,7 +65,7 @@
 
 .lh-nav-link.active {
   color: var(--vp-c-text-1);
-  font-weight: 550;
+  font-weight: 500;
 }
 
 .lh-nav-right {

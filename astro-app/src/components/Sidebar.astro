@@ -19,8 +19,8 @@ function isActive(link: string): boolean {
 }
 ---
 
-<div class="lh-sidebar-overlay" id="sidebar-overlay"></div>
-<aside class="lh-sidebar" id="sidebar">
+<div class="lh-sidebar-overlay" id="sidebar-overlay" transition:persist></div>
+<aside class="lh-sidebar" id="sidebar" transition:persist>
   <nav class="lh-sidebar-nav">
     {groups.map((group) => (
       <div class="lh-sidebar-group">
@@ -49,11 +49,19 @@ function isActive(link: string): boolean {
 </aside>
 
 <script>
-  // Sidebar toggle for mobile
-  document.addEventListener('DOMContentLoaded', () => {
+  let sidebarInited = false;
+
+  function initSidebar() {
     const toggle = document.getElementById('sidebar-toggle');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
+
+    // Update active link & auto-expand group on every navigation
+    updateActiveLink();
+
+    // Only bind event listeners once (sidebar persists across navigations)
+    if (sidebarInited) return;
+    sidebarInited = true;
 
     function openSidebar() {
       sidebar?.classList.add('open');
@@ -87,5 +95,37 @@ function isActive(link: string): boolean {
         title.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
       });
     });
-  });
+  }
+
+  function updateActiveLink() {
+    const currentPath = window.location.pathname.replace(/\/$/, '');
+
+    // Clear old active
+    document.querySelectorAll('.lh-sidebar-link.active').forEach(el => {
+      el.classList.remove('active');
+    });
+
+    // Set new active & expand its parent group
+    document.querySelectorAll<HTMLAnchorElement>('a.lh-sidebar-link').forEach(link => {
+      const href = link.getAttribute('href')?.replace(/\/$/, '') || '';
+      if (href === currentPath) {
+        link.classList.add('active');
+
+        // Auto-expand the group containing the active link
+        const group = link.closest('.lh-sidebar-group');
+        if (group) {
+          const items = group.querySelector('.lh-sidebar-items');
+          const title = group.querySelector('.lh-sidebar-group-title');
+          const arrow = title?.querySelector('.lh-sidebar-arrow');
+          if (items?.classList.contains('collapsed')) {
+            items.classList.remove('collapsed');
+            arrow?.classList.remove('collapsed');
+            title?.setAttribute('data-collapsed', 'false');
+          }
+        }
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initSidebar);
 </script>
