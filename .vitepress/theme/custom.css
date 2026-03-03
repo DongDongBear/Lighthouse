@@ -505,7 +505,7 @@
 
 
 /* widen cards (safe, no overlap) */
-.VPHome { max-width: 1240px !important; }
+.VPHome { max-width: 1460px !important; }
 .lh-home-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 28px !important;
