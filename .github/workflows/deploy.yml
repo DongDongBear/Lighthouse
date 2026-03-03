@@ -32,7 +32,9 @@ jobs:
 
       - name: Build
         working-directory: astro-app
-        run: npm run build
+        env:
+          NODE_OPTIONS: --max-old-space-size=3072
+        run: npm run build -- --concurrency 4
 
       - uses: actions/upload-pages-artifact@v3
         with:
