@@ -29,6 +29,7 @@ export default defineConfig({
     logo: '/lighthouse-icon.svg',
     nav: [
       { text: '首页', link: '/' },
+      { text: 'Rust 教程', link: '/rust-tutorial/' },
       { text: 'AI 产品分析', link: '/ai-product-analysis/' },
     ],
     sidebar: {
@@ -110,6 +111,45 @@ export default defineConfig({
           { text: '08. 配置管理', link: '/electron-tutorial/03-openclaw-desktop/08-config-management' },
           { text: '09. 自动更新', link: '/electron-tutorial/03-openclaw-desktop/09-auto-update' },
           { text: '10. 打包与发布', link: '/electron-tutorial/03-openclaw-desktop/10-packaging-release' },
+        ]},
+      ],
+
+      '/rust-tutorial/': [
+        { text: '开始', items: [
+          { text: '教程总览', link: '/rust-tutorial/' },
+          { text: '00. 全景概览', link: '/rust-tutorial/00-overview' },
+          { text: '01. 环境搭建', link: '/rust-tutorial/01-setup' },
+          { text: '02. 第一个程序', link: '/rust-tutorial/02-first-program' },
+          { text: '03. 类型系统', link: '/rust-tutorial/03-type-system' },
+        ]},
+        { text: '核心基础', collapsed: false, items: [
+          { text: '04. 所有权', link: '/rust-tutorial/04-ownership' },
+          { text: '05. 借用与引用', link: '/rust-tutorial/05-borrowing' },
+          { text: '06. 结构体与枚举', link: '/rust-tutorial/06-structs-enums' },
+          { text: '07. 模式匹配', link: '/rust-tutorial/07-pattern-matching' },
+          { text: '08. 错误处理', link: '/rust-tutorial/08-error-handling' },
+          { text: '09. 集合', link: '/rust-tutorial/09-collections' },
+        ]},
+        { text: '进阶能力', collapsed: true, items: [
+          { text: '10. 泛型与 Trait', link: '/rust-tutorial/10-generics-traits' },
+          { text: '11. 生命周期', link: '/rust-tutorial/11-lifetime' },
+          { text: '12. 闭包与迭代器', link: '/rust-tutorial/12-closures-iterators' },
+          { text: '13. 模块与 Crate', link: '/rust-tutorial/13-modules-crates' },
+          { text: '14. 智能指针', link: '/rust-tutorial/14-smart-pointers' },
+          { text: '15. 并发编程', link: '/rust-tutorial/15-concurrency' },
+          { text: '16. 异步编程', link: '/rust-tutorial/16-async-await' },
+          { text: '17. 宏', link: '/rust-tutorial/17-macros' },
+        ]},
+        { text: '实战与精通', collapsed: true, items: [
+          { text: '18. CLI 工具', link: '/rust-tutorial/18-cli-tool' },
+          { text: '19. Web API', link: '/rust-tutorial/19-web-api' },
+          { text: '20. Rust + WASM', link: '/rust-tutorial/20-wasm' },
+          { text: '21. FFI', link: '/rust-tutorial/21-ffi' },
+          { text: '22. Unsafe Rust', link: '/rust-tutorial/22-unsafe' },
+          { text: '23. 高级类型', link: '/rust-tutorial/23-advanced-types' },
+          { text: '24. Tokio 深入', link: '/rust-tutorial/24-tokio-deep-dive' },
+          { text: '25. 性能优化', link: '/rust-tutorial/25-performance' },
+          { text: '26. 发布 Crate', link: '/rust-tutorial/26-publish-crate' },
         ]},
       ],
       '/ai-product-analysis/': [
