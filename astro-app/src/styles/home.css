@@ -3,8 +3,12 @@
   padding-top: 6px;
 }
 .lh-intro {
-  max-width: 860px;
+  max-width: 100%;
   margin-bottom: 44px;
+  padding: 0 20%;
+}
+.lh-products {
+  padding: 0 10%;
 }
 .lh-intro h1 {
   margin: 0 0 6px;
@@ -184,6 +188,10 @@
 @media (max-width: 960px) {
   .lh-intro {
     margin-bottom: 24px;
+    padding: 0;
+  }
+  .lh-products {
+    padding: 0;
   }
   .lh-intro h1 {
     font-size: 30px;
