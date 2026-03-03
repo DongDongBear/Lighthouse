@@ -2,8 +2,28 @@
 import '../styles/home.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ChatWidget from '../components/chat/ChatWidget.tsx';
+import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const sectionLabel: Record<string, string> = {
+  'unity-tutorial': 'Unity',
+  'electron-tutorial': 'Electron',
+  'rust-tutorial': 'Rust',
+  'ai-product-analysis': 'AI 产品',
+};
+
+const allDocs = await getCollection('docs');
+const articles = allDocs
+  .filter(e => !e.slug.split('/').pop()?.startsWith('index'))
+  .map(e => {
+    const m = e.body.match(/^#\s+(.+)$/m);
+    const title = m?.[1]?.replace(/[*_`[\]]/g, '') ?? e.slug.split('/').pop()!;
+    const section = e.slug.split('/')[0];
+    return { slug: e.slug, title, label: sectionLabel[section] ?? section };
+  })
+  .sort((a, b) => b.slug.localeCompare(a.slug))
+  .slice(0, 9);
 ---
 
 <BaseLayout title="LightHouse" pageClass="lh-page-home">
@@ -21,9 +41,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             <h3>AI 时代的构建模块</h3>
             <p>在 AI 驱动的软件范式里，能力不再只来自代码量，而来自模型协作、系统设计与持续迭代。</p>
           </div>
-          <div class="lh-tabs"><span class="active">全部</span><span>游戏开发</span><span>桌面开发</span><span>实战案例</span><span>AI 产品</span></div>
+          <div class="lh-tabs">
+            <span class="active" data-cat="">全部</span>
+            <span data-cat="游戏开发">游戏开发</span>
+            <span data-cat="桌面开发">桌面开发</span>
+            <span data-cat="实战案例">实战案例</span>
+            <span data-cat="AI 产品">AI 产品</span>
+          </div>
           <div class="lh-home-grid">
-            <a class="lh-card group" href={`${base}/unity-tutorial/`} title="查看 Unity 教程">
+            <a class="lh-card group" data-category="游戏开发" href={`${base}/unity-tutorial/`} title="查看 Unity 教程">
               <div class="lh-card-media"><div class="lh-media-inner"><img src={`${base}/unity-logo.svg`} alt="Unity 3D" /></div></div>
               <h3>Unity 3D 从零到精通</h3>
               <div class="lh-desc">
@@ -31,7 +57,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                 <h4>角色控制、战斗、任务、地形、优化与发布全覆盖，适合前端背景开发者迁移学习。</h4>
               </div>
             </a>
-            <a class="lh-card group" href={`${base}/electron-tutorial/`} title="查看 Electron 教程">
+            <a class="lh-card group" data-category="桌面开发" href={`${base}/electron-tutorial/`} title="查看 Electron 教程">
               <div class="lh-card-media"><div class="lh-media-inner"><img src={`${base}/electron-logo.svg`} alt="Electron" /></div></div>
               <h3>Electron 桌面开发</h3>
               <div class="lh-desc">
@@ -39,7 +65,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                 <h4>覆盖热更新与 OpenClaw 桌面端实战，帮助你搭建可维护、可迭代的桌面应用体系。</h4>
               </div>
             </a>
-            <a class="lh-card group" href={`${base}/rust-tutorial/`} title="查看 Rust 教程">
+            <a class="lh-card group" data-category="实战案例" href={`${base}/rust-tutorial/`} title="查看 Rust 教程">
               <div class="lh-card-media"><div class="lh-media-inner"><img src={`${base}/rust-logo.png`} alt="Rust" /></div></div>
               <h3>Rust 从入门到精通</h3>
               <div class="lh-desc">
@@ -47,7 +73,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                 <h4>从语言基础到 Axum/WASM/FFI/Tokio 深入，帮助你构建高性能、可维护、可部署的 Rust 项目体系。</h4>
               </div>
             </a>
-            <a class="lh-card group" href={`${base}/ai-product-analysis/`} title="查看 AI 产品分析">
+            <a class="lh-card group" data-category="AI 产品" href={`${base}/ai-product-analysis/`} title="查看 AI 产品分析">
               <div class="lh-card-media"><div class="lh-media-inner"><img src={`${base}/ai-analysis-logo.svg`} alt="AI 产品分析" /></div></div>
               <h3>AI 产品分析</h3>
               <div class="lh-desc">
@@ -57,8 +83,40 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             </a>
           </div>
         </section>
+        <section class="lh-recent">
+          <div class="lh-recent-head">
+            <h3>最近更新</h3>
+          </div>
+          <div class="lh-recent-grid">
+            {articles.map(a => (
+              <a class="lh-recent-card" href={`${base}/${a.slug}/`}>
+                <span class="lh-recent-tag">{a.label}</span>
+                <p class="lh-recent-title">{a.title}</p>
+              </a>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   </main>
   <ChatWidget client:only="react" />
 </BaseLayout>
+
+<script>
+  function initTabs() {
+    const tabs = document.querySelectorAll<HTMLElement>('.lh-tabs span');
+    const cards = document.querySelectorAll<HTMLElement>('.lh-card');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const cat = tab.dataset.cat;
+        cards.forEach(card => {
+          card.style.display = (!cat || card.dataset.category === cat) ? '' : 'none';
+        });
+      });
+    });
+  }
+  initTabs();
+  document.addEventListener('astro:page-load', initTabs);
+</script>
