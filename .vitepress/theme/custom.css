@@ -1322,15 +1322,44 @@ nav[aria-labelledby="sidebar-aria-label"] {
   margin-top: 50px !important;
 }
 
-/* ===== home width hard override (latest) ===== */
+/* =========================================================
+   LAYOUT SYSTEM V3 (layout-only, maintainable)
+   - Only controls width/centering
+   - No visual style changes
+========================================================= */
 :root {
-  --vp-layout-max-width: 2200px;
+  --lh-layout-home-max: 1920px;
+  --lh-layout-doc-max: 1200px;
+  --lh-layout-gutter-desktop: 32px;
+  --lh-layout-gutter-tablet: 24px;
 }
 
+/* reset problematic centering hacks */
+.VPHome .container,
+.VPDoc .container,
+.VPDoc.has-sidebar .content-container,
+.VPDoc:not(.has-sidebar) .content-container {
+  position: static !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+/* desktop */
 @media (min-width: 1024px) {
   .VPHome .container {
-    width: min(1920px, calc(100vw - 64px)) !important;
-    max-width: min(1920px, calc(100vw - 64px)) !important;
+    width: min(var(--lh-layout-home-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
+    max-width: min(var(--lh-layout-home-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    width: min(var(--lh-layout-doc-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
+    max-width: min(var(--lh-layout-doc-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
     margin-left: auto !important;
     margin-right: auto !important;
     padding-left: 0 !important;
@@ -1340,86 +1369,22 @@ nav[aria-labelledby="sidebar-aria-label"] {
   .lh-landing,
   .lh-products,
   .lh-home-grid {
+    max-width: none !important;
     width: 100% !important;
-    max-width: none !important;
-  }
-
-  .lh-intro,
-  .lh-intro p {
-    max-width: none !important;
   }
 }
 
-/* =========================================================
-   WIDTH SYSTEM V2 (authoritative override)
-   Goal: one clear, deterministic width model for Home/Doc.
-   Put all width logic here and let this block win by source order.
-========================================================= */
-:root {
-  --lh-doc-max: 1200px;
-  --lh-home-max: 1920px;
-  --lh-gutter-desktop: 32px;
-  --lh-gutter-tablet: 24px;
-  --lh-gutter-mobile: 16px;
-}
-
-/* kill inherited max-width constraints from scattered old rules */
-.VPHome,
-.VPDoc,
-.VPContent {
-  max-width: none !important;
-}
-
-/* Desktop/tablet base: make container width formula explicit */
-@media (min-width: 961px) {
-  /* docs: keep readable measure */
+/* tablet */
+@media (min-width: 961px) and (max-width: 1023px) {
+  .VPHome .container,
   .VPDoc .container,
   .VPDoc.has-sidebar .content-container,
   .VPDoc:not(.has-sidebar) .content-container {
-    width: min(var(--lh-doc-max), calc(100vw - (var(--lh-gutter-desktop) * 2))) !important;
-    max-width: min(var(--lh-doc-max), calc(100vw - (var(--lh-gutter-desktop) * 2))) !important;
-    margin: 0 auto !important;
-    position: relative !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    width: calc(100vw - (var(--lh-layout-gutter-tablet) * 2)) !important;
+    max-width: calc(100vw - (var(--lh-layout-gutter-tablet) * 2)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  /* home: much wider, no hidden cap */
-  .VPHome .container {
-    width: min(var(--lh-home-max), calc(100vw - (var(--lh-gutter-desktop) * 2))) !important;
-    max-width: min(var(--lh-home-max), calc(100vw - (var(--lh-gutter-desktop) * 2))) !important;
-    margin: 0 auto !important;
-    position: relative !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  /* home content should never re-shrink itself */
-  .lh-landing,
-  .lh-products,
-  .lh-home-grid,
-  .lh-intro,
-  .lh-intro p {
-    width: 100% !important;
-    max-width: none !important;
   }
 }
-
-/* mid screens */
-@media (min-width: 961px) and (max-width: 1439px) {
-  .VPDoc .container,
-  .VPDoc.has-sidebar .content-container,
-  .VPDoc:not(.has-sidebar) .content-container,
-  .VPHome .container {
-    width: calc(100vw - (var(--lh-gutter-tablet) * 2)) !important;
-    max-width: calc(100vw - (var(--lh-gutter-tablet) * 2)) !important;
-  }
-}
-
-/* mobile overrides removed by request */
