@@ -30,7 +30,7 @@
 </a>
 
 <a class="lh-card group" href="rust-tutorial/" title="查看 Rust 教程">
-<div class="lh-card-media"><div class="lh-media-inner"><img src="/rust-logo.svg" alt="Rust" /></div></div>
+<div class="lh-card-media"><div class="lh-media-inner"><img src="/rust-logo.png" alt="Rust" /></div></div>
 <h3>Rust 从入门到精通</h3>
 <div class="lh-desc">
 <h4>面向 TS/JS 开发者的 Rust 系统化学习路径：所有权、借用、并发、异步、宏与工程实战全覆盖。</h4>
