@@ -1,224 +1,1425 @@
-/* =========================================================
-   Lighthouse Layout System (Refactor V3)
-   Goal: simple, predictable, maintainable.
-   Strategy:
-   - Home page: wide + centered
-   - Doc page: readable width + centered
-   - No sidebar/nav hack overrides
-========================================================= */
-
 :root {
-  --lh-home-max: 1840px;
-  --lh-doc-max: 1200px;
-  --lh-gutter-desktop: 32px;
-  --lh-gutter-mobile: 16px;
+  --vp-c-brand-1: #111;
+  --vp-c-brand-2: #000;
+  --vp-c-brand-3: #333;
+  --vp-c-brand-soft: rgba(0, 0, 0, 0.06);
 
-  --lh-card-radius: 14px;
-  --lh-card-border: var(--vp-c-divider);
-  --lh-card-bg: var(--vp-c-bg-soft);
+  --vp-c-bg: #fff;
+  --vp-c-bg-alt: #fcfcfc;
+  --vp-c-bg-soft: #f7f7f7;
+
+  --vp-c-text-1: #111;
+  --vp-c-text-2: #4b4b4b;
+  --vp-c-text-3: #777;
+
+  --vp-c-divider: #ececec;
+  --vp-c-divider-light: #f2f2f2;
+
+  --vp-font-family-base: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
+  --vp-font-family-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
 }
 
-/* ===== global container logic ===== */
-@media (min-width: 961px) {
-  .VPHome .container {
-    width: min(var(--lh-home-max), calc(100vw - var(--lh-gutter-desktop) * 2));
-    max-width: min(var(--lh-home-max), calc(100vw - var(--lh-gutter-desktop) * 2));
-    margin: 0 auto;
-    padding: 0;
-  }
+.dark {
+  --vp-c-bg: #0b0b0b;
+  --vp-c-bg-alt: #111;
+  --vp-c-bg-soft: #151515;
 
-  .VPDoc .container,
-  .VPDoc.has-sidebar .content-container,
-  .VPDoc:not(.has-sidebar) .content-container {
-    width: min(var(--lh-doc-max), calc(100vw - var(--lh-gutter-desktop) * 2));
-    max-width: min(var(--lh-doc-max), calc(100vw - var(--lh-gutter-desktop) * 2));
-    margin: 0 auto;
-  }
+  --vp-c-text-1: #f3f3f3;
+  --vp-c-text-2: #c4c4c4;
+  --vp-c-text-3: #979797;
+
+  --vp-c-divider: #232323;
+  --vp-c-divider-light: #1a1a1a;
+
+  --vp-c-brand-1: #f3f3f3;
+  --vp-c-brand-2: #fff;
+  --vp-c-brand-3: #cfcfcf;
+  --vp-c-brand-soft: rgba(255, 255, 255, 0.09);
 }
 
-@media (max-width: 960px) {
-  .VPHome .container,
-  .VPDoc .container,
-  .VPDoc.has-sidebar .content-container,
-  .VPDoc:not(.has-sidebar) .content-container {
-    width: calc(100vw - var(--lh-gutter-mobile) * 2);
-    max-width: calc(100vw - var(--lh-gutter-mobile) * 2);
-    margin: 0 auto;
-  }
+/* 顶部 */
+.VPNavBar {
+  backdrop-filter: saturate(180%) blur(10px);
+  background: color-mix(in srgb, var(--vp-c-bg) 88%, transparent);
+  border-bottom: 1px solid var(--vp-c-divider-light);
+}
+.VPNavBarTitle .title {
+  letter-spacing: .08em;
+  font-weight: 650;
 }
 
-/* ===== docs typography ===== */
-.vp-doc {
-  line-height: 1.8;
+/* 首页 */
+.VPContent.is-home { padding-top: 20px !important; }
+.VPHome { max-width: 1040px; margin: 0 auto; }
+.VPHero .name {
+  font-size: clamp(48px, 8vw, 74px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 760;
 }
-
-.vp-doc p,
-.vp-doc li {
-  font-size: 16px;
-}
-
-/* ===== home layout ===== */
-.VPContent.is-home {
-  padding-top: 20px;
-}
-
-.lh-landing {
-  width: 100%;
-}
-
-.lh-intro {
-  margin-bottom: 28px;
-}
-
-.lh-intro h1 {
-  margin: 0 0 8px;
-  font-size: 46px;
+.VPHero .text {
+  font-size: clamp(24px, 3.5vw, 34px);
   line-height: 1.15;
   letter-spacing: -0.02em;
+  font-weight: 560;
 }
-
-.lh-intro h2 {
-  margin: 0 0 16px;
-  font-size: 36px;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--vp-c-text-1);
-}
-
-.lh-intro p {
-  margin: 0 0 8px;
-  max-width: none;
-  color: var(--vp-c-text-2);
+.VPHero .tagline {
+  max-width: 760px;
   font-size: 15px;
-  line-height: 1.9;
-}
-
-.lh-products-head h3 {
-  margin: 0 0 8px;
-  font-size: 18px;
-}
-
-.lh-products-head p {
-  margin: 0 0 12px;
+  line-height: 1.85;
   color: var(--vp-c-text-2);
 }
-
-.lh-tabs {
-  display: flex;
-  gap: 14px;
-  margin: 0 0 16px;
-  font-size: 13px;
-  color: var(--vp-c-text-3);
+.VPButton.brand {
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+}
+.dark .VPButton.brand {
+  border: 1px solid #f3f3f3;
+  background: #f3f3f3;
+  color: #111;
+}
+.VPButton.alt {
+  border: 1px solid #e8e8e8;
+  background: transparent;
 }
 
-.lh-tabs .active {
+/* Feature 卡片 */
+.VPFeature {
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  transition: all .22s ease;
+}
+.VPFeature:hover {
+  transform: translateY(-2px);
+  border-color: var(--vp-c-text-3);
+}
+
+/* 文档版心 */
+.VPDoc .container { max-width: 790px; }
+.vp-doc {
   color: var(--vp-c-text-1);
-  font-weight: 600;
+  letter-spacing: 0;
+}
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  letter-spacing: -0.015em;
+  font-weight: 650;
+  color: var(--vp-c-text-1);
+}
+.vp-doc h1 {
+  font-size: clamp(36px, 4.5vw, 46px);
+  line-height: 1.15;
+  margin-top: .2rem;
+  margin-bottom: 1rem;
+}
+.vp-doc h2 {
+  font-size: 30px;
+  line-height: 1.2;
+  margin-top: 2.8rem;
+  margin-bottom: 1rem;
+  padding-top: 0;
+  border-top: 0;
+}
+.vp-doc h3 {
+  font-size: 24px;
+  line-height: 1.25;
+  margin-top: 2rem;
+  margin-bottom: .75rem;
+}
+.vp-doc p,
+.vp-doc li {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--vp-c-text-2);
+}
+.vp-doc p { margin: 0 0 1.15rem; }
+.vp-doc a {
+  color: var(--vp-c-text-1);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.vp-doc a:hover { color: var(--vp-c-text-2); }
+
+/* 代码块 */
+.vp-doc div[class*='language-'] {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  box-shadow: none;
+}
+.vp-doc :not(pre) > code {
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  border-color: #d8d8d8;
+  border-radius: 6px;
+  padding: .18em .4em;
+}
+
+/* 侧边栏 */
+.VPSidebar {
+  border-right: 1px solid var(--vp-c-divider-light);
+}
+.VPSidebar .group + .group {
+  margin-top: .55rem;
+  padding-top: .55rem;
+}
+
+/* 页脚 */
+.VPFooter { border-top: 1px solid var(--vp-c-divider-light); }
+
+@media (max-width: 768px) {
+  .VPDoc .container { padding: 0 14px; }
+  .vp-doc p,.vp-doc li { font-size: 16px; line-height: 1.85; }
+  .vp-doc h2 { font-size: 26px; }
+  .vp-doc h3 { font-size: 22px; }
+}
+
+
+/* 修正首页标题蓝色渐变 + 溢出 */
+.VPHero .name,
+.VPHero .name .clip {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--vp-c-text-1) !important;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* 全站（非正文）字体统一 */
+.VPNav,
+.VPSidebar,
+.VPFooter,
+.VPLink,
+.VPDocAside,
+.VPLocalNav {
+  font-family: var(--vp-font-family-base);
+}
+
+/* 首页避免超宽 */
+.VPHero .name { font-size: clamp(40px, 7vw, 62px); }
+
+/* caicai-like details */
+.VPNavBarMenuLink,
+.VPNavBarExtra,
+.VPNavBarMenu .VPLink {
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 450;
+}
+
+.VPNavBarTitle .title {
+  font-size: 14px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.vp-doc h2 { font-weight: 520; }
+.vp-doc h3 { font-weight: 520; }
+.vp-doc p,
+.vp-doc li { font-weight: 320; }
+
+/* widen article content */
+:root {
+  --vp-layout-max-width: 1520px;
+}
+
+.VPDoc .container { max-width: 1100px !important; }
+.VPDoc.has-sidebar .content-container { max-width: 1100px !important; }
+.VPDoc:not(.has-sidebar) .content-container { max-width: 1100px !important; }
+
+@media (max-width: 1280px) {
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: 1040px !important;
+  }
+}
+
+/* hero heading spacing tune */
+.VPHero .heading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.VPHero .name {
+  margin-bottom: 6px;
+}
+.VPHero .text {
+  margin-top: 4px;
+  line-height: 1.22;
+}
+
+@media (max-width: 768px) {
+  .VPHero .heading { gap: 10px; }
+}
+
+/* refine hover effects: less jump, cleaner underline */
+.VPNavBarMenuLink,
+.VPLink {
+  transition: color .18s ease, opacity .18s ease;
+}
+
+.VPNavBarMenuLink:hover,
+.VPLink:hover {
+  color: var(--vp-c-text-1);
+  opacity: .86;
+}
+
+/* nav active/hover subtle underline */
+.VPNavBarMenuLink::after {
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* buttons: remove heavy transform */
+.VPButton,
+.VPFeature {
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+
+.VPFeature:hover {
+  transform: none !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,.04);
+  border-color: #d6d6d6;
+}
+.dark .VPFeature:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  border-color: #2a2a2a;
+}
+
+.VPButton.brand:hover {
+  transform: none !important;
+  opacity: .92;
+}
+
+.VPButton.alt:hover {
+  transform: none !important;
+  background: var(--vp-c-bg-soft);
+  border-color: #d8d8d8;
+}
+
+/* article links hover less aggressive */
+.vp-doc a {
+  transition: color .16s ease, text-decoration-color .16s ease;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-text-1) 45%, transparent);
+}
+.vp-doc a:hover {
+  color: var(--vp-c-text-1);
+  text-decoration-color: var(--vp-c-text-1);
+}
+
+.dark .VPButton.alt:hover { border-color: #2a2a2a; }
+
+/* widen gutters after content width increase */
+@media (min-width: 1280px) {
+  .VPDoc.has-aside .content-container {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .VPSidebar {
+    padding-right: 22px;
+  }
+
+  .VPDocAside {
+    padding-left: 22px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .VPDoc.has-aside .content-container {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+
+  .VPSidebar {
+    padding-right: 28px;
+  }
+
+  .VPDocAside {
+    padding-left: 28px;
+  }
+}
+
+
+/* remove heading hash anchor */
+.vp-doc .header-anchor { display: none !important; }
+
+.VPFeature, .VPFeature:hover { border-width: 1px !important; }
+
+/* custom home cards */
+.lh-subtitle {
+  margin-top: -8px;
+  margin-bottom: 34px;
+  color: var(--vp-c-text-2);
+  font-size: 18px;
 }
 
 .lh-home-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 26px;
-  align-items: stretch;
+  gap: 22px;
 }
 
 .lh-card {
   display: block;
-  border: 1px solid var(--lh-card-border);
-  border-radius: var(--lh-card-radius);
-  background: var(--vp-c-bg);
-  text-decoration: none;
   color: inherit;
-  padding: 14px;
-  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-
-.lh-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
-}
-
-.dark .lh-card:hover {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  text-decoration: none;
 }
 
 .lh-card-media {
-  height: 270px;
-  border-radius: 12px;
-  background: var(--lh-card-bg);
-  display: grid;
-  place-items: center;
-  margin-bottom: 12px;
+  height: 260px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  transition: transform .2s ease;
+}
+
+.lh-card:hover .lh-card-media {
+  transform: translateY(-4px);
 }
 
 .lh-card-media img {
-  max-width: 210px;
-  max-height: 170px;
-  width: auto;
-  height: auto;
+  width: 130px;
+  height: 130px;
   object-fit: contain;
 }
 
 .lh-card h3 {
   margin: 0 0 8px;
-  font-size: 17px;
-  line-height: 1.35;
+  font-size: 16px;
+  font-weight: 560;
 }
 
-.lh-desc h4 {
-  margin: 0 0 8px;
-  font-size: 14px;
-  line-height: 1.75;
+.lh-card p {
+  margin: 0;
   color: var(--vp-c-text-2);
-  font-weight: 450;
+  line-height: 1.75;
 }
 
-/* ===== responsive ===== */
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
+  .lh-home-grid { grid-template-columns: 1fr; }
+  .lh-card-media { height: 220px; }
+}
+
+
+/* card text no underline */
+.lh-card,
+.lh-card:hover,
+.lh-card h3,
+.lh-card p {
+  text-decoration: none !important;
+}
+
+/* exact cover ratio 464 x 320 */
+.lh-card-media {
+  aspect-ratio: 464 / 320;
+  height: auto;
+  min-height: 320px;
+}
+
+.lh-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* card typography match requested style */
+.lh-card h3 {
+  font-size: 14px !important;
+  font-weight: 500;
+  color: rgba(0,0,0,1);
+  margin-bottom: 8px;
+  transition: color .2s ease;
+}
+.dark .lh-card h3 { color: rgba(255,255,255,1); }
+ .lh-card:hover h3 { color: rgba(0,0,0,1); }
+.dark .lh-card:hover h3 { color: rgba(255,255,255,1); }
+
+.lh-desc { margin-bottom: 12px; }
+.lh-desc h4 {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(0,0,0,0.8);
+  margin: 0 0 8px;
+  line-height: 1.625;
+}
+.dark .lh-desc h4 { color: rgba(255,255,255,0.6); }
+
+
+/* match requested cover block style */
+.lh-card { text-decoration: none !important; }
+.lh-card-media {
+  background: rgba(0,0,0,0.02) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 32px !important;
+  height: 380px !important;
+  min-height: 380px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform .2s ease;
+}
+.dark .lh-card-media { background: rgba(255,255,255,0.05) !important; }
+.group:hover .lh-card-media { transform: translateY(-4px); }
+.lh-media-inner { text-align: center; }
+.lh-card-media img {
+  max-width: 140px !important;
+  max-height: 140px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+.lh-card h3,.lh-card h4,.lh-card p { text-decoration: none !important; }
+
+
+/* force card grid layout */
+.lh-home-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  align-items: start;
+}
+
+.lh-card {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
   .lh-home-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+
+/* widen cards (safe, no overlap) */
+.VPHome { max-width: 1560px !important; }
+.lh-home-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 40px !important;
+}
+.lh-card {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+.lh-card-media {
+  height: 340px !important;
+  min-height: 340px !important;
+}
+.lh-card-media img {
+  max-width: 260px !important;
+  max-height: 220px !important;
+}
+@media (max-width: 1180px) {
+  .lh-home-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* layout: fixed side paddings instead of max-width */
+@media (min-width: 1440px) {
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 200px !important;
+    padding-right: 200px !important;
   }
 
-  .lh-intro h1 {
-    font-size: 38px;
+  .VPHome {
+    max-width: none !important;
+    width: 100% !important;
   }
+}
 
-  .lh-intro h2 {
-    font-size: 30px;
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 120px !important;
+    padding-right: 120px !important;
   }
+}
+
+/* ===== final layout fixes (home + doc separation) ===== */
+/* 文章页：恢复正常，不要 200px 固定大 padding */
+@media (min-width: 1024px) {
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    max-width: 1200px !important;
+  }
+}
+
+/* 首页：用固定左右留白，但不影响文章页 */
+@media (min-width: 1440px) {
+  .VPHome .container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 200px !important;
+    padding-right: 200px !important;
+  }
+}
+
+/* home structure */
+.lh-home-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+.lh-hero-note {
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  padding: 18px 20px;
+}
+.lh-hero-note h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.lh-hero-note p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  line-height: 1.7;
+}
+.lh-quick-stats {
+  border: 1px solid var(--vp-c-divider);
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  background: var(--vp-c-bg);
+}
+.lh-quick-stats div { display:flex; align-items: baseline; justify-content: space-between; }
+.lh-quick-stats strong { font-size: 16px; font-weight: 650; }
+.lh-quick-stats span { font-size: 12px; color: var(--vp-c-text-2); }
+.lh-section-title {
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  margin-bottom: 10px;
+}
+
+/* card hover: only lift */
+.lh-card h3 { color: rgba(0,0,0,1) !important; }
+.dark .lh-card h3 { color: rgba(255,255,255,1) !important; }
+.lh-card:hover h3 { color: rgba(0,0,0,1) !important; }
+.dark .lh-card:hover h3 { color: rgba(255,255,255,1) !important; }
+
+@media (max-width: 1100px) {
+  .lh-home-top { grid-template-columns: 1fr; }
+}
+
+/* ===== Home redesign (caicai-like structure) ===== */
+.lh-landing {
+  padding-top: 6px;
+}
+.lh-intro {
+  max-width: 860px;
+  margin-bottom: 44px;
+}
+.lh-intro h1 {
+  margin: 0 0 6px;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 620;
+}
+.lh-intro h2 {
+  margin: 0 0 14px;
+  font-size: 34px;
+  line-height: 1.24;
+  letter-spacing: -0.02em;
+  font-weight: 520;
+}
+.lh-intro p {
+  margin: 0;
+  max-width: 760px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--vp-c-text-2);
+}
+
+.lh-products-head h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.lh-products-head p {
+  margin: 0 0 16px;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+}
+
+.lh-tabs {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+}
+.lh-tabs span {
+  cursor: default;
+}
+.lh-tabs .active {
+  color: var(--vp-c-text-1);
+  font-weight: 550;
+}
+
+/* keep requested card style, just align spacing */
+.lh-home-grid {
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .lh-intro h1 { font-size: 34px; }
+  .lh-intro h2 { font-size: 28px; }
+}
+
+
+/* user preference: no top navbar line */
+.VPNavBar, .VPNavBar.has-sidebar { border-bottom: 0 !important; box-shadow: none !important; }
+
+/* force remove nav divider line (all variants) */
+.VPNav,
+.VPNavBar,
+.VPNavBar.has-sidebar,
+.VPNavBar.top,
+.VPNavBar:not(.home),
+.VPNavBar:not(.home).top {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.VPNavBar::before,
+.VPNavBar::after,
+.VPNav::before,
+.VPNav::after,
+.VPNavBar.has-sidebar::before,
+.VPNavBar.has-sidebar::after {
+  border: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  content: none !important;
+}
+
+.VPNavBar .divider,
+.VPNavBarDivider,
+.VPNavBarMenu .divider {
+  display: none !important;
+}
+
+/* sidebar background same as main background */
+.VPSidebar,
+.VPSidebarNav,
+.VPSidebar.open {
+  background: var(--vp-c-bg) !important;
 }
 
 @media (max-width: 960px) {
-  .VPContent.is-home {
-    padding-top: 12px;
+  .VPSidebar {
+    background: var(--vp-c-bg) !important;
+  }
+}
+
+/* remove sidebar right border line and top split line */
+.VPSidebar,
+.VPSidebarNav,
+.VPSidebar.open,
+.VPSidebarCurtain {
+  border-right: 0 !important;
+  box-shadow: none !important;
+}
+
+.VPSidebar::before,
+.VPSidebar::after,
+.VPSidebarNav::before,
+.VPSidebarNav::after,
+.VPSidebar.open::before,
+.VPSidebar.open::after {
+  border: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  background: transparent !important;
+  content: none !important;
+}
+
+/* top split line above sidebar header */
+.VPSidebarItem.level-0.is-link + .group,
+.VPSidebarItem + .group,
+.VPSidebar .group,
+.VPSidebar .group + .group,
+.VPSidebarNav .group,
+.VPSidebarNav .group + .group {
+  border-top: 0 !important;
+}
+
+/* remove local-nav top border on mobile */
+.VPLocalNav,
+.VPLocalNavOutlineDropdown {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ===== mobile optimization pass ===== */
+@media (max-width: 960px) {
+  /* overall spacing */
+  .VPContent,
+  .VPDoc,
+  .VPHome {
+    padding-top: 6px !important;
   }
 
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* top nav compact */
+  .VPNavBar {
+    height: 54px !important;
+    padding: 0 12px !important;
+  }
+  .VPNavBarTitle .title {
+    font-size: 13px !important;
+    letter-spacing: .08em;
+  }
+
+  /* homepage text rhythm */
   .lh-intro {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
-
   .lh-intro h1 {
-    font-size: 32px;
+    font-size: 30px !important;
+    line-height: 1.18;
+    margin-bottom: 4px;
   }
-
   .lh-intro h2 {
-    font-size: 24px;
+    font-size: 24px !important;
+    line-height: 1.25;
+    margin-bottom: 10px;
   }
-
   .lh-intro p {
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.85;
   }
 
+  .lh-products-head h3 { font-size: 15px; }
+  .lh-products-head p { font-size: 12px; line-height: 1.6; }
+
   .lh-tabs {
+    gap: 10px;
     overflow-x: auto;
     white-space: nowrap;
-    padding-bottom: 4px;
+    padding-bottom: 2px;
+    margin-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lh-tabs::-webkit-scrollbar { display: none; }
+
+  .lh-home-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
   }
 
   .lh-card-media {
-    height: 220px;
+    height: 260px !important;
+    min-height: 260px !important;
+    padding: 18px !important;
+    margin-bottom: 12px;
+  }
+
+  .lh-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 6px;
+  }
+
+  .lh-desc h4 {
+    font-size: 13px;
+    line-height: 1.72;
+    margin-bottom: 7px;
+  }
+
+  /* article readability on mobile */
+  .vp-doc h1 {
+    font-size: 30px !important;
+    line-height: 1.2;
+  }
+  .vp-doc h2 {
+    font-size: 24px !important;
+    line-height: 1.28;
+    margin-top: 2.1rem;
+  }
+  .vp-doc h3 {
+    font-size: 20px !important;
+    line-height: 1.32;
+  }
+  .vp-doc p,
+  .vp-doc li {
+    font-size: 16px !important;
+    line-height: 1.86 !important;
+  }
+
+  /* code blocks fit screen */
+  .vp-doc div[class*='language-'] {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 8px;
   }
 }
+
+/* mobile horizontal overflow fix */
+html, body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 960px) {
+  .VPHome .container,
+  .lh-landing,
+  .lh-home-grid,
+  .lh-card,
+  .lh-card-media {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .lh-home-grid {
+    overflow-x: clip;
+  }
+
+  .lh-card-media img {
+    max-width: min(140px, 45vw) !important;
+    height: auto !important;
+  }
+}
+
+/* ===== mobile sidebar redesign (compact + no blank gaps) ===== */
+@media (max-width: 960px) {
+  .VPSidebar {
+    padding-top: 10px !important;
+  }
+
+  .VPSidebar .group {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .VPSidebar .group + .group {
+    margin-top: 8px !important;
+    padding-top: 8px !important;
+  }
+
+  .VPSidebar .items,
+  .VPSidebar .items .items,
+  .VPSidebar .group .items {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .VPSidebar .item {
+    margin: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .VPSidebar .item .link,
+  .VPSidebar .item .item,
+  .VPSidebar .item .text {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* section title row */
+  .VPSidebar .item.level-0 .item,
+  .VPSidebar .item.level-0 .link {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+  }
+
+  /* nested links */
+  .VPSidebar .item.level-1 .item,
+  .VPSidebar .item.level-1 .link,
+  .VPSidebar .item.level-2 .item,
+  .VPSidebar .item.level-2 .link {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+
+  /* prevent phantom spacing from collapsible containers */
+  .VPSidebar [style*="height"] {
+    height: auto !important;
+  }
+}
+
+/* keep PC card media height unchanged (user request) */
+@media (min-width: 901px) {
+  .lh-card-media {
+    height: 320px !important;
+    min-height: 320px !important;
+  }
+}
+
+/* ===== Desktop sidebar redesign ===== */
+@media (min-width: 961px) {
+  .VPSidebar {
+    background: transparent !important;
+    padding-top: 18px !important;
+    padding-right: 14px !important;
+  }
+
+  .VPSidebar .group {
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .VPSidebar .group .title {
+    font-size: 11px !important;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--vp-c-text-3) !important;
+    font-weight: 600 !important;
+    margin: 0 0 8px !important;
+  }
+
+  .VPSidebar .item {
+    margin: 0 !important;
+  }
+
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    border-radius: 8px;
+    padding: 7px 10px !important;
+    margin: 2px 0 !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+    color: var(--vp-c-text-2) !important;
+    transition: background-color .16s ease, color .16s ease;
+  }
+
+  .VPSidebar .item .item:hover,
+  .VPSidebar .item .link:hover {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 86%, transparent);
+    color: var(--vp-c-text-1) !important;
+  }
+
+  .VPSidebar .item.is-active > .item,
+  .VPSidebar .item.is-active > .link {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 100%, transparent);
+    color: var(--vp-c-text-1) !important;
+    font-weight: 560;
+  }
+
+  /* nested levels cleaner indentation */
+  .VPSidebar .items .items {
+    padding-left: 10px !important;
+    margin-top: 2px !important;
+    border-left: 1px solid var(--vp-c-divider-light);
+  }
+
+  .VPSidebar .item.level-0 > .item,
+  .VPSidebar .item.level-0 > .link {
+    font-weight: 560;
+    color: var(--vp-c-text-1) !important;
+  }
+
+  .VPSidebar .item.level-1 > .item,
+  .VPSidebar .item.level-1 > .link,
+  .VPSidebar .item.level-2 > .item,
+  .VPSidebar .item.level-2 > .link {
+    font-weight: 470;
+  }
+}
+
+/* ultra-minimal desktop sidebar + nuke top line */
+@media (min-width: 961px) {
+  /* kill any top divider line in sidebar area */
+  .VPSidebar,
+  .VPSidebarNav,
+  .VPSidebarOpen,
+  .VPSidebar .curtain,
+  .VPSidebar .content {
+    border-top: 0 !important;
+    border-right: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .VPSidebar::before,
+  .VPSidebar::after,
+  .VPSidebarNav::before,
+  .VPSidebarNav::after,
+  .VPSidebar .content::before,
+  .VPSidebar .content::after,
+  .VPSidebar .group::before,
+  .VPSidebar .group::after {
+    content: none !important;
+    border: 0 !important;
+    border-top: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* more minimal look */
+  .VPSidebar .group .title {
+    font-size: 10px !important;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--vp-c-text-3) !important;
+    margin-bottom: 6px !important;
+  }
+
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 6px;
+    padding: 6px 8px !important;
+    margin: 1px 0 !important;
+    font-size: 13px !important;
+    color: var(--vp-c-text-2) !important;
+  }
+
+  .VPSidebar .item .item:hover,
+  .VPSidebar .item .link:hover {
+    background: transparent !important;
+    color: var(--vp-c-text-1) !important;
+  }
+
+  .VPSidebar .item.is-active > .item,
+  .VPSidebar .item.is-active > .link {
+    background: transparent !important;
+    color: var(--vp-c-text-1) !important;
+    font-weight: 600;
+  }
+
+  .VPSidebar .items .items {
+    border-left: 0 !important;
+    padding-left: 8px !important;
+  }
+}
+
+/* restore nicer hover + tighter item spacing */
+@media (min-width: 961px) {
+  /* kill line under title block specifically */
+  .VPNavBarTitle.has-sidebar,
+  .VPNavBarTitle,
+  .VPNavBarTitle .title {
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    background-image: none !important;
+  }
+
+  .VPNavBarTitle.has-sidebar::before,
+  .VPNavBarTitle.has-sidebar::after,
+  .VPNavBarTitle::before,
+  .VPNavBarTitle::after,
+  .VPNavBarTitle .title::before,
+  .VPNavBarTitle .title::after {
+    content: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* sidebar item spacing: closer */
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    padding: 5px 8px !important;
+    margin: 0 !important;
+    border-radius: 7px;
+  }
+
+  .VPSidebar .items .item + .item {
+    margin-top: 1px !important;
+  }
+
+  /* bring back subtle hover you liked */
+  .VPSidebar .item .item:hover,
+  .VPSidebar .item .link:hover {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 90%, transparent) !important;
+    color: var(--vp-c-text-1) !important;
+  }
+
+  .VPSidebar .item.is-active > .item,
+  .VPSidebar .item.is-active > .link {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 100%, transparent) !important;
+    color: var(--vp-c-text-1) !important;
+    font-weight: 580;
+  }
+}
+
+/* keep frosted top navbar only */
+.VPNavBar {
+  background: color-mix(in srgb, var(--vp-c-bg) 78%, transparent) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* mobile sidebar: remove blank bars/gaps and extra backgrounds */
+@media (max-width: 960px) {
+  .VPSidebar .item,
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    background: transparent !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .VPSidebar .group,
+  .VPSidebar .group + .group {
+    margin-top: 4px !important;
+    padding-top: 4px !important;
+  }
+
+  .VPSidebar .items,
+  .VPSidebar .items .items,
+  .VPSidebar .group .items {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+/* mobile sidebar spacing final tuning (based on screenshot) */
+@media (max-width: 960px) {
+  /* push first items block down from logo */
+  .VPSidebar .items:first-child {
+    margin-top: 18px !important;
+  }
+
+  /* tighten gap between groups/sections */
+  .VPSidebar .group,
+  .VPSidebar .group + .group,
+  .VPSidebar .item,
+  .VPSidebar .items {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .VPSidebar .item .item,
+  .VPSidebar .item .link {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+    margin: 0 !important;
+  }
+
+  /* specifically reduce section split distance */
+  .VPSidebarItem.level-0 {
+    margin-top: 8px !important;
+  }
+
+  .VPSidebarItem.level-1 {
+    margin-top: 0 !important;
+  }
+}
+
+/* user-requested fix: sidebar top offset + remove large group gap */
+@media (max-width: 960px) {
+  [aria-label="sidebar navigation"] {
+    margin-top: 50px !important;
+  }
+
+  .VPSidebarItem.level-0 {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+    margin-top: 8px !important;
+  }
+}
+
+/* kill remaining nav divider line explicitly */
+.VPNavBar .divider,
+.VPNavBar .divider-line,
+.VPNav .divider,
+.VPNav .divider-line {
+  display: none !important;
+  height: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* tighten sidebar groups globally (pc + mobile) */
+.VPSidebar .group,
+.VPSidebar .group + .group {
+  margin-top: 4px !important;
+  padding-top: 4px !important;
+}
+
+.VPSidebar .item .item,
+.VPSidebar .item .link {
+  margin: 0 !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+/* precise target per user: sidebar aria label nav */
+nav[aria-labelledby="sidebar-aria-label"] {
+  margin-top: 12px !important;
+}
+
+@media (max-width: 960px) {
+  nav[aria-labelledby="sidebar-aria-label"] {
+    margin-top: 50px !important;
+  }
+}
+
+/* user-requested: remove VPSidebarItem bottom padding */
+.VPSidebarItem {
+  padding-bottom: 0 !important;
+}
+
+/* user correction: remove desktop nav top margin */
+nav[aria-labelledby="sidebar-aria-label"] {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 960px) {
+  nav[aria-labelledby="sidebar-aria-label"] {
+    margin-top: 50px !important;
+  }
+}
+
+/* user final: desktop sidebar nav top margin = 50px */
+nav[aria-labelledby="sidebar-aria-label"] {
+  margin-top: 50px !important;
+}
+
+/* ===== home width hard override (latest) ===== */
+:root {
+  --vp-layout-max-width: 2200px;
+}
+
+@media (min-width: 1024px) {
+  .VPHome .container {
+    width: min(1920px, calc(100vw - 64px)) !important;
+    max-width: min(1920px, calc(100vw - 64px)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .lh-landing,
+  .lh-products,
+  .lh-home-grid {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .lh-intro,
+  .lh-intro p {
+    max-width: none !important;
+  }
+}
+
+/* =========================================================
+   WIDTH SYSTEM V2 (authoritative override)
+   Goal: one clear, deterministic width model for Home/Doc.
+   Put all width logic here and let this block win by source order.
+========================================================= */
+:root {
+  --lh-doc-max: 1200px;
+  --lh-home-max: 1920px;
+  --lh-gutter-desktop: 32px;
+  --lh-gutter-tablet: 24px;
+  --lh-gutter-mobile: 16px;
+}
+
+/* kill inherited max-width constraints from scattered old rules */
+.VPHome,
+.VPDoc,
+.VPContent {
+  max-width: none !important;
+}
+
+/* Desktop/tablet base: make container width formula explicit */
+@media (min-width: 961px) {
+  /* docs: keep readable measure */
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    width: min(var(--lh-doc-max), calc(100vw - (var(--lh-gutter-desktop) * 2))) !important;
+    max-width: min(var(--lh-doc-max), calc(100vw - (var(--lh-gutter-desktop) * 2))) !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* home: much wider, no hidden cap */
+  .VPHome .container {
+    width: min(var(--lh-home-max), calc(100vw - (var(--lh-gutter-desktop) * 2))) !important;
+    max-width: min(var(--lh-home-max), calc(100vw - (var(--lh-gutter-desktop) * 2))) !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* home content should never re-shrink itself */
+  .lh-landing,
+  .lh-products,
+  .lh-home-grid,
+  .lh-intro,
+  .lh-intro p {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+/* mid screens */
+@media (min-width: 961px) and (max-width: 1439px) {
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container,
+  .VPHome .container {
+    width: calc(100vw - (var(--lh-gutter-tablet) * 2)) !important;
+    max-width: calc(100vw - (var(--lh-gutter-tablet) * 2)) !important;
+  }
+}
+
+/* mobile overrides removed by request */
