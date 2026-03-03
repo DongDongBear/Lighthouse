@@ -15,7 +15,7 @@
 .lh-sidebar::-webkit-scrollbar-thumb { background: var(--vp-c-divider); border-radius: 4px; }
 
 .lh-sidebar-nav {
-  margin-top: 50px;
+  margin-top: 6px;
 }
 
 .lh-sidebar-group {

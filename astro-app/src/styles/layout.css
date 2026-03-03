@@ -35,7 +35,7 @@
   flex: 1;
   min-width: 0;
   max-width: 100%;
-  padding: 24px 48px 60px;
+  padding: 4px 48px 60px;
 }
 
 /* with sidebar */
@@ -47,9 +47,9 @@
 .lh-page-doc .lh-toc-wrap {
   width: 260px;
   flex-shrink: 0;
-  padding: 24px 48px 24px 24px;
+  padding: 8px 48px 24px 24px;
   position: sticky;
-  top: 88px;
+  top: 68px;
   align-self: flex-start;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
