@@ -1418,17 +1418,4 @@ nav[aria-labelledby="sidebar-aria-label"] {
   }
 }
 
-/* mobile: simple and predictable */
-@media (max-width: 960px) {
-  .VPHome .container,
-  .VPDoc .container,
-  .VPDoc.has-sidebar .content-container,
-  .VPDoc:not(.has-sidebar) .content-container {
-    width: calc(100vw - (var(--lh-gutter-mobile) * 2)) !important;
-    max-width: calc(100vw - (var(--lh-gutter-mobile) * 2)) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
+/* mobile overrides removed by request */
