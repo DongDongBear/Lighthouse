@@ -3,7 +3,7 @@
 <h1>嗨！这里是 LightHouse</h1>
 <h2>从 BellLab 出发，记录面向 AI 时代的工程实践</h2>
 <p>LightHouse 是 BellLab 的学习与方法论分支。BellLab 这个名字致敬贝尔实验室——一个把科学突破、工程实现和长期主义放在一起的地方。这里不做“教程堆砌”，而是持续沉淀一套可复用的工作方式：如何和 AI 协作、如何把想法快速做成产品、如何在复杂系统里做正确的技术决策。</p>
-<p>当前聚焦三条主线：Unity 3D、Electron 与 AI 产品分析。前者关注交互与世界构建，中者关注桌面端产品化与工程稳定性，后者用工程视角拆解 AI 产品。后续还会加入更多 AI 应用开发、自动化与系统设计专题。</p>
+<p>当前聚焦四条主线：Unity 3D、Electron、Rust 与 AI 产品分析。Unity 关注交互与世界构建，Electron 聚焦桌面端产品化与工程稳定性，Rust 覆盖系统级性能与可靠性，AI 产品分析则用工程视角拆解产品。后续还会加入更多 AI 应用开发、自动化与系统设计专题。</p>
 </section>
 <section class="lh-products">
 <div class="lh-products-head">
@@ -26,6 +26,15 @@
 <div class="lh-desc">
 <h4>从基础能力到工程化落地，讲清进程模型、窗口管理、数据存储和打包发布。</h4>
 <h4>覆盖热更新与 OpenClaw 桌面端实战，帮助你搭建可维护、可迭代的桌面应用体系。</h4>
+</div>
+</a>
+
+<a class="lh-card group" href="rust-tutorial/" title="查看 Rust 教程">
+<div class="lh-card-media"><div class="lh-media-inner"><img src="/rust-logo.svg" alt="Rust" /></div></div>
+<h3>Rust 从入门到精通</h3>
+<div class="lh-desc">
+<h4>面向 TS/JS 开发者的 Rust 系统化学习路径：所有权、借用、并发、异步、宏与工程实战全覆盖。</h4>
+<h4>从语言基础到 Axum/WASM/FFI/Tokio 深入，帮助你构建高性能、可维护、可部署的 Rust 项目体系。</h4>
 </div>
 </a>
 <a class="lh-card group" href="ai-product-analysis/" title="查看 AI 产品分析">
