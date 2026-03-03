@@ -50,6 +50,7 @@
 
 /* 首页 */
 .VPContent.is-home { padding-top: 20px !important; }
+.VPHome { max-width: 1040px; margin: 0 auto; }
 .VPHero .name {
   font-size: clamp(48px, 8vw, 74px);
   line-height: 0.98;
@@ -96,6 +97,7 @@
 }
 
 /* 文档版心 */
+.VPDoc .container { max-width: 790px; }
 .vp-doc {
   color: var(--vp-c-text-1);
   letter-spacing: 0;
@@ -169,7 +171,7 @@
 .VPFooter { border-top: 1px solid var(--vp-c-divider-light); }
 
 @media (max-width: 768px) {
-  .lh-page-doc .container { padding: 0 14px; }
+  .VPDoc .container { padding: 0 14px; }
   .vp-doc p,.vp-doc li { font-size: 16px; line-height: 1.85; }
   .vp-doc h2 { font-size: 26px; }
   .vp-doc h3 { font-size: 22px; }
@@ -221,7 +223,22 @@
 .vp-doc p,
 .vp-doc li { font-weight: 320; }
 
-/* layout widths → controlled by LAYOUT SYSTEM V3 at end of file */
+/* widen article content */
+:root {
+  --vp-layout-max-width: 1520px;
+}
+
+.VPDoc .container { max-width: 1100px !important; }
+.VPDoc.has-sidebar .content-container { max-width: 1100px !important; }
+.VPDoc:not(.has-sidebar) .content-container { max-width: 1100px !important; }
+
+@media (max-width: 1280px) {
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: 1040px !important;
+  }
+}
 
 /* hero heading spacing tune */
 .VPHero .heading {
@@ -488,6 +505,7 @@
 
 
 /* widen cards (safe, no overlap) */
+.VPHome { max-width: 1560px !important; }
 .lh-home-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 40px !important;
@@ -512,7 +530,57 @@
 }
 
 
-/* old layout rules removed → see LAYOUT SYSTEM V3 */
+/* layout: fixed side paddings instead of max-width */
+@media (min-width: 1440px) {
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 200px !important;
+    padding-right: 200px !important;
+  }
+
+  .VPHome {
+    max-width: none !important;
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 120px !important;
+    padding-right: 120px !important;
+  }
+}
+
+/* ===== final layout fixes (home + doc separation) ===== */
+/* 文章页：恢复正常，不要 200px 固定大 padding */
+@media (min-width: 1024px) {
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    max-width: 1200px !important;
+  }
+}
+
+/* 首页：用固定左右留白，但不影响文章页 */
+@media (min-width: 1440px) {
+  .VPHome .container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 200px !important;
+    padding-right: 200px !important;
+  }
+}
 
 /* home structure */
 .lh-home-top {
@@ -721,19 +789,16 @@
 /* ===== mobile optimization pass ===== */
 @media (max-width: 960px) {
   /* overall spacing */
-  .lh-page-home .VPContent,
-  .lh-page-doc .VPContent,
-  .lh-page-doc .VPDoc {
+  .VPContent,
+  .VPDoc,
+  .VPHome {
     padding-top: 6px !important;
   }
 
-  .lh-page-home .container {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  .lh-page-doc .container,
-  .lh-page-doc .content-container {
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
@@ -837,7 +902,7 @@ html, body {
 }
 
 @media (max-width: 960px) {
-  .lh-page-home .container,
+  .VPHome .container,
   .lh-landing,
   .lh-home-grid,
   .lh-card,
@@ -1258,102 +1323,68 @@ nav[aria-labelledby="sidebar-aria-label"] {
 }
 
 /* =========================================================
-   LAYOUT SYSTEM V3 — single source of truth
-   顶层 class 由 Layout.vue 注入：
-     .lh-page-home  → 首页
-     .lh-page-doc   → 文档 / 其他页面
-   两者选择器完全隔离，互不影响
+   LAYOUT SYSTEM V3 (layout-only, maintainable)
+   - Only controls width/centering
+   - No visual style changes
 ========================================================= */
 :root {
-  --lh-home-max: 1920px;
-  --lh-doc-max: 1200px;
-  --lh-gutter-lg: 32px;
-  --lh-gutter-md: 24px;
+  --lh-layout-home-max: 1920px;
+  --lh-layout-doc-max: 1200px;
+  --lh-layout-gutter-desktop: 32px;
+  --lh-layout-gutter-tablet: 24px;
 }
 
-/* ========================
-   .lh-page-home  首页
-======================== */
-.lh-page-home .VPHome {
-  max-width: none !important;
-  width: 100% !important;
-}
-
-.lh-page-home .container {
+/* reset problematic centering hacks */
+.VPHome .container,
+.VPDoc .container,
+.VPDoc.has-sidebar .content-container,
+.VPDoc:not(.has-sidebar) .content-container {
   position: static !important;
   left: auto !important;
   transform: none !important;
 }
 
+/* desktop */
 @media (min-width: 1024px) {
-  .lh-page-home .container {
-    width: min(var(--lh-home-max), calc(100vw - var(--lh-gutter-lg) * 2)) !important;
-    max-width: min(var(--lh-home-max), calc(100vw - var(--lh-gutter-lg) * 2)) !important;
+  .VPHome .container {
+    width: min(var(--lh-layout-home-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
+    max-width: min(var(--lh-layout-home-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
     margin-left: auto !important;
     margin-right: auto !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
 
-  .lh-page-home .lh-landing,
-  .lh-page-home .lh-products,
-  .lh-page-home .lh-home-grid {
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    width: min(var(--lh-layout-doc-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
+    max-width: min(var(--lh-layout-doc-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .lh-landing,
+  .lh-products,
+  .lh-home-grid {
     max-width: none !important;
     width: 100% !important;
   }
 }
 
+/* tablet */
 @media (min-width: 961px) and (max-width: 1023px) {
-  .lh-page-home .container {
-    width: calc(100vw - var(--lh-gutter-md) * 2) !important;
-    max-width: calc(100vw - var(--lh-gutter-md) * 2) !important;
+  .VPHome .container,
+  .VPDoc .container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    width: calc(100vw - (var(--lh-layout-gutter-tablet) * 2)) !important;
+    max-width: calc(100vw - (var(--lh-layout-gutter-tablet) * 2)) !important;
     margin-left: auto !important;
     margin-right: auto !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
-  }
-}
-
-/* ========================
-   .lh-page-doc  文档页
-======================== */
-.lh-page-doc .container,
-.lh-page-doc .content-container {
-  position: static !important;
-  left: auto !important;
-  transform: none !important;
-}
-
-/* --- 无侧边栏：居中 + 限宽 --- */
-@media (min-width: 1024px) {
-  .lh-page-doc .VPDoc:not(.has-sidebar) .container,
-  .lh-page-doc .VPDoc:not(.has-sidebar) .content-container {
-    width: min(var(--lh-doc-max), calc(100vw - var(--lh-gutter-lg) * 2)) !important;
-    max-width: min(var(--lh-doc-max), calc(100vw - var(--lh-gutter-lg) * 2)) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
-
-@media (min-width: 961px) and (max-width: 1023px) {
-  .lh-page-doc .VPDoc:not(.has-sidebar) .container,
-  .lh-page-doc .VPDoc:not(.has-sidebar) .content-container {
-    width: calc(100vw - var(--lh-gutter-md) * 2) !important;
-    max-width: calc(100vw - var(--lh-gutter-md) * 2) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
-
-/* --- 有侧边栏：填满剩余空间 --- */
-@media (min-width: 961px) {
-  .lh-page-doc .VPDoc.has-sidebar .container,
-  .lh-page-doc .VPDoc.has-sidebar .content-container {
-    width: 100% !important;
-    max-width: 100% !important;
   }
 }
