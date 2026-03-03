@@ -26,23 +26,17 @@ jobs:
         with:
           node-version: 22
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - name: Install deps
-        run: pnpm install --no-frozen-lockfile
+        working-directory: astro-app
+        run: npm install
 
-      - name: Build docs
-        run: pnpm run docs:build
+      - name: Build
+        working-directory: astro-app
+        run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .vitepress/dist
+          path: astro-app/dist
 
   deploy:
     environment:
