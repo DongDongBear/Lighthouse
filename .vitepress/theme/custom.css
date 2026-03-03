@@ -1355,13 +1355,20 @@ nav[aria-labelledby="sidebar-aria-label"] {
     padding-right: 0 !important;
   }
 
-  .VPDoc .container,
-  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .container,
   .VPDoc:not(.has-sidebar) .content-container {
     width: min(var(--lh-layout-doc-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
     max-width: min(var(--lh-layout-doc-max), calc(100vw - (var(--lh-layout-gutter-desktop) * 2))) !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .VPDoc.has-sidebar .container,
+  .VPDoc.has-sidebar .content-container {
+    width: 100% !important;
+    max-width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
@@ -1377,13 +1384,20 @@ nav[aria-labelledby="sidebar-aria-label"] {
 /* tablet */
 @media (min-width: 961px) and (max-width: 1023px) {
   .VPHome .container,
-  .VPDoc .container,
-  .VPDoc.has-sidebar .content-container,
+  .VPDoc:not(.has-sidebar) .container,
   .VPDoc:not(.has-sidebar) .content-container {
     width: calc(100vw - (var(--lh-layout-gutter-tablet) * 2)) !important;
     max-width: calc(100vw - (var(--lh-layout-gutter-tablet) * 2)) !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .VPDoc.has-sidebar .container,
+  .VPDoc.has-sidebar .content-container {
+    width: 100% !important;
+    max-width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
