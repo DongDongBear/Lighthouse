@@ -7,7 +7,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <header class="lh-nav">
   <div class="lh-nav-left">
     <a class="lh-nav-logo" href={`${base}/`}>
-      <img src={`${base}/lighthouse-icon.svg`} alt="LightHouse" width="24" height="24" />
+      <svg class="lh-nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3l2 3l2 15h-8l2 -15l2 -3" />
+        <path d="M8 9l8 0" />
+        <path d="M3 11l2 -2l-2 -2" />
+        <path d="M21 11l-2 -2l2 -2" />
+      </svg>
       <span class="lh-nav-title">LightHouse</span>
     </a>
   </div>
