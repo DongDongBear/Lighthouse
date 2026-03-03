@@ -12,56 +12,54 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 function isActive(link: string): boolean {
   const fullLink = `${base}${link}`;
-  // Handle trailing slash variants
   const normalized = currentPath.replace(/\/$/, '');
   const normalizedLink = fullLink.replace(/\/$/, '');
   return normalized === normalizedLink;
 }
+
+function groupHasActive(group: { items: { link?: string }[] }): boolean {
+  return group.items.some(item => item.link && isActive(item.link));
+}
 ---
 
-<div class="lh-sidebar-overlay" id="sidebar-overlay" transition:persist></div>
-<aside class="lh-sidebar" id="sidebar" transition:persist>
+<div class="lh-sidebar-overlay" id="sidebar-overlay"></div>
+<aside class="lh-sidebar" id="sidebar">
   <nav class="lh-sidebar-nav">
-    {groups.map((group) => (
-      <div class="lh-sidebar-group">
-        <div class="lh-sidebar-group-title" data-collapsed={group.collapsed ? 'true' : 'false'}>
-          <span>{group.text}</span>
-          <svg class:list={['lh-sidebar-arrow', { collapsed: group.collapsed }]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
+    {groups.map((group) => {
+      const forceExpand = groupHasActive(group);
+      const isCollapsed = forceExpand ? false : !!group.collapsed;
+      return (
+        <div class="lh-sidebar-group">
+          <div class="lh-sidebar-group-title" data-collapsed={isCollapsed ? 'true' : 'false'}>
+            <span>{group.text}</span>
+            <svg class:list={['lh-sidebar-arrow', { collapsed: isCollapsed }]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <ul class:list={['lh-sidebar-items', { collapsed: isCollapsed }]}>
+            {group.items.map((item) => (
+              <li>
+                {item.link ? (
+                  <a class:list={['lh-sidebar-link', { active: isActive(item.link) }]} href={`${base}${item.link}`}>
+                    {item.text}
+                  </a>
+                ) : (
+                  <span class="lh-sidebar-link level-0">{item.text}</span>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul class:list={['lh-sidebar-items', { collapsed: group.collapsed }]}>
-          {group.items.map((item) => (
-            <li>
-              {item.link ? (
-                <a class:list={['lh-sidebar-link', { active: isActive(item.link) }]} href={`${base}${item.link}`}>
-                  {item.text}
-                </a>
-              ) : (
-                <span class="lh-sidebar-link level-0">{item.text}</span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
+      );
+    })}
   </nav>
 </aside>
 
 <script>
-  let sidebarInited = false;
-
   function initSidebar() {
     const toggle = document.getElementById('sidebar-toggle');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
-
-    // Update active link & auto-expand group on every navigation
-    updateActiveLink();
-
-    // Only bind event listeners once (sidebar persists across navigations)
-    if (sidebarInited) return;
-    sidebarInited = true;
 
     function openSidebar() {
       sidebar?.classList.add('open');
@@ -94,36 +92,6 @@ function isActive(link: string): boolean {
         arrow?.classList.toggle('collapsed');
         title.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
       });
-    });
-  }
-
-  function updateActiveLink() {
-    const currentPath = window.location.pathname.replace(/\/$/, '');
-
-    // Clear old active
-    document.querySelectorAll('.lh-sidebar-link.active').forEach(el => {
-      el.classList.remove('active');
-    });
-
-    // Set new active & expand its parent group
-    document.querySelectorAll<HTMLAnchorElement>('a.lh-sidebar-link').forEach(link => {
-      const href = link.getAttribute('href')?.replace(/\/$/, '') || '';
-      if (href === currentPath) {
-        link.classList.add('active');
-
-        // Auto-expand the group containing the active link
-        const group = link.closest('.lh-sidebar-group');
-        if (group) {
-          const items = group.querySelector('.lh-sidebar-items');
-          const title = group.querySelector('.lh-sidebar-group-title');
-          const arrow = title?.querySelector('.lh-sidebar-arrow');
-          if (items?.classList.contains('collapsed')) {
-            items.classList.remove('collapsed');
-            arrow?.classList.remove('collapsed');
-            title?.setAttribute('data-collapsed', 'false');
-          }
-        }
-      }
     });
   }
 
