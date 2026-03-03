@@ -460,9 +460,9 @@
   background: rgba(0,0,0,0.02) !important;
   border: 0 !important;
   border-radius: 0 !important;
-  padding: 24px !important;
-  height: 320px !important;
-  min-height: 320px !important;
+  padding: 32px !important;
+  height: 380px !important;
+  min-height: 380px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -505,10 +505,10 @@
 
 
 /* widen cards (safe, no overlap) */
-.VPHome { max-width: 1460px !important; }
+.VPHome { max-width: 1560px !important; }
 .lh-home-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 28px !important;
+  gap: 40px !important;
 }
 .lh-card {
   position: relative;
@@ -520,8 +520,8 @@
   min-height: 340px !important;
 }
 .lh-card-media img {
-  max-width: 220px !important;
-  max-height: 180px !important;
+  max-width: 260px !important;
+  max-height: 220px !important;
 }
 @media (max-width: 1180px) {
   .lh-home-grid {
