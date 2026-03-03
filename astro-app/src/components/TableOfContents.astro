@@ -22,37 +22,40 @@ const toc = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 
 <style>
   .lh-toc {
-    position: sticky;
-    top: 88px;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
     font-family: var(--vp-font-family-base);
   }
+
   .lh-toc-title {
-    font-size: 10px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--vp-c-text-3);
+    font-size: 13px;
+    letter-spacing: .04em;
+    color: var(--vp-c-text-1);
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--vp-c-divider-light);
   }
+
   .lh-toc-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
+
   .lh-toc-item.depth-3 {
-    padding-left: 12px;
+    padding-left: 14px;
   }
+
   .lh-toc-link {
     display: block;
-    padding: 4px 0;
-    font-size: 12px;
-    line-height: 1.4;
+    padding: 5px 0;
+    font-size: 13px;
+    line-height: 1.5;
     color: var(--vp-c-text-3);
     text-decoration: none;
     transition: color .15s ease;
+    font-weight: 400;
   }
+
   .lh-toc-link:hover {
     color: var(--vp-c-text-1);
   }

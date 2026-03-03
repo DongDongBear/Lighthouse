@@ -3,7 +3,7 @@
   top: 64px;
   left: 0;
   bottom: 0;
-  width: 272px;
+  width: 300px;
   overflow-y: auto;
   padding: 18px 14px 32px 24px;
   background: transparent;
@@ -19,16 +19,16 @@
 }
 
 .lh-sidebar-group {
-  margin-bottom: 14px;
+  margin: 4px 0 14px;
+  padding-top: 4px;
 }
 
 .lh-sidebar-group-title {
-  font-size: 10px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--vp-c-text-3);
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--vp-c-text-1);
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   padding: 0 8px;
   cursor: pointer;
   display: flex;
@@ -65,18 +65,18 @@
 .lh-sidebar-link {
   display: block;
   border-radius: 7px;
-  padding: 5px 8px;
+  padding: 6px 10px;
   margin: 0;
-  font-size: 13px;
-  line-height: 1.35;
+  font-size: 14px;
+  line-height: 1.45;
   color: var(--vp-c-text-2);
   text-decoration: none;
   transition: background-color .16s ease, color .16s ease;
-  font-weight: 470;
+  font-weight: 400;
 }
 
-.lh-sidebar-link + .lh-sidebar-link {
-  margin-top: 1px;
+.lh-sidebar-items li {
+  padding-bottom: 0;
 }
 
 .lh-sidebar-link:hover {
@@ -87,11 +87,11 @@
 .lh-sidebar-link.active {
   background: color-mix(in srgb, var(--vp-c-bg-soft) 100%, transparent);
   color: var(--vp-c-text-1);
-  font-weight: 580;
+  font-weight: 500;
 }
 
 .lh-sidebar-link.level-0 {
-  font-weight: 560;
+  font-weight: 500;
   color: var(--vp-c-text-1);
 }
 

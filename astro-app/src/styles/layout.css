@@ -40,14 +40,19 @@
 
 /* with sidebar */
 .lh-page-doc.has-sidebar .lh-main-content {
-  margin-left: 272px; /* sidebar width */
+  margin-left: 300px; /* sidebar width */
 }
 
 /* with TOC */
 .lh-page-doc .lh-toc-wrap {
-  width: 220px;
+  width: 260px;
   flex-shrink: 0;
-  padding: 24px 22px;
+  padding: 24px 24px;
+  position: sticky;
+  top: 88px;
+  align-self: flex-start;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
 /* no sidebar: center + limit width */
@@ -56,10 +61,24 @@
   margin: 0 auto;
 }
 
+/* responsive padding tiers (matching VitePress gutter widths) */
+@media (min-width: 1280px) {
+  .lh-page-doc.has-sidebar .lh-main-content {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+  .lh-page-doc .lh-toc-wrap {
+    padding-left: 22px;
+  }
+}
+
 @media (min-width: 1440px) {
   .lh-page-doc.has-sidebar .lh-main-content {
     padding-left: 36px;
     padding-right: 36px;
+  }
+  .lh-page-doc .lh-toc-wrap {
+    padding-left: 28px;
   }
 }
 

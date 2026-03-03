@@ -50,8 +50,15 @@
   margin: 0 0 1.15rem;
 }
 
-.lh-prose ul,
+/* lists */
+.lh-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin: 0 0 1.15rem;
+}
+
 .lh-prose ol {
+  list-style-type: decimal;
   padding-left: 1.5em;
   margin: 0 0 1.15rem;
 }
@@ -60,6 +67,24 @@
   margin-top: 0.25em;
 }
 
+/* nested lists */
+.lh-prose ul ul,
+.lh-prose ol ul {
+  list-style-type: circle;
+  margin: 0.25em 0;
+}
+
+.lh-prose ul ul ul,
+.lh-prose ol ul ul {
+  list-style-type: square;
+}
+
+.lh-prose ol ol {
+  list-style-type: lower-alpha;
+  margin: 0.25em 0;
+}
+
+/* links */
 .lh-prose a {
   color: var(--vp-c-text-1);
   text-decoration: underline;
@@ -74,6 +99,18 @@
   text-decoration-color: var(--vp-c-text-1);
 }
 
+/* ─── Shiki dual-theme support ─── */
+/* Light mode: inline styles on <pre> and <span> already handle it correctly */
+/* Dark mode: override with --shiki-dark CSS variables */
+.dark .lh-prose .astro-code,
+.dark .lh-prose .shiki {
+  background-color: var(--shiki-dark-bg) !important;
+}
+.dark .lh-prose .astro-code span,
+.dark .lh-prose .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
 /* code blocks */
 .lh-prose pre {
   border: 1px solid var(--vp-c-divider);
@@ -81,12 +118,25 @@
   box-shadow: none;
   overflow-x: auto;
   margin: 1rem 0;
+  padding: 16px 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: var(--vp-font-family-mono);
+}
+
+.lh-prose pre code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 0;
 }
 
 .lh-prose :not(pre) > code {
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #d8d8d8;
   background: var(--vp-c-bg-soft);
-  border-color: #d8d8d8;
   border-radius: 6px;
   padding: .18em .4em;
   font-size: 0.9em;
@@ -109,6 +159,8 @@
   width: 100%;
   border-collapse: collapse;
   margin: 1rem 0;
+  display: block;
+  overflow-x: auto;
 }
 
 .lh-prose th,
@@ -140,6 +192,10 @@
 .lh-prose strong {
   font-weight: 600;
   color: var(--vp-c-text-1);
+}
+
+.lh-prose em {
+  font-style: italic;
 }
 
 @media (max-width: 960px) {
