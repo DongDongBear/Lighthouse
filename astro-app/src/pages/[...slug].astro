@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import DocLayout from '../layouts/DocLayout.astro';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  return docs.filter(doc => {
+    const id = doc.id;
+    // Skip README files
+    if (id.endsWith('README.md') || id === 'README.md') return false;
+    return true;
+  }).map(doc => {
+    let slug = doc.id.replace(/\.md$/, '');
+    // "unity-tutorial/index" → "unity-tutorial"
+    slug = slug.replace(/\/index$/, '');
+    return {
+      params: { slug },
+      props: { doc },
+    };
+  });
+}
+
+const { doc } = Astro.props;
+const { Content, headings } = await doc.render();
+
+// Extract title from first h1 heading, or use slug
+const h1 = headings.find(h => h.depth === 1);
+const title = h1?.text || doc.id.split('/').pop()?.replace(/^\d+-/, '').replace(/-/g, ' ') || 'LightHouse';
+---
+
+<DocLayout title={title} headings={headings} slug={doc.id}>
+  <Content />
+</DocLayout>

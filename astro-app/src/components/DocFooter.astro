@@ -1,0 +1,76 @@
+---
+import { getSidebarFlatLinks } from '../data/sidebar';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const links = getSidebarFlatLinks(currentPath.replace(base, ''));
+
+const currentNormalized = currentPath.replace(/\/$/, '');
+const currentIndex = links.findIndex(l => {
+  const fullLink = `${base}${l.link}`.replace(/\/$/, '');
+  return currentNormalized === fullLink;
+});
+
+const prev = currentIndex > 0 ? links[currentIndex - 1] : null;
+const next = currentIndex >= 0 && currentIndex < links.length - 1 ? links[currentIndex + 1] : null;
+---
+
+{(prev || next) && (
+  <nav class="lh-doc-footer">
+    <div class="lh-doc-footer-prev">
+      {prev && (
+        <a href={`${base}${prev.link}`} class="lh-doc-footer-link">
+          <span class="lh-doc-footer-label">上一篇</span>
+          <span class="lh-doc-footer-text">{prev.text}</span>
+        </a>
+      )}
+    </div>
+    <div class="lh-doc-footer-next">
+      {next && (
+        <a href={`${base}${next.link}`} class="lh-doc-footer-link">
+          <span class="lh-doc-footer-label">下一篇</span>
+          <span class="lh-doc-footer-text">{next.text}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+
+<style>
+  .lh-doc-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--vp-c-divider-light);
+    gap: 16px;
+  }
+  .lh-doc-footer-prev { flex: 1; }
+  .lh-doc-footer-next { flex: 1; text-align: right; }
+  .lh-doc-footer-link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background .15s ease;
+  }
+  .lh-doc-footer-link:hover {
+    background: var(--vp-c-bg-soft);
+  }
+  .lh-doc-footer-label {
+    font-size: 11px;
+    color: var(--vp-c-text-3);
+    font-weight: 500;
+  }
+  .lh-doc-footer-text {
+    font-size: 14px;
+    color: var(--vp-c-text-1);
+    font-weight: 500;
+  }
+</style>

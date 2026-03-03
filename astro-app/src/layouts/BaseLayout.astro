@@ -1,0 +1,44 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/nav.css';
+import '../styles/layout.css';
+
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  pageClass?: string;
+}
+
+const { title = 'LightHouse', description = 'LightHouse 学习资料库 — 探索、学习、创造', pageClass = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{title === 'LightHouse' ? title : `${title} | LightHouse`}</title>
+  <link rel="icon" href={`${base}lighthouse-icon.svg`} />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@300;400;500;700&family=Shippori+Mincho:wght@600&display=swap" />
+  <script is:inline>
+    // Dark mode initialization - runs before paint to avoid flash
+    (function() {
+      const saved = localStorage.getItem('lh-theme');
+      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class={pageClass}>
+    <Nav />
+    <slot />
+  </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+const toc = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+---
+
+{toc.length > 0 && (
+  <div class="lh-toc">
+    <div class="lh-toc-title">目录</div>
+    <ul class="lh-toc-list">
+      {toc.map(h => (
+        <li class={`lh-toc-item depth-${h.depth}`}>
+          <a href={`#${h.slug}`} class="lh-toc-link">{h.text}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .lh-toc {
+    position: sticky;
+    top: 88px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    font-family: var(--vp-font-family-base);
+  }
+  .lh-toc-title {
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--vp-c-text-3);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .lh-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .lh-toc-item.depth-3 {
+    padding-left: 12px;
+  }
+  .lh-toc-link {
+    display: block;
+    padding: 4px 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--vp-c-text-3);
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .lh-toc-link:hover {
+    color: var(--vp-c-text-1);
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+import '../styles/sidebar.css';
+import type { SidebarGroup } from '../data/sidebar';
+
+interface Props {
+  groups: SidebarGroup[];
+  currentPath: string;
+}
+
+const { groups, currentPath } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function isActive(link: string): boolean {
+  const fullLink = `${base}${link}`;
+  // Handle trailing slash variants
+  const normalized = currentPath.replace(/\/$/, '');
+  const normalizedLink = fullLink.replace(/\/$/, '');
+  return normalized === normalizedLink;
+}
+---
+
+<div class="lh-sidebar-overlay" id="sidebar-overlay"></div>
+<aside class="lh-sidebar" id="sidebar">
+  <nav class="lh-sidebar-nav">
+    {groups.map((group) => (
+      <div class="lh-sidebar-group">
+        <div class="lh-sidebar-group-title" data-collapsed={group.collapsed ? 'true' : 'false'}>
+          <span>{group.text}</span>
+          <svg class:list={['lh-sidebar-arrow', { collapsed: group.collapsed }]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <ul class:list={['lh-sidebar-items', { collapsed: group.collapsed }]}>
+          {group.items.map((item) => (
+            <li>
+              {item.link ? (
+                <a class:list={['lh-sidebar-link', { active: isActive(item.link) }]} href={`${base}${item.link}`}>
+                  {item.text}
+                </a>
+              ) : (
+                <span class="lh-sidebar-link level-0">{item.text}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </nav>
+</aside>
+
+<script>
+  // Sidebar toggle for mobile
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    function openSidebar() {
+      sidebar?.classList.add('open');
+      overlay?.classList.add('visible');
+    }
+
+    function closeSidebar() {
+      sidebar?.classList.remove('open');
+      overlay?.classList.remove('visible');
+    }
+
+    toggle?.addEventListener('click', () => {
+      if (sidebar?.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
+
+    overlay?.addEventListener('click', closeSidebar);
+
+    // Collapsible groups
+    document.querySelectorAll('.lh-sidebar-group-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const items = title.nextElementSibling as HTMLElement;
+        const arrow = title.querySelector('.lh-sidebar-arrow');
+        if (!items) return;
+        const isCollapsed = items.classList.contains('collapsed');
+        items.classList.toggle('collapsed');
+        arrow?.classList.toggle('collapsed');
+        title.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
+      });
+    });
+  });
+</script>

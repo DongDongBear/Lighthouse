@@ -1,0 +1,36 @@
+---
+import { nav } from '../data/nav';
+import ThemeToggle from './ThemeToggle.tsx';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentPath = Astro.url.pathname;
+---
+
+<header class="lh-nav">
+  <div class="lh-nav-left">
+    <a class="lh-nav-logo" href={`${base}/`}>
+      <img src={`${base}/lighthouse-icon.svg`} alt="LightHouse" width="24" height="24" />
+      <span class="lh-nav-title">LightHouse</span>
+    </a>
+    <nav class="lh-nav-links">
+      {nav.map(item => (
+        <a
+          class:list={['lh-nav-link', { active: currentPath === `${base}${item.link}` || currentPath.startsWith(`${base}${item.link}`) && item.link !== '/' }]}
+          href={`${base}${item.link}`}
+        >
+          {item.text}
+        </a>
+      ))}
+    </nav>
+  </div>
+  <div class="lh-nav-right">
+    <ThemeToggle client:load />
+    <button class="lh-nav-hamburger" id="sidebar-toggle" aria-label="打开菜单">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+</header>
