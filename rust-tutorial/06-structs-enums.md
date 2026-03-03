@@ -5,7 +5,7 @@
 > - 掌握结构体（Struct）的定义与使用，对比 TypeScript 的 interface/class
 > - 理解方法（Method）与关联函数（Associated Function），掌握 `impl` 块
 > - 深入理解枚举（Enum），对比 TypeScript 的 union type 和 enum
-> - 熟练使用 `Option<T>`，对比 TypeScript 的 `T | null | undefined`
+> - 熟练使用 `Option&lt;T&gt;`，对比 TypeScript 的 `T | null | undefined`
 > - 掌握模式匹配（Pattern Matching）和 `match` 表达式
 > - 学会常用的枚举模式和惯用法
 > - 通过练习题巩固所学
@@ -678,7 +678,7 @@ fn main() {
 
 ---
 
-## 6.4 Option\<T\> —— 告别 null 和 undefined
+## 6.4 Option\&lt;T\&gt; —— 告别 null 和 undefined
 
 ### 6.4.1 JS/TS 中的 null 问题
 
@@ -698,9 +698,9 @@ console.log(user.name); // 💥 运行时错误：Cannot read property 'name' of
 
 > Tony Hoare（null 的发明者）称 null 为他的"十亿美元错误"。
 
-### 6.4.2 Rust 的 Option\<T\>
+### 6.4.2 Rust 的 Option\&lt;T\&gt;
 
-Rust 中**没有 null**。取而代之的是 `Option<T>` 枚举：
+Rust 中**没有 null**。取而代之的是 `Option&lt;T&gt;` 枚举：
 
 ```rust
 // Option 的定义（标准库中）
@@ -1230,7 +1230,7 @@ fn main() {
 
 ---
 
-## 6.7 Result\<T, E\> —— 错误处理预览
+## 6.7 Result\&lt;T, E\&gt; —— 错误处理预览
 
 `Result` 和 `Option` 类似，但用于可能出错的操作：
 
@@ -1290,8 +1290,8 @@ fn main() {
 // 在这里写你的代码
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 ```rust
 #[derive(Debug)]
@@ -1357,7 +1357,7 @@ fn main() {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ### 练习 2：设计枚举
 
@@ -1378,8 +1378,8 @@ fn main() {
 // - display(&self) -> String（简单的 JSON 格式化）
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 ```rust
 #[derive(Debug)]
@@ -1454,7 +1454,7 @@ fn main() {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ### 练习 3：Option 链式操作
 
@@ -1494,8 +1494,8 @@ fn main() {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 ```rust
 fn is_corporate_email(users: &[User], name: &str) -> Option<bool> {
@@ -1508,7 +1508,7 @@ fn is_corporate_email(users: &[User], name: &str) -> Option<bool> {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ### 练习 4：match 穷尽匹配
 
@@ -1557,8 +1557,8 @@ fn main() {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 ```rust
 impl Command {
@@ -1595,7 +1595,7 @@ impl Command {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ---
 
@@ -1635,7 +1635,7 @@ impl Command {
 └──────────────────────────────────────────────────────────┘
 ```
 
-> **下一章预告**：我们将学习 Rust 的错误处理体系 —— `Result<T, E>`、自定义错误类型和 `?` 运算符。告别 try/catch，迎接更安全的错误处理方式！
+> **下一章预告**：我们将学习 Rust 的错误处理体系 —— `Result&lt;T, E&gt;`、自定义错误类型和 `?` 运算符。告别 try/catch，迎接更安全的错误处理方式！
 
 ---
 

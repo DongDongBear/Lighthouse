@@ -4,7 +4,7 @@
 >
 > - 理解 Rust 为什么没有异常机制，以及这带来的好处
 > - 掌握 `panic!` 的使用场景和工作原理
-> - 深入理解 `Result<T, E>` 类型，并与 JS Promise 对比
+> - 深入理解 `Result&lt;T, E&gt;` 类型，并与 JS Promise 对比
 > - 熟练使用 `?` 运算符简化错误传播
 > - 学会定义自定义错误类型
 > - 了解 `thiserror` 和 `anyhow` 这两个常用错误处理库
@@ -60,7 +60,7 @@ Rust 把错误分为两大类：
 | 类别 | 机制 | 场景 | JS 类比 |
 |---|---|---|---|
 | **不可恢复错误** | `panic!` | 程序 bug、不变量被违反 | `throw new Error()` 但无法 catch |
-| **可恢复错误** | `Result<T, E>` | 预期中可能发生的错误 | Promise 的 reject / 返回错误对象 |
+| **可恢复错误** | `Result&lt;T, E&gt;` | 预期中可能发生的错误 | Promise 的 reject / 返回错误对象 |
 
 ### 8.2.1 panic! —— 不可恢复错误
 
@@ -153,7 +153,7 @@ fn main() {
 
 ---
 
-## 8.3 Result<T, E> —— 可恢复错误
+## 8.3 Result&lt;T, E&gt; —— 可恢复错误
 
 `Result` 是 Rust 错误处理的核心。它是一个枚举：
 
@@ -280,9 +280,9 @@ fn main() {
 > ```javascript
 > // JavaScript
 > fetch(url)
->   .then(res => res.json())           // 类似 and_then
->   .then(data => data.value * 2)      // 类似 map
->   .catch(err => console.error(err)); // 类似 unwrap_or_else
+>   .then(res =&gt; res.json())           // 类似 and_then
+>   .then(data =&gt; data.value * 2)      // 类似 map
+>   .catch(err =&gt; console.error(err)); // 类似 unwrap_or_else
 >
 > // Rust
 > fetch(url)
@@ -1246,8 +1246,8 @@ Eve, 32, 110000.00, Engineering";
 | 转换错误值 | `map_err(\|e\| ...)` | 不影响 Ok |
 | 链式操作 | `and_then(\|v\| ...)` | 类似 JS 的 .then() |
 | 添加上下文 | `.context("消息")` | anyhow 提供 |
-| 忽略错误 | `.ok()` | Result -> Option |
-| Option 转 Result | `.ok_or("错误")` | Option -> Result |
+| 忽略错误 | `.ok()` | Result -&gt; Option |
+| Option 转 Result | `.ok_or("错误")` | Option -&gt; Result |
 
 ---
 
@@ -1351,12 +1351,12 @@ Rust 的错误处理模型与 JavaScript 截然不同：
 
 | 概念 | JavaScript | Rust |
 |---|---|---|
-| 可恢复错误 | `try-catch` | `Result<T, E>` |
+| 可恢复错误 | `try-catch` | `Result&lt;T, E&gt;` |
 | 不可恢复错误 | `throw` (可 catch) | `panic!` (通常不 catch) |
 | 错误传播 | 自动沿调用栈传播 | 显式使用 `?` |
 | 异步错误 | `.catch()` / `try-catch` + `await` | `Result` + `?` (一致) |
 | 错误类型 | 任意值 (通常 Error 对象) | 强类型 |
-| 空值处理 | `null` / `undefined` | `Option<T>` |
+| 空值处理 | `null` / `undefined` | `Option&lt;T&gt;` |
 | 强制处理 | ❌ | ✅ 编译器警告未使用的 Result |
 
 **核心理念**：

@@ -1129,8 +1129,8 @@ fn calculate_length(s: String) -> usize {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 **1a**：❌ 编译失败。`s1` 被移动到 `s2`，不能再使用 `s1`。
 修复：`let s2 = s1.clone();` 或改为 `println!("{}", s2);`
@@ -1153,7 +1153,7 @@ fn calculate_length(s: &String) -> usize {
 // 调用时：let len = calculate_length(&s);
 ```
 
-</details>
+&lt;/details&gt;
 
 ### 练习 2：所有权追踪
 
@@ -1175,8 +1175,8 @@ fn process(s: String) -> String {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 - Q1: `a` 有效，拥有 `"a"` 的所有权
 - Q2: `a` 已无效（被移动），`b` 有效，拥有 `"a"` 的所有权
@@ -1184,7 +1184,7 @@ fn process(s: String) -> String {
 - Q4: `c` 已无效（被移动到 process 函数），`d` 有效，拥有 `"processed: a"` 的所有权
 - Q5: ✅ 能编译。`b` 和 `d` 都有效
 
-</details>
+&lt;/details&gt;
 
 ### 练习 3：修复编译错误
 
@@ -1211,8 +1211,8 @@ fn main() {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 方案 1：使用引用（推荐）：
 ```rust
@@ -1253,7 +1253,7 @@ fn main() {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ### 练习 4：实现一个简单的 todo 管理器
 
@@ -1298,8 +1298,8 @@ fn main() {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 ```rust
 impl TodoList {
@@ -1325,7 +1325,7 @@ impl TodoList {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ---
 

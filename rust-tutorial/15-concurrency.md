@@ -7,7 +7,7 @@
 > - 深入理解 `thread::spawn` 与 `JoinHandle`
 > - 掌握 `move` 闭包在线程中的使用
 > - 理解消息传递模型：`channel`（对比 JS 的 EventEmitter）
-> - 掌握共享状态：`Mutex<T>` 和 `Arc<Mutex<T>>`
+> - 掌握共享状态：`Mutex&lt;T&gt;` 和 `Arc&lt;Mutex&lt;T&gt;&gt;`
 > - 了解原子类型 `Atomic*` 的使用场景
 > - 理解 `Send` 和 `Sync` trait 的含义
 > - 通过练习题巩固并发编程知识
@@ -654,7 +654,7 @@ fn main() {
 
 ---
 
-## 15.5 共享状态：`Mutex<T>` 和 `Arc<Mutex<T>>`
+## 15.5 共享状态：`Mutex&lt;T&gt;` 和 `Arc&lt;Mutex&lt;T&gt;&gt;`
 
 ### 15.5.1 什么是 Mutex？
 

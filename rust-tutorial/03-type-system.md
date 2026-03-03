@@ -124,7 +124,7 @@ fn main() {
 ```
 
 > **Tony Hoare**（null 的发明者）称 null 为他的"十亿美元错误"。
-> Rust 通过 `Option<T>` 在类型系统层面消灭了空指针问题。
+> Rust 通过 `Option&lt;T&gt;` 在类型系统层面消灭了空指针问题。
 
 ### 3.1.4 Rust 没有异常！
 
@@ -247,9 +247,9 @@ let default = Default::default();  // ❌ 编译器不知道是什么类型
 let default: i32 = Default::default();  // ✅ 明确是 i32 的默认值（0）
 ```
 
-### 3.2.3 Turbofish 语法 ::<T>
+### 3.2.3 Turbofish 语法 ::&lt;T&gt;
 
-当你需要在表达式中指定泛型类型时，使用 `::<T>` 语法（因为形状像一条鱼 🐟 所以叫 turbofish）：
+当你需要在表达式中指定泛型类型时，使用 `::&lt;T&gt;` 语法（因为形状像一条鱼 🐟 所以叫 turbofish）：
 
 ```rust
 fn main() {
@@ -274,10 +274,10 @@ fn main() {
 > **对比 TypeScript 的泛型调用**：
 > ```typescript
 > // TypeScript
-> const result = someFunction<number>(arg);
+> const result = someFunction&lt;number&gt;(arg);
 >
 > // Rust（turbofish 语法）
-> let result = some_function::<i32>(arg);
+> let result = some_function::&lt;i32&gt;(arg);
 > // 注意 :: 的位置
 > ```
 
@@ -355,7 +355,7 @@ fn main() {
 > Math.floor(3.99)   // 3
 >
 > // Rust：必须显式转换，清楚知道自己在做什么
-> "42".parse::<i32>().unwrap()  // 42
+> "42".parse::&lt;i32&gt;().unwrap()  // 42
 > 3.99_f64 as i32               // 3
 > ```
 
@@ -629,9 +629,9 @@ push/pop/splice 修改             → 大小不可变
 索引越界返回 undefined           → 索引越界会 panic
 ```
 
-### 3.5.2 Vec<T> —— 动态数组（对应 JS 的 Array）
+### 3.5.2 Vec&lt;T&gt; —— 动态数组（对应 JS 的 Array）
 
-如果你需要动态大小的数组，使用 `Vec<T>`（vector，动态数组）：
+如果你需要动态大小的数组，使用 `Vec&lt;T&gt;`（vector，动态数组）：
 
 ```rust
 fn main() {
@@ -811,7 +811,7 @@ fn main() {
 > function sum(arr: number[]): number { }
 >
 > // ✅ 接受任何可迭代对象（但 TS 通常不区分这么细）
-> function sum(arr: Iterable<number>): number { }
+> function sum(arr: Iterable&lt;number&gt;): number { }
 > ```
 > 在 Rust 中，`&[T]` 是切片类型，它是接受序列数据的"最通用"参数类型。
 
@@ -909,8 +909,8 @@ fn main() {
 > // TypeScript 的类型别名
 > type UserId = number;
 > type Username = string;
-> type Result<T> = { ok: true; value: T } | { ok: false; error: Error };
-> type Callback = (n: number) => number;
+> type Result&lt;T&gt; = { ok: true; value: T } | { ok: false; error: Error };
+> type Callback = (n: number) =&gt; number;
 >
 > // TypeScript 也有 branded types（模拟新类型）
 > type UserId = number & { __brand: 'UserId' };
@@ -1311,11 +1311,11 @@ fn main() {
 >
 > 在本章中，我们深入探讨了 Rust 的类型系统：
 >
-> 1. **强类型系统**：Rust 没有 any、没有 null、没有异常，通过 Option<T> 和 Result<T, E> 在类型层面保证安全
+> 1. **强类型系统**：Rust 没有 any、没有 null、没有异常，通过 Option&lt;T&gt; 和 Result&lt;T, E&gt; 在类型层面保证安全
 > 2. **类型推断**：编译器很聪明，大部分时候不需要显式标注类型
 > 3. **类型转换**：as（原始转换）、From/Into（安全转换）、TryFrom/TryInto（可能失败的转换）
 > 4. **元组**：固定大小、不同类型的集合，用于返回多个值
-> 5. **数组和 Vec**：固定大小数组 [T; N] 和动态数组 Vec<T>
+> 5. **数组和 Vec**：固定大小数组 [T; N] 和动态数组 Vec&lt;T&gt;
 > 6. **切片**：对连续内存的引用，零拷贝的"视图"
 > 7. **类型别名和 newtype**：type 创建别名，元组结构体创建真正的新类型
 > 8. **never 类型**：! 表示永远不返回的函数

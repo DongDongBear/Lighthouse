@@ -204,12 +204,12 @@ fn add_with_semicolon(a: i32, b: i32) -> i32 {
 > 类比 JavaScript：
 > ```javascript
 > // JavaScript 的箭头函数
-> const add = (a, b) => a + b;      // 隐式返回
-> const add = (a, b) => { a + b };  // ❌ 没有 return，返回 undefined
-> const add = (a, b) => { return a + b; };  // 需要显式 return
+> const add = (a, b) =&gt; a + b;      // 隐式返回
+> const add = (a, b) =&gt; { a + b };  // ❌ 没有 return，返回 undefined
+> const add = (a, b) =&gt; { return a + b; };  // 需要显式 return
 >
 > // Rust 类似于 JS 的隐式返回语法
-> fn add(a: i32, b: i32) -> i32 {
+> fn add(a: i32, b: i32) -&gt; i32 {
 >     a + b  // 隐式返回（没有分号）
 > }
 > ```
@@ -748,7 +748,7 @@ fn main() {
 > if Some(42) { }  // error: mismatched types
 >
 > // ✅ 必须是显式的 bool
-> if 1 > 0 { }
+> if 1 &gt; 0 { }
 > if !some_string.is_empty() { }
 > ```
 

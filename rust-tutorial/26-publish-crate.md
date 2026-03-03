@@ -264,7 +264,7 @@ thiserror = "1"
 
 步骤：
 
-1. 打开 <https://crates.io>
+1. 打开 &lt;https://crates.io&gt;
 2. 使用 GitHub 登录
 3. 到账户设置生成 API Token
 4. 本地登录：
@@ -332,9 +332,9 @@ cargo yank --vers 0.1.0 --undo
 
 版本格式：`MAJOR.MINOR.PATCH`
 
-- **PATCH**：向后兼容的 bug 修复（`1.2.3 -> 1.2.4`）
-- **MINOR**：向后兼容的新功能（`1.2.3 -> 1.3.0`）
-- **MAJOR**：不向后兼容的变更（`1.2.3 -> 2.0.0`）
+- **PATCH**：向后兼容的 bug 修复（`1.2.3 -&gt; 1.2.4`）
+- **MINOR**：向后兼容的新功能（`1.2.3 -&gt; 1.3.0`）
+- **MAJOR**：不向后兼容的变更（`1.2.3 -&gt; 2.0.0`）
 
 ### 26.5.2 Rust 中的兼容性判断
 
@@ -380,14 +380,14 @@ regex = "=1.10.4"  # 锁定精确版本
 语义：
 
 - `1.2` 等价 `^1.2`
-- `^1.2` 允许 `<2.0.0`
-- `~1.2` 允许 `<1.3.0`
+- `^1.2` 允许 `&lt;2.0.0`
+- `~1.2` 允许 `&lt;1.3.0`
 
 ### 26.5.5 0.x 版本的特殊规则
 
 SemVer 对 `0.x` 更严格：
 
-- `0.1 -> 0.2` 可能被视为 breaking
+- `0.1 -&gt; 0.2` 可能被视为 breaking
 - 建议尽早稳定到 `1.0`，给使用者更清晰预期
 
 ### 26.5.6 版本发布策略建议
@@ -551,7 +551,7 @@ cargo release patch --execute
 库代码建议：
 
 - 不要随意 panic
-- 用 `Result<T, E>` 返回可恢复错误
+- 用 `Result&lt;T, E&gt;` 返回可恢复错误
 - 错误类型实现 `std::error::Error`
 - 用 `thiserror` 简化错误定义
 
@@ -926,8 +926,8 @@ jobs:
 
 处理：换一个更具体名称，比如：
 
-- `util` -> `dd-util-kit`
-- `cache` -> `tiny-cache-rs`
+- `util` -&gt; `dd-util-kit`
+- `cache` -&gt; `tiny-cache-rs`
 
 ### 26.10.2 缺少 license
 
@@ -1139,7 +1139,7 @@ pub struct Client {
 
 1. 将一个旧 API 标记 `deprecated`。
 2. 新增替代 API。
-3. 写一段迁移文档（旧 -> 新）。
+3. 写一段迁移文档（旧 -&gt; 新）。
 4. 发布一个 MINOR 版本。
 
 ### 练习 5：思考题

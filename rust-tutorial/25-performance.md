@@ -959,7 +959,7 @@ fn process_batches_v2(data: &[i32], batch_size: usize) {
 }
 ```
 
-### 25.7.5 陷阱五：Box<dyn Trait> 的动态分发
+### 25.7.5 陷阱五：Box&lt;dyn Trait&gt; 的动态分发
 
 ```rust
 // ❌ 动态分发（vtable 查找 + 无法内联）
@@ -1088,7 +1088,7 @@ struct RingBuffer<T> {
 1. `Vec::push` vs 预分配后 `push`
 2. `String::from` vs `to_string()` vs `to_owned()`
 3. `HashMap` vs `BTreeMap` vs 排序 `Vec` 的查找性能
-4. `Box<dyn Trait>` vs 泛型的调用开销
+4. `Box&lt;dyn Trait&gt;` vs 泛型的调用开销
 
 ### 练习 4：思考题
 

@@ -56,11 +56,11 @@ Part 4：高级主题与生态（第 19-24 章）≈ 3-4 周
 |------|------|----------|------|
 | [第 00 章](00-overview.md) | 全景概览：从 Web 到 Systems 的思维转变 | 60-90 分钟 | ⭐ |
 | [第 01 章](01-setup.md) | 环境搭建：Rustup + Cargo + VS Code | 2 小时 | ⭐ |
-| [第 02 章](02-variables-types.md) | 变量、类型与函数（对比 TypeScript） | 4 小时 | ⭐⭐ |
-| [第 03 章](03-ownership.md) | 所有权与借用 —— Rust 的灵魂 | 6 小时 | ⭐⭐⭐ |
-| [第 04 章](04-structs-enums.md) | 结构体与枚举（对比 interface / union type） | 5 小时 | ⭐⭐ |
-| [第 05 章](05-pattern-matching.md) | 模式匹配与错误处理（告别 try/catch） | 5 小时 | ⭐⭐⭐ |
-| [第 06 章](06-modules-cargo.md) | 模块系统与 Cargo（对比 ES Modules / npm） | 4 小时 | ⭐⭐ |
+| [第 02 章](02-first-program.md) | 变量、类型与函数（对比 TypeScript） | 4 小时 | ⭐⭐ |
+| [第 03 章](03-type-system.md) | 所有权与借用 —— Rust 的灵魂 | 6 小时 | ⭐⭐⭐ |
+| [第 04 章](04-ownership.md) | 结构体与枚举（对比 interface / union type） | 5 小时 | ⭐⭐ |
+| [第 05 章](05-borrowing.md) | 模式匹配与错误处理（告别 try/catch） | 5 小时 | ⭐⭐⭐ |
+| [第 06 章](06-structs-enums.md) | 模块系统与 Cargo（对比 ES Modules / npm） | 4 小时 | ⭐⭐ |
 
 ---
 
@@ -68,12 +68,12 @@ Part 4：高级主题与生态（第 19-24 章）≈ 3-4 周
 
 | 章节 | 主题 | 预计时间 | 难度 |
 |------|------|----------|------|
-| [第 07 章](07-generics-traits.md) | 泛型与 Trait（对比 TS 泛型与接口） | 6 小时 | ⭐⭐⭐ |
-| [第 08 章](08-lifetimes.md) | 生命周期深度解析 | 6 小时 | ⭐⭐⭐⭐ |
-| [第 09 章](09-collections-iterators.md) | 集合与迭代器（对比 Array/Map/Set） | 5 小时 | ⭐⭐⭐ |
-| [第 10 章](10-closures.md) | 闭包与函数式编程 | 4 小时 | ⭐⭐⭐ |
-| [第 11 章](11-smart-pointers.md) | 智能指针与内存管理（Box/Rc/Arc/RefCell） | 6 小时 | ⭐⭐⭐⭐ |
-| [第 12 章](12-concurrency.md) | 并发编程（对比 JS async/await） | 6 小时 | ⭐⭐⭐⭐ |
+| [第 07 章](07-pattern-matching.md) | 泛型与 Trait（对比 TS 泛型与接口） | 6 小时 | ⭐⭐⭐ |
+| [第 08 章](08-error-handling.md) | 生命周期深度解析 | 6 小时 | ⭐⭐⭐⭐ |
+| [第 09 章](09-collections.md) | 集合与迭代器（对比 Array/Map/Set） | 5 小时 | ⭐⭐⭐ |
+| [第 10 章](10-generics-traits.md) | 闭包与函数式编程 | 4 小时 | ⭐⭐⭐ |
+| [第 11 章](11-lifetime.md) | 智能指针与内存管理（Box/Rc/Arc/RefCell） | 6 小时 | ⭐⭐⭐⭐ |
+| [第 12 章](12-closures-iterators.md) | 并发编程（对比 JS async/await） | 6 小时 | ⭐⭐⭐⭐ |
 
 ---
 
@@ -81,12 +81,12 @@ Part 4：高级主题与生态（第 19-24 章）≈ 3-4 周
 
 | 章节 | 主题 | 预计时间 | 难度 |
 |------|------|----------|------|
-| [第 13 章](13-cli-project.md) | 项目实战：构建 CLI 工具（clap + tokio） | 6 小时 | ⭐⭐⭐ |
-| [第 14 章](14-file-io-serde.md) | 文件 I/O 与序列化（serde 全解析） | 5 小时 | ⭐⭐⭐ |
-| [第 15 章](15-networking.md) | 网络编程与 HTTP（对比 Express/Koa） | 5 小时 | ⭐⭐⭐ |
-| [第 16 章](16-web-framework.md) | Axum 实战：构建 REST API | 8 小时 | ⭐⭐⭐⭐ |
-| [第 17 章](17-database.md) | 数据库操作（SQLx / SeaORM） | 6 小时 | ⭐⭐⭐⭐ |
-| [第 18 章](18-wasm.md) | WebAssembly 实战：Rust → 浏览器 | 6 小时 | ⭐⭐⭐⭐ |
+| [第 13 章](13-modules-crates.md) | 项目实战：构建 CLI 工具（clap + tokio） | 6 小时 | ⭐⭐⭐ |
+| [第 14 章](14-smart-pointers.md) | 文件 I/O 与序列化（serde 全解析） | 5 小时 | ⭐⭐⭐ |
+| [第 15 章](15-concurrency.md) | 网络编程与 HTTP（对比 Express/Koa） | 5 小时 | ⭐⭐⭐ |
+| [第 16 章](16-async-await.md) | Axum 实战：构建 REST API | 8 小时 | ⭐⭐⭐⭐ |
+| [第 17 章](17-macros.md) | 数据库操作（SQLx / SeaORM） | 6 小时 | ⭐⭐⭐⭐ |
+| [第 18 章](18-cli-tool.md) | WebAssembly 实战：Rust → 浏览器 | 6 小时 | ⭐⭐⭐⭐ |
 
 ---
 
@@ -94,12 +94,12 @@ Part 4：高级主题与生态（第 19-24 章）≈ 3-4 周
 
 | 章节 | 主题 | 预计时间 | 难度 |
 |------|------|----------|------|
-| [第 19 章](19-macros.md) | 宏编程：声明宏与过程宏 | 6 小时 | ⭐⭐⭐⭐ |
-| [第 20 章](20-unsafe-ffi.md) | unsafe Rust 与 FFI | 5 小时 | ⭐⭐⭐⭐ |
-| [第 21 章](21-async-deep-dive.md) | 异步运行时深入（Tokio 原理） | 6 小时 | ⭐⭐⭐⭐⭐ |
-| [第 22 章](22-performance.md) | 性能优化与 Profiling | 5 小时 | ⭐⭐⭐⭐ |
-| [第 23 章](23-design-patterns.md) | Rust 设计模式与最佳实践 | 5 小时 | ⭐⭐⭐⭐ |
-| [第 24 章](24-ecosystem.md) | 开源贡献指南与生态全景 | 4 小时 | ⭐⭐⭐ |
+| [第 19 章](19-web-api.md) | 宏编程：声明宏与过程宏 | 6 小时 | ⭐⭐⭐⭐ |
+| [第 20 章](20-wasm.md) | unsafe Rust 与 FFI | 5 小时 | ⭐⭐⭐⭐ |
+| [第 21 章](21-ffi.md) | 异步运行时深入（Tokio 原理） | 6 小时 | ⭐⭐⭐⭐⭐ |
+| [第 22 章](22-unsafe.md) | 性能优化与 Profiling | 5 小时 | ⭐⭐⭐⭐ |
+| [第 23 章](23-advanced-types.md) | Rust 设计模式与最佳实践 | 5 小时 | ⭐⭐⭐⭐ |
+| [第 24 章](24-tokio-deep-dive.md) | 开源贡献指南与生态全景 | 4 小时 | ⭐⭐⭐ |
 
 ---
 
@@ -137,3 +137,7 @@ Part 4：高级主题与生态（第 19-24 章）≈ 3-4 周
 ---
 
 *开始你的 Rust 之旅 → [第 00 章：全景概览](00-overview.md)*
+
+
+- [第 25 章](25-performance.md) 性能优化
+- [第 26 章](26-publish-crate.md) 发布 crate

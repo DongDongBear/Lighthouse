@@ -2,9 +2,9 @@
 
 > **本章目标**
 >
-> - 深入掌握 `Vec<T>` 的使用，理解它与 JS Array 的异同
+> - 深入掌握 `Vec&lt;T&gt;` 的使用，理解它与 JS Array 的异同
 > - 彻底理解 Rust 的 `String` 和 `&str`，以及 UTF-8 的复杂性
-> - 熟练使用 `HashMap<K, V>`，对比 JS 的 Object 和 Map
+> - 熟练使用 `HashMap&lt;K, V&gt;`，对比 JS 的 Object 和 Map
 > - 了解 `HashSet`、`VecDeque`、`BTreeMap` 等其他集合
 > - 初步认识迭代器（Iterator）的强大能力
 > - 能够根据场景选择合适的集合类型
@@ -19,23 +19,23 @@
 
 | Rust 集合 | JS 近似 | 特点 |
 |---|---|---|
-| `Vec<T>` | `Array` | 可变长数组，连续内存 |
+| `Vec&lt;T&gt;` | `Array` | 可变长数组，连续内存 |
 | `String` | `string` | UTF-8 编码的可变字符串 |
-| `HashMap<K, V>` | `Map` / `Object` | 哈希表键值对 |
-| `HashSet<T>` | `Set` | 哈希集合（无重复） |
-| `VecDeque<T>` | 无直接对应 | 双端队列 |
-| `BTreeMap<K, V>` | 无直接对应 | 有序键值对（B 树） |
-| `BTreeSet<T>` | 无直接对应 | 有序集合 |
-| `LinkedList<T>` | 无直接对应 | 双向链表（很少用） |
-| `BinaryHeap<T>` | 无直接对应 | 二叉堆（优先队列） |
+| `HashMap&lt;K, V&gt;` | `Map` / `Object` | 哈希表键值对 |
+| `HashSet&lt;T&gt;` | `Set` | 哈希集合（无重复） |
+| `VecDeque&lt;T&gt;` | 无直接对应 | 双端队列 |
+| `BTreeMap&lt;K, V&gt;` | 无直接对应 | 有序键值对（B 树） |
+| `BTreeSet&lt;T&gt;` | 无直接对应 | 有序集合 |
+| `LinkedList&lt;T&gt;` | 无直接对应 | 双向链表（很少用） |
+| `BinaryHeap&lt;T&gt;` | 无直接对应 | 二叉堆（优先队列） |
 
 所有集合类型都存储在**堆**（heap）上，并在超出作用域时自动释放。
 
 ---
 
-## 9.2 Vec<T> —— 动态数组
+## 9.2 Vec&lt;T&gt; —— 动态数组
 
-`Vec<T>` 是 Rust 中最常用的集合，相当于 JavaScript 的 `Array`。
+`Vec&lt;T&gt;` 是 Rust 中最常用的集合，相当于 JavaScript 的 `Array`。
 
 ### 9.2.1 创建 Vec
 
@@ -173,7 +173,7 @@ fn main() {
 > | 操作 | Rust | JavaScript |
 > |---|---|---|
 > | 添加到末尾 | `push(x)` | `push(x)` |
-> | 从末尾弹出 | `pop()` → `Option<T>` | `pop()` → `T \| undefined` |
+> | 从末尾弹出 | `pop()` → `Option&lt;T&gt;` | `pop()` → `T \| undefined` |
 > | 添加到开头 | `insert(0, x)` (慢) | `unshift(x)` |
 > | 从开头弹出 | `remove(0)` (慢) | `shift()` |
 > | 拼接 | `extend(iter)` | `concat()` / `...spread` |
@@ -681,7 +681,7 @@ fn main() {
 
 ---
 
-## 9.4 HashMap<K, V> —— 键值对集合
+## 9.4 HashMap&lt;K, V&gt; —— 键值对集合
 
 `HashMap` 是 Rust 的哈希表，类似于 JavaScript 的 `Map`（或 `Object`）。
 
@@ -929,9 +929,9 @@ fn main() {
 
 ---
 
-## 9.5 HashSet<T> —— 无重复元素的集合
+## 9.5 HashSet&lt;T&gt; —— 无重复元素的集合
 
-`HashSet` 相当于 JavaScript 的 `Set`。底层实际上是 `HashMap<T, ()>`。
+`HashSet` 相当于 JavaScript 的 `Set`。底层实际上是 `HashMap&lt;T, ()&gt;`。
 
 ```rust
 use std::collections::HashSet;
@@ -1450,14 +1450,14 @@ fn main() {
 
 | 需求 | 推荐 | 原因 |
 |---|---|---|
-| 有序列表，经常在末尾增删 | `Vec<T>` | 最常用，缓存友好 |
-| 需要在头部频繁增删 | `VecDeque<T>` | 双端 O(1) |
-| 键值对查找 | `HashMap<K, V>` | O(1) 查找 |
-| 有序键值对 | `BTreeMap<K, V>` | 有序遍历、范围查询 |
-| 去重 | `HashSet<T>` | O(1) 查找和插入 |
-| 有序去重 | `BTreeSet<T>` | 有序 + 去重 |
-| 优先队列 | `BinaryHeap<T>` | O(log n) 弹出最大/最小 |
-| 频繁中间插入/删除 | `LinkedList<T>` | 理论上O(1)，但实践中很少用 |
+| 有序列表，经常在末尾增删 | `Vec&lt;T&gt;` | 最常用，缓存友好 |
+| 需要在头部频繁增删 | `VecDeque&lt;T&gt;` | 双端 O(1) |
+| 键值对查找 | `HashMap&lt;K, V&gt;` | O(1) 查找 |
+| 有序键值对 | `BTreeMap&lt;K, V&gt;` | 有序遍历、范围查询 |
+| 去重 | `HashSet&lt;T&gt;` | O(1) 查找和插入 |
+| 有序去重 | `BTreeSet&lt;T&gt;` | 有序 + 去重 |
+| 优先队列 | `BinaryHeap&lt;T&gt;` | O(log n) 弹出最大/最小 |
+| 频繁中间插入/删除 | `LinkedList&lt;T&gt;` | 理论上O(1)，但实践中很少用 |
 | 字符串 | `String` / `&str` | UTF-8 安全 |
 
 ---
@@ -1578,13 +1578,13 @@ where
 
 | 集合 | 何时使用 | JS 对应 |
 |---|---|---|
-| `Vec<T>` | 有序列表、数组 | `Array` |
+| `Vec&lt;T&gt;` | 有序列表、数组 | `Array` |
 | `String` | 可变字符串 | `string`（但有所有权） |
 | `&str` | 字符串引用/切片 | `string`（不可变） |
-| `HashMap<K,V>` | 键值查找 | `Map` / `Object` |
-| `HashSet<T>` | 去重集合 | `Set` |
-| `VecDeque<T>` | 双端队列 | 无 |
-| `BTreeMap<K,V>` | 有序键值对 | 无 |
+| `HashMap&lt;K,V&gt;` | 键值查找 | `Map` / `Object` |
+| `HashSet&lt;T&gt;` | 去重集合 | `Set` |
+| `VecDeque&lt;T&gt;` | 双端队列 | 无 |
+| `BTreeMap&lt;K,V&gt;` | 有序键值对 | 无 |
 
 **关键收获**：
 

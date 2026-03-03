@@ -864,7 +864,7 @@ fn main() {
 }
 ```
 
-> 💡 **最佳实践**：函数参数尽量用 `&str` 而不是 `&String`，用 `&[T]` 而不是 `&Vec<T>`。这样更通用。
+> 💡 **最佳实践**：函数参数尽量用 `&str` 而不是 `&String`，用 `&[T]` 而不是 `&Vec&lt;T&gt;`。这样更通用。
 
 ---
 
@@ -1024,8 +1024,8 @@ fn first_word(s: &String) -> &str {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 ```rust
 fn main() {
@@ -1040,7 +1040,7 @@ fn main() {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ### 练习 2：实现安全的字符串处理
 
@@ -1076,8 +1076,8 @@ fn main() {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 ```rust
 fn count_vowels(s: &str) -> usize {
@@ -1102,7 +1102,7 @@ fn take_chars(s: &str, n: usize) -> &str {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ### 练习 3：修复结构体借用
 
@@ -1148,8 +1148,8 @@ fn main() {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 ```rust
 impl TextEditor {
@@ -1168,7 +1168,7 @@ impl TextEditor {
 }
 ```
 
-</details>
+&lt;/details&gt;
 
 ### 练习 4：理解 NLL
 
@@ -1203,8 +1203,8 @@ fn main() {
 }
 ```
 
-<details>
-<summary>📝 答案</summary>
+&lt;details&gt;
+&lt;summary&gt;📝 答案&lt;/summary&gt;
 
 **4a**：❌ 编译失败。`first` 在 `v.push(4)` 之后还被使用（`println!`），此时 `first` 的借用和 `push` 的可变借用冲突。
 
@@ -1212,7 +1212,7 @@ fn main() {
 
 **4c**：✅ 编译成功。`r1` 和 `r2` 在 `println!` 之后不再使用（NLL），之后可以创建可变引用 `r3`。
 
-</details>
+&lt;/details&gt;
 
 ---
 

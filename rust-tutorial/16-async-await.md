@@ -1075,7 +1075,7 @@ struct ExampleFuture {
 
 ### 16.8.2 Pin 的作用
 
-`Pin<P>` 保证被包装的值**不会在内存中移动**：
+`Pin&lt;P&gt;` 保证被包装的值**不会在内存中移动**：
 
 ```rust
 use std::pin::Pin;

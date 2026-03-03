@@ -3,14 +3,14 @@
 > **本章目标**
 >
 > - 理解智能指针与普通引用的区别
-> - 掌握 `Box<T>` 的堆分配与使用场景
+> - 掌握 `Box&lt;T&gt;` 的堆分配与使用场景
 > - 深入理解 `Deref` trait 与自动解引用机制
 > - 掌握 `Drop` trait 与资源清理
-> - 理解 `Rc<T>` 引用计数（对比 JavaScript 的垃圾回收）
-> - 掌握 `Arc<T>` 在多线程中的使用
-> - 理解 `RefCell<T>` 的内部可变性模式
-> - 灵活运用 `Rc<RefCell<T>>` 组合模式
-> - 理解循环引用问题与 `Weak<T>` 的解决方案
+> - 理解 `Rc&lt;T&gt;` 引用计数（对比 JavaScript 的垃圾回收）
+> - 掌握 `Arc&lt;T&gt;` 在多线程中的使用
+> - 理解 `RefCell&lt;T&gt;` 的内部可变性模式
+> - 灵活运用 `Rc&lt;RefCell&lt;T&gt;&gt;` 组合模式
+> - 理解循环引用问题与 `Weak&lt;T&gt;` 的解决方案
 > - 通过练习题巩固所有知识点
 
 > **预计学习时间：150 - 210 分钟**（智能指针是 Rust 高级编程的基石，值得深入理解）
@@ -56,21 +56,21 @@ const obj2 = obj;              // obj2 也指向同一个对象
 
 | 智能指针 | 用途 | JS 类比 |
 |---------|------|---------|
-| `Box<T>` | 堆分配 | `new Object()` |
-| `Rc<T>` | 单线程引用计数 | JS 的引用 + GC |
-| `Arc<T>` | 多线程引用计数 | SharedArrayBuffer 的理念 |
-| `RefCell<T>` | 运行时借用检查 | 普通的 JS 可变对象 |
-| `Mutex<T>` | 互斥锁 | 无直接类比 |
+| `Box&lt;T&gt;` | 堆分配 | `new Object()` |
+| `Rc&lt;T&gt;` | 单线程引用计数 | JS 的引用 + GC |
+| `Arc&lt;T&gt;` | 多线程引用计数 | SharedArrayBuffer 的理念 |
+| `RefCell&lt;T&gt;` | 运行时借用检查 | 普通的 JS 可变对象 |
+| `Mutex&lt;T&gt;` | 互斥锁 | 无直接类比 |
 
 让我们逐一深入学习。
 
 ---
 
-## 14.2 `Box<T>` —— 最简单的智能指针
+## 14.2 `Box&lt;T&gt;` —— 最简单的智能指针
 
-### 14.2.1 什么是 `Box<T>`？
+### 14.2.1 什么是 `Box&lt;T&gt;`？
 
-`Box<T>` 是 Rust 中最简单、最常用的智能指针。它把数据存储在**堆（Heap）** 上，而非栈（Stack）上。
+`Box&lt;T&gt;` 是 Rust 中最简单、最常用的智能指针。它把数据存储在**堆（Heap）** 上，而非栈（Stack）上。
 
 ```rust
 fn main() {
@@ -96,13 +96,13 @@ fn main() {
 └──────────┘            └──────────┘
 ```
 
-### 14.2.2 为什么需要 `Box<T>`？
+### 14.2.2 为什么需要 `Box&lt;T&gt;`？
 
-你可能会问：直接把值放在栈上不好吗？大多数情况下确实如此。但以下场景需要 `Box<T>`：
+你可能会问：直接把值放在栈上不好吗？大多数情况下确实如此。但以下场景需要 `Box&lt;T&gt;`：
 
 **场景一：编译时大小未知的类型（递归类型）**
 
-这是 `Box<T>` 最经典的用例。考虑一个链表：
+这是 `Box&lt;T&gt;` 最经典的用例。考虑一个链表：
 
 ```rust
 // ❌ 编译错误！递归类型有无限大小
@@ -232,7 +232,7 @@ const animals = [
 animals.forEach(a => console.log(a.speak()));
 ```
 
-### 14.2.3 `Box<T>` 的常用操作
+### 14.2.3 `Box&lt;T&gt;` 的常用操作
 
 ```rust
 fn main() {
@@ -360,9 +360,9 @@ Box<String> → String → str
 ```
 
 规则：
-- `&Box<T>` 可以自动变成 `&T`
+- `&Box&lt;T&gt;` 可以自动变成 `&T`
 - `&String` 可以自动变成 `&str`
-- `&Vec<T>` 可以自动变成 `&[T]`
+- `&Vec&lt;T&gt;` 可以自动变成 `&[T]`
 
 ```rust
 fn main() {
@@ -623,7 +623,7 @@ struct Point {
 
 ---
 
-## 14.5 `Rc<T>` —— 引用计数智能指针
+## 14.5 `Rc&lt;T&gt;` —— 引用计数智能指针
 
 ### 14.5.1 单一所有者的限制
 
@@ -639,9 +639,9 @@ struct Point {
 答案：最后一个放手的人。
 ```
 
-这就是 `Rc<T>`（Reference Counting，引用计数）的用武之地。
+这就是 `Rc&lt;T&gt;`（Reference Counting，引用计数）的用武之地。
 
-### 14.5.2 Rc<T> 基本用法
+### 14.5.2 Rc&lt;T&gt; 基本用法
 
 ```rust
 use std::rc::Rc;
@@ -707,7 +707,7 @@ fn main() {
 
 核心区别：
 
-| 特性 | JavaScript GC | Rust Rc<T> |
+| 特性 | JavaScript GC | Rust Rc&lt;T&gt; |
 |------|--------------|-----------|
 | 管理方式 | 自动（不可见） | 显式（可查看计数） |
 | 开销 | GC 暂停 | 引用计数增减 |
@@ -715,7 +715,7 @@ fn main() {
 | 线程安全 | 单线程 | 仅单线程（Arc 用于多线程） |
 | 可预测性 | 不确定何时回收 | 引用计数归零立即释放 |
 
-### 14.5.4 Rc<T> 实现共享链表
+### 14.5.4 Rc&lt;T&gt; 实现共享链表
 
 ```rust
 use std::rc::Rc;
@@ -748,9 +748,9 @@ fn main() {
 }
 ```
 
-### 14.5.5 Rc<T> 的限制
+### 14.5.5 Rc&lt;T&gt; 的限制
 
-**重要：`Rc<T>` 只提供不可变访问！**
+**重要：`Rc&lt;T&gt;` 只提供不可变访问！**
 
 ```rust
 use std::rc::Rc;
@@ -769,7 +769,7 @@ fn main() {
 
 ---
 
-## 14.6 `Arc<T>` —— 多线程的引用计数
+## 14.6 `Arc&lt;T&gt;` —— 多线程的引用计数
 
 ### 14.6.1 为什么不能在多线程中使用 Rc？
 
@@ -790,9 +790,9 @@ fn main() {
 }
 ```
 
-### 14.6.2 Arc<T> 来救场
+### 14.6.2 Arc&lt;T&gt; 来救场
 
-`Arc<T>`（Atomic Reference Counting，原子引用计数）是 `Rc<T>` 的线程安全版本：
+`Arc&lt;T&gt;`（Atomic Reference Counting，原子引用计数）是 `Rc&lt;T&gt;` 的线程安全版本：
 
 ```rust
 use std::sync::Arc;
@@ -859,7 +859,7 @@ fn main() {
 
 ---
 
-## 14.7 `RefCell<T>` —— 内部可变性
+## 14.7 `RefCell&lt;T&gt;` —— 内部可变性
 
 ### 14.7.1 什么是内部可变性？
 
@@ -878,7 +878,7 @@ obj.count += 1; // 完全没问题
 // const 只是说 obj 变量不能重新赋值，但属性随便改
 ```
 
-在 Rust 中，`RefCell<T>` 提供了类似的能力——将借用检查推迟到**运行时**：
+在 Rust 中，`RefCell&lt;T&gt;` 提供了类似的能力——将借用检查推迟到**运行时**：
 
 ```rust
 use std::cell::RefCell;
@@ -907,7 +907,7 @@ fn main() {
 
 ### 14.7.2 运行时借用检查
 
-`RefCell<T>` 在运行时执行与编译时相同的规则。违反规则会 **panic**（而不是编译错误）：
+`RefCell&lt;T&gt;` 在运行时执行与编译时相同的规则。违反规则会 **panic**（而不是编译错误）：
 
 ```rust
 use std::cell::RefCell;
@@ -1009,9 +1009,9 @@ fn main() {
 }
 ```
 
-### 14.7.4 `Cell<T>` vs `RefCell<T>`
+### 14.7.4 `Cell&lt;T&gt;` vs `RefCell&lt;T&gt;`
 
-Rust 还有一个更轻量的内部可变性类型 `Cell<T>`：
+Rust 还有一个更轻量的内部可变性类型 `Cell&lt;T&gt;`：
 
 ```rust
 use std::cell::Cell;
@@ -1030,7 +1030,7 @@ fn main() {
 }
 ```
 
-| 特性 | `Cell<T>` | `RefCell<T>` |
+| 特性 | `Cell&lt;T&gt;` | `RefCell&lt;T&gt;` |
 |------|----------|-------------|
 | 适用类型 | `Copy` 类型 | 任意类型 |
 | 获取方式 | `get()`/`set()` 复制值 | `borrow()`/`borrow_mut()` 引用 |
@@ -1039,13 +1039,13 @@ fn main() {
 
 ---
 
-## 14.8 `Rc<RefCell<T>>` —— 多所有者 + 可变性
+## 14.8 `Rc&lt;RefCell&lt;T&gt;&gt;` —— 多所有者 + 可变性
 
 ### 14.8.1 为什么需要组合？
 
-- `Rc<T>`：多个所有者，但数据不可变
-- `RefCell<T>`：单个所有者，但可以修改数据
-- `Rc<RefCell<T>>`：**多个所有者 + 可以修改数据**！
+- `Rc&lt;T&gt;`：多个所有者，但数据不可变
+- `RefCell&lt;T&gt;`：单个所有者，但可以修改数据
+- `Rc&lt;RefCell&lt;T&gt;&gt;`：**多个所有者 + 可以修改数据**！
 
 这是 Rust 中非常常见的组合模式。
 
@@ -1140,7 +1140,7 @@ fn main() {
 }
 ```
 
-### 14.8.4 多线程版本：`Arc<Mutex<T>>`
+### 14.8.4 多线程版本：`Arc&lt;Mutex&lt;T&gt;&gt;`
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -1182,11 +1182,11 @@ fn main() {
 
 ---
 
-## 14.9 循环引用与 `Weak<T>` —— 打破引用循环
+## 14.9 循环引用与 `Weak&lt;T&gt;` —— 打破引用循环
 
 ### 14.9.1 循环引用导致内存泄漏
 
-`Rc<T>` 有一个致命弱点：**循环引用会导致引用计数永远不会归零**，从而造成内存泄漏。
+`Rc&lt;T&gt;` 有一个致命弱点：**循环引用会导致引用计数永远不会归零**，从而造成内存泄漏。
 
 ```rust
 use std::rc::Rc;
@@ -1253,9 +1253,9 @@ b = null;
 // Rust 的 Rc 做不到这一点！
 ```
 
-### 14.9.2 Weak<T> 来救场
+### 14.9.2 Weak&lt;T&gt; 来救场
 
-`Weak<T>` 是一种**弱引用**——它不增加强引用计数，不会阻止值被释放：
+`Weak&lt;T&gt;` 是一种**弱引用**——它不增加强引用计数，不会阻止值被释放：
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -1318,7 +1318,7 @@ fn main() {
 // 没有内存泄漏！
 ```
 
-### 14.9.3 Weak<T> 的关键 API
+### 14.9.3 Weak&lt;T&gt; 的关键 API
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -1498,7 +1498,7 @@ fn print_tree(node: &Rc<TreeNode>, depth: usize) {
 // 3. 测试自动解引用是否工作
 ```
 
-### 练习 3：Rc<RefCell<T>> 实现双向链表
+### 练习 3：Rc&lt;RefCell&lt;T&gt;&gt; 实现双向链表
 
 ```rust
 // 实现一个双向链表，支持：
@@ -1541,14 +1541,14 @@ fn print_tree(node: &Rc<TreeNode>, depth: usize) {
 
 在本章中，我们深入学习了 Rust 的智能指针系统：
 
-1. **`Box<T>`** —— 最简单的堆分配智能指针，用于递归类型和大数据
+1. **`Box&lt;T&gt;`** —— 最简单的堆分配智能指针，用于递归类型和大数据
 2. **`Deref` trait** —— 让智能指针像普通引用一样使用，支持自动解引用链
 3. **`Drop` trait** —— RAII 的基石，确保资源在离开作用域时自动清理
-4. **`Rc<T>`** —— 单线程引用计数，实现多所有者共享
-5. **`Arc<T>`** —— `Rc` 的线程安全版本，使用原子操作
-6. **`RefCell<T>`** —— 运行时借用检查，提供内部可变性
-7. **`Rc<RefCell<T>>`** —— 多所有者 + 可变性的黄金组合
-8. **`Weak<T>`** —— 弱引用，打破循环引用，防止内存泄漏
+4. **`Rc&lt;T&gt;`** —— 单线程引用计数，实现多所有者共享
+5. **`Arc&lt;T&gt;`** —— `Rc` 的线程安全版本，使用原子操作
+6. **`RefCell&lt;T&gt;`** —— 运行时借用检查，提供内部可变性
+7. **`Rc&lt;RefCell&lt;T&gt;&gt;`** —— 多所有者 + 可变性的黄金组合
+8. **`Weak&lt;T&gt;`** —— 弱引用，打破循环引用，防止内存泄漏
 
 > 💡 **给 JavaScript 开发者的总结：**
 > JavaScript 的 GC 自动处理了所有这些问题——共享引用、循环引用、内存释放。

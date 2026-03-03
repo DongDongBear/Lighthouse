@@ -1229,7 +1229,7 @@ fn main() {
 ### 练习 4：思考题
 
 1. 为什么 `Iterator` 使用关联类型而不是泛型参数？如果改成泛型会有什么问题？
-2. `type Thunk = Box<dyn Fn() + Send + 'static>` 这个类型别名中每个部分的含义是什么？
+2. `type Thunk = Box&lt;dyn Fn() + Send + 'static&gt;` 这个类型别名中每个部分的含义是什么？
 3. 为什么 `str` 是 DST 而 `String` 不是？它们在内存布局上有什么区别？
 4. Newtype 模式的 `#[repr(transparent)]` 有什么作用？什么场景下必须使用？
 5. `!` 类型为什么可以强制转换为任何类型？这在数学上叫什么？

@@ -361,7 +361,7 @@ let name = user.map(|u| u.name).unwrap_or("匿名用户".to_string());
 ```
 
 💡 **TS 类比**：
-- `Option<T>` ≈ `T | undefined`，但你**不可能**忘记处理 `undefined` 的情况
+- `Option&lt;T&gt;` ≈ `T | undefined`，但你**不可能**忘记处理 `undefined` 的情况
 - 没有 `!` 非空断言操作符（好吧有 `.unwrap()`，但它会 panic，而且代码审查时会被指出来）
 
 **错误处理对比：**
@@ -403,7 +403,7 @@ let user = fetch_user(999).await?; // 如果出错，当前函数也返回 Err
 ```
 
 💡 **TS 类比**：
-- `Result<T, E>` ≈ 如果 TypeScript 强制你每个 async 函数都写 try/catch
+- `Result&lt;T, E&gt;` ≈ 如果 TypeScript 强制你每个 async 函数都写 try/catch
 - `?` 操作符 ≈ 自动 throw，但是是类型安全的
 
 **性能对比：**
@@ -625,24 +625,24 @@ Python 生态中的 Rust
 | `string` | `String` / `&str` | Rust 区分拥有的字符串和借用的字符串切片 |
 | `number` | `i32` / `f64` / `u8` 等 | Rust 有精确的数字类型 |
 | `boolean` | `bool` | 一样 |
-| `null` / `undefined` | 没有！用 `Option<T>` | Rust 没有空值 |
-| `Array<T>` | `Vec<T>` | 动态数组 |
+| `null` / `undefined` | 没有！用 `Option&lt;T&gt;` | Rust 没有空值 |
+| `Array&lt;T&gt;` | `Vec&lt;T&gt;` | 动态数组 |
 | `[1, 2, 3]` (固定) | `[1, 2, 3]` | 固定长度数组 |
-| `Map<K, V>` | `HashMap<K, V>` | 哈希映射 |
-| `Set<T>` | `HashSet<T>` | 哈希集合 |
+| `Map&lt;K, V&gt;` | `HashMap&lt;K, V&gt;` | 哈希映射 |
+| `Set&lt;T&gt;` | `HashSet&lt;T&gt;` | 哈希集合 |
 | `interface` | `trait` | 定义行为契约 |
 | `type A = B \| C` | `enum { B, C }` | 联合类型 → 枚举 |
 | `class` | `struct` + `impl` | Rust 没有类，用结构体 + 方法实现 |
 | 继承 (`extends`) | Trait 组合 | Rust 不支持继承，用组合 |
-| `(x: number) => x * 2` | `\|x: i32\| x * 2` | 闭包/匿名函数 |
+| `(x: number) =&gt; x * 2` | `\|x: i32\| x * 2` | 闭包/匿名函数 |
 | `async/await` | `async/await` | 语法几乎一样，但底层机制不同 |
-| `Promise<T>` | `Future<Output = T>` | 异步值 |
-| `try {} catch {}` | `Result<T, E>` + `?` | 错误处理 |
+| `Promise&lt;T&gt;` | `Future&lt;Output = T&gt;` | 异步值 |
+| `try {} catch {}` | `Result&lt;T, E&gt;` + `?` | 错误处理 |
 | `throw new Error()` | `Err(e)` 或 `panic!()` | 抛出错误 |
 | `typeof` | 无对应（编译期已知） | Rust 是静态类型，不需要运行时检查 |
 | `import {} from` | `use crate::` | 模块导入 |
 | `export` | `pub` | 公开可见性 |
-| 泛型 `<T>` | 泛型 `<T>` | 语法几乎一样 |
+| 泛型 `&lt;T&gt;` | 泛型 `&lt;T&gt;` | 语法几乎一样 |
 | `T extends U` | `T: U` (trait bound) | 泛型约束 |
 
 ### 0.4.3 项目结构映射

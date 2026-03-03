@@ -224,11 +224,11 @@ fn main() {
 }
 ```
 
-注意 `impl<T> Point<T>` 中的两个 `<T>`：
-- 第一个 `<T>`：声明这是一个泛型实现
-- 第二个 `<T>`：指定我们在为 `Point<T>` 实现
+注意 `impl&lt;T&gt; Point&lt;T&gt;` 中的两个 `&lt;T&gt;`：
+- 第一个 `&lt;T&gt;`：声明这是一个泛型实现
+- 第二个 `&lt;T&gt;`：指定我们在为 `Point&lt;T&gt;` 实现
 
-而 `impl Point<f64>` 没有 `<T>`，因为这是为**具体类型**实现，不是泛型实现。
+而 `impl Point&lt;f64&gt;` 没有 `&lt;T&gt;`，因为这是为**具体类型**实现，不是泛型实现。
 
 **对比 TypeScript：**
 
@@ -247,7 +247,7 @@ class Point<T> {
 
 ## 10.4 泛型枚举
 
-你其实已经用过了！`Option<T>` 和 `Result<T, E>` 就是泛型枚举：
+你其实已经用过了！`Option&lt;T&gt;` 和 `Result&lt;T, E&gt;` 就是泛型枚举：
 
 ```rust
 // 标准库中的定义
@@ -732,7 +732,7 @@ fn main() {
 }
 ```
 
-**规则：实现 `From<A> for B` 会自动获得 `Into<B> for A`。所以只需要实现 `From`。**
+**规则：实现 `From&lt;A&gt; for B` 会自动获得 `Into&lt;B&gt; for A`。所以只需要实现 `From`。**
 
 **对比 TypeScript：**
 
@@ -832,10 +832,10 @@ fn main() {
 }
 ```
 
-**`Box<dyn Area>` 是什么？**
+**`Box&lt;dyn Area&gt;` 是什么？**
 
 - `dyn Area` 表示"任何实现了 Area Trait 的类型"
-- `Box<dyn Area>` 是一个指向堆上某个实现了 Area 的值的智能指针
+- `Box&lt;dyn Area&gt;` 是一个指向堆上某个实现了 Area 的值的智能指针
 - 运行时通过 **vtable（虚函数表）** 来调用正确的方法 —— 这就是**动态分发**
 
 ```
@@ -961,8 +961,8 @@ impl MyTrait for String {
 ### 10.8.2 为什么需要孤儿规则？
 
 想象如果没有这个规则：
-- crate A 为 `Vec<i32>` 实现了 `Display`，输出 `[1, 2, 3]`
-- crate B 为 `Vec<i32>` 也实现了 `Display`，输出 `1|2|3`
+- crate A 为 `Vec&lt;i32&gt;` 实现了 `Display`，输出 `[1, 2, 3]`
+- crate B 为 `Vec&lt;i32&gt;` 也实现了 `Display`，输出 `1|2|3`
 - 你的项目同时依赖 A 和 B……应该用哪个实现？
 
 孤儿规则防止了这种冲突。
@@ -1043,7 +1043,7 @@ trait Iterator {
 }
 ```
 
-一个类型可以 `impl From<String>` 和 `impl From<i32>`，但只能有一个 `Iterator` 实现。
+一个类型可以 `impl From&lt;String&gt;` 和 `impl From&lt;i32&gt;`，但只能有一个 `Iterator` 实现。
 
 ### 10.9.2 运算符重载
 
@@ -1087,7 +1087,7 @@ fn main() {
 | `*` | `std::ops::Mul` | `mul(self, rhs)` |
 | `/` | `std::ops::Div` | `div(self, rhs)` |
 | `==` | `std::cmp::PartialEq` | `eq(&self, other)` |
-| `<` | `std::cmp::PartialOrd` | `partial_cmp(&self, other)` |
+| `&lt;` | `std::cmp::PartialOrd` | `partial_cmp(&self, other)` |
 | `[]` | `std::ops::Index` | `index(&self, idx)` |
 | `-x` | `std::ops::Neg` | `neg(self)` |
 
@@ -1238,7 +1238,7 @@ fn main() {
 
 | 概念 | Rust | TypeScript |
 |---|---|---|
-| 泛型函数 | `fn foo<T>(x: T)` | `function foo<T>(x: T)` |
+| 泛型函数 | `fn foo&lt;T&gt;(x: T)` | `function foo&lt;T&gt;(x: T)` |
 | 泛型约束 | `T: Trait` | `T extends Interface` |
 | 多约束 | `T: A + B` | `T extends A & B` |
 | 接口/Trait | `trait Foo { }` | `interface Foo { }` |
@@ -1260,7 +1260,7 @@ fn main() {
 
 ### 练习 1：泛型栈
 
-实现一个泛型栈 `Stack<T>`，支持 `push`、`pop`、`peek`、`is_empty`、`size` 方法。
+实现一个泛型栈 `Stack&lt;T&gt;`，支持 `push`、`pop`、`peek`、`is_empty`、`size` 方法。
 
 ```rust
 struct Stack<T> {
@@ -1285,13 +1285,13 @@ fn main() {
 
 ### 练习 2：实现 Trait
 
-定义一个 `Drawable` Trait，包含 `draw(&self)` 和 `bounding_box(&self) -> (f64, f64, f64, f64)` 方法。为 `Circle` 和 `Rectangle` 实现它，然后写一个函数接收 `Vec<Box<dyn Drawable>>` 并打印所有图形。
+定义一个 `Drawable` Trait，包含 `draw(&self)` 和 `bounding_box(&self) -&gt; (f64, f64, f64, f64)` 方法。为 `Circle` 和 `Rectangle` 实现它，然后写一个函数接收 `Vec&lt;Box&lt;dyn Drawable&gt;&gt;` 并打印所有图形。
 
 ### 练习 3：From 转换
 
 为一个 `Temperature` 结构体实现以下转换：
-- `From<f64>` —— 从摄氏度创建
-- `From<(f64, char)>` —— 从 `(值, 'C'|'F')` 创建
+- `From&lt;f64&gt;` —— 从摄氏度创建
+- `From&lt;(f64, char)&gt;` —— 从 `(值, 'C'|'F')` 创建
 - `Display` —— 格式化为 "23.5°C"
 
 ```rust
@@ -1312,7 +1312,7 @@ fn main() {
 
 ### 练习 4：泛型排序
 
-写一个泛型函数 `sort_by_key`，接收一个 `Vec<T>` 和一个提取排序键的函数，返回排序后的 Vec：
+写一个泛型函数 `sort_by_key`，接收一个 `Vec&lt;T&gt;` 和一个提取排序键的函数，返回排序后的 Vec：
 
 ```rust
 fn sort_by_key<T, K: Ord>(mut items: Vec<T>, key_fn: impl Fn(&T) -> K) -> Vec<T> {
@@ -1335,8 +1335,8 @@ fn main() {
 ### 练习 5：Trait 组合
 
 设计一个序列化系统：
-- `Serializable` Trait：`fn serialize(&self) -> String`
-- `Deserializable` Trait：`fn deserialize(s: &str) -> Result<Self, String> where Self: Sized`
+- `Serializable` Trait：`fn serialize(&self) -&gt; String`
+- `Deserializable` Trait：`fn deserialize(s: &str) -&gt; Result&lt;Self, String&gt; where Self: Sized`
 - 为 `User` 结构体实现这两个 Trait
 - 写一个泛型函数 `round_trip`，对任何同时实现两个 Trait 的类型做序列化再反序列化
 

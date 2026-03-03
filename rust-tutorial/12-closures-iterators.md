@@ -40,7 +40,7 @@ fn main() {
 
 ### 12.1.2 闭包语法
 
-Rust 闭包用 `|参数|` 而不是 `(参数) =>`：
+Rust 闭包用 `|参数|` 而不是 `(参数) =&gt;`：
 
 ```rust
 // Rust 闭包的各种写法
@@ -72,10 +72,10 @@ fn main() {
 
 | Rust | JavaScript |
 |---|---|
-| `\|x\| x + 1` | `(x) => x + 1` |
-| `\|x, y\| x + y` | `(x, y) => x + y` |
-| `\|\| println!("hi")` | `() => console.log("hi")` |
-| `\|x: i32\| -> i32 { x + 1 }` | `(x: number): number => x + 1` |
+| `\|x\| x + 1` | `(x) =&gt; x + 1` |
+| `\|x, y\| x + y` | `(x, y) =&gt; x + y` |
+| `\|\| println!("hi")` | `() =&gt; console.log("hi")` |
+| `\|x: i32\| -&gt; i32 { x + 1 }` | `(x: number): number =&gt; x + 1` |
 
 ### 12.1.3 闭包类型推断
 
@@ -652,7 +652,7 @@ fn main() {
 | `.take(n)` | `.slice(0, n)` | 取前 n 个 |
 | `.skip(n)` | `.slice(n)` | 跳过前 n 个 |
 | `.collect()` | 不需要（立即执行） | 触发计算 |
-| `.sum()` | `.reduce((a, b) => a + b, 0)` | 求和 |
+| `.sum()` | `.reduce((a, b) =&gt; a + b, 0)` | 求和 |
 | `.count()` | `.length` | 计数 |
 | `.max()` | `Math.max(...arr)` | 最大值 |
 | `.chain(other)` | `.concat(other)` | 连接 |
@@ -1097,12 +1097,12 @@ fn main() {
 
 | 特性 | Rust | JavaScript |
 |---|---|---|
-| 语法 | `\|x\| x + 1` | `(x) => x + 1` |
+| 语法 | `\|x\| x + 1` | `(x) =&gt; x + 1` |
 | 类型推断 | 是（但固定后不变） | 动态类型 |
 | 捕获方式 | Fn / FnMut / FnOnce | 全部引用 |
 | move | `move \|\| { ... }` | 不需要 |
-| 作为参数 | `impl Fn(i32) -> i32` | 直接传 |
-| 作为返回值 | `impl Fn() / Box<dyn Fn()>` | 直接返回 |
+| 作为参数 | `impl Fn(i32) -&gt; i32` | 直接传 |
+| 作为返回值 | `impl Fn() / Box&lt;dyn Fn()&gt;` | 直接返回 |
 
 ### 迭代器速查
 
@@ -1179,7 +1179,7 @@ fn main() {
 1. 过滤掉长度小于 3 的字符串
 2. 将每个字符串转为大写
 3. 在每个字符串前加上序号 "1. XXX"
-4. 收集成 Vec<String>
+4. 收集成 Vec&lt;String&gt;
 
 ### 练习 4：矩阵迭代器
 
