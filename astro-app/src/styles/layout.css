@@ -1,0 +1,100 @@
+/* =========================================================
+   LAYOUT SYSTEM V3
+   .lh-page-home  → 首页
+   .lh-page-doc   → 文档页
+========================================================= */
+
+/* body-level class for page type */
+.lh-page-home .lh-content-wrap {
+  max-width: none;
+  width: 100%;
+}
+
+.lh-main {
+  padding-top: 64px; /* nav height */
+  min-height: 100vh;
+}
+
+/* ========================
+   .lh-page-home  首页
+======================== */
+.lh-page-home .lh-main-content {
+  max-width: var(--lh-home-max);
+  margin: 0 auto;
+  padding: 20px var(--lh-gutter-lg) 60px;
+}
+
+/* ========================
+   .lh-page-doc  文档页
+======================== */
+.lh-page-doc .lh-main {
+  display: flex;
+}
+
+.lh-page-doc .lh-main-content {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  padding: 24px 28px 60px;
+}
+
+/* with sidebar */
+.lh-page-doc.has-sidebar .lh-main-content {
+  margin-left: 272px; /* sidebar width */
+}
+
+/* with TOC */
+.lh-page-doc .lh-toc-wrap {
+  width: 220px;
+  flex-shrink: 0;
+  padding: 24px 22px;
+}
+
+/* no sidebar: center + limit width */
+.lh-page-doc:not(.has-sidebar) .lh-main-content {
+  max-width: var(--lh-doc-max);
+  margin: 0 auto;
+}
+
+@media (min-width: 1440px) {
+  .lh-page-doc.has-sidebar .lh-main-content {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1023px) {
+  .lh-page-home .lh-main-content {
+    padding-left: var(--lh-gutter-md);
+    padding-right: var(--lh-gutter-md);
+  }
+  .lh-page-doc:not(.has-sidebar) .lh-main-content {
+    max-width: calc(100vw - var(--lh-gutter-md) * 2);
+  }
+}
+
+/* hide TOC on smaller screens */
+@media (max-width: 1280px) {
+  .lh-page-doc .lh-toc-wrap {
+    display: none;
+  }
+}
+
+/* mobile: no sidebar offset */
+@media (max-width: 960px) {
+  .lh-main {
+    padding-top: 54px; /* mobile nav height */
+  }
+
+  .lh-page-doc.has-sidebar .lh-main-content {
+    margin-left: 0;
+  }
+
+  .lh-page-home .lh-main-content {
+    padding: 6px 16px 40px;
+  }
+
+  .lh-page-doc .lh-main-content {
+    padding: 6px 16px 40px;
+  }
+}

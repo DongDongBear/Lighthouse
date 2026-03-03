@@ -1,0 +1,230 @@
+/* ===== Home redesign (caicai-like structure) ===== */
+.lh-landing {
+  padding-top: 6px;
+}
+.lh-intro {
+  max-width: 860px;
+  margin-bottom: 44px;
+}
+.lh-intro h1 {
+  margin: 0 0 6px;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 620;
+  color: var(--vp-c-text-1);
+}
+.lh-intro h2 {
+  margin: 0 0 14px;
+  font-size: 34px;
+  line-height: 1.24;
+  letter-spacing: -0.02em;
+  font-weight: 520;
+  color: var(--vp-c-text-1);
+}
+.lh-intro p {
+  margin: 0;
+  max-width: 760px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--vp-c-text-2);
+}
+.lh-intro p + p {
+  margin-top: 0.5em;
+}
+
+.lh-products-head h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+.lh-products-head p {
+  margin: 0 0 16px;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+}
+
+.lh-tabs {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+}
+.lh-tabs span {
+  cursor: default;
+}
+.lh-tabs .active {
+  color: var(--vp-c-text-1);
+  font-weight: 550;
+}
+
+/* card grid */
+.lh-home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+.lh-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+  text-decoration: none;
+  color: inherit;
+}
+
+.lh-card,
+.lh-card:hover,
+.lh-card h3,
+.lh-card h4,
+.lh-card p {
+  text-decoration: none;
+}
+
+.lh-card-media {
+  background: rgba(0,0,0,0.02);
+  border: 0;
+  border-radius: 0;
+  padding: 32px;
+  height: 340px;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform .2s ease;
+}
+.dark .lh-card-media { background: rgba(255,255,255,0.05); }
+.group:hover .lh-card-media { transform: translateY(-4px); }
+
+.lh-media-inner { text-align: center; }
+
+.lh-card-media img {
+  max-width: 260px;
+  max-height: 220px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.lh-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0,0,0,1);
+  margin: 0 0 8px;
+  transition: color .2s ease;
+}
+.dark .lh-card h3 { color: rgba(255,255,255,1); }
+.lh-card:hover h3 { color: rgba(0,0,0,1); }
+.dark .lh-card:hover h3 { color: rgba(255,255,255,1); }
+
+.lh-desc { margin-bottom: 12px; }
+.lh-desc h4 {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(0,0,0,0.8);
+  margin: 0 0 8px;
+  line-height: 1.625;
+}
+.dark .lh-desc h4 { color: rgba(255,255,255,0.6); }
+
+.lh-section-title {
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  margin-bottom: 10px;
+}
+
+/* PC card media height */
+@media (min-width: 901px) {
+  .lh-card-media {
+    height: 320px;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .lh-home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .lh-intro h1 { font-size: 34px; }
+  .lh-intro h2 { font-size: 28px; }
+  .lh-home-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .lh-card-media {
+    height: 260px;
+    min-height: 260px;
+    padding: 18px;
+    margin-bottom: 12px;
+  }
+  .lh-card h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .lh-desc h4 {
+    font-size: 13px;
+    line-height: 1.72;
+    margin-bottom: 7px;
+  }
+}
+
+/* mobile overflow fix */
+@media (max-width: 960px) {
+  .lh-intro {
+    margin-bottom: 24px;
+  }
+  .lh-intro h1 {
+    font-size: 30px;
+    line-height: 1.18;
+    margin-bottom: 4px;
+  }
+  .lh-intro h2 {
+    font-size: 24px;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .lh-intro p {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .lh-products-head h3 { font-size: 15px; }
+  .lh-products-head p { font-size: 12px; line-height: 1.6; }
+  .lh-tabs {
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 2px;
+    margin-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lh-tabs::-webkit-scrollbar { display: none; }
+
+  .lh-landing,
+  .lh-home-grid,
+  .lh-card,
+  .lh-card-media {
+    max-width: 100%;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .lh-home-grid {
+    overflow-x: clip;
+  }
+  .lh-card-media img {
+    max-width: min(140px, 45vw);
+    height: auto;
+  }
+}
