@@ -24,7 +24,7 @@
 }
 
 .lh-sidebar-group-title {
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: .04em;
   color: var(--vp-c-text-1);
   font-weight: 600;
@@ -67,8 +67,8 @@
   border-radius: 7px;
   padding: 6px 10px;
   margin: 0;
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.5;
   color: var(--vp-c-text-2);
   text-decoration: none;
   transition: background-color .16s ease, color .16s ease;
