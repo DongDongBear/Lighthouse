@@ -261,34 +261,112 @@
 
 /* ─── Mobile ─── */
 @media (max-width: 960px) {
+  .lh-prose {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
   .lh-prose h1 {
-    font-size: 26px;
-    line-height: 1.25;
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: 1rem;
   }
   .lh-prose h2 {
-    font-size: 20px;
+    font-size: 19px;
     line-height: 1.3;
     margin-top: 2rem;
   }
   .lh-prose h3 {
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.35;
+  }
+  .lh-prose h4 {
+    font-size: 14.5px;
   }
   .lh-prose p,
   .lh-prose li {
-    font-size: 14.5px;
-    line-height: 1.78;
+    font-size: 14px;
+    line-height: 1.75;
   }
+
+  /* code blocks: full bleed, smaller font, scroll */
   .lh-prose pre {
-    font-size: 13px;
-    padding: 16px 18px;
-    border-radius: 5px;
+    font-size: 12.5px;
+    padding: 14px 14px;
+    margin-left: -16px;
+    margin-right: -16px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    max-width: calc(100% + 32px);
+    -webkit-overflow-scrolling: touch;
   }
+
+  /* inline code */
+  .lh-prose :not(pre) > code {
+    font-size: 0.82em;
+    word-break: break-all;
+  }
+
+  /* tables: horizontal scroll */
   .lh-prose table {
-    font-size: 13px;
+    font-size: 12.5px;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
   }
   .lh-prose th,
   .lh-prose td {
-    padding: 6px 10px;
+    padding: 6px 8px;
+    min-width: 60px;
+    white-space: normal;
+  }
+  .lh-prose th {
+    font-size: 12px;
+  }
+
+  /* blockquote */
+  .lh-prose blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0.8rem;
+  }
+  .lh-prose blockquote p {
+    font-size: 13px;
+  }
+
+  /* images */
+  .lh-prose img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* hr spacing */
+  .lh-prose hr {
+    margin: 1.6rem 0;
+  }
+
+  /* lists */
+  .lh-prose ul,
+  .lh-prose ol {
+    padding-left: 1.2em;
+  }
+}
+
+/* ─── Extra small screens (iPhone SE etc) ─── */
+@media (max-width: 380px) {
+  .lh-prose h1 {
+    font-size: 20px;
+  }
+  .lh-prose h2 {
+    font-size: 17px;
+  }
+  .lh-prose p,
+  .lh-prose li {
+    font-size: 13.5px;
+  }
+  .lh-prose pre {
+    font-size: 11.5px;
+    padding: 12px 12px;
   }
 }
