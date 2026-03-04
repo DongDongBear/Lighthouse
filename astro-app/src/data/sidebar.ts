@@ -130,6 +130,15 @@ export const sidebar: Record<string, SidebarGroup[]> = {
       { text: '26. 发布 Crate', link: '/rust-tutorial/26-publish-crate' },
     ]},
   ],
+  '/ai-research/': [
+    { text: 'AI Research', items: [
+      { text: '栏目总览', link: '/ai-research/' },
+    ]},
+    { text: 'Agent', collapsed: false, items: [
+      { text: '总览', link: '/ai-research/agent/' },
+      { text: 'Codex Context Compaction', link: '/ai-research/agent/codex-context-compaction' },
+    ]},
+  ],
   '/ai-product-analysis/': [
     { text: 'AI 产品分析', items: [
       { text: '栏目总览', link: '/ai-product-analysis/' },
