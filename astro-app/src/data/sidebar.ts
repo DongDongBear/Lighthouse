@@ -142,6 +142,7 @@ export const sidebar: Record<string, SidebarGroup[]> = {
   '/ai-product-analysis/': [
     { text: 'News', items: [
       { text: '栏目总览', link: '/ai-product-analysis/news/' },
+      { text: '2026-03-05 17:26（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1726' },
       { text: '2026-03-05 16:00（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1600' },
     ]},
     { text: 'AI 产品分析', items: [
