@@ -54,10 +54,10 @@
   align-items: center;
   justify-content: center;
   margin: 0 0 10px;
-  min-height: 26px;
+  min-height: 28px;
   padding: 0 11px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: .04em;
@@ -362,8 +362,8 @@
     -webkit-line-clamp: 4;
   }
   .lh-prose .lh-article-hero-label {
-    font-size: 12px;
-    min-height: 24px;
+    font-size: 13px;
+    min-height: 26px;
     padding: 0 10px;
     margin-bottom: 6px;
   }
