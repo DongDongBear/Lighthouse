@@ -26,72 +26,39 @@
 
 /* ========================
    .lh-page-doc  文档页
+   Holy Grail (双飞翼) layout:
+   sidebar(300) | content(flex, max 1000) | toc(260)
+   All three columns lock to viewport, only scroll internally.
 ======================== */
 .lh-page-doc .lh-main {
   display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+  height: calc(100vh - 64px); /* fill viewport below nav */
+  overflow: hidden;            /* children handle own scroll */
 }
 
+/* — center column — */
 .lh-page-doc .lh-main-content {
   flex: 1;
   min-width: 0;
-  max-width: 100%;
-  padding: 24px 48px 60px;
-  overflow-y: auto;
-  max-height: calc(100vh - 64px);
-}
-
-/* with sidebar */
-.lh-page-doc.has-sidebar .lh-main-content {
-  margin-left: 300px; /* sidebar width */
-}
-
-/* with TOC */
-.lh-page-doc .lh-toc-wrap {
-  width: 260px;
-  flex-shrink: 0;
-  padding: 8px 48px 24px 24px;
-  position: sticky;
-  top: 68px;
-  align-self: flex-start;
-  max-height: calc(100vh - 100px);
+  max-width: 1100px;
+  padding: 24px 0 60px;
   overflow-y: auto;
 }
 
-/* no sidebar: center + limit width */
+/* no sidebar → center the content */
 .lh-page-doc:not(.has-sidebar) .lh-main-content {
-  max-width: var(--lh-doc-max);
   margin: 0 auto;
 }
 
-/* responsive padding tiers (matching VitePress gutter widths) */
-@media (min-width: 1280px) {
-  .lh-page-doc.has-sidebar .lh-main-content {
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-  .lh-page-doc .lh-toc-wrap {
-    padding-left: 32px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .lh-page-doc.has-sidebar .lh-main-content {
-    padding-left: 56px;
-    padding-right: 56px;
-  }
-  .lh-page-doc .lh-toc-wrap {
-    padding-left: 36px;
-  }
-}
-
-@media (min-width: 961px) and (max-width: 1023px) {
-  .lh-page-home .lh-main-content {
-    padding-left: var(--lh-gutter-md);
-    padding-right: var(--lh-gutter-md);
-  }
-  .lh-page-doc:not(.has-sidebar) .lh-main-content {
-    max-width: calc(100vw - var(--lh-gutter-md) * 2);
-  }
+/* — right column (TOC) — */
+.lh-page-doc .lh-toc-wrap {
+  width: 260px;
+  flex-shrink: 0;
+  padding: 24px 32px 24px 0;
+  overflow-y: auto;
 }
 
 /* hide TOC on smaller screens */
@@ -101,21 +68,24 @@
   }
 }
 
-/* mobile: no sidebar offset */
+/* mobile */
 @media (max-width: 960px) {
   .lh-main {
     padding-top: 54px; /* mobile nav height */
   }
 
-  .lh-page-doc.has-sidebar .lh-main-content {
-    margin-left: 0;
-  }
-
-  .lh-page-home .lh-main-content {
-    padding: 6px 16px 40px;
+  .lh-page-doc .lh-main {
+    height: auto;
+    overflow: visible;
   }
 
   .lh-page-doc .lh-main-content {
+    padding: 6px 16px 40px;
+    max-width: 100%;
+    overflow-y: visible;
+  }
+
+  .lh-page-home .lh-main-content {
     padding: 6px 16px 40px;
   }
 }
