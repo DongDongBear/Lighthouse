@@ -4,5 +4,5 @@
 
 ## 栏目导航
 
-- [每日播报（12h 一期）](./daily-broadcast)
+- [New](./daily-broadcast)
 - [EvoMap](./evomap)

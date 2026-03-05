@@ -17,10 +17,20 @@ const cardBackgrounds = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png',
 
 const productCards = [
   {
+    category: 'AI 产品',
+    href: `${base}/ai-product-analysis/`,
+    linkTitle: '查看 AI Research',
+    title: 'AI Research',
+    description: [
+      '聚焦模型公司官方公告、LLM/Agent 论文与 Agent 生态热点，持续追踪 AI 前沿。',
+      'New 栏目（原每日播报）每 12 小时更新一期，每一期都作为该栏目下一篇文章发布，并以时间作为标题。',
+    ],
+  },
+  {
     category: '游戏开发',
     href: `${base}/unity-tutorial/`,
     linkTitle: '查看 Unity 教程',
-    title: 'Unity 3D 从零到精通',
+    title: 'Unity',
     description: [
       '聚焦 3D 开放世界手游开发路径，从安装到核心系统实现，完整覆盖开发链路。',
       '角色控制、战斗、任务、地形、优化与发布全覆盖，适合前端背景开发者迁移学习。',
@@ -30,7 +40,7 @@ const productCards = [
     category: '桌面开发',
     href: `${base}/electron-tutorial/`,
     linkTitle: '查看 Electron 教程',
-    title: 'Electron 桌面开发',
+    title: 'Electron',
     description: [
       '从基础能力到工程化落地，讲清进程模型、窗口管理、数据存储和打包发布。',
       '覆盖热更新与 OpenClaw 桌面端实战，帮助你搭建可维护、可迭代的桌面应用体系。',
@@ -40,30 +50,10 @@ const productCards = [
     category: '实战案例',
     href: `${base}/rust-tutorial/`,
     linkTitle: '查看 Rust 教程',
-    title: 'Rust 从入门到精通',
+    title: 'Rust',
     description: [
       '面向 TS/JS 开发者的 Rust 系统化学习路径：所有权、借用、并发、异步、宏与工程实战全覆盖。',
       '从语言基础到 Axum/WASM/FFI/Tokio 深入，帮助你构建高性能、可维护、可部署的 Rust 项目体系。',
-    ],
-  },
-  {
-    category: 'AI 产品',
-    href: `${base}/ai-product-analysis/`,
-    linkTitle: '查看 AI 研究',
-    title: 'AI 研究',
-    description: [
-      '聚焦模型公司官方公告、LLM/Agent 论文、Agent 生态热点，持续追踪 AI 前沿。',
-      '新增「每日播报」栏目，每 12 小时更新一期，沉淀到知识库，长期可回看。',
-    ],
-  },
-  {
-    category: 'AI 产品',
-    href: `${base}/ai-product-analysis/daily-broadcast`,
-    linkTitle: '查看 每日播报',
-    title: '每日播报（12h 一期）',
-    description: [
-      '每 12 小时自动更新：官方公告、论文快讯、Agent 热点三段式简报。',
-      '每条都保留来源链接与时间信息，方便快速浏览与后续深挖。',
     ],
   },
 ];
@@ -112,7 +102,9 @@ const articles = allDocs
                 title={card.linkTitle}
                 style={`--lh-card-bg: url('${base}/card-bg/${cardBackgrounds[index % cardBackgrounds.length]}')`}
               >
-                <h3>{card.title}</h3>
+                <div class="lh-card-hero">
+                  <h3>{card.title}</h3>
+                </div>
                 <div class="lh-desc">
                   {card.description.map(line => (
                     <h4>{line}</h4>
