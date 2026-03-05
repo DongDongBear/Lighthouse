@@ -46,12 +46,12 @@
 
 .lh-sidebar-items {
   list-style: none;
-  padding: 0;
+  padding: 0 0 0 10px;
   margin: 0;
 }
 
 .lh-sidebar-items.nested {
-  padding-left: 8px;
+  padding-left: 14px;
 }
 
 .lh-sidebar-items.collapsed {
