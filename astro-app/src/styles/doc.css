@@ -6,28 +6,71 @@
 
 .lh-article-hero {
   width: 100%;
-  height: clamp(180px, 28vw, 280px);
-  border-radius: 6px;
-  margin: 0 0 1.2rem;
-  padding: 20px;
+  min-height: clamp(190px, 24vw, 270px);
+  border-radius: 10px;
+  margin: 0 0 1.3rem;
+  padding: 16px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-start;
   position: relative;
+  isolation: isolate;
   overflow: hidden;
+  background: #0e1426;
+}
+
+.lh-article-hero::before {
+  content: '';
+  position: absolute;
+  inset: -12%;
   background-image: var(--lh-article-hero-bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transform: scale(1.08);
+  filter: blur(10px) saturate(1.06) contrast(1.02) brightness(0.82);
+  z-index: -2;
+}
+
+.lh-article-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8, 12, 24, 0.14) 0%, rgba(8, 12, 24, 0.58) 68%, rgba(8, 12, 24, 0.76) 100%),
+    radial-gradient(78% 70% at 10% 0%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 65%);
+  z-index: -1;
+}
+
+.lh-article-hero-inner {
+  width: min(100%, 920px);
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.lh-article-hero-kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .lh-prose .lh-article-hero-title {
   margin: 0;
   color: #fff !important;
-  font-size: clamp(30px, 4.2vw, 44px);
-  line-height: 1.2;
-  text-align: center;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  font-size: clamp(19px, 2.2vw, 28px);
+  line-height: 1.28;
+  text-align: left;
+  text-wrap: balance;
+  max-width: 32ch;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: none;
 }
 
 .lh-prose > h1:first-of-type {
@@ -292,11 +335,22 @@
 /* ─── Mobile ─── */
 @media (max-width: 960px) {
   .lh-article-hero {
-    height: 160px;
-    margin-bottom: 0.9rem;
+    min-height: 176px;
+    margin-bottom: 1rem;
+    padding: 12px;
+  }
+  .lh-article-hero-inner {
+    padding: 0;
   }
   .lh-prose .lh-article-hero-title {
-    font-size: 28px;
+    font-size: 17px;
+    line-height: 1.28;
+    max-width: 100%;
+    -webkit-line-clamp: 4;
+  }
+  .lh-article-hero-kicker {
+    font-size: 11px;
+    margin-bottom: 6px;
   }
 
   .lh-prose {

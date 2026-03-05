@@ -20,6 +20,16 @@ const sidebarGroups = getSidebarGroups(currentPath.replace(base, ''));
 const hasSidebar = sidebarGroups !== null && sidebarGroups.length > 0;
 const articleHeroBgs = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg'];
 const initialHeroBg = articleHeroBgs[Math.floor(Math.random() * articleHeroBgs.length)];
+const cleanSlug = slug.replace(/\.md$/, '');
+const heroLabel = (() => {
+  if (cleanSlug.startsWith('ai-product-analysis/news/')) return 'News';
+  if (cleanSlug.startsWith('ai-product-analysis/')) return 'AI 产品分析';
+  if (cleanSlug.startsWith('ai-research/')) return 'AI Research';
+  if (cleanSlug.startsWith('unity-tutorial/')) return 'Unity';
+  if (cleanSlug.startsWith('electron-tutorial/')) return 'Electron';
+  if (cleanSlug.startsWith('rust-tutorial/')) return 'Rust';
+  return 'LightHouse';
+})();
 ---
 
 <BaseLayout title={title} pageClass={`lh-page-doc${hasSidebar ? ' has-sidebar' : ''}`}>
@@ -30,7 +40,10 @@ const initialHeroBg = articleHeroBgs[Math.floor(Math.random() * articleHeroBgs.l
     <div class="lh-main-content">
       <article class="lh-prose">
         <div class="lh-article-hero" style={`--lh-article-hero-bg: url('${base}/card-bg/${initialHeroBg}')`}>
-          <h1 class="lh-article-hero-title">{title}</h1>
+          <div class="lh-article-hero-inner">
+            <p class="lh-article-hero-kicker">{heroLabel}</p>
+            <h1 class="lh-article-hero-title">{title}</h1>
+          </div>
         </div>
         <slot />
       </article>
