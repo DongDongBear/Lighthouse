@@ -35,7 +35,7 @@
   flex: 1;
   min-width: 0;
   max-width: 100%;
-  padding: 24px 48px 60px;
+  padding: 24px 72px 60px;
   overflow-y: auto;
   max-height: calc(100vh - 64px);
 }
@@ -66,8 +66,8 @@
 /* responsive padding tiers (matching VitePress gutter widths) */
 @media (min-width: 1280px) {
   .lh-page-doc.has-sidebar .lh-main-content {
-    padding-left: 48px;
-    padding-right: 48px;
+    padding-left: 64px;
+    padding-right: 64px;
   }
   .lh-page-doc .lh-toc-wrap {
     padding-left: 32px;
@@ -76,8 +76,8 @@
 
 @media (min-width: 1440px) {
   .lh-page-doc.has-sidebar .lh-main-content {
-    padding-left: 56px;
-    padding-right: 56px;
+    padding-left: 80px;
+    padding-right: 80px;
   }
   .lh-page-doc .lh-toc-wrap {
     padding-left: 36px;
