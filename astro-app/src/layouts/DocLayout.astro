@@ -18,7 +18,7 @@ const currentPath = Astro.url.pathname;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const sidebarGroups = getSidebarGroups(currentPath.replace(base, ''));
 const hasSidebar = sidebarGroups !== null && sidebarGroups.length > 0;
-const articleHeroBgs = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg'];
+const articleHeroBgs = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg'];
 const initialHeroBg = articleHeroBgs[Math.floor(Math.random() * articleHeroBgs.length)];
 ---
 
@@ -47,7 +47,7 @@ const initialHeroBg = articleHeroBgs[Math.floor(Math.random() * articleHeroBgs.l
 
 <script is:inline>
   (() => {
-    const heroImages = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg'];
+    const heroImages = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg'];
     const base = {JSON.stringify(base)};
 
     const applyRandomHero = () => {
