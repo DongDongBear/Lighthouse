@@ -11,6 +11,32 @@ export interface SidebarGroup {
   items: SidebarItem[];
 }
 
+function buildAiResearchAgentItems(): SidebarItem[] {
+  const modules = import.meta.glob('../content/docs/ai-research/agent/*.md', {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }) as Record<string, string>;
+
+  const articleItems = Object.entries(modules)
+    .filter(([path]) => !path.endsWith('/index.md'))
+    .map(([path, raw]) => {
+      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
+      const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
+      const text = h1 || slug.replace(/-/g, ' ');
+      return {
+        text,
+        link: `/ai-research/agent/${slug}`,
+      } as SidebarItem;
+    })
+    .sort((a, b) => a.text.localeCompare(b.text, 'zh-Hans-CN'));
+
+  return [
+    { text: '总览', link: '/ai-research/agent/' },
+    ...articleItems,
+  ];
+}
+
 export const sidebar: Record<string, SidebarGroup[]> = {
   '/unity-tutorial/': [
     { text: '开始', items: [
@@ -134,14 +160,12 @@ export const sidebar: Record<string, SidebarGroup[]> = {
     { text: 'AI Research', items: [
       { text: '栏目总览', link: '/ai-research/' },
     ]},
-    { text: 'Agent', collapsed: false, items: [
-      { text: '总览', link: '/ai-research/agent/' },
-      { text: 'Codex Context Compaction', link: '/ai-research/agent/codex-context-compaction' },
-    ]},
+    { text: 'Agent', collapsed: false, items: buildAiResearchAgentItems() },
   ],
   '/ai-product-analysis/': [
     { text: 'News', items: [
       { text: '栏目总览', link: '/ai-product-analysis/news/' },
+      { text: '2026-03-05 17:26（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1726' },
       { text: '2026-03-05 16:00（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1600' },
     ]},
     { text: 'AI 产品分析', items: [
