@@ -4,20 +4,43 @@ import DocLayout from '../layouts/DocLayout.astro';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
-  return docs.filter(doc => {
-    const id = doc.id;
-    // Skip README files
-    if (id.endsWith('README.md') || id === 'README.md') return false;
-    return true;
-  }).map(doc => {
-    let slug = doc.id.replace(/\.md$/, '');
-    // "unity-tutorial/index" → "unity-tutorial"
-    slug = slug.replace(/\/index$/, '');
-    return {
-      params: { slug },
-      props: { doc },
-    };
-  });
+  const paths: { params: { slug: string }; props: { doc: (typeof docs)[number] } }[] = [];
+  const seen = new Set<string>();
+
+  docs
+    .filter(doc => {
+      const id = doc.id;
+      // Skip README files
+      if (id.endsWith('README.md') || id === 'README.md') return false;
+      return true;
+    })
+    .forEach(doc => {
+      let slug = doc.id.replace(/\.md$/, '');
+      // "unity-tutorial/index" → "unity-tutorial"
+      slug = slug.replace(/\/index$/, '');
+
+      if (!seen.has(slug)) {
+        paths.push({
+          params: { slug },
+          props: { doc },
+        });
+        seen.add(slug);
+      }
+
+      // Compatibility alias: "/section/readme" -> "/section/"
+      if (doc.id.endsWith('/index.md')) {
+        const readmeAlias = doc.id.replace(/\/index\.md$/, '/readme');
+        if (!seen.has(readmeAlias)) {
+          paths.push({
+            params: { slug: readmeAlias },
+            props: { doc },
+          });
+          seen.add(readmeAlias);
+        }
+      }
+    });
+
+  return paths;
 }
 
 const { doc } = Astro.props;
