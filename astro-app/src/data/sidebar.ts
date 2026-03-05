@@ -142,7 +142,7 @@ export const sidebar: Record<string, SidebarGroup[]> = {
   '/ai-product-analysis/': [
     { text: 'AI 研究', items: [
       { text: '栏目总览', link: '/ai-product-analysis/' },
-      { text: 'New', link: '/ai-product-analysis/daily-broadcast' },
+      { text: 'News', link: '/ai-product-analysis/daily-broadcast' },
       { text: 'EvoMap', link: '/ai-product-analysis/evomap' },
     ]},
   ],

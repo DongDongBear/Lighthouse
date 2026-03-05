@@ -4,5 +4,5 @@
 
 ## 栏目导航
 
-- [New](./daily-broadcast)
+- [News](./daily-broadcast)
 - [EvoMap](./evomap)
