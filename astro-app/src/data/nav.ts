@@ -7,5 +7,5 @@ export const nav: NavItem[] = [
   { text: '首页', link: '/' },
   { text: 'Rust 教程', link: '/rust-tutorial/' },
   { text: 'AI 研究', link: '/ai-product-analysis/' },
-  { text: 'News', link: '/ai-product-analysis/daily-broadcast' },
+  { text: 'News', link: '/ai-product-analysis/news/' },
 ];

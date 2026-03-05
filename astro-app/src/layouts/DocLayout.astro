@@ -18,6 +18,8 @@ const currentPath = Astro.url.pathname;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const sidebarGroups = getSidebarGroups(currentPath.replace(base, ''));
 const hasSidebar = sidebarGroups !== null && sidebarGroups.length > 0;
+const articleHeroBgs = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg'];
+const initialHeroBg = articleHeroBgs[Math.floor(Math.random() * articleHeroBgs.length)];
 ---
 
 <BaseLayout title={title} pageClass={`lh-page-doc${hasSidebar ? ' has-sidebar' : ''}`}>
@@ -27,6 +29,9 @@ const hasSidebar = sidebarGroups !== null && sidebarGroups.length > 0;
     )}
     <div class="lh-main-content">
       <article class="lh-prose">
+        <div class="lh-article-hero" style={`--lh-article-hero-bg: url('${base}/card-bg/${initialHeroBg}')`}>
+          <h1 class="lh-article-hero-title">{title}</h1>
+        </div>
         <slot />
       </article>
       <DocFooter currentPath={currentPath} />
@@ -39,3 +44,24 @@ const hasSidebar = sidebarGroups !== null && sidebarGroups.length > 0;
   </main>
   <ChatWidget client:only="react" />
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const heroImages = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg'];
+    const base = {JSON.stringify(base)};
+
+    const applyRandomHero = () => {
+      const hero = document.querySelector('.lh-article-hero');
+      if (!hero) return;
+      const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)];
+      hero.style.setProperty('--lh-article-hero-bg', `url('${base}/card-bg/${randomImage}')`);
+    };
+
+    applyRandomHero();
+
+    if (!window.__lhArticleHeroRandomInited) {
+      document.addEventListener('astro:page-load', applyRandomHero);
+      window.__lhArticleHeroRandomInited = true;
+    }
+  })();
+</script>

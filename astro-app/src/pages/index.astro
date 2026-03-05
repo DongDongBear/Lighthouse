@@ -22,40 +22,32 @@ const productCards = [
     linkTitle: '查看 AI Research',
     title: 'AI Research',
     bg: 'bg7.jpg',
-    description: [
-      '聚焦模型公司官方公告、LLM/Agent 论文与 Agent 生态热点，持续追踪 AI 前沿。',
-      'News 栏目（原每日播报）每 12 小时更新一期，每一期都作为该栏目下一篇文章发布，并以时间作为标题。',
-    ],
+    description:
+      '聚焦模型公司官方公告、LLM/Agent 论文与 Agent 生态热点，持续追踪 AI 前沿。News 栏目（原每日播报）每 12 小时更新一期，每一期都作为该栏目下一篇文章发布，并以时间作为标题。',
   },
   {
     category: '游戏开发',
     href: `${base}/unity-tutorial/`,
     linkTitle: '查看 Unity 教程',
     title: 'Unity',
-    description: [
-      '聚焦 3D 开放世界手游开发路径，从安装到核心系统实现，完整覆盖开发链路。',
-      '角色控制、战斗、任务、地形、优化与发布全覆盖，适合前端背景开发者迁移学习。',
-    ],
+    description:
+      '聚焦 3D 开放世界手游开发路径，从安装到核心系统实现，完整覆盖开发链路。角色控制、战斗、任务、地形、优化与发布全覆盖，适合前端背景开发者迁移学习。',
   },
   {
     category: '桌面开发',
     href: `${base}/electron-tutorial/`,
     linkTitle: '查看 Electron 教程',
     title: 'Electron',
-    description: [
-      '从基础能力到工程化落地，讲清进程模型、窗口管理、数据存储和打包发布。',
-      '覆盖热更新与 OpenClaw 桌面端实战，帮助你搭建可维护、可迭代的桌面应用体系。',
-    ],
+    description:
+      '从基础能力到工程化落地，讲清进程模型、窗口管理、数据存储和打包发布。覆盖热更新与 OpenClaw 桌面端实战，帮助你搭建可维护、可迭代的桌面应用体系。',
   },
   {
     category: '实战案例',
     href: `${base}/rust-tutorial/`,
     linkTitle: '查看 Rust 教程',
     title: 'Rust',
-    description: [
-      '面向 TS/JS 开发者的 Rust 系统化学习路径：所有权、借用、并发、异步、宏与工程实战全覆盖。',
-      '从语言基础到 Axum/WASM/FFI/Tokio 深入，帮助你构建高性能、可维护、可部署的 Rust 项目体系。',
-    ],
+    description:
+      '面向 TS/JS 开发者的 Rust 系统化学习路径：所有权、借用、并发、异步、宏与工程实战全覆盖。从语言基础到 Axum/WASM/FFI/Tokio 深入，帮助你构建高性能、可维护、可部署的 Rust 项目体系。',
   },
 ];
 
@@ -107,9 +99,7 @@ const articles = allDocs
                   <h3>{card.title}</h3>
                 </div>
                 <div class="lh-desc">
-                  {card.description.map(line => (
-                    <h4>{line}</h4>
-                  ))}
+                  <h4>{card.description}</h4>
                 </div>
               </a>
             ))}
