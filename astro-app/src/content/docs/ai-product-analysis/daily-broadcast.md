@@ -1,0 +1,62 @@
+# 每日播报（12h 一期）
+
+> 本栏目每 12 小时更新一期，聚焦：模型公司官方公告、LLM/Agent 论文、Agent 生态热点。
+
+## 更新规则
+
+- 更新频率：每 12 小时（UTC+8）
+- 信息优先级：官方源 > 论文源 > 社区热榜
+- 每条必须包含：时间、来源、标题、链接、一句话解读
+
+---
+
+## 2026-03-05 16:00（UTC+8）
+
+### 模型公司公告
+
+1. **OpenAI 发布 GPT-5.3 Instant 与 System Card**  
+   - 时间：2026-03-03  
+   - 来源：OpenAI News  
+   - 链接：https://openai.com/index/gpt-5-3-instant  
+   - 补充：https://openai.com/index/gpt-5-3-instant-system-card  
+   - 解读：属于可用性与交互体验方向的版本更新，偏向日常对话质量提升。
+
+2. **Anthropic 官方公告更新**  
+   - 时间：2026-02-27  
+   - 来源：Anthropic News  
+   - 链接：https://www.anthropic.com/news  
+   - 解读：官方层面的政策与客户建议更新，建议作为风险与合规信号持续跟踪。
+
+### LLM / Agent 论文
+
+1. **AriadneMem: Threading the Maze of Lifelong Memory for LLM Agents**  
+   - 时间：2026-03-05  
+   - 来源：arXiv cs.CL  
+   - 链接：https://arxiv.org/abs/2603.03290  
+   - 解读：聚焦长周期 Agent 记忆中的多跳关联与状态更新问题。
+
+2. **One Bias After Another: Mechanistic Reward Shaping and Persistent Biases in Language Reward Models**  
+   - 时间：2026-03-05  
+   - 来源：arXiv cs.CL  
+   - 链接：https://arxiv.org/abs/2603.03291  
+   - 解读：系统分析奖励模型偏置，并给出轻量修正方法。
+
+3. **From Conflict to Consensus: Boosting Medical Reasoning via Multi-Round Agentic RAG**  
+   - 时间：2026-03-05  
+   - 来源：arXiv cs.CL  
+   - 链接：https://arxiv.org/abs/2603.03292  
+   - 解读：通过多轮 Agentic RAG 提升医疗问答稳定性与准确率。
+
+### Agent 生态热点
+
+1. **KeygraphHQ/shannon（GitHub Trending）**  
+   - 时间：Today  
+   - 来源：GitHub Trending  
+   - 链接：https://github.com/KeygraphHQ/shannon  
+   - 解读：自主安全测试 Agent 方向热度持续上升。
+
+2. **msitarzewski/agency-agents（GitHub Trending）**  
+   - 时间：Today  
+   - 来源：GitHub Trending  
+   - 链接：https://github.com/msitarzewski/agency-agents  
+   - 解读：多角色分工式 Agent 工作流受到关注。

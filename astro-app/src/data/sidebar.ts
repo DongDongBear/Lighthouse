@@ -140,8 +140,9 @@ export const sidebar: Record<string, SidebarGroup[]> = {
     ]},
   ],
   '/ai-product-analysis/': [
-    { text: 'AI 产品分析', items: [
+    { text: 'AI 研究', items: [
       { text: '栏目总览', link: '/ai-product-analysis/' },
+      { text: '每日播报（12h 一期）', link: '/ai-product-analysis/daily-broadcast' },
       { text: 'EvoMap', link: '/ai-product-analysis/evomap' },
     ]},
   ],

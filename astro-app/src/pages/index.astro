@@ -10,7 +10,7 @@ const sectionLabel: Record<string, string> = {
   'unity-tutorial': 'Unity',
   'electron-tutorial': 'Electron',
   'rust-tutorial': 'Rust',
-  'ai-product-analysis': 'AI 产品',
+  'ai-product-analysis': 'AI 研究',
 };
 
 const allDocs = await getCollection('docs');
@@ -73,12 +73,20 @@ const articles = allDocs
                 <h4>从语言基础到 Axum/WASM/FFI/Tokio 深入，帮助你构建高性能、可维护、可部署的 Rust 项目体系。</h4>
               </div>
             </a>
-            <a class="lh-card group" data-category="AI 产品" href={`${base}/ai-product-analysis/`} title="查看 AI 产品分析">
-              <div class="lh-card-media"><div class="lh-media-inner"><img src={`${base}/ai-analysis-logo.svg`} alt="AI 产品分析" /></div></div>
-              <h3>AI 产品分析</h3>
+            <a class="lh-card group" data-category="AI 产品" href={`${base}/ai-product-analysis/`} title="查看 AI 研究">
+              <div class="lh-card-media"><div class="lh-media-inner"><img src={`${base}/ai-analysis-logo.svg`} alt="AI 研究" /></div></div>
+              <h3>AI 研究</h3>
               <div class="lh-desc">
-                <h4>深度拆解值得关注的 AI 产品——从产品定位、技术架构到商业模式，用工程视角理解 AI 时代的产品设计。</h4>
-                <h4>不只看营销话术，更关注技术实现、数据真实性和商业可行性，帮你建立独立判断力。</h4>
+                <h4>聚焦模型公司官方公告、LLM/Agent 论文、Agent 生态热点，持续追踪 AI 前沿。</h4>
+                <h4>新增「每日播报」栏目，每 12 小时更新一期，沉淀到知识库，长期可回看。</h4>
+              </div>
+            </a>
+            <a class="lh-card group" data-category="AI 产品" href={`${base}/ai-product-analysis/daily-broadcast`} title="查看 每日播报">
+              <div class="lh-card-media"><div class="lh-media-inner"><img src={`${base}/ai-analysis-logo.svg`} alt="每日播报" /></div></div>
+              <h3>每日播报（12h 一期）</h3>
+              <div class="lh-desc">
+                <h4>每 12 小时自动更新：官方公告、论文快讯、Agent 热点三段式简报。</h4>
+                <h4>每条都保留来源链接与时间信息，方便快速浏览与后续深挖。</h4>
               </div>
             </a>
           </div>
