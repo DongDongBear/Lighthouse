@@ -43,7 +43,6 @@
 /* with sidebar */
 .lh-page-doc.has-sidebar .lh-main-content {
   margin-left: 300px; /* sidebar width */
-  max-width: var(--lh-doc-max);
 }
 
 /* with TOC */
@@ -58,9 +57,13 @@
   overflow-y: auto;
 }
 
-/* no sidebar: center + limit width */
-.lh-page-doc:not(.has-sidebar) .lh-main-content {
+/* content max-width for all doc pages */
+.lh-page-doc .lh-main-content {
   max-width: var(--lh-doc-max);
+}
+
+/* no sidebar: center */
+.lh-page-doc:not(.has-sidebar) .lh-main-content {
   margin: 0 auto;
 }
 
@@ -90,7 +93,7 @@
     padding-left: var(--lh-gutter-md);
     padding-right: var(--lh-gutter-md);
   }
-  .lh-page-doc:not(.has-sidebar) .lh-main-content {
+  .lh-page-doc .lh-main-content {
     max-width: calc(100vw - var(--lh-gutter-md) * 2);
   }
 }
