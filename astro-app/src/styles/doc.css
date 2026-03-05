@@ -27,8 +27,8 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transform: scale(1.08);
-  filter: blur(10px) saturate(1.06) contrast(1.02) brightness(0.82);
+  transform: scale(1.05);
+  filter: blur(6px) saturate(1.06) contrast(1.02) brightness(0.84);
   z-index: -2;
 }
 
@@ -49,19 +49,32 @@
   background: transparent;
 }
 
-.lh-article-hero-kicker {
-  margin: 0 0 8px;
+.lh-prose .lh-article-hero-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 10px;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
   font-size: 12px;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: .04em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.96) !important;
+  background: linear-gradient(135deg, rgba(13, 20, 36, 0.42), rgba(13, 20, 36, 0.28));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px) saturate(1.08);
+  -webkit-backdrop-filter: blur(6px) saturate(1.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+  text-shadow: none;
 }
 
 .lh-prose .lh-article-hero-title {
   margin: 0;
   color: #fff !important;
-  font-size: clamp(19px, 2.2vw, 28px);
+  font-size: clamp(18px, 2vw, 26px);
   line-height: 1.28;
   text-align: left;
   text-wrap: balance;
@@ -343,13 +356,15 @@
     padding: 0;
   }
   .lh-prose .lh-article-hero-title {
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.28;
     max-width: 100%;
     -webkit-line-clamp: 4;
   }
-  .lh-article-hero-kicker {
+  .lh-prose .lh-article-hero-label {
     font-size: 11px;
+    min-height: 22px;
+    padding: 0 9px;
     margin-bottom: 6px;
   }
 
