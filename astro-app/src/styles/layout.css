@@ -43,6 +43,7 @@
 /* with sidebar */
 .lh-page-doc.has-sidebar .lh-main-content {
   margin-left: 300px; /* sidebar width */
+  max-width: var(--lh-doc-max);
 }
 
 /* with TOC */
