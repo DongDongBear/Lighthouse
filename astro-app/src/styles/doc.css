@@ -273,6 +273,11 @@
 .lh-prose blockquote p {
   color: var(--vp-c-text-3);
   font-size: 14px;
+  margin: 0;
+}
+
+.lh-prose blockquote p + p {
+  margin-top: 0.6rem;
 }
 
 /* ─── Table ─── */
