@@ -233,8 +233,8 @@
 
 .lh-recent-head h3 {
   margin: 0 0 16px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
   color: var(--vp-c-text-1);
 }
 
@@ -248,7 +248,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 148px;
+  min-height: 176px;
   padding: 20px 24px;
   border-radius: 6px;
   overflow: hidden;
@@ -272,16 +272,16 @@
 
 .lh-recent-tag {
   display: inline-block;
-  font-size: 10px;
-  letter-spacing: .1em;
+  font-size: 12px;
+  letter-spacing: .06em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.82);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .lh-recent-title {
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 18px;
+  line-height: 1.45;
   color: rgba(255, 255, 255, 0.96);
   margin: 0;
   display: -webkit-box;
@@ -298,8 +298,23 @@
   .lh-recent {
     padding: 32px 0 40px;
   }
+  .lh-recent-head h3 {
+    font-size: 20px;
+  }
   .lh-recent-grid {
     grid-template-columns: 1fr;
+  }
+  .lh-recent-card {
+    min-height: 160px;
+    padding: 18px 20px;
+  }
+  .lh-recent-tag {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  .lh-recent-title {
+    font-size: 16px;
+    line-height: 1.42;
   }
 }
 
