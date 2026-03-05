@@ -37,6 +37,29 @@ function buildAiResearchAgentItems(): SidebarItem[] {
   ];
 }
 
+const aiResearchGroups: SidebarGroup[] = [
+  {
+    text: 'AI Research',
+    items: [
+      { text: '栏目总览', link: '/ai-research/' },
+    ],
+  },
+  {
+    text: 'Agent',
+    collapsed: false,
+    items: buildAiResearchAgentItems(),
+  },
+  {
+    text: 'News',
+    collapsed: false,
+    items: [
+      { text: 'News 总览', link: '/ai-product-analysis/news/' },
+      { text: '2026-03-05 17:26（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1726' },
+      { text: '2026-03-05 16:00（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1600' },
+    ],
+  },
+];
+
 export const sidebar: Record<string, SidebarGroup[]> = {
   '/unity-tutorial/': [
     { text: '开始', items: [
@@ -156,23 +179,8 @@ export const sidebar: Record<string, SidebarGroup[]> = {
       { text: '26. 发布 Crate', link: '/rust-tutorial/26-publish-crate' },
     ]},
   ],
-  '/ai-research/': [
-    { text: 'AI Research', items: [
-      { text: '栏目总览', link: '/ai-research/' },
-    ]},
-    { text: 'Agent', collapsed: false, items: buildAiResearchAgentItems() },
-  ],
-  '/ai-product-analysis/': [
-    { text: 'News', items: [
-      { text: '栏目总览', link: '/ai-product-analysis/news/' },
-      { text: '2026-03-05 17:26（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1726' },
-      { text: '2026-03-05 16:00（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1600' },
-    ]},
-    { text: 'AI 产品分析', items: [
-      { text: '栏目总览', link: '/ai-product-analysis/' },
-      { text: 'EvoMap', link: '/ai-product-analysis/evomap' },
-    ]},
-  ],
+  '/ai-research/': aiResearchGroups,
+  '/ai-product-analysis/': aiResearchGroups,
 };
 
 /**
