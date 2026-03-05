@@ -33,19 +33,24 @@
 .lh-page-doc .lh-main {
   display: flex;
   justify-content: space-between;
-  gap: 40px;
   width: 100%;
   height: calc(100vh - 64px); /* fill viewport below nav */
   overflow: hidden;            /* children handle own scroll */
 }
 
-/* — center column — */
+/* — center column (container with scrollbar) — */
 .lh-page-doc .lh-main-content {
   flex: 1;
   min-width: 0;
-  max-width: 1100px;
+  max-width: 1400px;
   padding: 24px 0 60px;
   overflow-y: auto;
+}
+
+/* — inner content width — */
+.lh-page-doc .lh-main-content .lh-prose,
+.lh-page-doc .lh-main-content .lh-doc-footer {
+  max-width: 1200px;
 }
 
 /* no sidebar → center the content */
