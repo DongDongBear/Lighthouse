@@ -2,17 +2,10 @@
 import '../styles/home.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ChatWidget from '../components/chat/ChatWidget.tsx';
-import ContinueReading from '../components/ContinueReading.tsx';
+import RecentSection from '../components/RecentSection.tsx';
 import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-
-const sectionLabel: Record<string, string> = {
-  'unity-tutorial': 'Unity',
-  'electron-tutorial': 'Electron',
-  'rust-tutorial': 'Rust',
-  'ai-product-analysis': 'AI 研究',
-};
 
 const cardBackgrounds = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg'];
 
@@ -53,17 +46,8 @@ const productCards = [
 ];
 
 const allDocs = await getCollection('docs');
-const articles = allDocs
-  .filter(e => !e.slug.split('/').pop()?.startsWith('index'))
-  .map(e => {
-    const m = e.body.match(/^#\s+(.+)$/m);
-    const title = m?.[1]?.replace(/[*_`[\]]/g, '') ?? e.slug.split('/').pop()!;
-    const section = e.slug.split('/')[0];
-    return { slug: e.slug, title, label: sectionLabel[section] ?? section };
-  })
-  .sort((a, b) => b.slug.localeCompare(a.slug))
-  .slice(0, 9);
 
+// News entries (up to 6 to ensure we can fill the grid)
 const newsEntries = allDocs
   .filter(e => e.id.startsWith('ai-product-analysis/news/') && !e.id.endsWith('index.md'))
   .map(e => {
@@ -73,15 +57,18 @@ const newsEntries = allDocs
     const dateStr = parts[0]?.match(/(\d{2}-\d{2})/)?.[1] ?? '';
     const newsTitle = parts[1] ?? fullTitle;
     const desc = e.data?.description ?? '';
+    const slug = e.id.replace(/\.md$/, '');
+    const bgIndex = slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % cardBackgrounds.length;
     return {
-      slug: e.id.replace(/\.md$/, ''),
+      slug,
       date: dateStr,
       title: newsTitle,
       description: desc.length > 100 ? desc.slice(0, 100) + '…' : desc,
+      bg: cardBackgrounds[bgIndex],
     };
   })
   .sort((a, b) => b.slug.localeCompare(a.slug))
-  .slice(0, 3);
+  .slice(0, 6);
 ---
 
 <BaseLayout title="LightHouse" pageClass="lh-page-home">
@@ -94,21 +81,12 @@ const newsEntries = allDocs
           <p>LightHouse 是 BellLab 的学习与方法论分支。BellLab 这个名字致敬贝尔实验室——一个把科学突破、工程实现和长期主义放在一起的地方。这里不做"教程堆砌"，而是持续沉淀一套可复用的工作方式：如何和 AI 协作、如何把想法快速做成产品、如何在复杂系统里做正确的技术决策。</p>
           <p>当前聚焦四条主线：Unity 3D、Electron、Rust 与 AI 产品分析。Unity 关注交互与世界构建，Electron 聚焦桌面端产品化与工程稳定性，Rust 覆盖系统级性能与可靠性，AI 产品分析则用工程视角拆解产品。后续还会加入更多 AI 应用开发、自动化与系统设计专题。</p>
         </section>
-        <section class="lh-news">
-          <div class="lh-news-head">
-            <h3>📡 每日前沿</h3>
-            <p>AI 前沿动态，每 12 小时更新</p>
-          </div>
-          <div class="lh-news-grid">
-            {newsEntries.map(n => (
-              <a class="lh-news-card" href={`${base}/${n.slug}/`}>
-                <span class="lh-news-date">{n.date}</span>
-                <p class="lh-news-title">{n.title}</p>
-                <p class="lh-news-desc">{n.description}</p>
-              </a>
-            ))}
-          </div>
-        </section>
+        <RecentSection
+          client:only="react"
+          base={base}
+          newsItems={newsEntries}
+          backgrounds={cardBackgrounds}
+        />
         <section class="lh-products">
           <div class="lh-products-head">
             <h3>AI 时代的构建模块</h3>
@@ -140,25 +118,6 @@ const newsEntries = allDocs
             ))}
           </div>
         </section>
-        <section class="lh-recent">
-          <div class="lh-recent-head">
-            <h3>最近更新</h3>
-          </div>
-          <div class="lh-recent-grid">
-            {articles.map((a, index) => (
-              <a
-                class="lh-recent-card"
-                href={`${base}/${a.slug}/`}
-                data-slug={a.slug}
-                style={`--lh-card-bg: url('${base}/card-bg/${cardBackgrounds[index % cardBackgrounds.length]}')`}
-              >
-                <span class="lh-recent-tag">{a.label}</span>
-                <p class="lh-recent-title">{a.title}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-        <ContinueReading client:only="react" base={base} />
       </div>
     </div>
   </main>
@@ -180,26 +139,6 @@ const newsEntries = allDocs
       });
     });
   }
-  function addReadBadges() {
-    try {
-      const progress = JSON.parse(localStorage.getItem('lh-reading-progress') || '{}');
-      document.querySelectorAll<HTMLElement>('.lh-recent-card').forEach(card => {
-        const slug = card.dataset.slug;
-        if (slug && progress[slug] && !card.querySelector('.lh-read-badge')) {
-          const badge = document.createElement('span');
-          badge.className = 'lh-read-badge';
-          badge.textContent = '已读';
-          const tag = card.querySelector('.lh-recent-tag');
-          if (tag) tag.after(badge);
-        }
-      });
-    } catch {}
-  }
-
   initTabs();
-  addReadBadges();
-  document.addEventListener('astro:page-load', () => {
-    initTabs();
-    addReadBadges();
-  });
+  document.addEventListener('astro:page-load', initTabs);
 </script>
