@@ -53,13 +53,19 @@ function buildLlmResearchItems(): SidebarItem[] {
       return {
         text,
         link: `/ai-research/llm-research/${slug}`,
-      } as SidebarItem;
-    })
-    .sort((a, b) => a.text.localeCompare(b.text, 'zh-Hans-CN'));
+        _slug: slug,
+      } as SidebarItem & { _slug: string };
+    });
+
+  const roadmap = articleItems.find(item => item._slug === '00-llm-roadmap');
+  const others = articleItems
+    .filter(item => item._slug !== '00-llm-roadmap')
+    .sort((a, b) => a._slug.localeCompare(b._slug, 'zh-Hans-CN'));
 
   return [
     { text: '总览', link: '/ai-research/llm-research/' },
-    ...articleItems,
+    ...(roadmap ? [{ text: roadmap.text, link: roadmap.link } as SidebarItem] : []),
+    ...others.map(({ text, link }) => ({ text, link } as SidebarItem)),
   ];
 }
 
