@@ -37,6 +37,32 @@ function buildAiResearchAgentItems(): SidebarItem[] {
   ];
 }
 
+function buildLlmResearchItems(): SidebarItem[] {
+  const modules = import.meta.glob('../content/docs/ai-research/llm-research/*.md', {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }) as Record<string, string>;
+
+  const articleItems = Object.entries(modules)
+    .filter(([path]) => !path.endsWith('/index.md'))
+    .map(([path, raw]) => {
+      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
+      const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
+      const text = h1 || slug.replace(/-/g, ' ');
+      return {
+        text,
+        link: `/ai-research/llm-research/${slug}`,
+      } as SidebarItem;
+    })
+    .sort((a, b) => a.text.localeCompare(b.text, 'zh-Hans-CN'));
+
+  return [
+    { text: '总览', link: '/ai-research/llm-research/' },
+    ...articleItems,
+  ];
+}
+
 function buildNewsItems(): SidebarItem[] {
   const modules = import.meta.glob('../content/docs/ai-product-analysis/news/*.md', {
     eager: true,
@@ -89,9 +115,8 @@ function buildNewsItems(): SidebarItem[] {
 const aiResearchGroups: SidebarGroup[] = [
   {
     text: 'LLM Research',
-    items: [
-      { text: '栏目总览', link: '/ai-research/' },
-    ],
+    collapsed: false,
+    items: buildLlmResearchItems(),
   },
   {
     text: 'Agent',
