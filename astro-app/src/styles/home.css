@@ -228,7 +228,7 @@
 
 /* ─── Recent (merged section) ─── */
 .lh-recent {
-  padding: 48px 10% 60px;
+  padding: 0 10% 60px;
 }
 
 .lh-recent-head h3 {
