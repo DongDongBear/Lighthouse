@@ -39,7 +39,7 @@ function buildAiResearchAgentItems(): SidebarItem[] {
 
 const aiResearchGroups: SidebarGroup[] = [
   {
-    text: 'AI Research',
+    text: 'LLM Research',
     items: [
       { text: '栏目总览', link: '/ai-research/' },
     ],

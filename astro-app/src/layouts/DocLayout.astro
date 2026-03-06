@@ -21,7 +21,9 @@ const hasSidebar = sidebarGroups !== null && sidebarGroups.length > 0;
 const articleHeroBgs = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg'];
 const initialHeroBg = articleHeroBgs[Math.floor(Math.random() * articleHeroBgs.length)];
 const cleanSlug = slug.replace(/\.md$/, '');
+const slugSegments = cleanSlug.split('/').filter(Boolean);
 const heroLabel = (() => {
+  if (slugSegments[0] === 'ai-research' && slugSegments[1] === 'agent') return 'Agent';
   if (cleanSlug.startsWith('ai-product-analysis/news/')) return 'News';
   if (cleanSlug.startsWith('ai-product-analysis/')) return 'AI 产品分析';
   if (cleanSlug.startsWith('ai-research/')) return 'AI Research';
