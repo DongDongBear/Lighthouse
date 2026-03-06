@@ -1,314 +1,699 @@
 ---
-title: "03. RAG、Agent 与推理扩展：从一次问答到多步智能搜索"
+title: "03. RAG、Agent 与推理扩展：从检索原理到 Test-Time Compute"
 ---
 
-# 03. RAG、Agent 与推理扩展：从一次问答到多步智能搜索
+# 03. RAG、Agent 与推理扩展：从检索原理到 Test-Time Compute
 
----
-
-## 一、为什么 LLM 需要"搜索"
-
-上一章讲到，模型参数中的知识有三个硬伤：时效性、私有性、可靠性。
-
-举个具体例子：
-
-> 问题："根据 X 公司 2024 年年报，营业收入同比变化百分比是多少？"
-
-模型的参数里不可能有这个数据——它需要去**检索**年报文档，找到具体数字，再做计算。
-
-这就是 Grounded Reasoning：答案不在模型"脑子里"，必须从外部数据中找到并推理。
+前两章讲了模型本身和训练方法。这一章讲模型如何与外部世界交互——检索文档、使用工具、管理上下文——以及如何在推理时花更多算力换更好的答案。
 
 ---
 
-## 二、Embedding 与向量检索
+## 一、Embedding 的数学原理
 
-### Embedding 是什么
+### 1.1 从 Word2Vec 到现代 Embedding
 
-Embedding 模型把文本映射成一个固定长度的高维向量（通常 768-4096 维）。
+Embedding 的核心思想：**用"上下文"定义"含义"**。
 
-```
-"量子纠缠" → [0.23, -0.15, 0.87, ..., 0.42]   (768 维)
-"量子力学" → [0.21, -0.18, 0.83, ..., 0.39]   (768 维，距离很近)
-"今天天气" → [0.91, 0.32, -0.05, ..., -0.67]   (768 维，距离很远)
-```
-
-核心性质：**语义相近的文本，向量在高维空间中距离更近。**
-
-这不是规则设定的，而是 Embedding 模型在大量文本对上训练出来的。
-
-### 向量检索的流程
+Word2Vec（2013）的训练任务：
 
 ```
-离线阶段：
-  文档集 → 分块（chunking） → 每个 chunk 计算 embedding → 存入向量数据库
-
-在线阶段：
-  用户查询 → 计算 embedding → 在向量库中找 top-k 最近邻 → 返回最相关的 k 个 chunk
+给定 "巴黎 是 法国 的 ___"，预测中间的词。
+给定 "___"，预测周围的词。
 ```
 
-相似度通常用**余弦相似度**或**内积**计算。
+训练完成后，经常出现在相似上下文中的词，其向量自然接近。
 
-### Chunking 为什么重要
+现代 Embedding 模型（如 KARL 使用的 Qwen3-8B Embeddings）不是词级别的，而是**段落级别的**：输入一整段文本，输出一个向量。
 
-文档太长不能整篇做 embedding（信息被稀释），需要先切块。
+### 1.2 余弦相似度
 
-切块的粒度直接影响检索质量：
-- 太小（如句子级）：上下文断裂，可能检索到无用碎片
-- 太大（如页级）：检索不精确，且浪费上下文窗口
+两个向量 a, b 的余弦相似度：
 
-KARL 针对不同数据集用不同策略（有的按页，有的按句子，有的按语义段落），但**不做任何针对性优化**——强调提升来自模型能力而不是数据预处理。
+$$
+\cos(a, b) = \frac{a \cdot b}{\|a\| \cdot \|b\|} = \frac{\sum_i a_i b_i}{\sqrt{\sum_i a_i^2} \cdot \sqrt{\sum_i b_i^2}}
+$$
+
+数值例子（简化为 4 维）：
+
+```
+a = [0.8, 0.3, 0.1, 0.5]    ("法国首都")
+b = [0.7, 0.4, 0.2, 0.4]    ("巴黎")
+c = [0.1, 0.9, 0.8, 0.0]    ("量子力学")
+
+cos(a, b) = (0.56 + 0.12 + 0.02 + 0.20) / (0.990 * 0.906) = 0.90 / 0.897 = 0.998
+cos(a, c) = (0.08 + 0.27 + 0.08 + 0.00) / (0.990 * 1.208) = 0.43 / 1.196 = 0.360
+```
+
+"法国首都"和"巴黎"相似度 0.998（很高），和"量子力学"相似度 0.360（很低）。
+
+### 1.3 向量检索的实现
+
+**暴力搜索**：计算 query 和所有文档的相似度，返回 top-k。复杂度 O(N)。当 N = 2600 万（TREC-Biogen 的规模）时，每次查询要计算 2600 万次点积。
+
+**近似最近邻（ANN）**：
+
+主流方法是 **HNSW（Hierarchical Navigable Small World）**：
+
+```
+构建一个多层图:
+  最顶层: 少数节点，长距离连接（快速定位大致区域）
+  中间层: 更多节点，中等距离连接
+  最底层: 所有节点，短距离连接（精确搜索）
+
+查询时:
+  从顶层开始 → 贪心走向最近邻 → 降到下一层 → 继续 → 到底层返回 top-k
+```
+
+HNSW 的查询复杂度约 O(log N)，召回率通常 > 95%。
+
+KARL 使用**嵌入式向量数据库**：不走网络，直接在进程内存中查询。每机 500+ QPS，消除了网络 I/O 瓶颈。
 
 ---
 
-## 三、RAG：检索增强生成
+## 二、Chunking 策略
 
-RAG（Retrieval-Augmented Generation）是最简单的"LLM + 搜索"范式：
+### 2.1 为什么要分块
+
+一篇 50 页的财报约 25000 token。直接做 embedding：
+
+- 信息被稀释（一个向量要编码太多内容）
+- 检索粒度太粗（你需要的可能是第 45 页的一个表格）
+
+分块后，每个 chunk 的信息密度更高，检索更精确。
+
+### 2.2 分块方法
+
+**固定长度分块**：
 
 ```
-用户问题 → 检索 top-k 文档 → 拼进 prompt → 模型生成答案
+文档 → 每 512 token 切一块
+优点: 简单
+缺点: 可能切断句子或段落
 ```
 
-**单轮 RAG 的局限**：
+**语义分块**：
 
-1. 一次检索可能找不到所有需要的信息
-2. 初始查询可能不够精确
-3. 答案分散在多个文档中，需要多次检索和整合
-4. 检索到的文档可能需要进一步分析才知道是否相关
+```
+文档 → 检测段落/章节边界 → 在边界处切分
+优点: 保持语义完整性
+缺点: chunk 长度不均匀
+```
 
-对于简单的事实查询（"X 公司 CEO 是谁"），单轮 RAG 够用。但对于 KARL 面对的复杂任务（多约束实体搜索、跨文档报告综合），单轮远远不够。
+**滑动窗口分块**：
+
+```
+文档 → 每 512 token 一块，相邻块有 128 token 重叠
+优点: 不丢边界信息
+缺点: 数据冗余
+```
+
+### 2.3 KARL 的分块策略
+
+KARL 对每个数据集使用不同但固定的策略，不做针对性优化：
+
+| 数据集 | 分块方式 | 每个 chunk 大小 |
+|--------|---------|---------------|
+| BrowseComp-Plus | 文档前 512 token | 最多 512 token |
+| TREC-Biogen | 摘要级别 | 短摘要 |
+| FinanceBench | 按页切分 | 一页 |
+| FreshStack | 语义分割（已提供） | 最多 2048 token |
+| QAMPARI | 句子级别 | 约 100 词 |
+| PMBench | 文档前 2048 token | 最多 2048 token |
 
 ---
 
-## 四、Agent：可以"自主行动"的 LLM 系统
+## 三、从 RAG 到 Agent
 
-### 从 RAG 到 Agent 的跨越
-
-Agent 不止检索一次，它可以**循环**：
+### 3.1 单轮 RAG 的完整流程
 
 ```
-while 没得到满意答案:
-    思考当前状态和已有信息
-    决定下一步行动（搜索 / 分析 / 回答）
-    执行行动，获得结果
-    更新认知
+用户问: "X 公司 2024 年营收同比变化？"
+
+Step 1: Embedding
+  query_emb = EmbeddingModel("X 公司 2024 年营收同比变化")
+
+Step 2: 向量检索
+  results = VectorDB.search(query_emb, top_k=5)
+  → chunk_1: "X 公司 2024 年年报... 营业收入 128.3 亿元..."
+  → chunk_2: "X 公司 2023 年年报... 营业收入 114.2 亿元..."
+  → chunk_3: "X 公司 2024 年... 净利润..."
+  → chunk_4: (不相关)
+  → chunk_5: (不相关)
+
+Step 3: 构建 prompt
+  prompt = f"""根据以下文档回答问题：
+  {chunk_1}
+  {chunk_2}
+  {chunk_3}
+  问题：X 公司 2024 年营收同比变化？"""
+
+Step 4: 模型生成
+  answer = LLM(prompt)
+  → "根据文档，X 公司 2024 年营收 128.3 亿元，2023 年 114.2 亿元，
+     同比增长 (128.3-114.2)/114.2 = 12.3%。"
 ```
 
-### Tool Use 的实现方式
+### 3.2 单轮 RAG 的四个局限
 
-模型输出特定格式的"工具调用请求"，系统拦截并执行：
+**局限 1：查询表达不精确**
+
+用户问"那个拿了诺贝尔物理奖的出生在卡夫卡同城的人是谁"——直接搜索这句话，很难同时匹配到"诺贝尔物理奖获得者列表"和"卡夫卡出生地"两个信息源。
+
+**局限 2：答案分散在多个文档**
+
+TREC-Biogen 的报告综合任务需要从 50+ 个文档中提取信息。单次 top-5 检索根本不够。
+
+**局限 3：需要推理后再检索**
+
+BrowseComp-Plus 的约束搜索：先搜"诺贝尔物理奖获得者" → 得到候选列表 → 再搜每个候选的出生地 → 排除不在布拉格的 → 再验证是否在高等研究院工作过。
+
+**局限 4：无法判断何时停止**
+
+模型不知道自己已经收集了足够的信息，可能过早回答（遗漏信息）或过度搜索（浪费资源）。
+
+### 3.3 Agent 循环的完整实现
+
+```python
+def agent_loop(question, max_steps=200):
+    history = [{"role": "user", "content": question}]
+
+    for step in range(max_steps):
+        # 1. 模型决策
+        response = LLM(history)
+
+        # 2. 解析响应
+        if response.has_tool_call():
+            # 执行工具
+            tool_name = response.tool_call.name       # "vector_search"
+            query = response.tool_call.arguments      # 搜索查询
+            results = execute_tool(tool_name, query)
+
+            # 追加到历史
+            history.append({"role": "assistant", "content": response.text})
+            history.append({"role": "tool", "content": results})
+
+            # 检查是否需要压缩
+            if count_tokens(history) > COMPRESSION_THRESHOLD:
+                summary = LLM(compress_prompt(history))
+                history = [{"role": "system", "content": summary}]
+
+        elif response.has_final_answer():
+            return response.final_answer
+
+        else:
+            # 继续思考
+            history.append({"role": "assistant", "content": response.text})
+
+    return "达到最大步数，无法回答"
+```
+
+### 3.4 一条 BrowseComp-Plus rollout 的具体过程
+
+问题："哪位诺贝尔物理学家出生在《审判》作者同一城市，后来在高等研究院工作？"
 
 ```
-模型输出：
-  我需要搜索公司财报信息。
-  <tool_call>{"name": "vector_search", "query": "X公司 2024 营业收入"}</tool_call>
+Step 1: 搜索 "《审判》作者"
+  → 结果: 弗朗茨·卡夫卡，出生于布拉格
 
-系统执行 vector_search，返回：
-  <tool_result>
-  文档A (p.45): "2024年营业收入为128.3亿元，同比增长12.4%..."
-  文档B (p.12): "营业成本同期增长8.2%..."
-  </tool_result>
+Step 2: 搜索 "诺贝尔物理学奖获得者 出生 布拉格"
+  → 结果: 几个候选人
 
-模型继续：
-  根据文档A，答案是12.4%。但让我验证一下原始数据...
-  <tool_call>{"name": "vector_search", "query": "X公司 2023 营业收入"}</tool_call>
+Step 3: 搜索 "Peter Higgs 出生地"
+  → 结果: 纽卡斯尔 → 排除
 
-...（继续搜索验证）
+Step 4: 搜索 "Niels Bohr 出生地"
+  → 结果: 哥本哈根 → 排除
+
+Step 5-20: 逐个检查候选人...
+
+Step 21: 搜索 "Albert Einstein 出生地"
+  → 结果: 乌尔姆，德国 → 排除（不是布拉格）
+
+Step 22-50: [上下文压缩] 模型总结已排除的候选和剩余线索
+
+Step 51: 搜索 "Christian Doppler 出生地"
+  → 结果: 不是诺贝尔获奖者
+
+Step 52-100: 继续搜索更多候选...
+
+Step 101-155: 逐步缩小范围...
+
+Step 155: 搜索 "Ernst Mach 出生地"
+  → 结果: 布尔诺（当时属于奥匈帝国，靠近布拉格但不是布拉格）
+  但注意到 Philipp Lenard 出生在布拉迪斯拉发...
+
+最终: 确认答案是某位满足所有约束的物理学家
 ```
 
-### KARL 的 Agent 设计
-
-KARL 的 Agent 刻意保持极简：**只有一个工具（vector search）**。
-
-这是有意的设计选择：隔离"检索 + 推理"能力本身，不掺杂多工具编排的复杂度。模型必须完全靠搜索查询的质量和推理能力来解决问题。
-
-### Rollout / Trajectory
-
-Agent 的一次完整执行过程叫 rollout（或 trajectory）：
-
-```
-[初始问题]
-  → [思考 + 搜索查询 1] → [检索结果 1]
-  → [分析 + 搜索查询 2] → [检索结果 2]
-  → ...
-  → [搜索查询 N] → [检索结果 N]
-  → [综合分析 + 最终答案]
-```
-
-KARL 中 BrowseComp-Plus 的 rollout 中位数长达 50-200 步，TREC-Biogen 约 4-6 步。
+这说明为什么 BrowseComp-Plus 需要 200 步预算——多约束交叉搜索本质上是一个排除法过程。
 
 ---
 
-## 五、上下文管理：Agent 的核心工程挑战
+## 四、上下文压缩的详细机制
 
-### 问题
+### 4.1 触发条件
 
-每次搜索返回的文档都占上下文空间。50 步搜索，每步返回 20 个 chunk，每个 chunk 500 token → 50 万 token。远超大部分模型的上下文窗口。
-
-### KARL 的压缩机制
-
-当历史 token 超过阈值时，触发压缩：
-
-```
-[完整历史（太长）] → 送给模型自己 → [压缩后的摘要（短得多）]
+```python
+if count_tokens(history) > THRESHOLD:  # 例如 16K token
+    trigger_compression()
 ```
 
-**关键区别**：KARL 不用独立的摘要模型，而是让 Agent 模型自己做压缩，并且把压缩步骤纳入 RL 训练。
+### 4.2 压缩 Prompt
 
-这意味着模型学到的不是"写好摘要"，而是"**为了最终答对问题而保留关键信息**"——这是任务导向的信息管理。
+```
+你是一个研究助手。你正在回答以下问题：
+{原始问题}
 
-论文的交叉实验验证了这点（Table 6）：
+以下是你到目前为止的搜索历史和发现：
+{完整历史（可能 16K+ token）}
 
-| 搜索模型 | 压缩模型 | 得分 |
-|---------|---------|------|
-| GLM 4.5 Air | GLM 4.5 Air | 0.44 |
-| GLM 4.5 Air | **KARL** | **0.54** |
-| **KARL** | GLM 4.5 Air | 0.46 |
-| **KARL** | **KARL** | **0.57** |
+请将以上搜索历史压缩成一个简洁但完整的摘要，保留：
+1. 所有与回答问题相关的发现
+2. 已排除的假设（避免重复搜索）
+3. 下一步搜索的线索
 
-用 KARL 做压缩（即使搜索还是基座模型），直接提升 10 个百分点。说明 RL 训练出的压缩能力本身就很有价值。
+压缩后的摘要将替代完整历史，用于后续搜索。
+```
+
+### 4.3 RL 训练压缩能力
+
+压缩步骤在 RL 训练中被当作独立的 (x, y) 对：
+
+```
+x = 待压缩的完整历史
+y = 模型生成的摘要
+r = 整条轨迹最终的任务奖励
+```
+
+如果压缩后模型最终答对了 → 高 r → 这种压缩方式被鼓励
+如果压缩丢失了关键信息导致最终答错 → 低 r → 这种压缩方式被抑制
+
+经过大量轨迹的训练，模型学会了：
+- 保留"已排除的候选"（避免重复搜索）
+- 保留"尚未验证的线索"（指导后续搜索方向）
+- 丢弃"已确认不相关的文档细节"
+
+### 4.4 压缩与搜索的交叉实验
+
+Table 6 的设计很巧妙——把搜索和压缩分开测试：
+
+```
+实验: 用模型 A 做搜索决策，用模型 B 做历史压缩
+
+                    搜索 = GLM Air    搜索 = KARL
+压缩 = GLM Air      0.44            0.46
+压缩 = KARL          0.54            0.57
+```
+
+分析：
+- 列方向（搜索）：KARL 搜索 vs Air 搜索，在 Air 压缩下 +0.02，在 KARL 压缩下 +0.03
+- 行方向（压缩）：KARL 压缩 vs Air 压缩，在 Air 搜索下 +0.10，在 KARL 搜索下 +0.11
+
+**结论：RL 训练的压缩能力 (+0.10) 比搜索能力 (+0.02) 的独立贡献更大。** 这很反直觉——你可能以为"搜更好"比"压缩更好"重要，但实际上"管理好已有信息"同样关键。
+
+---
+
+## 五、Agentic 合成数据管线
+
+### 5.1 Stage I：问题-答案合成
+
+```python
+def synthesize_qa(corpus, seed_examples, seed_docs=None):
+    """
+    输入:
+      corpus: 文档语料库（可通过 vector search 访问）
+      seed_examples: 4 个种子 QA pair（来自验证集）
+      seed_docs: 10 个种子文档（BrowseComp-Plus 特有）
+
+    过程:
+      合成 Agent 进行最多 60 步的 vector search 探索
+      基于发现的文档组合，生成 8 个候选 QA pair
+      每个 QA pair 包含: 问题, nugget 化的答案, 引用证据
+
+    输出:
+      8 个候选 QA pair
+    """
+```
+
+**为什么让 Agent 动态探索而不是静态给文档？**
+
+静态方法："这里是文档 A, B, C，请基于它们出题"
+动态方法："这里是整个语料库的搜索工具，你自己去发现有趣的文档组合，然后出题"
+
+动态方法生成的问题更自然、更多样，且自动覆盖更多的语料库区域。BrowseComp-Plus 的种子文档引导使语料库覆盖率提升 25%。
+
+### 5.2 Stage II：Pass-Rate 过滤
+
+```
+对每个合成 QA pair:
+  运行 8 个 Solver Agent 独立尝试
+
+  pass_rate = 正确次数 / 8
+
+  如果 pass_rate == 1.0: 删除（太简单，无学习信号）
+  如果 pass_rate == 0.0: 删除（太难或有质量问题）
+  否则: 保留（有学习信号）
+```
+
+为什么"半对半错"最有价值？
+
+```
+prompt A: 8 条全对
+  优势 = [0, 0, 0, 0, 0, 0, 0, 0]  → 梯度方向不明确
+
+prompt B: 8 条全错
+  优势 = [0, 0, 0, 0, 0, 0, 0, 0]  → 无法区分（都一样差）
+
+prompt C: 4 对 4 错
+  优势 = [+, +, +, +, -, -, -, -]  → 清晰的正负对比 → 强学习信号
+```
+
+对于 TREC-Biogen（连续分数 [0,1]），需要先二值化：
+
+```
+Iter.1: 阈值 0.6 → 分数 > 0.6 算"对"
+Iter.2: 阈值 0.7 → 模型变强了，提高标准
+Expert Iter.3: 阈值 0.9 → 更高标准
+```
+
+### 5.3 去重防泄漏
+
+两阶段去重确保训练数据不包含测试集的问题：
+
+```
+Stage 1: 精确匹配
+  对每个合成问题 q:
+    if q in test_set or q in already_synthesized:
+      删除
+
+Stage 2: 近似重复检测
+  对每个测试集问题 t:
+    candidates = embedding_search(t, top_k=20, pool=synthetic_questions)
+    for c in candidates:
+      if gpt_4o_mini_judge(t, c) == "paraphrase":
+        删除 c
+```
+
+用 gpt-4o-mini 作为释义判断器（paraphrase judge）比纯向量相似度更准确——两个问题在表述上可能很不同但语义相同。
+
+### 5.4 训练数据统计
+
+| 迭代 | 合成模型 | BCP prompt 数 | TREC prompt 数 | BCP 中位轨迹步数 | TREC 中位轨迹步数 |
+|------|---------|-------------|--------------|---------------|---------------|
+| Iter.1 | GLM 4.5 Air | 1,218 | 6,270 | ~50 | ~5 |
+| Iter.2 | KARL Iter.1 | 1,336 | 11,371 | ~20 | ~5 |
+
+关键观察：Iter.2 的 BCP 轨迹显著短于 Iter.1（50 → 20 步）。KARL Iter.1 已经学会了更高效的搜索策略，不再需要用满 200 步预算。
 
 ---
 
 ## 六、推理时计算扩展（Test-Time Compute）
 
-### 核心思想
-
-不改模型参数，只在推理时多花算力 → 更好的答案。
-
-训练是"一次性投入，永久提升基础能力"。TTC 是"按需投入，临时提升单次任务表现"。两者互补。
-
-### 方法 1：Best-of-N
+### 6.1 Best-of-N
 
 ```
-同一个问题 → 采样 N 条独立 rollout → 用评分函数选最好的
+输入: 问题 x
+参数: N (采样数), scoring_function
+
+过程:
+  for i in 1..N:
+    y_i = Agent(x)    # 独立 rollout
+    s_i = scoring_function(y_i)
+
+  return y_{argmax(s)}    # 返回最高分
 ```
 
-简单有效，但需要一个好的评分函数。
+缺点：需要一个可靠的 scoring function。对开放式任务（如报告综合），自动评分很困难。
 
-### 方法 2：Majority Voting
-
-```
-N 条 rollout → N 个答案 → 出现次数最多的作为最终答案
-```
-
-适合离散答案（实体名、数字）。不需要评分函数。
-
-### 方法 3：Parallel Thinking（KARL 的主要 TTC 方案）
+### 6.2 Majority Voting
 
 ```
-同一个问题 → N 条独立 rollout → N 个答案
-              ↓
-          全部喂给模型（Aggregator）
-              ↓
-          Aggregator 综合出最终答案
-          （Aggregator 也可以使用工具做额外搜索）
+for i in 1..N:
+    y_i = Agent(x)
+    answer_i = extract_answer(y_i)
+
+answer_counts = Counter(answer_1, ..., answer_N)
+return answer_counts.most_common(1)    # 返回出现最多的答案
 ```
 
-Parallel Thinking 比 Best-of-N 和投票都更强，因为 Aggregator 可以**融合互补信息**。
+适合离散答案。不适合长文本生成（两条不同的报告很难判断是否"相同"）。
 
-关键数据：在 PMBench 上，23.7% 的情况下 Aggregator 生成的答案比 N 条 rollout 中任何一条都好。它不只是"选最好的"，而是"综合出更好的"。
-
-### 方法 4：Value-Guided Search（VGS，任务特化 TTC）
-
-需要额外训练一个小型 Value Model（KARL 用 Qwen3-4B）。
+### 6.3 Parallel Thinking（KARL 的主要 TTC 方案）
 
 ```
-Agent 每一步：
-  1. 并行生成 k=2 个候选动作
-  2. Value Model 对每个候选评分（预测"从这里出发最终答对的概率"）
-  3. 选分高的继续
+Phase 1: 并行搜索
+  for i in 1..N:
+    y_i = Agent(x)    # N 条独立 rollout，并行执行
+
+Phase 2: 聚合
+  aggregation_prompt = f"""
+  以下是 {N} 个独立搜索 Agent 对同一个问题的回答：
+  {y_1}
+  {y_2}
+  ...
+  {y_N}
+
+  请综合以上所有信息，给出最终答案。
+  你也可以使用搜索工具补充信息。
+  """
+
+  final_answer = Agent(aggregation_prompt)    # Aggregator 也可以用工具
 ```
 
-这相当于在搜索过程中做"树搜索剪枝"——每步都选最有希望的方向。
+**为什么 Aggregator 能超越所有单条 rollout？**
 
-VGS 在有明确答案的任务（如 BrowseComp-Plus 的命名实体搜索）上效果更好，但需要额外的 Value Model 训练和推理开销。
+```
+rollout_1 找到了证据 A 和 B
+rollout_2 找到了证据 B 和 C
+rollout_3 找到了证据 A 和 D
 
-### TTC 与 RL 的关系
+单条最好的也只有 2/4 的证据。
 
-一个关键发现：**RL 和 TTC 的收益是叠加的**。
+Aggregator 看到所有结果后:
+  综合 A + B + C + D = 4/4 的证据 → 更完整的答案
+```
 
-| 配置 | BCP 得分 |
-|------|---------|
-| GLM 4.5 Air（无 TTC） | 44.7 |
-| GLM 4.5 Air（N=10） | 约 55 |
-| KARL（无 TTC） | 58.5 |
-| KARL（N=10） | 67.5 |
+PMBench 上 23.7% 的情况下 Aggregator 生成了比任何单条 rollout 都好的答案。
 
-增加 N 对两个模型都有提升，但 KARL 在每个 N 值上都保持优势。RL 和 TTC 不是替代关系——RL 提升基础能力，TTC 在此基础上进一步放大。
+**Aggregation 的开销**：Table 7 显示 aggregation 步骤平均只需 1.3-3.7 个 LLM 步（远短于搜索本身），是轻量的。
+
+**N 的选择**：
+
+```
+N=1:  58.9 (无 TTC)
+N=3:  64.1 (+5.2)
+N=5:  65.8 (+1.7)
+N=10: 67.5 (+1.7)
+N=15: 67.8 (+0.3)
+N=20: 68.1 (+0.3)
+```
+
+收益在 N=10-15 后显著递减。可能原因：(1) pass@k 饱和，(2) N 个答案拼在一起上下文太长。
+
+### 6.4 Value-Guided Search（VGS）
+
+#### Value Model 训练
+
+```
+训练数据: KARL 生成的大量 rollout {(trajectory, final_reward)}
+
+对每条轨迹:
+  对每个模型生成的 token 位置 t:
+    label = 1 if 该轨迹最终得到正确答案 else 0
+    loss += BCELoss(ValueModel(trajectory[:t]), label)
+
+模型: Qwen3-4B-Thinking（小但够用）
+```
+
+Value Model 学到的是：给定当前部分轨迹，预测"从这里继续下去最终答对的概率"。
+
+#### 搜索过程
+
+```
+for each rollout:
+    trajectory = [initial_prompt]
+
+    for step in range(max_steps):
+        # 并行生成 k 个候选动作
+        candidates = []
+        for j in range(k):    # k=2
+            action_j = LLM(trajectory, temperature=T)
+            value_j = ValueModel(trajectory + action_j)
+            candidates.append((action_j, value_j))
+
+        # 选最高价值的候选
+        best = max(candidates, key=lambda x: x[1])
+        trajectory.append(best[0])
+
+        # 执行工具调用等
+        if best[0].has_tool_call():
+            result = execute_tool(...)
+            trajectory.append(result)
+
+    rollouts.append(trajectory)
+```
+
+每步生成 2 个候选，选价值更高的。相当于宽度为 2 的 beam search，但不是基于概率，而是基于"预测最终成功概率"。
+
+#### 聚合策略对比
+
+```
+BrowseComp-Plus 上 (N=10):
+  Majority Voting (MV):            65.2
+  Best-of-N (BoN):                 67.8
+  Weighted Majority Voting (WMV):  70.4
+```
+
+WMV > BoN > MV。WMV 用 Value Model 的预测值作为投票权重——不只是"数票数"，还考虑"哪条轨迹更可信"。
+
+#### 意外发现
+
+VGS 同时提升了文档召回率，尽管 Value Model 从未被训练来预测召回率。
+
+解释：价值高的轨迹方向往往也是证据丰富的方向——Value Model 隐式学到了"证据充分 → 成功概率高"。
 
 ---
 
-## 七、合成数据管线
+## 七、Agent 基础设施：aroll 框架
 
-KARL 的训练数据不是人工标注的，而是用 Agent 自动合成的。
-
-### Stage I：问题-答案合成
+### 7.1 三层抽象
 
 ```
-合成 Agent + 语料库访问权 + 少量种子示例（4 个）
-  → Agent 动态探索语料库（通过 vector search）
-  → 基于发现的文档组合，生成候选 QA pair
+Exploration Strategy（编排层）
+│
+├── 接收 prompt 批次
+├── 实例化 Environment-Agent 对
+├── 编排并发执行
+└── 收集完成的 rollout
+
+Environment（交互层）
+│
+├── 维护当前状态（历史、步数、token 数）
+├── 每步: 呈现历史 → 调 Agent → 执行工具 → 计算奖励
+├── 奖励函数通过配置声明
+└── 新增任务 = 新增奖励配置文件
+
+Agent（决策层）
+│
+├── 标准: 每步一次 LLM 调用
+└── VGS: 每步 k 个候选 + Value Model（即插即用替换）
 ```
 
-关键：合成 Agent 自己决定去哪搜、发现什么组合、提什么问题。比"给模型几个文档让它出题"更有表达力。
+### 7.2 Lifecycle Plugins
 
-### Stage II：难度过滤
+横切关注点通过插件注入：
 
-每个问题让 8 个 Solver Agent 独立尝试：
+```python
+class CompressionPlugin:
+    """当 token 数超阈值时触发压缩"""
+    def before_step(self, env):
+        if env.token_count > THRESHOLD:
+            summary = env.agent.compress(env.history)
+            env.history = [summary]
 
-- 全对的删掉（太简单）
-- 全错的删掉（太难或有问题）
-- 保留"半对半错"的（有学习信号）
+class BudgetPlugin:
+    """限制最大步数"""
+    def after_step(self, env):
+        if env.step_count >= MAX_STEPS:
+            env.force_answer()
 
-再用 Quality Filter Judge 过滤歧义问题和错误答案。
+class ToolGatewayPlugin:
+    """控制工具调用权限和参数"""
+    def on_tool_call(self, env, tool_call):
+        tool_call.top_k = min(tool_call.top_k, MAX_K)
+```
 
-### 迭代自举
+关键设计：**所有环境（数据收集、训练、评估、线上推理）使用完全相同的插件配置。**
 
-每轮训练后，用更强的模型合成更难的数据，提高过滤阈值，持续推高难度。
+### 7.3 为什么同构很重要
+
+如果训练和推理的代码路径不同：
+
+```
+训练时: 压缩阈值 = 16K, 最大步数 = 200, k = 20
+推理时: 压缩阈值 = 12K, 最大步数 = 100, k = 10  (开发者不小心改了)
+
+→ 模型在训练时学到的策略和推理时的环境不匹配 → 性能下降
+```
+
+aroll 的同构设计从架构层面消除了这类问题。
+
+### 7.4 高吞吐向量检索
+
+RL 训练的数据量：
+
+```
+假设:
+  5000 个 prompt × 8 条 rollout × 平均 50 步 × 每步 20 个检索 = 4000 万次检索
+
+如果用 client-server 向量数据库:
+  假设每次检索 5ms (网络 + 计算) → 4000 万 × 5ms = 200,000 秒 ≈ 55 小时
+
+KARL 的嵌入式方案:
+  每次检索 < 1ms (纯内存计算) → 4000 万 × 1ms = 40,000 秒 ≈ 11 小时
+```
+
+实际中通过多 worker 并行，进一步缩短到数小时。
 
 ---
 
-## 八、Agent 基础设施
+## 八、搜索环境消融实验
 
-论文详细描述了 aroll 框架，这在学术论文中罕见但对工程实践极有价值。
+### 8.1 搜索步数
 
-### 核心设计原则
+```
+BrowseComp-Plus (KARL):
+  10 步: 0.35
+  50 步: 0.48
+  100 步: 0.53
+  200 步: 0.57
+  400 步: 0.58  (几乎不再增长)
+```
 
-**训练和推理完全同构**：数据收集、训练、评估、线上推理使用完全相同的代码路径和配置。消除分布偏移（distributional shift）。
+200 → 400 步几乎没有增长。模型学会了在 200 步内完成搜索。
 
-**高吞吐向量检索**：嵌入式列式数据库，零网络 I/O，每机 500+ QPS。RL 训练需要生成数十万条长轨迹，瓶颈不能在检索。
+### 8.2 检索文档数 k
 
-**Lifecycle Plugin**：压缩、步数预算、工具权限等横切关注点通过插件注入，新任务只需新增奖励配置。
+```
+BrowseComp-Plus (KARL):
+  k=10: 0.56
+  k=20: 0.57
+  k=40: 0.39  (急剧下降!)
+```
+
+k=40 时性能崩溃。原因：每次检索返回 40 个文档，每个 ~500 token，一次就是 20K token，几步就填满上下文。没空间做多步推理了。
+
+### 8.3 Embedding 模型替换
+
+```
+Qwen3-8B (训练时用的): 0.570
+GTE-large (换一个):    0.568
+```
+
+几乎不变。说明 KARL 学到的搜索策略没有过拟合到特定 retriever——它是通用的"怎么搜"策略，不依赖"用哪个 retriever"。
+
+### 8.4 压缩工具移除
+
+```
+有压缩: 0.570
+无压缩: 0.389  (下降 31.7%)
+```
+
+压缩是必不可少的——没有它，长轨迹搜索根本无法进行。
 
 ---
 
-## 九、全链路串联
+## 本章总结
 
-把三章的知识串起来，你现在可以理解 KARL 的完整链路：
+你现在应该能理解：
 
-```
-GLM 4.5 Air（预训练 + SFT 的通用 LLM）
-  │
-  ├─ Agentic Synthesis 合成训练数据
-  │   ├─ Stage I: 问题-答案合成
-  │   └─ Stage II: 难度过滤 + 质量过滤
-  │
-  ├─ OAPL 多任务 RL 训练（BrowseComp-Plus + TREC-Biogen）
-  │   ├─ 离线大批量采样
-  │   ├─ Token 掩码 + 轨迹分段
-  │   ├─ 压缩步骤端到端训练
-  │   └─ 迭代自举（2-3 轮）
-  │
-  └─ 推理时计算扩展
-      ├─ Parallel Thinking（通用）
-      └─ Value-Guided Search（任务特化）
-  │
-  ▼
-KARL：在 6 类搜索任务上匹配 Claude Opus 4.6，成本低 33%，延迟低 47%
-```
+1. **Embedding 原理**：文本到向量的映射，余弦相似度衡量语义距离
+2. **向量检索**：HNSW 近似最近邻，嵌入式数据库消除网络 I/O
+3. **Chunking**：分块策略影响检索粒度和质量
+4. **RAG → Agent**：从单次检索到多步循环搜索
+5. **上下文压缩**：RL 端到端训练，任务导向而非通用摘要
+6. **合成数据管线**：Agentic synthesis + pass-rate 过滤 + 质量过滤
+7. **Test-Time Compute**：Best-of-N / Voting / Parallel Thinking / VGS
+8. **aroll 基础设施**：三层抽象 + 同构设计 + lifecycle plugins
 
-现在你再去读 [KARL 深度解读](../karl-knowledge-agents-rl)，应该每个段落都能理解了。
-
----
-
-**下一篇：[04. KARL 逐段导读](../04-karl-guided-reading)** — 带着知识回到原文
+**下一篇：[04. KARL 逐段导读](../04-karl-guided-reading)** — 带着知识读原文
