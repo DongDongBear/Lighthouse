@@ -78,6 +78,12 @@ Agent 和普通 LLM 对话有什么区别？工具调用怎么实现？多步推
 
 然后回去重读 [KARL 深度解读](./karl-knowledge-agents-rl)，感受应该完全不一样。
 
+## 第二阶段（论文实战）
+
+- [07. 读论文方法：如何快速抓住一篇 LLM 论文的主线](./07-how-to-read-llm-papers)
+- [08. 数学最小补课：KL、期望、优势函数到底在说什么](./08-minimum-math-for-llm-papers)
+- [09. KARL 逐段导读（Section 1-8 中文版）](./09-karl-paper-guided-reading)
+
 ---
 
 *本系列持续更新中。如果你在阅读过程中遇到任何不理解的概念，告诉我，我会补充说明。*
