@@ -33,7 +33,6 @@
 .lh-page-doc .lh-main {
   display: flex;
   justify-content: space-between;
-  gap: 28px;
   width: 100%;
   height: calc(100vh - 64px); /* fill viewport below nav */
   overflow: hidden;            /* children handle own scroll */
@@ -44,7 +43,7 @@
   flex: 1;
   min-width: 0;
   max-width: 1280px;
-  padding: 24px 0 60px;
+  padding: 24px 28px 60px;
   overflow-y: auto;
 }
 
