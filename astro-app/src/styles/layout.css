@@ -62,7 +62,7 @@
 .lh-page-doc .lh-toc-wrap {
   width: 260px;
   flex-shrink: 0;
-  padding: 24px 32px 24px 0;
+  padding: 24px 32px 24px 8px;
   overflow-y: auto;
 }
 
