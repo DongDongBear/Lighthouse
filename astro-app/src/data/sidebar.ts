@@ -53,13 +53,20 @@ function buildNewsItems(): SidebarItem[] {
       let text: string;
       const mNew = slug.match(/^\d{4}-(\d{2})-(\d{2})-(morning|evening)$/);
       const mLegacy = slug.match(/^\d{4}-(\d{2})-(\d{2})-(\d{2})(\d{2})$/);
+      let datePrefix = '';
       if (mNew) {
         const period = mNew[3] === 'morning' ? '早报' : '晚报';
-        text = `${mNew[1]}-${mNew[2]} ${period}`;
+        datePrefix = `${mNew[1]}-${mNew[2]} ${period}`;
       } else if (mLegacy) {
         const hour = parseInt(mLegacy[3], 10);
         const period = hour < 12 ? '早报' : '晚报';
-        text = `${mLegacy[1]}-${mLegacy[2]} ${period}`;
+        datePrefix = `${mLegacy[1]}-${mLegacy[2]} ${period}`;
+      }
+      if (datePrefix) {
+        // Extract short summary from title after ｜核心摘要：or ｜
+        const titleMatch = raw.match(/^title:\s*["']?[^｜]*｜(?:核心摘要：)?(.+?)["']?\s*$/m);
+        const summary = titleMatch?.[1]?.split(/[，,]/)?.[0]?.slice(0, 20) || '';
+        text = summary ? `${datePrefix}｜${summary}` : datePrefix;
       } else {
         text = slug;
       }
