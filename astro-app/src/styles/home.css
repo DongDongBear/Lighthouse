@@ -239,7 +239,7 @@
   letter-spacing: -0.01em;
 }
 
-/* ─── Recent: card style (reading history) ─── */
+/* ─── Recent: minimal cards (reading history) ─── */
 .lh-recent-section {
   margin-bottom: 36px;
 }
@@ -247,24 +247,23 @@
 .lh-recent-cards {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .lh-recent-card {
   display: flex;
   flex-direction: column;
-  padding: 16px 18px;
+  padding: 16px 18px 14px;
   border-radius: 6px;
-  border-left: 3px solid var(--accent, var(--vp-c-text-3));
-  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
   text-decoration: none;
   color: inherit;
-  transition: background .15s, transform .2s;
-  min-height: 120px;
+  transition: border-color .15s, transform .2s;
 }
 
 .lh-recent-card:hover {
-  background: var(--vp-c-bg-alt);
+  border-color: var(--vp-c-text-3);
   transform: translateY(-2px);
 }
 
@@ -272,7 +271,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .lh-recent-card-label {
@@ -280,7 +279,7 @@
   font-weight: 500;
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--accent, var(--vp-c-text-3));
+  color: var(--vp-c-text-3);
 }
 
 .lh-recent-card-time {
@@ -290,7 +289,7 @@
 }
 
 .lh-recent-card-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--vp-c-text-1);
   margin: 0;
@@ -302,11 +301,18 @@
   overflow: hidden;
 }
 
-.lh-recent-card-bottom {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  color: var(--accent, var(--vp-c-text-3));
+.lh-recent-card-bar {
+  margin-top: 12px;
+  height: 2px;
+  background: var(--vp-c-divider);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.lh-recent-card-fill {
+  height: 100%;
+  background: var(--vp-c-text-3);
+  border-radius: 1px;
 }
 
 /* ─── Update: visual cards (news) ─── */
