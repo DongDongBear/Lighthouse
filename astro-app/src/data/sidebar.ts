@@ -48,13 +48,18 @@ function buildNewsItems(): SidebarItem[] {
     .filter(([path]) => !path.endsWith('/index.md'))
     .map(([path, raw]) => {
       const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
-      // slug format: 2026-03-06-0526 → "03-06 早报"
-      const m = slug.match(/^\d{4}-(\d{2})-(\d{2})-(\d{2})(\d{2})$/);
+      // slug format: 2026-03-06-morning → "03-06 早报"
+      //              2026-03-06-0526   → "03-06 早报" (legacy)
       let text: string;
-      if (m) {
-        const hour = parseInt(m[3], 10);
+      const mNew = slug.match(/^\d{4}-(\d{2})-(\d{2})-(morning|evening)$/);
+      const mLegacy = slug.match(/^\d{4}-(\d{2})-(\d{2})-(\d{2})(\d{2})$/);
+      if (mNew) {
+        const period = mNew[3] === 'morning' ? '早报' : '晚报';
+        text = `${mNew[1]}-${mNew[2]} ${period}`;
+      } else if (mLegacy) {
+        const hour = parseInt(mLegacy[3], 10);
         const period = hour < 12 ? '早报' : '晚报';
-        text = `${m[1]}-${m[2]} ${period}`;
+        text = `${mLegacy[1]}-${mLegacy[2]} ${period}`;
       } else {
         text = slug;
       }
