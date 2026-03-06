@@ -58,17 +58,17 @@ const newsEntries = allDocs
     const newsTitle = parts[1] ?? fullTitle;
     const desc = e.data?.description ?? '';
     const slug = e.id.replace(/\.md$/, '');
-    const bgIndex = slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % cardBackgrounds.length;
     return {
       slug,
       date: dateStr,
       title: newsTitle,
       description: desc.length > 100 ? desc.slice(0, 100) + '…' : desc,
-      bg: cardBackgrounds[bgIndex],
+      bg: '', // assigned after sort
     };
   })
   .sort((a, b) => b.slug.localeCompare(a.slug))
-  .slice(0, 6);
+  .slice(0, 6)
+  .map((item, i) => ({ ...item, bg: cardBackgrounds[i % cardBackgrounds.length] }));
 ---
 
 <BaseLayout title="LightHouse" pageClass="lh-page-home">
