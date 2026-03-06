@@ -47,7 +47,7 @@ export default function RecentSection({
         localStorage.getItem(STORAGE_KEY) || '{}'
       );
       const items = Object.entries(stored)
-        .filter(([, v]) => v.scrollY > 0 && v.title)
+        .filter(([, v]) => v.title)
         .map(([slug, data], i) => ({
           slug,
           title: data.title!,
