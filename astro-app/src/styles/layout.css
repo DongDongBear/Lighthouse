@@ -42,7 +42,7 @@
 .lh-page-doc .lh-main-content {
   flex: 1;
   min-width: 0;
-  max-width: 1280px;
+  max-width: 1310px;
   padding: 24px 12px 60px 28px;
   overflow-y: auto;
 }
@@ -60,7 +60,7 @@
 
 /* — right column (TOC) — */
 .lh-page-doc .lh-toc-wrap {
-  width: 260px;
+  width: 290px;
   flex-shrink: 0;
   padding: 24px 32px 24px 8px;
   overflow-y: auto;
