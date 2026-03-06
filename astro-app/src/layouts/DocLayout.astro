@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import DocFooter from '../components/DocFooter.astro';
 import ChatWidget from '../components/chat/ChatWidget.tsx';
+import ReadingProgress from '../components/ReadingProgress.tsx';
 import { getSidebarGroups } from '../data/sidebar';
 
 interface Props {
@@ -57,6 +58,7 @@ const heroLabel = (() => {
       </div>
     )}
   </main>
+  <ReadingProgress client:only="react" slug={cleanSlug} title={title} />
   <ChatWidget client:only="react" />
 </BaseLayout>
 
