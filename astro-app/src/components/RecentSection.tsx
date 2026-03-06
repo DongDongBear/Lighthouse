@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'lh-reading-progress';
-const TOTAL_SLOTS = 6;
 
 interface NewsItem {
   slug: string;
@@ -27,17 +26,27 @@ function getLabel(slug: string): string {
   return 'Doc';
 }
 
+function timeAgo(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const min = Math.floor(diff / 60000);
+  if (min < 1) return '刚刚';
+  if (min < 60) return `${min} 分钟前`;
+  const hr = Math.floor(min / 60);
+  if (hr < 24) return `${hr} 小时前`;
+  const d = Math.floor(hr / 24);
+  return `${d} 天前`;
+}
+
 export default function RecentSection({
   base,
   newsItems,
-  backgrounds,
 }: {
   base: string;
   newsItems: NewsItem[];
-  backgrounds: string[];
+  backgrounds?: string[];
 }) {
   const [readingItems, setReadingItems] = useState<
-    { slug: string; title: string; label: string; percent: number; bg: string }[]
+    { slug: string; title: string; label: string; percent: number; lastRead: string }[]
   >([]);
   const [ready, setReady] = useState(false);
 
@@ -48,101 +57,72 @@ export default function RecentSection({
       );
       const items = Object.entries(stored)
         .filter(([, v]) => v.title)
-        .map(([slug, data], i) => ({
+        .map(([slug, data]) => ({
           slug,
           title: data.title!,
           label: getLabel(slug),
           percent: data.scrollPercent,
-          bg: backgrounds[i % backgrounds.length],
+          lastRead: data.lastRead,
         }))
-        .sort((a, b) => {
-          const aTime = stored[a.slug]?.lastRead ?? '';
-          const bTime = stored[b.slug]?.lastRead ?? '';
-          return bTime.localeCompare(aTime);
-        });
+        .sort((a, b) => b.lastRead.localeCompare(a.lastRead))
+        .slice(0, 4);
       setReadingItems(items);
     } catch {}
     setReady(true);
   }, []);
 
-  if (!ready) {
-    // SSR placeholder: render news only to avoid layout shift
-    const allCards = newsItems.slice(0, TOTAL_SLOTS);
-    return (
-      <section className="lh-recent">
-        <div className="lh-recent-head">
-          <h3>Recent</h3>
+  return (
+    <div className="lh-recent-update-wrapper">
+      {/* Recent - reading history (list style) */}
+      {ready && readingItems.length > 0 && (
+        <section className="lh-recent-section">
+          <div className="lh-section-header">
+            <h3>Recent</h3>
+          </div>
+          <div className="lh-recent-list">
+            {readingItems.map(item => (
+              <a key={item.slug} className="lh-recent-item" href={`${base}/${item.slug}/`}>
+                <div className="lh-recent-item-main">
+                  <span className="lh-recent-item-label">{item.label}</span>
+                  <span className="lh-recent-item-title">{item.title}</span>
+                </div>
+                <div className="lh-recent-item-meta">
+                  <div className="lh-recent-item-progress">
+                    <div className="lh-recent-item-bar">
+                      <div
+                        className="lh-recent-item-fill"
+                        style={{ width: `${item.percent}%` }}
+                      />
+                    </div>
+                    <span className="lh-recent-item-pct">{item.percent}%</span>
+                  </div>
+                  <span className="lh-recent-item-time">{timeAgo(item.lastRead)}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Update - news cards (visual style) */}
+      <section className="lh-update-section">
+        <div className="lh-section-header">
+          <h3>Update</h3>
         </div>
-        <div className="lh-recent-grid lh-recent-grid-compact">
-          {allCards.map((n, i) => (
+        <div className="lh-update-grid">
+          {newsItems.slice(0, 3).map(n => (
             <a
               key={n.slug}
-              className="lh-recent-card lh-recent-card-compact"
+              className="lh-update-card"
               href={`${base}/${n.slug}/`}
               style={{ '--lh-card-bg': `url('${base}/card-bg/${n.bg}')` } as React.CSSProperties}
             >
-              <span className="lh-recent-tag">News</span>
-              <p className="lh-recent-title">{n.title}</p>
+              <span className="lh-update-date">News · {n.date}</span>
+              <p className="lh-update-title">{n.title}</p>
             </a>
           ))}
         </div>
       </section>
-    );
-  }
-
-  // Build the 6-card grid: reading items first, then fill with news
-  const readingSlice = readingItems.slice(0, Math.min(readingItems.length, TOTAL_SLOTS));
-  const newsNeeded = TOTAL_SLOTS - readingSlice.length;
-  const newsSlice = newsItems.slice(0, newsNeeded);
-
-  const cards: React.ReactNode[] = [];
-
-  readingSlice.forEach((item, i) => {
-    cards.push(
-      <a
-        key={`read-${item.slug}`}
-        className="lh-recent-card lh-recent-card-compact"
-        href={`${base}/${item.slug}/`}
-        style={{ '--lh-card-bg': `url('${base}/card-bg/${item.bg}')` } as React.CSSProperties}
-      >
-        <span className="lh-recent-tag">{item.label}</span>
-        <p className="lh-recent-title">{item.title}</p>
-        <div className="lh-recent-progress">
-          <div className="lh-recent-progress-bar">
-            <div className="lh-recent-progress-fill" style={{ width: `${item.percent}%` }} />
-          </div>
-          <span className="lh-recent-progress-pct">已读 {item.percent}%</span>
-        </div>
-      </a>
-    );
-  });
-
-  newsSlice.forEach((n, i) => {
-    cards.push(
-      <a
-        key={`news-${n.slug}`}
-        className="lh-recent-card lh-recent-card-compact"
-        href={`${base}/${n.slug}/`}
-        style={
-          {
-            '--lh-card-bg': `url('${base}/card-bg/${n.bg}')`,
-          } as React.CSSProperties
-        }
-      >
-        <span className="lh-recent-tag">News · {n.date}</span>
-        <p className="lh-recent-title">{n.title}</p>
-      </a>
-    );
-  });
-
-  return (
-    <section className="lh-recent">
-      <div className="lh-recent-head">
-        <h3>Recent</h3>
-      </div>
-      <div className="lh-recent-grid lh-recent-grid-compact">
-        {cards}
-      </div>
-    </section>
+    </div>
   );
 }
