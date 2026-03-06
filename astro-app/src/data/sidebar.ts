@@ -37,6 +37,36 @@ function buildAiResearchAgentItems(): SidebarItem[] {
   ];
 }
 
+function buildNewsItems(): SidebarItem[] {
+  const modules = import.meta.glob('../content/docs/ai-product-analysis/news/*.md', {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }) as Record<string, string>;
+
+  const articleItems = Object.entries(modules)
+    .filter(([path]) => !path.endsWith('/index.md'))
+    .map(([path, raw]) => {
+      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
+      // Extract title from frontmatter
+      const titleMatch = raw.match(/^title:\s*["']?(.+?)["']?\s*$/m);
+      const text = titleMatch?.[1] || slug;
+      return {
+        text,
+        link: `/ai-product-analysis/news/${slug}`,
+        _slug: slug,
+      };
+    })
+    // Sort by slug descending (newest first)
+    .sort((a, b) => b._slug.localeCompare(a._slug))
+    .map(({ text, link }) => ({ text, link } as SidebarItem));
+
+  return [
+    { text: 'News 总览', link: '/ai-product-analysis/news/' },
+    ...articleItems,
+  ];
+}
+
 const aiResearchGroups: SidebarGroup[] = [
   {
     text: 'LLM Research',
@@ -52,11 +82,7 @@ const aiResearchGroups: SidebarGroup[] = [
   {
     text: 'News',
     collapsed: false,
-    items: [
-      { text: 'News 总览', link: '/ai-product-analysis/news/' },
-      { text: '2026-03-05 17:26（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1726' },
-      { text: '2026-03-05 16:00（UTC+8）', link: '/ai-product-analysis/news/2026-03-05-1600' },
-    ],
+    items: buildNewsItems(),
   },
 ];
 
