@@ -63,12 +63,15 @@
   border-radius: 7px;
   padding: 6px 10px;
   margin: 0;
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 13.5px;
+  line-height: 1.45;
   color: var(--vp-c-text-2);
   text-decoration: none;
   transition: background-color .16s ease, color .16s ease;
   font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lh-sidebar-items li {

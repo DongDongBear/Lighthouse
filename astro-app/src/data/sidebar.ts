@@ -48,9 +48,22 @@ function buildNewsItems(): SidebarItem[] {
     .filter(([path]) => !path.endsWith('/index.md'))
     .map(([path, raw]) => {
       const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
-      // Extract title from frontmatter
-      const titleMatch = raw.match(/^title:\s*["']?(.+?)["']?\s*$/m);
-      const text = titleMatch?.[1] || slug;
+      // Use short date-based label for sidebar (e.g. "03-06 05:26")
+      // slug format: 2026-03-06-0526 → "03-06 05:26"
+      const m = slug.match(/^\d{4}-(\d{2}-\d{2})-(\d{2})(\d{2})$/);
+      let text: string;
+      if (m) {
+        text = `${m[1]} ${m[2]}:${m[3]}`;
+        // Append short summary from title if available
+        const titleMatch = raw.match(/^title:\s*["']?[^｜]*｜[^：]*：(.+?)["']?\s*$/m);
+        if (titleMatch) {
+          // Take first phrase, truncate to ~20 chars
+          const summary = titleMatch[1].split(/[，,]/)[0].slice(0, 24);
+          text += ` ${summary}`;
+        }
+      } else {
+        text = slug;
+      }
       return {
         text,
         link: `/ai-product-analysis/news/${slug}`,
