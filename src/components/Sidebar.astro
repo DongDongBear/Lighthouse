@@ -26,7 +26,7 @@ function groupHasActive(group: { items: { link?: string; items?: { link?: string
 ---
 
 <div class="lh-sidebar-overlay" id="sidebar-overlay"></div>
-<aside class="lh-sidebar" id="sidebar">
+<aside class="lh-sidebar" id="sidebar" transition:persist>
   <nav class="lh-sidebar-nav">
     {groups.map((group) => {
       const forceExpand = groupHasActive(group);
@@ -109,59 +109,31 @@ function groupHasActive(group: { items: { link?: string; items?: { link?: string
 
     overlay?.addEventListener('click', closeSidebar);
 
-    // --- Persist collapse state in localStorage ---
-    const STORAGE_KEY = 'lh-sidebar-state';
+    // --- Update active link on navigation ---
+    const currentPath = window.location.pathname.replace(/\/$/, '');
+    document.querySelectorAll('#sidebar .lh-sidebar-link').forEach(link => {
+      const href = (link as HTMLAnchorElement).getAttribute('href')?.replace(/\/$/, '') || '';
+      if (href === currentPath) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
 
-    function loadState(): Record<string, boolean> {
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-      } catch { return {}; }
-    }
-
-    function saveState(state: Record<string, boolean>) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }
-
-    function getGroupKey(titleEl: Element): string {
-      return (titleEl.querySelector('span')?.textContent || '').trim();
-    }
-
+    // --- Collapsible groups (only bind if not already bound) ---
     function setupCollapsible(selector: string) {
-      const state = loadState();
       document.querySelectorAll(selector).forEach(title => {
-        const key = getGroupKey(title);
-        const items = title.nextElementSibling as HTMLElement;
-        const arrow = title.querySelector('.lh-sidebar-arrow');
-        if (!items) return;
+        if ((title as any)._lhBound) return;
+        (title as any)._lhBound = true;
 
-        // Restore saved state (skip if current page is active inside)
-        if (key && key in state) {
-          const hasActive = items.querySelector('.lh-sidebar-link.active');
-          if (!hasActive) {
-            const shouldCollapse = state[key];
-            if (shouldCollapse) {
-              items.classList.add('collapsed');
-              arrow?.classList.add('collapsed');
-              title.setAttribute('data-collapsed', 'true');
-            } else {
-              items.classList.remove('collapsed');
-              arrow?.classList.remove('collapsed');
-              title.setAttribute('data-collapsed', 'false');
-            }
-          }
-        }
-
-        // Click handler
         title.addEventListener('click', () => {
+          const items = title.nextElementSibling as HTMLElement;
+          const arrow = title.querySelector('.lh-sidebar-arrow');
+          if (!items) return;
           const isCollapsed = items.classList.contains('collapsed');
           items.classList.toggle('collapsed');
           arrow?.classList.toggle('collapsed');
           title.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
-
-          // Save
-          const s = loadState();
-          s[key] = !isCollapsed;
-          saveState(s);
         });
       });
     }
