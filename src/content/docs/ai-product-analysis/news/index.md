@@ -12,6 +12,7 @@
 
 ## 按日期归档
 
+- [2026-03-07 17:26 ｜ FlashAttention-4 为 Blackwell GPU 重写注意力内核；Reasoning Theater 揭示 CoT 中的表演性推理](/ai-product-analysis/news/2026-03-07-evening/)
 - [2026-03-07 05:26 ｜ Claude Opus 4.6 两周挖出 Firefox 22 个漏洞；AReaL 开源异步 RL 训练框架冲上 GitHub Trending](/ai-product-analysis/news/2026-03-07-morning/)
 - [2026-03-06 17:26 ｜ Agent 检索与验证范式继续收敛，算力供应链不确定性上行](/ai-product-analysis/news/2026-03-06-evening/)
 - [2026-03-06 05:26 ｜ Reasoning-Aware Retrieval 重塑 Agent 检索范式，美国拟全球 AI 芯片许可制](/ai-product-analysis/news/2026-03-06-0526/)
