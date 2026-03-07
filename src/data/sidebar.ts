@@ -162,27 +162,31 @@ const aiResearchGroups: SidebarGroup[] = [
   {
     text: 'LLM Research',
     collapsed: false,
-    items: buildLlmResearchItems(),
-  },
-  {
-    text: 'LLM Paper Read',
-    collapsed: false,
     items: [
-      { text: '总览', link: '/ai-research/llm-research/paper-read/' },
-      ...buildLlmPaperReadItems(),
+      ...buildLlmResearchItems(),
+      {
+        text: 'LLM Paper Read',
+        collapsed: true,
+        items: [
+          { text: '总览', link: '/ai-research/llm-research/paper-read/' },
+          ...buildLlmPaperReadItems(),
+        ],
+      },
     ],
   },
   {
     text: 'Agent',
     collapsed: false,
-    items: buildAiResearchAgentItems(),
-  },
-  {
-    text: 'Agent Paper Read',
-    collapsed: false,
     items: [
-      { text: '总览', link: '/ai-research/agent/paper-read/' },
-      ...buildAgentPaperReadItems(),
+      ...buildAiResearchAgentItems(),
+      {
+        text: 'Agent Paper Read',
+        collapsed: true,
+        items: [
+          { text: '总览', link: '/ai-research/agent/paper-read/' },
+          ...buildAgentPaperReadItems(),
+        ],
+      },
     ],
   },
   {
