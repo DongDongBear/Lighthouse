@@ -69,33 +69,44 @@ function buildLlmResearchItems(): SidebarItem[] {
   ];
 }
 
-function buildPaperReadItems(): SidebarItem[] {
-  const modules = import.meta.glob('../content/docs/ai-research/paper-read/*.md', {
+function buildAgentPaperReadItems(): SidebarItem[] {
+  const modules = import.meta.glob('../content/docs/ai-research/agent/paper-read/*.md', {
     eager: true,
     query: '?raw',
     import: 'default',
   }) as Record<string, string>;
 
-  const articleItems = Object.entries(modules)
+  return Object.entries(modules)
     .filter(([path]) => !path.endsWith('/index.md'))
     .map(([path, raw]) => {
       const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
       const titleMatch = raw.match(/^title:\s*["']?(.+?)["']?\s*$/m);
       const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
       const text = titleMatch?.[1] || h1 || slug.replace(/-/g, ' ');
-      return {
-        text,
-        link: `/ai-research/paper-read/${slug}`,
-        _slug: slug,
-      };
+      return { text, link: `/ai-research/agent/paper-read/${slug}`, _slug: slug };
     })
     .sort((a, b) => b._slug.localeCompare(a._slug))
     .map(({ text, link }) => ({ text, link } as SidebarItem));
+}
 
-  return [
-    { text: 'Paper Read 总览', link: '/ai-research/paper-read/' },
-    ...articleItems,
-  ];
+function buildLlmPaperReadItems(): SidebarItem[] {
+  const modules = import.meta.glob('../content/docs/ai-research/llm-research/paper-read/*.md', {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }) as Record<string, string>;
+
+  return Object.entries(modules)
+    .filter(([path]) => !path.endsWith('/index.md'))
+    .map(([path, raw]) => {
+      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
+      const titleMatch = raw.match(/^title:\s*["']?(.+?)["']?\s*$/m);
+      const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
+      const text = titleMatch?.[1] || h1 || slug.replace(/-/g, ' ');
+      return { text, link: `/ai-research/llm-research/paper-read/${slug}`, _slug: slug };
+    })
+    .sort((a, b) => b._slug.localeCompare(a._slug))
+    .map(({ text, link }) => ({ text, link } as SidebarItem));
 }
 
 function buildNewsItems(): SidebarItem[] {
@@ -154,14 +165,25 @@ const aiResearchGroups: SidebarGroup[] = [
     items: buildLlmResearchItems(),
   },
   {
+    text: 'LLM Paper Read',
+    collapsed: false,
+    items: [
+      { text: '总览', link: '/ai-research/llm-research/paper-read/' },
+      ...buildLlmPaperReadItems(),
+    ],
+  },
+  {
     text: 'Agent',
     collapsed: false,
     items: buildAiResearchAgentItems(),
   },
   {
-    text: 'Paper Read',
+    text: 'Agent Paper Read',
     collapsed: false,
-    items: buildPaperReadItems(),
+    items: [
+      { text: '总览', link: '/ai-research/agent/paper-read/' },
+      ...buildAgentPaperReadItems(),
+    ],
   },
   {
     text: 'News',
