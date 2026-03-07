@@ -43,7 +43,7 @@
   flex: 1;
   min-width: 0;
   max-width: 1310px;
-  padding: 24px 12px 60px 28px;
+  padding: 24px 12px 60px 44px;
   overflow-y: auto;
 }
 
@@ -51,6 +51,8 @@
 .lh-page-doc .lh-main-content .lh-prose,
 .lh-page-doc .lh-main-content .lh-doc-footer {
   max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* no sidebar → center the content */
