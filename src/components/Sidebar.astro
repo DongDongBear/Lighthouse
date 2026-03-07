@@ -109,31 +109,65 @@ function groupHasActive(group: { items: { link?: string; items?: { link?: string
 
     overlay?.addEventListener('click', closeSidebar);
 
-    // Collapsible groups
-    document.querySelectorAll('.lh-sidebar-group-title').forEach(title => {
-      title.addEventListener('click', () => {
-        const items = title.nextElementSibling as HTMLElement;
-        const arrow = title.querySelector('.lh-sidebar-arrow');
-        if (!items) return;
-        const isCollapsed = items.classList.contains('collapsed');
-        items.classList.toggle('collapsed');
-        arrow?.classList.toggle('collapsed');
-        title.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
-      });
-    });
+    // --- Persist collapse state in localStorage ---
+    const STORAGE_KEY = 'lh-sidebar-state';
 
-    // Collapsible subgroups
-    document.querySelectorAll('.lh-sidebar-subgroup-title').forEach(title => {
-      title.addEventListener('click', () => {
+    function loadState(): Record<string, boolean> {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      } catch { return {}; }
+    }
+
+    function saveState(state: Record<string, boolean>) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function getGroupKey(titleEl: Element): string {
+      return (titleEl.querySelector('span')?.textContent || '').trim();
+    }
+
+    function setupCollapsible(selector: string) {
+      const state = loadState();
+      document.querySelectorAll(selector).forEach(title => {
+        const key = getGroupKey(title);
         const items = title.nextElementSibling as HTMLElement;
         const arrow = title.querySelector('.lh-sidebar-arrow');
         if (!items) return;
-        const isCollapsed = items.classList.contains('collapsed');
-        items.classList.toggle('collapsed');
-        arrow?.classList.toggle('collapsed');
-        title.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
+
+        // Restore saved state (skip if current page is active inside)
+        if (key && key in state) {
+          const hasActive = items.querySelector('.lh-sidebar-link.active');
+          if (!hasActive) {
+            const shouldCollapse = state[key];
+            if (shouldCollapse) {
+              items.classList.add('collapsed');
+              arrow?.classList.add('collapsed');
+              title.setAttribute('data-collapsed', 'true');
+            } else {
+              items.classList.remove('collapsed');
+              arrow?.classList.remove('collapsed');
+              title.setAttribute('data-collapsed', 'false');
+            }
+          }
+        }
+
+        // Click handler
+        title.addEventListener('click', () => {
+          const isCollapsed = items.classList.contains('collapsed');
+          items.classList.toggle('collapsed');
+          arrow?.classList.toggle('collapsed');
+          title.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
+
+          // Save
+          const s = loadState();
+          s[key] = !isCollapsed;
+          saveState(s);
+        });
       });
-    });
+    }
+
+    setupCollapsible('.lh-sidebar-group-title');
+    setupCollapsible('.lh-sidebar-subgroup-title');
   }
 
   document.addEventListener('astro:page-load', initSidebar);
