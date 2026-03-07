@@ -70,7 +70,7 @@ const heroLabel = (() => {
   <ChatWidget client:only="react" />
 </BaseLayout>
 
-<script is:inline>
+<script is:inline define:vars={{ base }}>
   (() => {
     const heroImages = [
       'bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg',
@@ -81,8 +81,6 @@ const heroLabel = (() => {
       'bg51.png', 'bg52.png', 'bg53.png', 'bg54.png', 'bg55.png', 'bg56.png', 'bg57.png', 'bg58.png', 'bg59.png', 'bg60.png',
       'bg61.png', 'bg62.png', 'bg63.png', 'bg64.png', 'bg65.png',
     ];
-    const base = {JSON.stringify(base)};
-
     const applyRandomHero = () => {
       const hero = document.querySelector('.lh-article-hero');
       if (!hero) return;
