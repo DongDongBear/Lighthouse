@@ -7,7 +7,15 @@ import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const cardBackgrounds = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg'];
+const cardBackgrounds = [
+  'bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg',
+  'bg11.png', 'bg12.png', 'bg13.png', 'bg14.png', 'bg15.png', 'bg16.png', 'bg17.png', 'bg18.png', 'bg19.png', 'bg20.png',
+  'bg21.png', 'bg22.png', 'bg23.png', 'bg24.png', 'bg25.png', 'bg26.png', 'bg27.png', 'bg28.png', 'bg29.png', 'bg30.png',
+  'bg31.png', 'bg32.png', 'bg33.png', 'bg34.png', 'bg35.png', 'bg36.png', 'bg37.png', 'bg38.png', 'bg39.png', 'bg40.png',
+  'bg41.png', 'bg42.png', 'bg43.png', 'bg44.png', 'bg45.png', 'bg46.png', 'bg47.png', 'bg48.png', 'bg49.png', 'bg50.png',
+  'bg51.png', 'bg52.png', 'bg53.png', 'bg54.png', 'bg55.png', 'bg56.png', 'bg57.png', 'bg58.png', 'bg59.png', 'bg60.png',
+  'bg61.png', 'bg62.png', 'bg63.png', 'bg64.png', 'bg65.png',
+];
 
 const productCards = [
   {
@@ -15,7 +23,7 @@ const productCards = [
     href: `${base}/ai-product-analysis/`,
     linkTitle: '查看 AI Research',
     title: 'AI Research',
-    bg: 'bg7.jpg',
+    bg: 'bg45.png',
     description:
       '聚焦模型公司官方公告、LLM/Agent 论文与 Agent 生态热点，持续追踪 AI 前沿。News 栏目（原每日播报）每 12 小时更新一期，每一期都作为该栏目下一篇文章发布，并以时间作为标题。',
   },
@@ -24,6 +32,7 @@ const productCards = [
     href: `${base}/unity-tutorial/`,
     linkTitle: '查看 Unity 教程',
     title: 'Unity',
+    bg: 'bg20.png',
     description:
       '聚焦 3D 开放世界手游开发路径，从安装到核心系统实现，完整覆盖开发链路。角色控制、战斗、任务、地形、优化与发布全覆盖，适合前端背景开发者迁移学习。',
   },
@@ -32,6 +41,7 @@ const productCards = [
     href: `${base}/electron-tutorial/`,
     linkTitle: '查看 Electron 教程',
     title: 'Electron',
+    bg: 'bg30.png',
     description:
       '从基础能力到工程化落地，讲清进程模型、窗口管理、数据存储和打包发布。覆盖热更新与 OpenClaw 桌面端实战，帮助你搭建可维护、可迭代的桌面应用体系。',
   },
@@ -40,6 +50,7 @@ const productCards = [
     href: `${base}/rust-tutorial/`,
     linkTitle: '查看 Rust 教程',
     title: 'Rust',
+    bg: 'bg55.png',
     description:
       '面向 TS/JS 开发者的 Rust 系统化学习路径：所有权、借用、并发、异步、宏与工程实战全覆盖。从语言基础到 Axum/WASM/FFI/Tokio 深入，帮助你构建高性能、可维护、可部署的 Rust 项目体系。',
   },

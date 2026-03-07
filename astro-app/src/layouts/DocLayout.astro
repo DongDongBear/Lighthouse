@@ -19,7 +19,15 @@ const currentPath = Astro.url.pathname;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const sidebarGroups = getSidebarGroups(currentPath.replace(base, ''));
 const hasSidebar = sidebarGroups !== null && sidebarGroups.length > 0;
-const articleHeroBgs = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg'];
+const articleHeroBgs = [
+  'bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg',
+  'bg11.png', 'bg12.png', 'bg13.png', 'bg14.png', 'bg15.png', 'bg16.png', 'bg17.png', 'bg18.png', 'bg19.png', 'bg20.png',
+  'bg21.png', 'bg22.png', 'bg23.png', 'bg24.png', 'bg25.png', 'bg26.png', 'bg27.png', 'bg28.png', 'bg29.png', 'bg30.png',
+  'bg31.png', 'bg32.png', 'bg33.png', 'bg34.png', 'bg35.png', 'bg36.png', 'bg37.png', 'bg38.png', 'bg39.png', 'bg40.png',
+  'bg41.png', 'bg42.png', 'bg43.png', 'bg44.png', 'bg45.png', 'bg46.png', 'bg47.png', 'bg48.png', 'bg49.png', 'bg50.png',
+  'bg51.png', 'bg52.png', 'bg53.png', 'bg54.png', 'bg55.png', 'bg56.png', 'bg57.png', 'bg58.png', 'bg59.png', 'bg60.png',
+  'bg61.png', 'bg62.png', 'bg63.png', 'bg64.png', 'bg65.png',
+];
 const initialHeroBg = articleHeroBgs[Math.floor(Math.random() * articleHeroBgs.length)];
 const cleanSlug = slug.replace(/\.md$/, '');
 const slugSegments = cleanSlug.split('/').filter(Boolean);
@@ -64,7 +72,15 @@ const heroLabel = (() => {
 
 <script is:inline>
   (() => {
-    const heroImages = ['bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg'];
+    const heroImages = [
+      'bg1.png', 'bg2.png', 'bg3.jpg', 'bg4.webp', 'bg5.png', 'bg6.png', 'bg7.jpg', 'bg8.jpg', 'bg9.png', 'bg10.jpg',
+      'bg11.png', 'bg12.png', 'bg13.png', 'bg14.png', 'bg15.png', 'bg16.png', 'bg17.png', 'bg18.png', 'bg19.png', 'bg20.png',
+      'bg21.png', 'bg22.png', 'bg23.png', 'bg24.png', 'bg25.png', 'bg26.png', 'bg27.png', 'bg28.png', 'bg29.png', 'bg30.png',
+      'bg31.png', 'bg32.png', 'bg33.png', 'bg34.png', 'bg35.png', 'bg36.png', 'bg37.png', 'bg38.png', 'bg39.png', 'bg40.png',
+      'bg41.png', 'bg42.png', 'bg43.png', 'bg44.png', 'bg45.png', 'bg46.png', 'bg47.png', 'bg48.png', 'bg49.png', 'bg50.png',
+      'bg51.png', 'bg52.png', 'bg53.png', 'bg54.png', 'bg55.png', 'bg56.png', 'bg57.png', 'bg58.png', 'bg59.png', 'bg60.png',
+      'bg61.png', 'bg62.png', 'bg63.png', 'bg64.png', 'bg65.png',
+    ];
     const base = {JSON.stringify(base)};
 
     const applyRandomHero = () => {
