@@ -49,9 +49,32 @@ function writeStorage(records: ReadingMap) {
   }
 }
 
+function getScrollContainer(): HTMLElement | Window {
+  const docScroller = document.querySelector<HTMLElement>('.lh-page-doc .lh-main-content');
+  if (!docScroller) return window;
+
+  const isDesktop = window.matchMedia('(min-width: 961px)').matches;
+  if (!isDesktop) return window;
+
+  if (docScroller.scrollHeight > docScroller.clientHeight) return docScroller;
+  return window;
+}
+
+function getScrollMetrics(container: HTMLElement | Window) {
+  if (container === window) {
+    const scrollY = Math.max(0, Math.round(window.scrollY));
+    const maxScrollable = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    return { scrollY, maxScrollable };
+  }
+
+  const scrollY = Math.max(0, Math.round(container.scrollTop));
+  const maxScrollable = Math.max(0, container.scrollHeight - container.clientHeight);
+  return { scrollY, maxScrollable };
+}
+
 function getCurrentProgress() {
-  const scrollY = Math.max(0, Math.round(window.scrollY));
-  const maxScrollable = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const container = getScrollContainer();
+  const { scrollY, maxScrollable } = getScrollMetrics(container);
   const scrollPercent = maxScrollable > 0 ? Math.min(100, Math.round((scrollY / maxScrollable) * 100)) : 0;
   return { scrollY, scrollPercent };
 }
@@ -76,11 +99,17 @@ function restoreProgress(slug: string): boolean {
   if (!entry) return false;
   if (typeof entry.scrollY !== 'number' || entry.scrollY < RESTORE_MIN_SCROLL) return false;
 
-  const maxScrollable = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const container = getScrollContainer();
+  const { maxScrollable } = getScrollMetrics(container);
   const targetY = Math.min(entry.scrollY, maxScrollable);
 
-  window.scrollTo({ top: targetY, behavior: 'auto' });
-  return Math.abs(window.scrollY - targetY) <= 4;
+  if (container === window) {
+    window.scrollTo({ top: targetY, behavior: 'auto' });
+    return Math.abs(window.scrollY - targetY) <= 4;
+  }
+
+  container.scrollTo({ top: targetY, behavior: 'auto' });
+  return Math.abs(container.scrollTop - targetY) <= 4;
 }
 
 export default function ReadingProgress({ slug, title }: { slug: string; title: string }) {
@@ -115,6 +144,10 @@ export default function ReadingProgress({ slug, title }: { slug: string; title: 
     };
 
     window.addEventListener('scroll', saveIfNeeded, { passive: true });
+
+    const docContainer = document.querySelector<HTMLElement>('.lh-page-doc .lh-main-content');
+    docContainer?.addEventListener('scroll', saveIfNeeded, { passive: true });
+
     window.addEventListener('pagehide', saveNow);
     window.addEventListener('beforeunload', saveNow);
     document.addEventListener('visibilitychange', onVisibilityChange);
@@ -122,6 +155,7 @@ export default function ReadingProgress({ slug, title }: { slug: string; title: 
     return () => {
       if (restoreTimer) window.clearTimeout(restoreTimer);
       window.removeEventListener('scroll', saveIfNeeded);
+      docContainer?.removeEventListener('scroll', saveIfNeeded);
       window.removeEventListener('pagehide', saveNow);
       window.removeEventListener('beforeunload', saveNow);
       document.removeEventListener('visibilitychange', onVisibilityChange);
