@@ -69,6 +69,35 @@ function buildLlmResearchItems(): SidebarItem[] {
   ];
 }
 
+function buildPaperReadItems(): SidebarItem[] {
+  const modules = import.meta.glob('../content/docs/ai-research/paper-read/*.md', {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }) as Record<string, string>;
+
+  const articleItems = Object.entries(modules)
+    .filter(([path]) => !path.endsWith('/index.md'))
+    .map(([path, raw]) => {
+      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
+      const titleMatch = raw.match(/^title:\s*["']?(.+?)["']?\s*$/m);
+      const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
+      const text = titleMatch?.[1] || h1 || slug.replace(/-/g, ' ');
+      return {
+        text,
+        link: `/ai-research/paper-read/${slug}`,
+        _slug: slug,
+      };
+    })
+    .sort((a, b) => b._slug.localeCompare(a._slug))
+    .map(({ text, link }) => ({ text, link } as SidebarItem));
+
+  return [
+    { text: 'Paper Read 总览', link: '/ai-research/paper-read/' },
+    ...articleItems,
+  ];
+}
+
 function buildNewsItems(): SidebarItem[] {
   const modules = import.meta.glob('../content/docs/ai-product-analysis/news/*.md', {
     eager: true,
@@ -128,6 +157,11 @@ const aiResearchGroups: SidebarGroup[] = [
     text: 'Agent',
     collapsed: false,
     items: buildAiResearchAgentItems(),
+  },
+  {
+    text: 'Paper Read',
+    collapsed: false,
+    items: buildPaperReadItems(),
   },
   {
     text: 'News',
