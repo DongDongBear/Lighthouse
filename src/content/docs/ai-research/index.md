@@ -10,3 +10,4 @@ AI 领域研究笔记与论文分析，按主题分类整理。
 
 - [LLM Research](./llm-research/) — LLM 基础研究：训练范式、强化学习、数据合成、推理扩展
 - [Agent](./agent/) — AI Agent 架构、工具使用、上下文管理等
+- [Paper Read](./paper-read/) — 每日精选 AI 论文深度导读
