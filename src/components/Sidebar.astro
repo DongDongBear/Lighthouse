@@ -17,8 +17,11 @@ function isActive(link: string): boolean {
   return normalized === normalizedLink;
 }
 
-function groupHasActive(group: { items: { link?: string }[] }): boolean {
-  return group.items.some(item => item.link && isActive(item.link));
+function groupHasActive(group: { items: { link?: string; items?: { link?: string }[] }[] }): boolean {
+  return group.items.some(item =>
+    (item.link && isActive(item.link)) ||
+    (item.items && item.items.some(sub => sub.link && isActive(sub.link)))
+  );
 }
 ---
 
@@ -39,7 +42,29 @@ function groupHasActive(group: { items: { link?: string }[] }): boolean {
           <ul class:list={['lh-sidebar-items', { collapsed: isCollapsed }]}>
             {group.items.map((item) => (
               <li>
-                {item.link ? (
+                {item.items ? (
+                  <Fragment>
+                    <div class="lh-sidebar-subgroup-title" data-collapsed={item.collapsed ? 'true' : 'false'}>
+                      <span>{item.text}</span>
+                      <svg class:list={['lh-sidebar-arrow', { collapsed: !!item.collapsed }]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                    <ul class:list={['lh-sidebar-subitems', { collapsed: !!item.collapsed }]}>
+                      {item.items.map((sub) => (
+                        <li>
+                          {sub.link ? (
+                            <a class:list={['lh-sidebar-link lh-sidebar-sublink', { active: isActive(sub.link) }]} href={`${base}${sub.link}`}>
+                              {sub.text}
+                            </a>
+                          ) : (
+                            <span class="lh-sidebar-link level-1">{sub.text}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </Fragment>
+                ) : item.link ? (
                   <a class:list={['lh-sidebar-link', { active: isActive(item.link) }]} href={`${base}${item.link}`}>
                     {item.text}
                   </a>
@@ -83,6 +108,19 @@ function groupHasActive(group: { items: { link?: string }[] }): boolean {
 
     // Collapsible groups
     document.querySelectorAll('.lh-sidebar-group-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const items = title.nextElementSibling as HTMLElement;
+        const arrow = title.querySelector('.lh-sidebar-arrow');
+        if (!items) return;
+        const isCollapsed = items.classList.contains('collapsed');
+        items.classList.toggle('collapsed');
+        arrow?.classList.toggle('collapsed');
+        title.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
+      });
+    });
+
+    // Collapsible subgroups
+    document.querySelectorAll('.lh-sidebar-subgroup-title').forEach(title => {
       title.addEventListener('click', () => {
         const items = title.nextElementSibling as HTMLElement;
         const arrow = title.querySelector('.lh-sidebar-arrow');
