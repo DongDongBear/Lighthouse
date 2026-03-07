@@ -27,18 +27,16 @@ jobs:
           node-version: 22
 
       - name: Install deps
-        working-directory: astro-app
         run: npm install
 
       - name: Build
-        working-directory: astro-app
         env:
           NODE_OPTIONS: --max-old-space-size=3072
         run: npm run build -- --concurrency 4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: astro-app/dist
+          path: dist
 
   deploy:
     environment:
