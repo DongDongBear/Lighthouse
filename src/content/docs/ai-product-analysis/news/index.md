@@ -12,6 +12,7 @@
 
 ## 按日期归档
 
+- [2026-03-08 05:26 ｜ OPSDC 推理压缩悖论：少想反而更准；Jensen Huang 确认退出 AI 公司投资](/ai-product-analysis/news/2026-03-08-morning/)
 - [2026-03-07 17:26 ｜ FlashAttention-4 为 Blackwell GPU 重写注意力内核；Reasoning Theater 揭示 CoT 中的表演性推理](/ai-product-analysis/news/2026-03-07-evening/)
 - [2026-03-07 05:26 ｜ Claude Opus 4.6 两周挖出 Firefox 22 个漏洞；AReaL 开源异步 RL 训练框架冲上 GitHub Trending](/ai-product-analysis/news/2026-03-07-morning/)
 - [2026-03-06 17:26 ｜ Agent 检索与验证范式继续收敛，算力供应链不确定性上行](/ai-product-analysis/news/2026-03-06-evening/)
