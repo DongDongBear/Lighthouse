@@ -96,7 +96,7 @@
   overflow: hidden;
   position: relative;
   isolation: isolate;
-  background-image: var(--lh-card-bg);
+  background-color: color-mix(in srgb, var(--vp-c-bg-soft) 92%, #000 8%);
   background-size: cover;
   background-position: center;
 }
@@ -121,6 +121,14 @@
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
 }
 .lh-card:hover { transform: translateY(-4px); }
+
+.lh-bg-lazy {
+  background-repeat: no-repeat;
+}
+
+.lh-bg-lazy {
+  transition: transform .2s ease, opacity .2s ease;
+}
 
 .lh-desc {
   margin: 12px 0 0;
@@ -332,7 +340,7 @@
   position: relative;
   isolation: isolate;
   text-decoration: none;
-  background-image: var(--lh-card-bg);
+  background-color: color-mix(in srgb, var(--vp-c-bg-soft) 80%, #000 20%);
   background-size: cover;
   background-position: center;
   transition: transform .2s ease;

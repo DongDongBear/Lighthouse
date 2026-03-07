@@ -71,6 +71,51 @@ export default function RecentSection({
     setReady(true);
   }, []);
 
+  useEffect(() => {
+    const targets = Array.from(
+      document.querySelectorAll<HTMLElement>('.lh-update-card[data-bg]')
+    );
+    if (!targets.length) return;
+
+    const load = (el: HTMLElement) => {
+      if (el.dataset.bgLoaded === '1') return;
+      const url = el.dataset.bg;
+      if (!url) return;
+
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = url;
+      img.onload = () => {
+        el.style.backgroundImage = `url('${url}')`;
+        el.dataset.bgLoaded = '1';
+        el.classList.add('is-loaded');
+      };
+      img.onerror = () => {
+        el.style.backgroundImage = `url('${url}')`;
+        el.dataset.bgLoaded = '1';
+      };
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(load);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          load(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '220px 0px' }
+    );
+
+    targets.forEach(target => observer.observe(target));
+    return () => observer.disconnect();
+  }, [newsItems]);
+
   return (
     <div className="lh-recent-update-wrapper">
       {/* Recent - reading history */}
@@ -105,9 +150,9 @@ export default function RecentSection({
           {newsItems.slice(0, 3).map(n => (
             <a
               key={n.slug}
-              className="lh-update-card"
+              className="lh-update-card lh-bg-lazy"
               href={`${base}/${n.slug}/`}
-              style={{ '--lh-card-bg': `url('${base}/card-bg/${n.bg}')` } as React.CSSProperties}
+              data-bg={`${base}/card-bg/${n.bg}`}
             >
               <span className="lh-update-date">News · {n.date}</span>
               <p className="lh-update-title">{n.title}</p>

@@ -117,9 +117,11 @@ const newsEntries = allDocs
                 data-category={card.category}
                 href={card.href}
                 title={card.linkTitle}
-                style={`--lh-card-bg: url('${base}/card-bg/${card.bg ?? cardBackgrounds[index % cardBackgrounds.length]}')`}
               >
-                <div class="lh-card-hero">
+                <div
+                  class="lh-card-hero lh-bg-lazy"
+                  data-bg={`${base}/card-bg/${card.bg ?? cardBackgrounds[index % cardBackgrounds.length]}`}
+                >
                   <h3>{card.title}</h3>
                 </div>
                 <div class="lh-desc">
@@ -137,19 +139,67 @@ const newsEntries = allDocs
 
 <script>
   function initTabs() {
-    const tabs = document.querySelectorAll<HTMLElement>('.lh-tabs span');
-    const cards = document.querySelectorAll<HTMLElement>('.lh-card');
+    const tabs = document.querySelectorAll('.lh-tabs span');
+    const cards = document.querySelectorAll('.lh-card');
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         const cat = tab.dataset.cat;
         cards.forEach(card => {
-          card.style.display = (!cat || card.dataset.category === cat) ? '' : 'none';
+          card.style.display = !cat || card.dataset.category === cat ? '' : 'none';
         });
       });
     });
   }
-  initTabs();
-  document.addEventListener('astro:page-load', initTabs);
+
+  function lazyLoadBackgrounds() {
+    const targets = Array.from(document.querySelectorAll('.lh-bg-lazy[data-bg]'));
+    if (!targets.length) return;
+
+    const load = el => {
+      if (el.dataset.bgLoaded === '1') return;
+      const url = el.dataset.bg;
+      if (!url) return;
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = url;
+      img.onload = () => {
+        el.style.backgroundImage = `url('${url}')`;
+        el.dataset.bgLoaded = '1';
+        el.classList.add('is-loaded');
+      };
+      img.onerror = () => {
+        el.style.backgroundImage = `url('${url}')`;
+        el.dataset.bgLoaded = '1';
+      };
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(load);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          load(el);
+          observer.unobserve(el);
+        });
+      },
+      { rootMargin: '220px 0px' }
+    );
+
+    targets.forEach(el => observer.observe(el));
+  }
+
+  function initHomeEnhancements() {
+    initTabs();
+    lazyLoadBackgrounds();
+  }
+
+  initHomeEnhancements();
+  document.addEventListener('astro:page-load', initHomeEnhancements);
 </script>
