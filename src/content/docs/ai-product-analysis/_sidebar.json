@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "text": "News",
+      "dir": "news",
+      "collapsed": false,
+      "sortBy": "slug-desc",
+      "formatTitle": "news-date"
+    }
+  ]
+}

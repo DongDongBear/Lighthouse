@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "text": "开始",
+      "items": ["index", "00-overview", "01-setup", "02-first-program", "03-type-system"]
+    },
+    {
+      "text": "核心基础",
+      "items": ["04-ownership", "05-borrowing", "06-structs-enums", "07-pattern-matching", "08-error-handling", "09-collections"]
+    },
+    {
+      "text": "进阶能力",
+      "collapsed": true,
+      "items": ["10-generics-traits", "11-lifetime", "12-closures-iterators", "13-modules-crates", "14-smart-pointers", "15-concurrency", "16-async-await", "17-macros"]
+    },
+    {
+      "text": "实战与精通",
+      "collapsed": true,
+      "items": ["18-cli-tool", "19-web-api", "20-wasm", "21-ffi", "22-unsafe", "23-advanced-types", "24-tokio-deep-dive", "25-performance", "26-publish-crate"]
+    }
+  ]
+}

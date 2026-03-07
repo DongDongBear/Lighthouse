@@ -1,0 +1,20 @@
+{
+  "groups": [
+    {
+      "text": "LLM Research",
+      "dir": "llm-research",
+      "collapsed": false,
+      "subgroups": [
+        { "text": "Paper", "dir": "paper-read", "collapsed": true }
+      ]
+    },
+    {
+      "text": "Agent",
+      "dir": "agent",
+      "collapsed": false,
+      "subgroups": [
+        { "text": "Paper", "dir": "paper-read", "collapsed": true }
+      ]
+    }
+  ]
+}

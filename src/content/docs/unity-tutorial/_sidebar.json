@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "text": "开始",
+      "items": ["index", "00-overview"]
+    },
+    {
+      "text": "基础篇",
+      "items": ["01-setup", "02-unity-basics", "03-gameobject-component", "04-csharp-for-unity", "05-first-scene"]
+    },
+    {
+      "text": "核心技能",
+      "collapsed": true,
+      "items": ["06-player-controller", "07-physics", "08-animation", "09-ui-system", "10-audio", "11-lighting-rendering"]
+    },
+    {
+      "text": "进阶系统",
+      "collapsed": true,
+      "items": ["12-inventory-system", "13-npc-dialogue", "14-combat-system", "15-ai-navigation", "16-save-load", "17-procedural-generation"]
+    },
+    {
+      "text": "开放世界",
+      "collapsed": true,
+      "items": ["18-open-world-architecture", "19-terrain-system", "20-day-night-weather", "21-quest-system", "22-minimap-worldmap"]
+    },
+    {
+      "text": "发布与优化",
+      "collapsed": true,
+      "items": ["23-mobile-optimization", "24-build-ios-android", "25-networking-basics", "26-asset-pipeline", "27-project-structure"]
+    }
+  ]
+}

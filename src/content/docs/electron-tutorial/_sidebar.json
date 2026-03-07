@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "text": "开始",
+      "items": ["index"]
+    },
+    {
+      "text": "Electron 基础",
+      "dir": "01-electron-basics",
+      "collapsed": false
+    },
+    {
+      "text": "热更新",
+      "dir": "02-hot-update",
+      "collapsed": true
+    },
+    {
+      "text": "OpenClaw 桌面端",
+      "dir": "03-openclaw-desktop",
+      "collapsed": true
+    }
+  ]
+}

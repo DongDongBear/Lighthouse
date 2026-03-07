@@ -11,317 +11,238 @@ export interface SidebarGroup {
   items: SidebarItem[];
 }
 
-function buildAiResearchAgentItems(): SidebarItem[] {
-  const modules = import.meta.glob('../content/docs/ai-research/agent/*.md', {
-    eager: true,
-    query: '?raw',
-    import: 'default',
-  }) as Record<string, string>;
+// ─── Helpers ───
 
-  const articleItems = Object.entries(modules)
-    .filter(([path]) => !path.endsWith('/index.md'))
-    .map(([path, raw]) => {
-      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
-      const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
-      const text = h1 || slug.replace(/-/g, ' ');
-      return {
-        text,
-        link: `/ai-research/agent/${slug}`,
-      } as SidebarItem;
-    })
-    .sort((a, b) => a.text.localeCompare(b.text, 'zh-Hans-CN'));
-
-  return [
-    { text: '总览', link: '/ai-research/agent/' },
-    ...articleItems,
-  ];
+/** Extract title from raw markdown: frontmatter title > h1 > slug */
+function extractTitle(raw: string, slug: string): string {
+  const titleMatch = raw.match(/^title:\s*["']?(.+?)["']?\s*$/m);
+  if (titleMatch) return titleMatch[1];
+  const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
+  if (h1) return h1;
+  return slug.replace(/-/g, ' ');
 }
 
-function buildLlmResearchItems(): SidebarItem[] {
-  const modules = import.meta.glob('../content/docs/ai-research/llm-research/*.md', {
-    eager: true,
-    query: '?raw',
-    import: 'default',
-  }) as Record<string, string>;
+/** Format news slug to readable title: 2026-03-06-morning → "03-06 早报" */
+function formatNewsTitle(raw: string, slug: string): string {
+  const mNew = slug.match(/^\d{4}-(\d{2})-(\d{2})-(morning|evening)$/);
+  const mLegacy = slug.match(/^\d{4}-(\d{2})-(\d{2})-(\d{2})(\d{2})$/);
+  let datePrefix = '';
+  if (mNew) {
+    datePrefix = `${mNew[1]}-${mNew[2]} ${mNew[3] === 'morning' ? '早报' : '晚报'}`;
+  } else if (mLegacy) {
+    const hour = parseInt(mLegacy[3], 10);
+    datePrefix = `${mLegacy[1]}-${mLegacy[2]} ${hour < 12 ? '早报' : '晚报'}`;
+  }
+  if (datePrefix) {
+    const summaryMatch = raw.match(/^title:\s*["']?[^｜]*｜(?:核心摘要：)?(.+?)["']?\s*$/m);
+    const summary = summaryMatch?.[1]?.split(/[，,]/)?.[0]?.slice(0, 20) || '';
+    return summary ? `${datePrefix}｜${summary}` : datePrefix;
+  }
+  return extractTitle(raw, slug);
+}
 
-  const articleItems = Object.entries(modules)
-    .filter(([path]) => !path.endsWith('/index.md'))
+/** Get slug from file path */
+function getSlug(path: string): string {
+  return path.split('/').pop()?.replace(/\.md$/, '') || '';
+}
+
+/** Build items from a glob of md files */
+function buildItemsFromGlob(
+  modules: Record<string, string>,
+  urlPrefix: string,
+  options?: {
+    sortBy?: string;
+    formatTitle?: string;
+  }
+): SidebarItem[] {
+  const items = Object.entries(modules)
+    .filter(([path]) => !path.endsWith('/index.md') && !path.endsWith('/README.md'))
     .map(([path, raw]) => {
-      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
-      const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
-      const text = h1 || slug.replace(/-/g, ' ');
-      return {
-        text,
-        link: `/ai-research/llm-research/${slug}`,
-        _slug: slug,
-      } as SidebarItem & { _slug: string };
+      const slug = getSlug(path);
+      const text = options?.formatTitle === 'news-date'
+        ? formatNewsTitle(raw, slug)
+        : extractTitle(raw, slug);
+      return { text, link: `${urlPrefix}${slug}`, _slug: slug };
     });
 
-  const roadmap = articleItems.find(item => item._slug === '00-llm-roadmap');
-  const others = articleItems
-    .filter(item => item._slug !== '00-llm-roadmap')
-    .sort((a, b) => a._slug.localeCompare(b._slug, 'zh-Hans-CN'));
+  // Sort
+  if (options?.sortBy === 'slug-desc') {
+    items.sort((a, b) => b._slug.localeCompare(a._slug));
+  } else {
+    items.sort((a, b) => a._slug.localeCompare(b._slug, 'zh-Hans-CN'));
+  }
 
-  return [
-    { text: '总览', link: '/ai-research/llm-research/' },
-    ...(roadmap ? [{ text: roadmap.text, link: roadmap.link } as SidebarItem] : []),
-    ...others.map(({ text, link }) => ({ text, link } as SidebarItem)),
-  ];
+  return items.map(({ text, link }) => ({ text, link }));
 }
 
-function buildAgentPaperReadItems(): SidebarItem[] {
-  const modules = import.meta.glob('../content/docs/ai-research/agent/paper-read/*.md', {
-    eager: true,
-    query: '?raw',
-    import: 'default',
-  }) as Record<string, string>;
+// ─── Config-based sidebar builder ───
 
-  return Object.entries(modules)
-    .filter(([path]) => !path.endsWith('/index.md'))
-    .map(([path, raw]) => {
-      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
-      const titleMatch = raw.match(/^title:\s*["']?(.+?)["']?\s*$/m);
-      const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
-      const text = titleMatch?.[1] || h1 || slug.replace(/-/g, ' ');
-      return { text, link: `/ai-research/agent/paper-read/${slug}`, _slug: slug };
-    })
-    .sort((a, b) => b._slug.localeCompare(a._slug))
-    .map(({ text, link }) => ({ text, link } as SidebarItem));
+interface SidebarConfigGroup {
+  text: string;
+  dir?: string;
+  items?: string[];
+  collapsed?: boolean;
+  sortBy?: string;
+  formatTitle?: string;
+  subgroups?: SidebarConfigSubgroup[];
 }
 
-function buildLlmPaperReadItems(): SidebarItem[] {
-  const modules = import.meta.glob('../content/docs/ai-research/llm-research/paper-read/*.md', {
-    eager: true,
-    query: '?raw',
-    import: 'default',
-  }) as Record<string, string>;
-
-  return Object.entries(modules)
-    .filter(([path]) => !path.endsWith('/index.md'))
-    .map(([path, raw]) => {
-      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
-      const titleMatch = raw.match(/^title:\s*["']?(.+?)["']?\s*$/m);
-      const h1 = raw.match(/^#\s+(.+)$/m)?.[1]?.trim();
-      const text = titleMatch?.[1] || h1 || slug.replace(/-/g, ' ');
-      return { text, link: `/ai-research/llm-research/paper-read/${slug}`, _slug: slug };
-    })
-    .sort((a, b) => b._slug.localeCompare(a._slug))
-    .map(({ text, link }) => ({ text, link } as SidebarItem));
+interface SidebarConfigSubgroup {
+  text: string;
+  dir: string;
+  collapsed?: boolean;
 }
 
-function buildNewsItems(): SidebarItem[] {
-  const modules = import.meta.glob('../content/docs/ai-product-analysis/news/*.md', {
-    eager: true,
-    query: '?raw',
-    import: 'default',
-  }) as Record<string, string>;
+interface SidebarConfig {
+  groups: SidebarConfigGroup[];
+}
 
-  const articleItems = Object.entries(modules)
-    .filter(([path]) => !path.endsWith('/index.md'))
-    .map(([path, raw]) => {
-      const slug = path.split('/').pop()?.replace(/\.md$/, '') || '';
-      // slug format: 2026-03-06-morning → "03-06 早报"
-      //              2026-03-06-0526   → "03-06 早报" (legacy)
-      let text: string;
-      const mNew = slug.match(/^\d{4}-(\d{2})-(\d{2})-(morning|evening)$/);
-      const mLegacy = slug.match(/^\d{4}-(\d{2})-(\d{2})-(\d{2})(\d{2})$/);
-      let datePrefix = '';
-      if (mNew) {
-        const period = mNew[3] === 'morning' ? '早报' : '晚报';
-        datePrefix = `${mNew[1]}-${mNew[2]} ${period}`;
-      } else if (mLegacy) {
-        const hour = parseInt(mLegacy[3], 10);
-        const period = hour < 12 ? '早报' : '晚报';
-        datePrefix = `${mLegacy[1]}-${mLegacy[2]} ${period}`;
+// Import all configs
+const configs: Record<string, SidebarConfig> = {};
+
+// ai-research
+import aiResearchConfig from '../content/docs/ai-research/_sidebar.json';
+configs['ai-research'] = aiResearchConfig as SidebarConfig;
+
+// ai-product-analysis
+import aiProductConfig from '../content/docs/ai-product-analysis/_sidebar.json';
+configs['ai-product-analysis'] = aiProductConfig as SidebarConfig;
+
+// unity-tutorial
+import unityConfig from '../content/docs/unity-tutorial/_sidebar.json';
+configs['unity-tutorial'] = unityConfig as SidebarConfig;
+
+// electron-tutorial
+import electronConfig from '../content/docs/electron-tutorial/_sidebar.json';
+configs['electron-tutorial'] = electronConfig as SidebarConfig;
+
+// rust-tutorial
+import rustConfig from '../content/docs/rust-tutorial/_sidebar.json';
+configs['rust-tutorial'] = rustConfig as SidebarConfig;
+
+// ─── Glob all content files ───
+
+const allModules = import.meta.glob('../content/docs/**/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+}) as Record<string, string>;
+
+/** Filter modules by directory prefix */
+function getModulesFor(dirPath: string): Record<string, string> {
+  const prefix = `../content/docs/${dirPath}/`;
+  const result: Record<string, string> = {};
+  for (const [path, raw] of Object.entries(allModules)) {
+    if (path.startsWith(prefix)) {
+      // Only include direct children (not nested subdirs)
+      const rest = path.slice(prefix.length);
+      if (!rest.includes('/')) {
+        result[path] = raw;
       }
-      if (datePrefix) {
-        // Extract short summary from title after ｜核心摘要：or ｜
-        const titleMatch = raw.match(/^title:\s*["']?[^｜]*｜(?:核心摘要：)?(.+?)["']?\s*$/m);
-        const summary = titleMatch?.[1]?.split(/[，,]/)?.[0]?.slice(0, 20) || '';
-        text = summary ? `${datePrefix}｜${summary}` : datePrefix;
-      } else {
-        text = slug;
-      }
-      return {
-        text,
-        link: `/ai-product-analysis/news/${slug}`,
-        _slug: slug,
-      };
-    })
-    // Sort by slug descending (newest first)
-    .sort((a, b) => b._slug.localeCompare(a._slug))
-    .map(({ text, link }) => ({ text, link } as SidebarItem));
-
-  return [
-    { text: 'News 总览', link: '/ai-product-analysis/news/' },
-    ...articleItems,
-  ];
+    }
+  }
+  return result;
 }
 
-const aiResearchGroups: SidebarGroup[] = [
-  {
-    text: 'LLM Research',
-    collapsed: false,
-    items: [
-      {
-        text: 'Paper',
-        collapsed: true,
-        items: [
-          { text: '总览', link: '/ai-research/llm-research/paper-read/' },
-          ...buildLlmPaperReadItems(),
-        ],
-      },
-      ...buildLlmResearchItems(),
-    ],
-  },
-  {
-    text: 'Agent',
-    collapsed: false,
-    items: [
-      {
-        text: 'Paper',
-        collapsed: true,
-        items: [
-          { text: '总览', link: '/ai-research/agent/paper-read/' },
-          ...buildAgentPaperReadItems(),
-        ],
-      },
-      ...buildAiResearchAgentItems(),
-    ],
-  },
-  {
-    text: 'News',
-    collapsed: false,
-    items: buildNewsItems(),
-  },
+/** Filter modules in a subdirectory */
+function getModulesForSubdir(parentDir: string, subDir: string): Record<string, string> {
+  return getModulesFor(`${parentDir}/${subDir}`);
+}
+
+/** Build sidebar groups from a config */
+function buildFromConfig(section: string, config: SidebarConfig): SidebarGroup[] {
+  return config.groups.map((groupConfig) => {
+    const items: SidebarItem[] = [];
+
+    if (groupConfig.items) {
+      // Explicit item list by slug
+      for (const slug of groupConfig.items) {
+        if (slug === 'index') {
+          items.push({ text: '教程总览', link: `/${section}/` });
+          continue;
+        }
+        // Find the file in allModules
+        const key = Object.keys(allModules).find(k =>
+          k.includes(`/${section}/`) && getSlug(k) === slug
+        );
+        if (key) {
+          const raw = allModules[key];
+          // Determine the URL path from the file path
+          const relPath = key.replace('../content/docs/', '').replace(/\.md$/, '');
+          items.push({
+            text: extractTitle(raw, slug),
+            link: `/${relPath}`,
+          });
+        }
+      }
+    } else if (groupConfig.dir) {
+      // Auto-scan directory
+      const dirPath = groupConfig.dir.includes('/')
+        ? groupConfig.dir
+        : `${section}/${groupConfig.dir}`;
+      const modules = getModulesFor(dirPath);
+      const urlPrefix = `/${dirPath}/`;
+
+      // Index as overview
+      const indexKey = Object.keys(modules).find(k => k.endsWith('/index.md'));
+      if (indexKey) {
+        items.push({ text: '总览', link: urlPrefix });
+      }
+
+      // Subgroups first
+      if (groupConfig.subgroups) {
+        for (const sub of groupConfig.subgroups) {
+          const subModules = getModulesForSubdir(dirPath, sub.dir);
+          const subUrlPrefix = `/${dirPath}/${sub.dir}/`;
+          const subItems: SidebarItem[] = [];
+
+          const subIndexKey = Object.keys(subModules).find(k => k.endsWith('/index.md'));
+          if (subIndexKey) {
+            subItems.push({ text: '总览', link: subUrlPrefix });
+          }
+
+          subItems.push(...buildItemsFromGlob(subModules, subUrlPrefix));
+
+          items.push({
+            text: sub.text,
+            collapsed: sub.collapsed ?? true,
+            items: subItems,
+          });
+        }
+      }
+
+      // Regular items
+      items.push(...buildItemsFromGlob(modules, urlPrefix, {
+        sortBy: groupConfig.sortBy,
+        formatTitle: groupConfig.formatTitle,
+      }));
+    }
+
+    return {
+      text: groupConfig.text,
+      collapsed: groupConfig.collapsed ?? false,
+      items,
+    } as SidebarGroup;
+  });
+}
+
+// ─── Build all sidebars ───
+
+const aiResearchGroups = [
+  ...buildFromConfig('ai-research', configs['ai-research']),
+  ...buildFromConfig('ai-product-analysis', configs['ai-product-analysis']),
 ];
 
 export const sidebar: Record<string, SidebarGroup[]> = {
-  '/unity-tutorial/': [
-    { text: '开始', items: [
-      { text: '教程总览', link: '/unity-tutorial/' },
-      { text: '总览与路线图', link: '/unity-tutorial/00-overview' },
-    ]},
-    { text: '基础篇', collapsed: false, items: [
-      { text: '01. 环境搭建', link: '/unity-tutorial/01-setup' },
-      { text: '02. Unity 界面', link: '/unity-tutorial/02-unity-basics' },
-      { text: '03. GameObject 与组件', link: '/unity-tutorial/03-gameobject-component' },
-      { text: '04. C# 快速入门', link: '/unity-tutorial/04-csharp-for-unity' },
-      { text: '05. 第一个 3D 场景', link: '/unity-tutorial/05-first-scene' },
-    ]},
-    { text: '核心技能', collapsed: true, items: [
-      { text: '06. 角色控制器', link: '/unity-tutorial/06-player-controller' },
-      { text: '07. 物理系统', link: '/unity-tutorial/07-physics' },
-      { text: '08. 动画系统', link: '/unity-tutorial/08-animation' },
-      { text: '09. UI 系统', link: '/unity-tutorial/09-ui-system' },
-      { text: '10. 音频系统', link: '/unity-tutorial/10-audio' },
-      { text: '11. 光照与渲染', link: '/unity-tutorial/11-lighting-rendering' },
-    ]},
-    { text: '进阶系统', collapsed: true, items: [
-      { text: '12. 背包系统', link: '/unity-tutorial/12-inventory-system' },
-      { text: '13. NPC 对话', link: '/unity-tutorial/13-npc-dialogue' },
-      { text: '14. 战斗系统', link: '/unity-tutorial/14-combat-system' },
-      { text: '15. AI 导航', link: '/unity-tutorial/15-ai-navigation' },
-      { text: '16. 存档系统', link: '/unity-tutorial/16-save-load' },
-      { text: '17. 程序化生成', link: '/unity-tutorial/17-procedural-generation' },
-    ]},
-    { text: '开放世界', collapsed: true, items: [
-      { text: '18. 开放世界架构', link: '/unity-tutorial/18-open-world-architecture' },
-      { text: '19. 地形系统', link: '/unity-tutorial/19-terrain-system' },
-      { text: '20. 昼夜与天气', link: '/unity-tutorial/20-day-night-weather' },
-      { text: '21. 任务系统', link: '/unity-tutorial/21-quest-system' },
-      { text: '22. 地图系统', link: '/unity-tutorial/22-minimap-worldmap' },
-    ]},
-    { text: '发布与优化', collapsed: true, items: [
-      { text: '23. 手机优化', link: '/unity-tutorial/23-mobile-optimization' },
-      { text: '24. iOS/Android 打包', link: '/unity-tutorial/24-build-ios-android' },
-      { text: '25. 联网基础', link: '/unity-tutorial/25-networking-basics' },
-      { text: '26. 美术管线', link: '/unity-tutorial/26-asset-pipeline' },
-      { text: '27. 项目架构', link: '/unity-tutorial/27-project-structure' },
-    ]},
-  ],
-  '/electron-tutorial/': [
-    { text: '开始', items: [{ text: '教程总览', link: '/electron-tutorial/' }] },
-    { text: 'Electron 基础', collapsed: false, items: [
-      { text: '01. 什么是 Electron', link: '/electron-tutorial/01-electron-basics/01-what-is-electron' },
-      { text: '02. 第一个应用', link: '/electron-tutorial/01-electron-basics/02-first-app' },
-      { text: '03. 进程模型', link: '/electron-tutorial/01-electron-basics/03-process-model' },
-      { text: '04. 窗口管理', link: '/electron-tutorial/01-electron-basics/04-window-management' },
-      { text: '05. 原生 API', link: '/electron-tutorial/01-electron-basics/05-native-api' },
-      { text: '06. 安全', link: '/electron-tutorial/01-electron-basics/06-security' },
-      { text: '07. 数据存储', link: '/electron-tutorial/01-electron-basics/07-data-storage' },
-      { text: '08. 打包', link: '/electron-tutorial/01-electron-basics/08-packaging' },
-      { text: '09. 测试', link: '/electron-tutorial/01-electron-basics/09-testing' },
-      { text: '10. 性能优化', link: '/electron-tutorial/01-electron-basics/10-performance' },
-      { text: '11. 签名与发布', link: '/electron-tutorial/01-electron-basics/11-code-signing-release' },
-      { text: '12. 跨平台', link: '/electron-tutorial/01-electron-basics/12-cross-platform' },
-      { text: '13. React 转 Electron', link: '/electron-tutorial/01-electron-basics/13-react-to-electron' },
-    ]},
-    { text: '热更新', collapsed: true, items: [
-      { text: '01. 更新概览', link: '/electron-tutorial/02-hot-update/01-update-overview' },
-      { text: '02. Electron Updater', link: '/electron-tutorial/02-hot-update/02-electron-updater' },
-      { text: '03. ASAR 热补丁', link: '/electron-tutorial/02-hot-update/03-asar-hot-patch' },
-      { text: '04. Web Bundle 更新', link: '/electron-tutorial/02-hot-update/04-web-bundle-update' },
-      { text: '05. 更新最佳实践', link: '/electron-tutorial/02-hot-update/05-update-best-practices' },
-    ]},
-    { text: 'OpenClaw 桌面端', collapsed: true, items: [
-      { text: '01. 架构', link: '/electron-tutorial/03-openclaw-desktop/01-architecture' },
-      { text: '02. Gateway 集成', link: '/electron-tutorial/03-openclaw-desktop/02-gateway-integration' },
-      { text: '03. WebSocket', link: '/electron-tutorial/03-openclaw-desktop/03-websocket-connection' },
-      { text: '04. 菜单栏与托盘', link: '/electron-tutorial/03-openclaw-desktop/04-menubar-tray' },
-      { text: '05. WebChat 窗口', link: '/electron-tutorial/03-openclaw-desktop/05-webchat-window' },
-      { text: '06. Canvas 系统', link: '/electron-tutorial/03-openclaw-desktop/06-canvas-system' },
-      { text: '07. IPC 桥接', link: '/electron-tutorial/03-openclaw-desktop/07-ipc-bridge' },
-      { text: '08. 配置管理', link: '/electron-tutorial/03-openclaw-desktop/08-config-management' },
-      { text: '09. 自动更新', link: '/electron-tutorial/03-openclaw-desktop/09-auto-update' },
-      { text: '10. 打包与发布', link: '/electron-tutorial/03-openclaw-desktop/10-packaging-release' },
-    ]},
-  ],
-  '/rust-tutorial/': [
-    { text: '开始', items: [
-      { text: '教程总览', link: '/rust-tutorial/' },
-      { text: '00. 全景概览', link: '/rust-tutorial/00-overview' },
-      { text: '01. 环境搭建', link: '/rust-tutorial/01-setup' },
-      { text: '02. 第一个程序', link: '/rust-tutorial/02-first-program' },
-      { text: '03. 类型系统', link: '/rust-tutorial/03-type-system' },
-    ]},
-    { text: '核心基础', collapsed: false, items: [
-      { text: '04. 所有权', link: '/rust-tutorial/04-ownership' },
-      { text: '05. 借用与引用', link: '/rust-tutorial/05-borrowing' },
-      { text: '06. 结构体与枚举', link: '/rust-tutorial/06-structs-enums' },
-      { text: '07. 模式匹配', link: '/rust-tutorial/07-pattern-matching' },
-      { text: '08. 错误处理', link: '/rust-tutorial/08-error-handling' },
-      { text: '09. 集合', link: '/rust-tutorial/09-collections' },
-    ]},
-    { text: '进阶能力', collapsed: true, items: [
-      { text: '10. 泛型与 Trait', link: '/rust-tutorial/10-generics-traits' },
-      { text: '11. 生命周期', link: '/rust-tutorial/11-lifetime' },
-      { text: '12. 闭包与迭代器', link: '/rust-tutorial/12-closures-iterators' },
-      { text: '13. 模块与 Crate', link: '/rust-tutorial/13-modules-crates' },
-      { text: '14. 智能指针', link: '/rust-tutorial/14-smart-pointers' },
-      { text: '15. 并发编程', link: '/rust-tutorial/15-concurrency' },
-      { text: '16. 异步编程', link: '/rust-tutorial/16-async-await' },
-      { text: '17. 宏', link: '/rust-tutorial/17-macros' },
-    ]},
-    { text: '实战与精通', collapsed: true, items: [
-      { text: '18. CLI 工具', link: '/rust-tutorial/18-cli-tool' },
-      { text: '19. Web API', link: '/rust-tutorial/19-web-api' },
-      { text: '20. Rust + WASM', link: '/rust-tutorial/20-wasm' },
-      { text: '21. FFI', link: '/rust-tutorial/21-ffi' },
-      { text: '22. Unsafe Rust', link: '/rust-tutorial/22-unsafe' },
-      { text: '23. 高级类型', link: '/rust-tutorial/23-advanced-types' },
-      { text: '24. Tokio 深入', link: '/rust-tutorial/24-tokio-deep-dive' },
-      { text: '25. 性能优化', link: '/rust-tutorial/25-performance' },
-      { text: '26. 发布 Crate', link: '/rust-tutorial/26-publish-crate' },
-    ]},
-  ],
+  '/unity-tutorial/': buildFromConfig('unity-tutorial', configs['unity-tutorial']),
+  '/electron-tutorial/': buildFromConfig('electron-tutorial', configs['electron-tutorial']),
+  '/rust-tutorial/': buildFromConfig('rust-tutorial', configs['rust-tutorial']),
   '/ai-research/': aiResearchGroups,
   '/ai-product-analysis/': aiResearchGroups,
 };
 
-/**
- * Get sidebar groups for a given path
- */
+// ─── Public API ───
+
 export function getSidebarGroups(path: string): SidebarGroup[] | null {
   for (const [prefix, groups] of Object.entries(sidebar)) {
     if (path.startsWith(prefix) || path.startsWith(prefix.slice(1))) {
@@ -331,9 +252,6 @@ export function getSidebarGroups(path: string): SidebarGroup[] | null {
   return null;
 }
 
-/**
- * Get flat list of all sidebar items with links for prev/next navigation
- */
 export function getSidebarFlatLinks(path: string): { text: string; link: string }[] {
   const groups = getSidebarGroups(path);
   if (!groups) return [];
