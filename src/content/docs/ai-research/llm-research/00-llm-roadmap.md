@@ -4,29 +4,29 @@ title: "LLM 入门路线图：从零到读懂前沿论文"
 
 # LLM 入门路线图：从零到读懂前沿论文
 
-> 本系列目标：让一个有编程基础但没有 ML 背景的开发者，能够读懂 KARL 这样的前沿 Agent RL 论文。
->
-> 一共 4 篇，每篇都写得够深够透。
+> 目标：让一个有编程基础但没有 ML 背景的开发者，从 0 开始，逐步读懂 KARL 这类 Agent RL 前沿论文。
 
 ---
 
-## 学习路线
+## 第一阶段：从 0 打基础（01-09）
 
-### [01. LLM 核心原理：从 Transformer 到训练全流程](../01-llm-core-principles)
+### [01. 什么是大语言模型：从神经网络到文本生成](../01-llm-core-principles)
+### [02. Token 化：文本如何变成数字](../02-tokenization)
+### [03. Embedding：从数字到向量空间](../03-embedding)
+### [04. Self-Attention：Transformer 的核心计算](../04-self-attention)
+### [05. Multi-Head Attention 与 FFN](../05-multi-head-ffn)
+### [06. 完整 Transformer 架构](../06-transformer-architecture)
+### [07. MoE 混合专家模型](../07-moe)
+### [08. 预训练与 SFT](../08-pretraining-sft)
+### [09. 生成策略与推理优化](../09-generation-and-inference)
 
-Token、Embedding、Self-Attention 的完整计算过程、Multi-Head Attention、因果掩码、FFN 与知识存储、MoE 架构与 Router 难题、预训练/SFT/后训练三阶段、生成策略（温度/Top-p）、上下文窗口与 KV Cache。
+---
 
-### [02. 强化学习与后训练：从 RLHF 到 OAPL](../02-rl-and-post-training)
+## 第二阶段：进阶到前沿（10-12）
 
-RL 基本框架、Policy/Reward/Rollout/Advantage、KL 正则化的数学直觉、On-policy vs Off-policy 的本质区别、GRPO 的做法与局限、OAPL 的完整推导直觉、多步 Agent 的 Token 掩码与轨迹分段、迭代自举、多任务 RL vs 蒸馏、RL beyond sharpening（max@k 分析）。
-
-### [03. RAG、Agent 与推理扩展](../03-rag-agent-and-inference-scaling)
-
-Embedding 与向量检索原理、Chunking 策略、单轮 RAG 的局限、Agent 循环与 Tool Use 实现、Rollout/Trajectory 概念、上下文压缩的端到端训练、Best-of-N / Majority Vote / Parallel Thinking / Value-Guided Search 四种 TTC 方法、合成数据管线（Agentic Synthesis + 难度过滤）、Agent 基础设施（aroll）、全链路串联。
-
-### [04. KARL 逐段导读](../04-karl-guided-reading)
-
-带着前三章的知识，按原文 Section 1-8 逐段标出核心论点、关键证据、该看的图表。读完能回答：解决了什么问题、方法为什么有效、证据是否充分。
+### [10. 强化学习与后训练：从 RLHF 到 OAPL](../10-rl-and-post-training)
+### [11. RAG、Agent 与推理扩展](../11-rag-agent-and-inference-scaling)
+### [12. KARL 逐段导读](../12-karl-guided-reading)
 
 ---
 

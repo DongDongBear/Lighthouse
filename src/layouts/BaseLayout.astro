@@ -26,6 +26,7 @@ const base = import.meta.env.BASE_URL;
   <title>{title === 'LightHouse' ? title : `${title} | LightHouse`}</title>
   <link rel="icon" href={`${base}lighthouse-icon.svg`} />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@300;400;500;700&family=Shippori+Mincho:wght@600&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5OLARBER7sSEMTuN/lKRqq4dEy8OH7LLwlBGfJcEDGOsKuX8EGHo" crossorigin="anonymous" />
   <ClientRouter />
   <script is:inline>
     // Dark mode initialization - runs before paint to avoid flash
@@ -51,5 +52,38 @@ const base = import.meta.env.BASE_URL;
     <Nav />
     <slot />
   </div>
+  <script is:inline>
+    // Mermaid: render ```mermaid code blocks
+    function initMermaid() {
+      var blocks = document.querySelectorAll('pre > code.language-mermaid');
+      if (!blocks.length) return;
+      // Load mermaid from CDN
+      if (!window.mermaid) {
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+        s.onload = function() {
+          var isDark = document.documentElement.classList.contains('dark');
+          window.mermaid.initialize({ startOnLoad: false, theme: isDark ? 'dark' : 'default' });
+          renderMermaidBlocks(blocks);
+        };
+        document.head.appendChild(s);
+      } else {
+        renderMermaidBlocks(blocks);
+      }
+    }
+    function renderMermaidBlocks(blocks) {
+      blocks.forEach(function(code, i) {
+        var pre = code.parentElement;
+        var div = document.createElement('div');
+        div.className = 'mermaid';
+        div.textContent = code.textContent;
+        pre.parentElement.replaceChild(div, pre);
+      });
+      window.mermaid.run();
+    }
+    // Run on initial load and after client-side navigation
+    document.addEventListener('DOMContentLoaded', initMermaid);
+    document.addEventListener('astro:page-load', initMermaid);
+  </script>
 </body>
 </html>
