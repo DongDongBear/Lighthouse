@@ -163,7 +163,6 @@ const aiResearchGroups: SidebarGroup[] = [
     text: 'LLM Research',
     collapsed: false,
     items: [
-      ...buildLlmResearchItems(),
       {
         text: 'Paper',
         collapsed: true,
@@ -172,13 +171,13 @@ const aiResearchGroups: SidebarGroup[] = [
           ...buildLlmPaperReadItems(),
         ],
       },
+      ...buildLlmResearchItems(),
     ],
   },
   {
     text: 'Agent',
     collapsed: false,
     items: [
-      ...buildAiResearchAgentItems(),
       {
         text: 'Paper',
         collapsed: true,
@@ -187,6 +186,7 @@ const aiResearchGroups: SidebarGroup[] = [
           ...buildAgentPaperReadItems(),
         ],
       },
+      ...buildAiResearchAgentItems(),
     ],
   },
   {
