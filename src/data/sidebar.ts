@@ -165,7 +165,7 @@ const aiResearchGroups: SidebarGroup[] = [
     items: [
       ...buildLlmResearchItems(),
       {
-        text: 'LLM Paper Read',
+        text: 'Paper',
         collapsed: true,
         items: [
           { text: '总览', link: '/ai-research/llm-research/paper-read/' },
@@ -180,7 +180,7 @@ const aiResearchGroups: SidebarGroup[] = [
     items: [
       ...buildAiResearchAgentItems(),
       {
-        text: 'Agent Paper Read',
+        text: 'Paper',
         collapsed: true,
         items: [
           { text: '总览', link: '/ai-research/agent/paper-read/' },
