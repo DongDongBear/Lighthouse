@@ -131,7 +131,7 @@
 /* ─── Body text ─── */
 .lh-prose p,
 .lh-prose li {
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.8;
   color: var(--vp-c-text-2);
   font-weight: 350;
@@ -396,7 +396,7 @@
   }
   .lh-prose p,
   .lh-prose li {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.75;
   }
 
@@ -475,7 +475,7 @@
   }
   .lh-prose p,
   .lh-prose li {
-    font-size: 13.5px;
+    font-size: 15.5px;
   }
   .lh-prose pre {
     font-size: 11.5px;
