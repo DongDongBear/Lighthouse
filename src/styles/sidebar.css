@@ -99,7 +99,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 12px 6px 20px;
+  padding: 6px 12px 6px 10px;
   font-size: 0.85em;
   font-weight: 600;
   color: var(--vp-c-text-2);

@@ -40,17 +40,20 @@ function groupHasActive(group: { items: { link?: string; items?: { link?: string
             </svg>
           </div>
           <ul class:list={['lh-sidebar-items', { collapsed: isCollapsed }]}>
-            {group.items.map((item) => (
+            {group.items.map((item) => {
+              const subHasActive = item.items?.some(sub => sub.link && isActive(sub.link)) ?? false;
+              const subCollapsed = subHasActive ? false : !!item.collapsed;
+              return (
               <li>
                 {item.items ? (
                   <Fragment>
-                    <div class="lh-sidebar-subgroup-title" data-collapsed={item.collapsed ? 'true' : 'false'}>
+                    <div class="lh-sidebar-subgroup-title" data-collapsed={subCollapsed ? 'true' : 'false'}>
                       <span>{item.text}</span>
-                      <svg class:list={['lh-sidebar-arrow', { collapsed: !!item.collapsed }]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <svg class:list={['lh-sidebar-arrow', { collapsed: subCollapsed }]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
                     </div>
-                    <ul class:list={['lh-sidebar-subitems', { collapsed: !!item.collapsed }]}>
+                    <ul class:list={['lh-sidebar-subitems', { collapsed: subCollapsed }]}>
                       {item.items.map((sub) => (
                         <li>
                           {sub.link ? (
@@ -72,7 +75,7 @@ function groupHasActive(group: { items: { link?: string; items?: { link?: string
                   <span class="lh-sidebar-link level-0">{item.text}</span>
                 )}
               </li>
-            ))}
+            )})}
           </ul>
         </div>
       );
