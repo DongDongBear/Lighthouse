@@ -12,6 +12,7 @@
 
 ## 按日期归档
 
+- [2026-03-12 05:26 ｜ MM-Zero 零数据三角色自进化 VLM；阿里 PageAgent 网页 GUI Agent 开源；MacBook Neo $599 开售](/ai-product-analysis/news/2026-03-12-morning/)
 - [2026-03-11 15:34 ｜ NVIDIA MM-Zero 零数据自进化 VLM；Hume 开源零幻觉 TTS；RISC-V 现实性能差距](/ai-product-analysis/news/2026-03-11-evening/)
 - [2026-03-11 15:23 ｜ Google 揭示推理如何解锁 LLM 隐藏知识；LeCun $10 亿豪赌世界模型](/ai-product-analysis/news/2026-03-11-afternoon/)
 - [2026-03-08 05:26 ｜ OPSDC 推理压缩悖论：少想反而更准；Jensen Huang 确认退出 AI 公司投资](/ai-product-analysis/news/2026-03-08-morning/)

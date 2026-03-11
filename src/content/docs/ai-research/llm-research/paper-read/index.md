@@ -6,6 +6,10 @@ title: LLM Paper Read
 
 基础模型方向论文导读。
 
+## 2026-03-12
+
+- [MM-Zero：零数据三角色自进化框架训练 VLM 推理](./mm-zero-self-evolving-vlm-zero-data) — Proposer-Coder-Solver 三角色 GRPO 闭环，零外部数据在 Qwen3-VL-8B 上实现 +5.9pp 视觉推理提升
+
 ## 2026-03-11
 
 - [思考即回忆：推理如何解锁 LLM 的隐藏知识](./thinking-to-recall-reasoning-unlocks-parametric-knowledge) — 推理通过计算缓冲 + 事实启动两种机制扩展知识边界，中间幻觉会毒化最终答案
