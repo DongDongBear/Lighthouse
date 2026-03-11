@@ -1,6 +1,7 @@
 ---
 title: "KARL：用多任务 RL 训练企业搜索 Agent，成本优于 Claude 4.6"
 description: "Databricks 提出 KARL 系统：通过合成数据 + 多任务 off-policy RL 训练知识搜索 Agent，在 6 种搜索任务上 Pareto 优于 Claude 4.6 和 GPT 5.2。"
+date: "2026-03-08 05:34"
 ---
 
 # KARL：用多任务 RL 训练企业搜索 Agent，成本优于 Claude 4.6

@@ -373,6 +373,19 @@
     margin-bottom: 6px;
   }
 
+  .lh-article-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px 0;
+    font-size: 13px;
+    color: #888;
+  }
+  .lh-article-date svg {
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
   .lh-prose {
     overflow-wrap: break-word;
     word-break: break-word;

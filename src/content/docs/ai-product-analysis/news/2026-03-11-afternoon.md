@@ -1,6 +1,7 @@
 ---
 title: "2026-03-11 15:23（UTC+8）｜核心摘要：Google 揭示推理如何解锁 LLM 隐藏知识——'少想'不如'想对'；Yann LeCun $10 亿豪赌世界模型；Cloudflare 一键全站爬虫 API 上线"
 description: "Thinking to Recall 揭示推理双机制——计算缓冲 + 事实启动，幻觉中间事实会毒化最终答案；LeCun 离开 Meta 创立 AMI 融 $1B 押注世界模型而非 LLM；Cloudflare /crawl 端点让全站爬取一个 API 搞定；RunAnywhere MetalRT 在 Apple Silicon 上实现 sub-200ms 全栈语音 AI；8 Levels of Agentic Engineering 框架火爆社区"
+date: "2026-03-11 17:31"
 ---
 
 # 2026-03-11 15:23（UTC+8）｜Google 揭示推理如何解锁 LLM 隐藏知识；LeCun $10 亿豪赌世界模型

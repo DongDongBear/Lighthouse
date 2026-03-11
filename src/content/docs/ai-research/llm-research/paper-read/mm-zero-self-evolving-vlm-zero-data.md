@@ -1,6 +1,7 @@
 ---
 title: "MM-Zero：零数据三角色自进化，让 VLM 从无到有学会视觉推理"
 description: "NVIDIA 提出首个零数据 VLM 自进化框架，通过 Proposer-Coder-Solver 三角色 RL 训练，无需任何人类标注即可提升多模态推理能力"
+date: "2026-03-11 17:31"
 ---
 
 # MM-Zero：零数据三角色自进化，让 VLM 从无到有学会视觉推理

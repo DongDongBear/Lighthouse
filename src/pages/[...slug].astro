@@ -49,8 +49,9 @@ const { Content, headings } = await doc.render();
 // Extract title from first h1 heading, or use slug
 const h1 = headings.find(h => h.depth === 1);
 const title = h1?.text || doc.id.split('/').pop()?.replace(/^\d+-/, '').replace(/-/g, ' ') || 'LightHouse';
+const date = doc.data?.date || undefined;
 ---
 
-<DocLayout title={title} headings={headings} slug={doc.id}>
+<DocLayout title={title} headings={headings} slug={doc.id} date={date}>
   <Content />
 </DocLayout>
