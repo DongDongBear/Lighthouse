@@ -12,6 +12,8 @@
 
 ## 按日期归档
 
+- [2026-03-11 15:34 ｜ NVIDIA MM-Zero 零数据自进化 VLM；Hume 开源零幻觉 TTS；RISC-V 现实性能差距](/ai-product-analysis/news/2026-03-11-evening/)
+- [2026-03-11 15:23 ｜ Google 揭示推理如何解锁 LLM 隐藏知识；LeCun $10 亿豪赌世界模型](/ai-product-analysis/news/2026-03-11-afternoon/)
 - [2026-03-08 05:26 ｜ OPSDC 推理压缩悖论：少想反而更准；Jensen Huang 确认退出 AI 公司投资](/ai-product-analysis/news/2026-03-08-morning/)
 - [2026-03-07 17:26 ｜ FlashAttention-4 为 Blackwell GPU 重写注意力内核；Reasoning Theater 揭示 CoT 中的表演性推理](/ai-product-analysis/news/2026-03-07-evening/)
 - [2026-03-07 05:26 ｜ Claude Opus 4.6 两周挖出 Firefox 22 个漏洞；AReaL 开源异步 RL 训练框架冲上 GitHub Trending](/ai-product-analysis/news/2026-03-07-morning/)
