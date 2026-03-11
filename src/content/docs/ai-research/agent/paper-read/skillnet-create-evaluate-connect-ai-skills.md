@@ -1,5 +1,6 @@
 ---
 title: "SkillNet：给 AI Agent 建一个技能仓库"
+date: "2026-03-07 20:54"
 ---
 
 # SkillNet：给 AI Agent 建一个技能仓库
