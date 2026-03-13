@@ -1,5 +1,5 @@
 ---
-title: "RetroAgent：从"解题"到"进化"——回顾式双重内在反馈驱动 Agent 在线 RL"
+title: 'RetroAgent：从"解题"到"进化"——回顾式双重内在反馈驱动 Agent 在线 RL'
 ---
 
 # RetroAgent：从"解题"到"进化"——回顾式双重内在反馈驱动 Agent 在线 RL
