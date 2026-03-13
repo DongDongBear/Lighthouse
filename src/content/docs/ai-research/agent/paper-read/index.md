@@ -6,6 +6,10 @@ title: Agent Paper Read
 
 Agent 方向论文导读。
 
+## 2026-03-13
+
+- [RetroAgent：从"解题"到"进化"——回顾式双重内在反馈驱动 Agent 在线 RL](./retroagent-evolving-via-retrospective-dual-intrinsic-feedback) — 双重内在反馈（数值进步信号 + UCB 记忆检索语言教训），Sokoban +27.1pp vs GRPO
+
 ## 2026-03-12
 
 - [OpenClaw-RL：让 Agent 边用边学——用 Next-State Signal 统一在线 RL 训练](./openclaw-rl-train-agent-by-talking) — 首个将所有 Agent 交互信号统一为在线 RL 训练源的框架，OPD 实现 token 级方向监督
