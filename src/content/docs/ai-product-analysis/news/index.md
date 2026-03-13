@@ -12,6 +12,7 @@
 
 ## 按日期归档
 
+- [2026-03-14 05:26 ｜ IndexCache 75% 砍掉稀疏注意力索引器仍保精度；ExeVRM 用执行视频取代人工脚本评估 CUA](/ai-product-analysis/news/2026-03-14-morning/)
 - [2026-03-13 05:26 ｜ V₀.₅ 用统计检验解决 RLVR 稀疏采样方差难题；IonAttention 在单块 GH200 跑出 7,167 tok/s](/ai-product-analysis/news/2026-03-13-morning/)
 - [2026-03-12 17:26 ｜ OpenClaw-RL 用对话信号在线训练 Agent；METR 揭示 SWE-bench 半数 PR 不可合并；BitNet 100B 纯 CPU 推理](/ai-product-analysis/news/2026-03-12-evening/)
 - [2026-03-12 05:26 ｜ MM-Zero 零数据三角色自进化 VLM；阿里 PageAgent 网页 GUI Agent 开源；MacBook Neo $599 开售](/ai-product-analysis/news/2026-03-12-morning/)

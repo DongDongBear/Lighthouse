@@ -6,6 +6,10 @@ title: LLM Paper Read
 
 基础模型方向论文导读。
 
+## 2026-03-14
+
+- [IndexCache：砍掉 75% 稀疏注意力索引器，推理加速 1.82×](./indexcache-sparse-attention-cross-layer-reuse) — 跨层 top-k 索引复用，一个 if-else 分支实现 DSA 推理 1.82× 加速，已在 GLM-5 744B 验证
+
 ## 2026-03-13
 
 - [V₀.₅：用预训练 Value Model 先验 + 统计检验解决 RLVR 稀疏 Rollout 的方差爆炸](./v05-value-model-prior-sparse-rl-rollouts) — Shrinkage estimator + 实时统计检验 + OSLA 动态预算，group size = 4 超过 GRPO G=16 达 10%+

@@ -6,6 +6,10 @@ title: Agent Paper Read
 
 Agent 方向论文导读。
 
+## 2026-03-14
+
+- [ExeVRM：用执行视频给 Computer-Use Agent 打分](./exevrm-video-reward-model-cua) — 将 CUA 轨迹转为视频训练奖励模型，8B 模型 84.7% 准确率超越 GPT-5.2，时空 Token 裁剪是关键
+
 ## 2026-03-13
 
 - [Memory in the Age of AI Agents：当 Agent 学会"记忆"](./memory-in-the-age-of-ai-agents) — 47 位作者联合综述，Forms-Functions-Dynamics 三角框架统一 Agent 记忆研究全景，核心信号：RL 将端到端驱动未来记忆系统

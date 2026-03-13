@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import ChatWindow from './ChatWindow';
 import './chat.css';
 
-const STORAGE_KEY = 'lh-chat-activated';
+const AUTH_KEY = 'isDong';
 
 function getApiBase(): string {
   if (typeof window === 'undefined') return '';
@@ -12,7 +12,7 @@ function getApiBase(): string {
 }
 
 export default function ChatWidget() {
-  const [activated, setActivated] = useState(false);
+  const [authed, setAuthed] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedText, setSelectedText] = useState('');
   const lastGoodSelection = useRef('');
@@ -40,47 +40,16 @@ export default function ChatWidget() {
     }, 10);
   }, []);
 
-  const handleGlobalKeydown = useCallback(async (e: KeyboardEvent) => {
-    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-      const searchInput = document.querySelector(
-        '.VPLocalSearchBox input[type="search"], .VPLocalSearchBox input, [class*="DocSearch"] input, .lh-search-input'
-      ) as HTMLInputElement | null;
-      if (!searchInput) return;
-      const val = searchInput.value.trim();
-      if (!val) return;
-      e.preventDefault();
-      e.stopPropagation();
-      try {
-        const res = await fetch(`${getApiBase()}/api/verify`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phrase: val }),
-        });
-        const data = await res.json();
-        if (data.ok) {
-          setActivated(true);
-          localStorage.setItem(STORAGE_KEY, '1');
-          searchInput.value = '';
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-          setTimeout(() => setOpen(true), 300);
-        }
-      } catch (err) {
-        console.warn('[LH Chat] verify failed:', err);
-      }
-    }
-  }, []);
-
   useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEY) === '1') {
-      setActivated(true);
+    // Check auth from localStorage
+    if (localStorage.getItem(AUTH_KEY) === 'true') {
+      setAuthed(true);
     }
-    document.addEventListener('keydown', handleGlobalKeydown, true);
     document.addEventListener('mouseup', onMouseUp);
     return () => {
-      document.removeEventListener('keydown', handleGlobalKeydown, true);
       document.removeEventListener('mouseup', onMouseUp);
     };
-  }, [handleGlobalKeydown, onMouseUp]);
+  }, [onMouseUp]);
 
   function onFabMouseDown() {
     const text = grabSelection();
@@ -92,7 +61,7 @@ export default function ChatWidget() {
     }
   }
 
-  if (!activated) return null;
+  if (!authed) return null;
 
   return (
     <div className="cw-widget">
@@ -109,7 +78,7 @@ export default function ChatWidget() {
         aria-label={open ? '关闭助手' : '打开助手'}
       >
         {!open ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
         ) : (
