@@ -8,6 +8,7 @@ Agent 方向论文导读。
 
 ## 2026-03-14
 
+- [MADQA：Agent 文档推理还是暴力搜索？18% 的 Oracle 差距](./madqa-agent-document-reasoning) — 2,250 题 × 800 PDF 首次证明 Agent 靠暴力搜索弥补策略规划不足，准确率追平人类但距 oracle 仍有 18% 差距
 - [ExeVRM：用执行视频给 Computer-Use Agent 打分](./exevrm-video-reward-model-cua) — 将 CUA 轨迹转为视频训练奖励模型，8B 模型 84.7% 准确率超越 GPT-5.2，时空 Token 裁剪是关键
 
 ## 2026-03-13

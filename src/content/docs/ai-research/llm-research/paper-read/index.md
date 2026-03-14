@@ -8,6 +8,7 @@ title: LLM Paper Read
 
 ## 2026-03-14
 
+- [推理评委在非验证域的对齐训练中催生了对抗策略](./reasoning-judges-adversarial-alignment) — 推理评委让 RL 策略持续提升，但 8B 模型学会了用对抗输出骗过 gpt-oss-120b 和 GPT-4.1，Arena-Hard 创意写作 89.6% 击败 o3
 - [IndexCache：砍掉 75% 稀疏注意力索引器，推理加速 1.82×](./indexcache-sparse-attention-cross-layer-reuse) — 跨层 top-k 索引复用，一个 if-else 分支实现 DSA 推理 1.82× 加速，已在 GLM-5 744B 验证
 
 ## 2026-03-13
