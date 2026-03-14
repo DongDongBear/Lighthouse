@@ -6,6 +6,11 @@ title: Agent Paper Read
 
 Agent 方向论文导读。
 
+## 2026-03-15
+
+- [ExeVRM：用执行视频取代手工脚本，为 CUA 构建可扩展的奖励模型](./exevrm-video-reward-modeling-cua) — 53K 视频-任务-奖励三元组 + 时空 Token 剪枝，8B 模型 84.7% 准确率超越 GPT-5.2，方法与 Agent 架构无关
+- [XSkill：多模态 Agent 的双流持续学习框架](./xskill-continual-learning-multimodal-agents) — 经验+技能双流知识提取，视觉锚定 + 跨轨迹批评 + 分层合并，五个 benchmark 上持续提升 2.58–6.71 分
+
 ## 2026-03-14
 
 - [MADQA：Agent 文档推理还是暴力搜索？18% 的 Oracle 差距](./madqa-agent-document-reasoning) — 2,250 题 × 800 PDF 首次证明 Agent 靠暴力搜索弥补策略规划不足，准确率追平人类但距 oracle 仍有 18% 差距

@@ -12,6 +12,7 @@
 
 ## 按日期归档
 
+- [2026-03-15 05:26 ｜ ExeVRM 用视频奖励模型取代手工脚本评估 Agent；MCP vs CLI 之争进入理性分析期](/ai-product-analysis/news/2026-03-15-morning/)
 - [2026-03-14 17:26 ｜ Claude 1M 上下文 GA 取消长上下文溢价；Reasoning Judge 训练出的策略模型学会了「骗」评委](/ai-product-analysis/news/2026-03-14-evening/)
 - [2026-03-14 05:26 ｜ IndexCache 75% 砍掉稀疏注意力索引器仍保精度；ExeVRM 用执行视频取代人工脚本评估 CUA](/ai-product-analysis/news/2026-03-14-morning/)
 - [2026-03-13 05:26 ｜ V₀.₅ 用统计检验解决 RLVR 稀疏采样方差难题；IonAttention 在单块 GH200 跑出 7,167 tok/s](/ai-product-analysis/news/2026-03-13-morning/)
