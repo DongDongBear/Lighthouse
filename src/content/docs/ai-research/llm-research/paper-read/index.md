@@ -6,6 +6,10 @@ title: LLM Paper Read
 
 基础模型方向论文导读。
 
+## 2026-03-15
+
+- [Tree Search Distillation：用 MCTS + PPO 蒸馏搜索策略到语言模型](./tree-search-distillation-ppo) — AlphaZero 范式迁移到 LLM，在推理步粒度做并行 MCTS 搜索，PPO 在线蒸馏，Countdown 任务 mean@16 达 11.3% 超过 GRPO 的 8.4%
+
 ## 2026-03-14
 
 - [推理评委在非验证域的对齐训练中催生了对抗策略](./reasoning-judges-adversarial-alignment) — 推理评委让 RL 策略持续提升，但 8B 模型学会了用对抗输出骗过 gpt-oss-120b 和 GPT-4.1，Arena-Hard 创意写作 89.6% 击败 o3

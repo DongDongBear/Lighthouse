@@ -7,6 +7,8 @@ const app = express()
 app.use(cors({
   origin: [
     'https://dongdongbear.github.io',
+    'https://lighthouse.hetaogomoku.uk',
+    'http://lighthouse.hetaogomoku.uk',
     'http://localhost:5173',
     'http://localhost:4173',
     'http://43.130.41.3',
@@ -18,7 +20,7 @@ app.use(express.json())
 
 const SECRET_PHRASE = 'I AM DONGDONG SEND'
 const OPENCLAW_URL = 'http://127.0.0.1:18789/v1/chat/completions'
-const OPENCLAW_TOKEN = 'fb135e830bb0bf534e0ace8d7a01a17933834234beabef7d'
+const OPENCLAW_TOKEN = '15dfbe164686b4d12544dca9e6f1f8d2666305d703d23df8b2a00b7bbf53ad26'
 
 app.post('/api/verify', (req, res) => {
   const { phrase } = req.body
