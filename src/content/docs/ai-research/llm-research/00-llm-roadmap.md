@@ -22,11 +22,12 @@ title: "LLM 入门路线图：从零到读懂前沿论文"
 
 ---
 
-## 第二阶段：进阶到前沿（10-12）
+## 第二阶段：进阶到前沿（10-13）
 
 ### [10. 强化学习与后训练：从 RLHF 到 OAPL](../10-rl-and-post-training)
 ### [11. RAG、Agent 与推理扩展](../11-rag-agent-and-inference-scaling)
 ### [12. KARL 逐段导读](../12-karl-guided-reading)
+### [13. 树搜索与搜索蒸馏：从 AlphaZero 到 LLM 推理](../13-mcts-and-search-distillation)
 
 ---
 
