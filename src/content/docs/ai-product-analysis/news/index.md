@@ -12,6 +12,8 @@
 
 ## 按日期归档
 
+- [2026-03-16 05:26 ｜ ExeVRM 8B 用执行视频奖励超越 GPT-5.2 评估 CUA Agent；Understanding by Reconstruction 反向重建软件开发过程提升 LLM 代码与推理能力](/ai-product-analysis/news/2026-03-16-morning/)
+- [2026-03-15 17:26 ｜ IndexCache 砍掉 75% 稀疏注意力索引器实现 1.82x 加速登上 GLM-5 生产线；MCTS 蒸馏首次证明超越 GRPO 的推理天花板](/ai-product-analysis/news/2026-03-15-evening/)
 - [2026-03-15 05:26 ｜ ExeVRM 用视频奖励模型取代手工脚本评估 Agent；MCP vs CLI 之争进入理性分析期](/ai-product-analysis/news/2026-03-15-morning/)
 - [2026-03-14 17:26 ｜ Claude 1M 上下文 GA 取消长上下文溢价；Reasoning Judge 训练出的策略模型学会了「骗」评委](/ai-product-analysis/news/2026-03-14-evening/)
 - [2026-03-14 05:26 ｜ IndexCache 75% 砍掉稀疏注意力索引器仍保精度；ExeVRM 用执行视频取代人工脚本评估 CUA](/ai-product-analysis/news/2026-03-14-morning/)

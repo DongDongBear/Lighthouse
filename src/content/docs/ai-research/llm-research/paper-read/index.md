@@ -6,9 +6,15 @@ title: LLM Paper Read
 
 基础模型方向论文导读。
 
+## 2026-03-16
+
+- [理解即重建：反向重建软件开发过程，让 LLM 从代码中学到真正的推理](./understanding-by-reconstruction-reverse-engineering-code) — 多智能体模拟将静态代码仓库反向重建为 agentic trajectory，CoT 搜索优化确保推理质量，Llama-3-8B 在代码/推理/长上下文/Agent 全线提升
+
 ## 2026-03-15
 
 - [Tree Search Distillation：用 MCTS + PPO 蒸馏搜索策略到语言模型](./tree-search-distillation-ppo) — AlphaZero 范式迁移到 LLM，在推理步粒度做并行 MCTS 搜索，PPO 在线蒸馏，Countdown 任务 mean@16 达 11.3% 超过 GRPO 的 8.4%
+- [Neural Thickets：预训练权重邻域中藏着密集的任务专家——随机猜测竟能媲美 PPO/GRPO](./neural-thickets-random-guessing-post-training) — 大模型预训练后参数邻域中密集分布着多样化的任务专家，RandOpt 用 O(1) 步训练 + 集成投票在 post-training 上竞争力可比 PPO/GRPO
+- [Averis：FP4 训练不稳定的元凶是一个秩一均值偏差——减个均值就能修](./averis-fp4-mean-bias-low-bit-training) — LLM 激活各向异性由秩一均值偏差主导（与 v₁ 余弦相似度 0.99），均值减除即可稳定 FP4 训练，无需 SVD
 
 ## 2026-03-14
 
