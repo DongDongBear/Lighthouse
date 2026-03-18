@@ -14,6 +14,11 @@
 
 - [2026-03-16 05:26 ｜ ExeVRM 8B 用执行视频奖励超越 GPT-5.2 评估 CUA Agent；Understanding by Reconstruction 反向重建软件开发过程提升 LLM 代码与推理能力](/ai-product-analysis/news/2026-03-16-morning/)
 - [2026-03-15 17:26 ｜ IndexCache 砍掉 75% 稀疏注意力索引器实现 1.82x 加速登上 GLM-5 生产线；MCTS 蒸馏首次证明超越 GRPO 的推理天花板](/ai-product-analysis/news/2026-03-15-evening/)
+- [2026-03-18 晨报 ｜ GTC 2026 持续发酵：Vera Rubin 全栈平台、NemoClaw 企业安全方案，OpenAI 战略收缩聚焦编码](/ai-product-analysis/news/2026-03-18-morning/)
+- [2026-03-18 早间 ｜ GTC 2026 余震：Dynamo 1.0 推理操作系统正式发布；Physical AI 全面进入量产；Moltbook 更新 ToS 要求用户为 Agent 行为负责](/ai-product-analysis/news/2026-03-17-afternoon-2/)
+- [2026-03-17 晚间 ｜ GTC 2026 全面解读：Vera Rubin + Feynman 路线图；NemoClaw 安全 Agent 平台；Leanstral 开源；Meta 收购 Moltbook](/ai-product-analysis/news/2026-03-17-evening/)
+- [2026-03-17 09:47 ｜ Leanstral 6B 形式化证明 Agent 1/15 成本超越 Sonnet；LM Teams 用分布式系统理论分析多 Agent；LMEB 揭示记忆嵌入与传统检索正交](/ai-product-analysis/news/2026-03-17-morning/)
+- [2026-03-16 16:30 ｜ BAVT 让 Agent 在 1/4 预算下超越暴力采样；LookaheadKV 14.5× KV 驱逐加速](/ai-product-analysis/news/2026-03-16-afternoon/)
 - [2026-03-15 05:26 ｜ ExeVRM 用视频奖励模型取代手工脚本评估 Agent；MCP vs CLI 之争进入理性分析期](/ai-product-analysis/news/2026-03-15-morning/)
 - [2026-03-14 17:26 ｜ Claude 1M 上下文 GA 取消长上下文溢价；Reasoning Judge 训练出的策略模型学会了「骗」评委](/ai-product-analysis/news/2026-03-14-evening/)
 - [2026-03-14 05:26 ｜ IndexCache 75% 砍掉稀疏注意力索引器仍保精度；ExeVRM 用执行视频取代人工脚本评估 CUA](/ai-product-analysis/news/2026-03-14-morning/)

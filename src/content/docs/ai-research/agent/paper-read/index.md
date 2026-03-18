@@ -6,6 +6,14 @@ title: Agent Paper Read
 
 Agent 方向论文导读。
 
+## 2026-03-17
+
+- [OpenSWE：$1.47M 打造 45K SWE 环境——用规模和质量重新定义 Agent 训练](./openswe-swe-environment-synthesis-at-scale) — 45,320 可执行 Docker 环境 + 难度感知筛选，32B/72B 模型 SWE-bench Verified 达 62.4%/66.0% SOTA，SWE 训练意外提升数学推理 +12pp
+
+## 2026-03-16
+
+- [BAVT：预算感知树搜索——让 Agent 花 1/4 的钱做得更好](./bavt-budget-aware-value-tree-search) — 剩余预算比例作为探索-利用的缩放指数，1/4 预算下超越 4× 资源的暴力并行采样，training-free 且有收敛保证
+
 ## 2026-03-15
 
 - [ExeVRM：用执行视频取代手工脚本，为 CUA 构建可扩展的奖励模型](./exevrm-video-reward-modeling-cua) — 53K 视频-任务-奖励三元组 + 时空 Token 剪枝，8B 模型 84.7% 准确率超越 GPT-5.2，方法与 Agent 架构无关

@@ -1,0 +1,151 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!-- Search trigger button -->
+<button class="lh-search-trigger" id="search-trigger" aria-label="搜索" title="搜索 (⌘K)">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+  <span class="lh-search-label">搜索</span>
+  <kbd class="lh-search-kbd">⌘K</kbd>
+</button>
+
+<!-- Search modal overlay -->
+<div class="lh-search-overlay" id="search-overlay">
+  <div class="lh-search-modal" id="search-modal">
+    <div class="lh-search-header">
+      <svg class="lh-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input
+        type="text"
+        class="lh-search-input"
+        id="search-input"
+        placeholder="搜索文档..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <kbd class="lh-search-esc">Esc</kbd>
+    </div>
+    <div class="lh-search-results" id="search-results">
+      <div class="lh-search-empty">输入关键词开始搜索</div>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ base }}>
+(function() {
+  let pagefind = null;
+  let searchTimer = null;
+
+  function initSearch() {
+    const trigger = document.getElementById('search-trigger');
+    const overlay = document.getElementById('search-overlay');
+    const modal = document.getElementById('search-modal');
+    const input = document.getElementById('search-input');
+    const results = document.getElementById('search-results');
+
+    if (!trigger || !overlay) return;
+
+    function open() {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => input?.focus(), 50);
+      // Lazy load pagefind
+      if (!pagefind) {
+        loadPagefind();
+      }
+    }
+
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      if (input) input.value = '';
+      if (results) results.innerHTML = '<div class="lh-search-empty">输入关键词开始搜索</div>';
+    }
+
+    trigger.addEventListener('click', open);
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) close();
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Cmd+K or Ctrl+K to open
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        if (overlay.classList.contains('active')) {
+          close();
+        } else {
+          open();
+        }
+      }
+      // Escape to close
+      if (e.key === 'Escape' && overlay.classList.contains('active')) {
+        close();
+      }
+    });
+
+    // Search input handler
+    if (input) {
+      input.addEventListener('input', function() {
+        clearTimeout(searchTimer);
+        const query = input.value.trim();
+        if (!query) {
+          results.innerHTML = '<div class="lh-search-empty">输入关键词开始搜索</div>';
+          return;
+        }
+        searchTimer = setTimeout(() => doSearch(query, results), 200);
+      });
+    }
+  }
+
+  async function loadPagefind() {
+    try {
+      pagefind = await import(base + '/pagefind/pagefind.js');
+      await pagefind.options({ baseUrl: base + '/' });
+    } catch (e) {
+      console.warn('[Search] Failed to load pagefind:', e);
+    }
+  }
+
+  async function doSearch(query, container) {
+    if (!pagefind) {
+      container.innerHTML = '<div class="lh-search-empty">搜索索引加载中...</div>';
+      await loadPagefind();
+      if (!pagefind) {
+        container.innerHTML = '<div class="lh-search-empty">搜索暂不可用</div>';
+        return;
+      }
+    }
+
+    try {
+      const search = await pagefind.search(query);
+      if (!search.results.length) {
+        container.innerHTML = '<div class="lh-search-empty">没有找到相关内容</div>';
+        return;
+      }
+
+      const items = await Promise.all(search.results.slice(0, 12).map(r => r.data()));
+      container.innerHTML = items.map(item => {
+        const title = item.meta?.title || '无标题';
+        const excerpt = item.excerpt || '';
+        return `<a class="lh-search-item" href="${item.url}">
+          <span class="lh-search-item-title">${title}</span>
+          <span class="lh-search-item-excerpt">${excerpt}</span>
+        </a>`;
+      }).join('');
+    } catch (e) {
+      container.innerHTML = '<div class="lh-search-empty">搜索出错</div>';
+    }
+  }
+
+  // Init on load and after navigation
+  initSearch();
+  document.addEventListener('astro:page-load', initSearch);
+})();
+</script>

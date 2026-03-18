@@ -9,6 +9,14 @@ title: LLM Paper Read
 ## 2026-03-16
 
 - [理解即重建：反向重建软件开发过程，让 LLM 从代码中学到真正的推理](./understanding-by-reconstruction-reverse-engineering-code) — 多智能体模拟将静态代码仓库反向重建为 agentic trajectory，CoT 搜索优化确保推理质量，Llama-3-8B 在代码/推理/长上下文/Agent 全线提升
+## 2026-03-17
+
+- [Leanstral：6B 活跃参数的形式化证明 Agent——专精小模型如何碾压百B大模型](./leanstral-formal-proof-agent) — Mistral 开源 120B/6B MoE 模型，$36 成本超越 $549 的 Sonnet，揭示"专精模型+外部验证器+并行搜索"范式
+- [Cheers：解耦 Patch 细节与语义表征——用 20% 训练成本实现统一多模态理解与生成](./cheers-unified-multimodal-comprehension-generation) — Patch 细节与语义解耦 + 级联 Flow Matching + 门控高频注入，83M 样本超越 403M 的 Tar，GenEval 0.78 SOTA
+
+## 2026-03-16
+
+- [LookaheadKV：不需要 draft 生成的未来感知 KV Cache 驱逐](./lookaheadkv-future-aware-kv-cache-eviction) — 参数高效模块预测 KV cache 重要性得分，14.5× 驱逐加速，质量超越 draft 方法，ICLR 2026
 
 ## 2026-03-15
 

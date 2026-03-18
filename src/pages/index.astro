@@ -62,11 +62,12 @@ const allDocs = await getCollection('docs');
 const newsEntries = allDocs
   .filter(e => e.id.startsWith('ai-product-analysis/news/') && !e.id.endsWith('index.md'))
   .map(e => {
+    // Try body heading first, then fall back to frontmatter title
     const m = e.body?.match(/^#\s+(.+)$/m);
-    const fullTitle = m?.[1]?.replace(/[*_`[\]]/g, '') ?? '';
+    const fullTitle = (m?.[1] ?? e.data?.title ?? '').replace(/[*_`[\]]/g, '');
     const parts = fullTitle.split('｜');
     const dateStr = parts[0]?.match(/(\d{2}-\d{2})/)?.[1] ?? '';
-    const newsTitle = parts[1] ?? fullTitle;
+    const newsTitle = parts.length > 1 ? parts.slice(1).join('｜').replace(/^核心摘要：/, '') : fullTitle;
     const desc = e.data?.description ?? '';
     const slug = e.id.replace(/\.md$/, '');
     return {
