@@ -12,6 +12,7 @@
 
 ## 按日期归档
 
+- [2026-03-18 晚报 ｜ Snowflake AI 沙箱逃逸敲响安全警钟，Stripe 推出机器支付协议 MPP 开启 Agent 经济新纪元](/ai-product-analysis/news/2026-03-18-evening/)
 - [2026-03-16 05:26 ｜ ExeVRM 8B 用执行视频奖励超越 GPT-5.2 评估 CUA Agent；Understanding by Reconstruction 反向重建软件开发过程提升 LLM 代码与推理能力](/ai-product-analysis/news/2026-03-16-morning/)
 - [2026-03-15 17:26 ｜ IndexCache 砍掉 75% 稀疏注意力索引器实现 1.82x 加速登上 GLM-5 生产线；MCTS 蒸馏首次证明超越 GRPO 的推理天花板](/ai-product-analysis/news/2026-03-15-evening/)
 - [2026-03-18 晨报 ｜ GTC 2026 持续发酵：Vera Rubin 全栈平台、NemoClaw 企业安全方案，OpenAI 战略收缩聚焦编码](/ai-product-analysis/news/2026-03-18-morning/)

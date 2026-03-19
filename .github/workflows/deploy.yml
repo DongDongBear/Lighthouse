@@ -32,7 +32,7 @@ jobs:
       - name: Build
         env:
           NODE_OPTIONS: --max-old-space-size=3072
-        run: npm run build -- --concurrency 4
+        run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
         with:
