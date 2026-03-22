@@ -12,6 +12,10 @@
 
 ## 按日期归档
 
+- [2026-03-22 上午 ｜ Mamba-3 重新定义推理效率击败 Transformer，NVIDIA Nemotron-Cascade 2 用 3B 活跃参数达到 IMO 金牌水平，OpenCode 开源编程 Agent 爆红](/ai-product-analysis/news/2026-03-22-morning/)
+- [2026-03-21 上午 ｜ Super Micro联合创始人涉25亿美元AI芯片走私被捕，arXiv宣布脱离康奈尔独立运营，Confer为Meta AI带来端到端加密](/ai-product-analysis/news/2026-03-21-morning/)
+- [2026-03-20 上午 ｜ OpenAI 收购 Astral 重塑 Python 工具链，GPT-5.4 首周 5T tokens/天，Samsung 730亿美元押注AI芯片](/ai-product-analysis/news/2026-03-20-morning/)
+- [2026-03-19 下午 ｜ Anthropic 81K人访谈报告，llm-circuit-finder 推理电路移植，Claude Code 插件生态爆发](/ai-product-analysis/news/2026-03-19-afternoon/)
 - [2026-03-18 晚报 ｜ Snowflake AI 沙箱逃逸敲响安全警钟，Stripe 推出机器支付协议 MPP 开启 Agent 经济新纪元](/ai-product-analysis/news/2026-03-18-evening/)
 - [2026-03-16 05:26 ｜ ExeVRM 8B 用执行视频奖励超越 GPT-5.2 评估 CUA Agent；Understanding by Reconstruction 反向重建软件开发过程提升 LLM 代码与推理能力](/ai-product-analysis/news/2026-03-16-morning/)
 - [2026-03-15 17:26 ｜ IndexCache 砍掉 75% 稀疏注意力索引器实现 1.82x 加速登上 GLM-5 生产线；MCTS 蒸馏首次证明超越 GRPO 的推理天花板](/ai-product-analysis/news/2026-03-15-evening/)

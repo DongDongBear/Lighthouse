@@ -6,6 +6,10 @@ title: LLM Paper Read
 
 基础模型方向论文导读。
 
+## 2026-03-22
+
+- [Mamba-3：首个以推理效率为核心设计的状态空间模型](./mamba-3-inference-first-ssm) — 指数梯形离散化 + 复数值状态 + MIMO 变体，1.5B 规模超越 Transformer，移除短卷积，开源高性能内核
+
 ## 2026-03-16
 
 - [理解即重建：反向重建软件开发过程，让 LLM 从代码中学到真正的推理](./understanding-by-reconstruction-reverse-engineering-code) — 多智能体模拟将静态代码仓库反向重建为 agentic trajectory，CoT 搜索优化确保推理质量，Llama-3-8B 在代码/推理/长上下文/Agent 全线提升
