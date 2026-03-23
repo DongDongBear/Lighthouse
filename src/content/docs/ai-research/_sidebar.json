@@ -1,19 +1,24 @@
 {
   "groups": [
     {
-      "text": "LLM Research",
+      "text": "LLM 零基础入门",
+      "dir": "fundamentals",
+      "collapsed": true
+    },
+    {
+      "text": "LLM 进阶研究",
       "dir": "llm-research",
       "collapsed": false,
       "subgroups": [
-        { "text": "Paper", "dir": "paper-read", "collapsed": true }
+        { "text": "论文导读", "dir": "paper-read", "collapsed": true }
       ]
     },
     {
-      "text": "Agent",
+      "text": "Agent 研究",
       "dir": "agent",
       "collapsed": false,
       "subgroups": [
-        { "text": "Paper", "dir": "paper-read", "collapsed": true }
+        { "text": "论文导读", "dir": "paper-read", "collapsed": true }
       ]
     }
   ]

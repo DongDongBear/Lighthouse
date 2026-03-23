@@ -1,5 +1,5 @@
 ---
-title: "03. RAG、Agent 与推理扩展：从检索原理到 Test-Time Compute"
+title: "11. RAG、Agent 与推理扩展：从检索原理到 Test-Time Compute"
 ---
 
 # 03. RAG、Agent 与推理扩展：从检索原理到 Test-Time Compute
