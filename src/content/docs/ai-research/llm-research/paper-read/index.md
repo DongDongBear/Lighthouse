@@ -6,6 +6,10 @@ title: LLM Paper Read
 
 基础模型方向论文导读。
 
+## 2026-03-23
+
+- [2026年春季开源LLM架构全景：10个模型的技术演化](./raschka-dream-of-spring-open-weight-llms) — Sebastian Raschka 对 2026 年 1-2 月 10 个主流开源 LLM 的架构横评，涵盖 Trinity 400B、Kimi K2.5 1T、GLM-5 744B、Qwen3.5 397B 等，揭示 Gated DeltaNet、MLA、混合注意力三大趋势
+
 ## 2026-03-22
 
 - [Mamba-3：首个以推理效率为核心设计的状态空间模型](./mamba-3-inference-first-ssm) — 指数梯形离散化 + 复数值状态 + MIMO 变体，1.5B 规模超越 Transformer，移除短卷积，开源高性能内核
