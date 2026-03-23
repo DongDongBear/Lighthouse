@@ -12,6 +12,7 @@
 
 ## 按日期归档
 
+- [2026-03-23 上午 ｜ Moxie Marlinspike 将为 Meta AI 带来端到端加密，Flash-MoE 在笔记本上跑 397B 参数模型，2025 图灵奖首次颁给量子计算](/ai-product-analysis/news/2026-03-23-morning/)
 - [2026-03-22 上午 ｜ Mamba-3 重新定义推理效率击败 Transformer，NVIDIA Nemotron-Cascade 2 用 3B 活跃参数达到 IMO 金牌水平，OpenCode 开源编程 Agent 爆红](/ai-product-analysis/news/2026-03-22-morning/)
 - [2026-03-21 上午 ｜ Super Micro联合创始人涉25亿美元AI芯片走私被捕，arXiv宣布脱离康奈尔独立运营，Confer为Meta AI带来端到端加密](/ai-product-analysis/news/2026-03-21-morning/)
 - [2026-03-20 上午 ｜ OpenAI 收购 Astral 重塑 Python 工具链，GPT-5.4 首周 5T tokens/天，Samsung 730亿美元押注AI芯片](/ai-product-analysis/news/2026-03-20-morning/)
