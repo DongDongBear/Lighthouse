@@ -228,67 +228,345 @@ environment-management.md ──→ auth-flow.md ──→ testing-strategy.md
 
 ---
 
-### 2.6 minimax-docx
+### 2.6 minimax-docx — .NET OpenXML SDK 工具链
 
-**定位**：DOCX 文档的创建、编辑和模板应用——基于 OpenXML 的底层操控
+**定位**：DOCX 文档的创建、编辑和模板应用——基于 .NET 8 + OpenXML SDK 3.x 的底层操控
 
-#### 三流水线架构
+**技术栈选型理由**：选择 .NET OpenXML SDK 而非 python-docx，因为：(1) OpenXML SDK 是 Microsoft 官方 SDK，100% 覆盖 OOXML 规范；(2) python-docx 不支持 track changes、comments、XSD 验证；(3) .NET 提供强类型 API，编译时捕获结构错误；(4) XSD 验证需要 `System.Xml.Schema`，Python 无等效物。
 
-| Pipeline | 流程 | 复杂度 |
-|----------|------|--------|
-| A — Create | 需求分析 → 文档类型选择 → 样式系统构建 → 内容 JSON → OpenXML 生成 → XSD 验证 | 高 |
-| B — Edit | 解包 DOCX → 定位目标元素 → 最小改动 → 保持格式完整性 → 重新打包 | 中 |
-| C — Template | 分析模板 → 识别区域(A/B/C/D) → 决策 Overlay vs Base-Replace → 样式映射 → XSD 验证 | 高 |
+#### 三管道路由与完整数据流
 
-#### XSD 验证机制
+```
+用户任务
+├─ 无输入文件 → Pipeline A: CREATE
+│   palette选择 → AestheticRecipeSamples (13种排版配方)
+│   → CLI (dotnet run create) 或 直接 C# SDK
+│   → ElementOrder 排序 → MergeRuns 合并 → Validate
+│
+├─ 有输入文件 + 替换内容 → Pipeline B: EDIT
+│   → 分析现有结构 (Analyze命令)
+│   → 文本替换/占位符填充/表格编辑
+│   → Diff 对比验证 → MergeRuns → Validate
+│
+└─ 有输入文件 + 重排版 → Pipeline C: TEMPLATE
+    ├─ C-1 OVERLAY (≤30段, 无封面/目录)
+    │   → 复制 styles.xml + theme + numbering
+    │   → 三级样式映射 (精确ID → 名称匹配 → 手动字典)
+    │   → 清理直接格式 → Gate-Check (强制)
+    │
+    └─ C-2 BASE-REPLACE (>100段, 有封面/目录/示例区)
+        → 模板作为基础文档
+        → 内容区替换 → Relationship ID 重映射
+        → 合并 headers/footers → Gate-Check (强制)
+```
 
-这是整个项目中**唯一使用形式化验证**的 Skill。XSD 验证充当了 Agent 输出的"编译器"——如果生成的 XML 不合法，Agent 可以根据错误信息自动修正。
+#### 核心算法深解
 
-三部曲 `openxml_encyclopedia_part1/2/3.md` 本质上是 ECMA-376 标准的"Agent 友好版"。
+**Run Merger 算法** (`RunMerger.cs`)：Word 可能将 "Hello World" 分散在 3 个 `<w:r>` 节点中——跨 run 的文本搜索/替换前必须先合并。算法遍历段落中所有相邻 run，比较 `<w:rPr>` 的序列化 XML 字符串是否完全一致，一致则合并 `<w:t>` 文本。关键细节：合并前必须处理 `xml:space="preserve"` 避免空格丢失。
+
+**Element Order 排序** (`ElementOrder.cs`)：硬编码字典存储 11 种父元素的合法子元素顺序（w:body, w:p, w:pPr, w:r, w:rPr, w:tbl, w:tblPr, w:tr, w:trPr, w:tc, w:tcPr, w:sectPr, w:hdr, w:ftr），递归遍历 XML 树重排。**违反顺序 = Word 静默损坏或拒绝打开**。
+
+**三级样式映射**（Pipeline C 的核心难题）：
+
+| 级别 | 匹配策略 | 示例 |
+|------|---------|------|
+| Tier 1 | `source.styleId == template.styleId` | "Heading1" → "Heading1" |
+| Tier 2 | `source.styleName == template.styleName` | name="heading 1" 跨文档匹配 |
+| Tier 3 | 手动字典覆盖 | 处理中文模板的数字 styleId: "1","2","3","a","a0" |
+
+**Relationship ID 重映射**：扫描源文档所有 rId 找最大值 → 模板 rId 从 max+1 开始重编 → 更新所有复制部件中的引用（headers, footers, images, hyperlinks）→ 去重超链接关系。
+
+#### 三级验证体系
+
+| 级别 | 检查内容 | 触发条件 |
+|------|---------|---------|
+| Level 1 (XSD) | 元素顺序、缺失属性 → 导致 Word 无法打开 | 所有管道 |
+| Level 2 (业务规则) | 页边距 360-4320 DXA、字号 8-72pt、标题层级连续 | 所有管道 |
+| Level 3 (Gate-Check) | 模板完整性检查 | **仅 Pipeline C 强制** |
+
+自动修复能力：`fix-order` 命令可自动修复元素顺序错误。
+
+#### 13 种美学配方
+
+配方来源涵盖 IEEE、ACM、APA、Nature、HBR、GB/T 9704 等权威标准，每个配方协调字体族、字号梯度、行距、页边距、颜色、表格样式。这不是自由排版——而是**防止 AI 做出业余排版决策**。
+
+#### .NET 工具链架构
+
+项目包含完整的 .NET 解决方案（~50+ C# 源文件）：
+
+| 模块 | 核心类 | 职责 |
+|------|--------|------|
+| Commands/ | CreateCommand, EditContentCommand, ApplyTemplateCommand, ValidateCommand, AnalyzeCommand, DiffCommand, FixOrderCommand, MergeRunsCommand | 8 个独立命令 |
+| OpenXml/ | RunMerger, ElementOrder, StyleAnalyzer, CommentSynchronizer, TrackChangesHelper, UnitConverter, NamespaceConstants | 底层 XML 操作 |
+| Typography/ | CjkHelper, FontDefaults, PageSizes | CJK 排版支持 |
+| Validation/ | XsdValidator, BusinessRuleValidator, GateCheckValidator, ValidationResult | 三级验证 |
+| Samples/ | 11 个 Samples 类（Aesthetic Batch 1-4, Character, Document, Field, Footnote, Header, Image, List, Paragraph, Style, Table, TrackChanges） | 代码生成范例 |
 
 ---
 
-### 2.7 minimax-xlsx
+### 2.7 minimax-xlsx — XML 直操零损失策略
 
 **定位**：Excel 文件的底层 XML 操控——零格式损失编辑
 
-#### 核心策略：禁用高级库
+**技术栈选型理由**：选择 Python + 原生 ElementTree 直操 XML，**严禁 openpyxl round-trip**。原因：`openpyxl.save()` 静默丢弃 VBA macros、pivot tables、sparklines、slicers、conditional formatting、data validation——这些是用户文件中最有价值的部分。
+
+#### 五路径完整数据流
 
 ```
-NEVER import openpyxl for editing
+READ路径:
+  xlsx_reader.py → pandas读取 → 结构/质量审计 → JSON/人可读报告
+
+CREATE路径:
+  复制 templates/minimal_xlsx/ (7文件骨架)
+  → 手动编辑 XML (sharedStrings + worksheet + workbook + styles)
+  → xlsx_pack.py (ZIP打包 + XML校验)
+  → formula_check.py (Tier 1 静态)
+  → libreoffice_recalc.py (Tier 2 动态, 可选)
+
+EDIT路径:
+  xlsx_unpack.py (解压 + pretty-print + 高危内容警告)
+  → 手术式 XML 编辑 (Edit tool only)
+  → xlsx_shift_rows.py (行偏移级联更新, 如需)
+  → xlsx_add_column.py / xlsx_insert_row.py (如需)
+  → xlsx_pack.py → formula_check.py → libreoffice_recalc.py
+
+FIX路径:
+  formula_check.py 识别7种错误 → 解压 → 修复 <f> 元素 → 打包 → 重新验证
+
+VALIDATE路径:
+  Tier 1: formula_check.py (静态, 无外部依赖)
+  Tier 2: libreoffice_recalc.py → formula_check.py (对重算后文件再扫)
 ```
 
-因为 openpyxl 在写回时会丢失格式信息。所有编辑直接操作解压后的 XML 文件，虽然更复杂但保证了"读入什么，写出什么"的保真度。
+#### 核心算法深解
 
-#### 十脚本工具链
+**公式行引用偏移算法** (`xlsx_shift_rows.py::_shift_refs()`)——这是整套工具链中最复杂的算法：
 
-| 脚本 | 职责 |
-|------|------|
-| `xlsx_reader.py` | 读取 xlsx 结构和内容 |
-| `xlsx_unpack.py` / `xlsx_pack.py` | 解压/重新打包 |
-| `xlsx_add_column.py` / `xlsx_insert_row.py` / `xlsx_shift_rows.py` | 行列操控（含公式偏移） |
-| `shared_strings_builder.py` | sharedStrings.xml 管理 |
-| `style_audit.py` | 样式审计 |
-| `formula_check.py` | 公式合法性检查 |
-| `libreoffice_recalc.py` | LibreOffice 无头模式重算公式 |
+```python
+# 正则: (\$?)([A-Z]+)(\$?)(\d+) 匹配单元格引用
+# 逻辑:
+#   1. 分割公式中的引号sheet名 ('Budget FY2025'!B5) 避免破坏
+#   2. 对每个匹配:
+#      - 如果 row >= insertion_point: row += delta
+#      - 保留 $ 绝对引用标记
+#      - 整列引用 (B:B) 不动
+#   3. 级联更新范围:
+#      - <mergeCell ref="A5:C7"> 的起止行
+#      - <conditionalFormatting sqref="...">
+#      - <dataValidations sqref="...">
+#      - <dimension ref="A1:D20">
+#      - xl/tables/*.xml 的 ref 属性
+#      - xl/charts/*.xml 的 <numRef><f> 和 <strRef><f>
+#      - xl/pivotCaches/*.xml 的 <worksheetSource ref="...">
+```
+
+**样式间接引用链** (`style_audit.py`)——xlsx 的样式通过多级索引链传递：
+
+```
+cell s="3" → cellXfs[3] → {fontId:2, fillId:0, borderId:0, numFmtId:165}
+                            ↓           ↓           ↓            ↓
+                        fonts[2]    fills[0]    borders[0]   numFmts[165]
+                        (蓝色)      (无填充)     (无边框)     ($#,##0)
+```
+
+**关键规则：只能追加，永不修改现有 `<xf>`** — 因为所有单元格通过索引引用。
+
+**SharedStrings 管理**：每个文本值对应 `<si>` 元素，单元格用 `t="s"` + `<v>索引</v>` 引用。`count` 和 `uniqueCount` 必须精确。**永不删除或重排 `<si>`** — 会破坏所有引用该索引的单元格。
+
+#### 十脚本速查
+
+| 脚本 | 核心逻辑 | 关键数据结构 |
+|------|---------|------------|
+| `xlsx_reader.py` | pandas 读取 + 数据质量审计 (null/重复/离群值/类型混合) | DataFrame + 审计报告 |
+| `xlsx_unpack.py` | ZIP 解压 + XML pretty-print + 高危内容警告 | zipfile → 目录树 |
+| `xlsx_pack.py` | 目录打包 + 所有 XML 校验 | 目录树 → ZIP |
+| `formula_check.py` | 7 种错误值扫描 + 跨 sheet 引用验证 + shared formula 完整性 | XML 遍历 → 错误列表 |
+| `xlsx_add_column.py` | 列添加 + 公式注入 + 样式继承 + dimension 更新 | XML element 追加 |
+| `xlsx_insert_row.py` | 行插入 + 内部调用 shift_rows + sharedStrings 更新 | 行级 XML 操作 |
+| `xlsx_shift_rows.py` | 正则匹配公式中的行引用 + 全文件级联更新 | 正则替换 + 多文件扫描 |
+| `shared_strings_builder.py` | 字符串去重 + XML 转义 + 空格保留 | 列表 → `<sst>` XML |
+| `libreoffice_recalc.py` | LibreOffice headless 重算 + 超时处理 | subprocess + 文件转换 |
+| `style_audit.py` | 样式索引链解析 + 颜色角色违规检测 | cellXfs 索引 → font → color |
+
+#### 金融语义着色系统
+
+| 颜色 | 语义 | 用途 |
+|------|------|------|
+| 蓝色 | 输入/假设 | 用户可编辑的单元格 |
+| 黑色 | 公式/计算 | 自动派生值 |
+| 绿色 | 跨 sheet 引用 | 引用其他工作表的公式 |
+| 黄色填充 | 关键假设 | 高亮重要参数 |
+
+这是投行/咨询行业的标准实践，便于审计和模型审查。
+
+#### 二级验证与理由
+
+| 级别 | 检查方式 | 为什么需要 |
+|------|---------|-----------|
+| Tier 1 (静态) | formula_check.py 扫描缓存的错误值 | 捕获已知的 `#REF!`, `#NAME?` 等 |
+| Tier 2 (动态) | LibreOffice headless 重算后再跑 Tier 1 | 新创建的公式 `<v>` 为空，静态检查看不出运行时错误 |
 
 ---
 
-### 2.8 minimax-pdf
+### 2.8 minimax-pdf — Token 化设计系统
 
-**定位**：PDF 的创建、表单填充和重排——带 Token 化设计系统
+**定位**：PDF 的创建、表单填充和重排——基于 Token 传播的设计系统
 
-三路由架构（CREATE/FILL/REFORMAT），15 种封面风格，Node.js + Python 混合管道。
+**技术栈选型理由**：封面用 HTML/CSS + Playwright（flexbox/SVG/渐变/Google Fonts 布局能力远超 ReportLab），正文用 ReportLab（Flowable 系统天然支持自动分页 + 精确的 KeepTogether 防孤行控制）。
 
-Token 化设计系统从"情绪"出发选色（Professional → 蓝灰、Creative → 橙红），通过 8pt 网格实现模块化间距。
+#### CREATE 路径完整数据流
+
+```
+make.sh run --title --type --author --content content.json --out output.pdf
+│
+├─ Step 1: palette.py
+│   输入: title, type, author, date, [--accent, --cover-bg 覆盖]
+│   输出: tokens.json (调色板 + 字体 + 尺度 + 间距 + 封面模式)
+│
+├─ Step 2: cover.py
+│   输入: tokens.json [+ --abstract, --cover-image]
+│   输出: cover.html (13种封面模式之一的完整 HTML)
+│
+├─ Step 3: render_cover.js
+│   输入: cover.html
+│   Playwright Chromium → 等待 800ms (CSS/字体加载)
+│   输出: cover.pdf (单页)
+│
+├─ Step 4: render_body.py
+│   输入: tokens.json + content.json (14种block类型)
+│   ReportLab Flowables → 自定义 CalloutBox/BibliographyItem
+│   → 页眉(标题+日期+accent线) + 页脚(作者+页码+淡线)
+│   → 图表/数学公式 → matplotlib PNG → 嵌入PDF
+│   输出: body.pdf (多页)
+│
+└─ Step 5: merge.py
+    输入: cover.pdf + body.pdf
+    QA: 文件大小 (20KB-50MB) + 页数验证
+    输出: output.pdf
+```
+
+#### Token 传播模型
+
+这是 minimax-pdf 最核心的设计——**所有下游脚本只读 tokens.json，从不自行决定颜色/字体/间距**：
+
+```json
+{
+  "identity": {"title", "author", "date", "doc_type"},
+  "palette": {"cover_bg", "accent", "accent_lt", "text_light", "page_bg",
+              "dark", "body_text", "muted"},
+  "typography": {"font_display", "font_body", "gfonts_import",
+                 "font_display_rl", "font_body_rl"},
+  "scale": {"size_display":54, "size_h1":28, "size_h2":22, "size_h3":18,
+            "size_body":11, "size_caption":9, "size_meta":8},
+  "layout": {"margin_left/right/top/bottom", "section_gap":26,
+             "para_gap":8, "line_gap"},
+  "cover_pattern": "fullbleed|split|typographic|minimal|terminal|diagonal|...",
+  "mood": "authoritative|confident|..."
+}
+```
+
+15 种文档类型映射到硬编码调色板 → 可预测、可测试，防止用户选出不和谐的颜色组合。`accent_lt` 通过 `_lighten(accent, 0.09)` 自动派生，保证色彩层次。
+
+#### 13 种封面模式
+
+每种模式是一个独立的 HTML 模板生成函数，产出完整的 794x1123px 页面：
+
+| 模式 | 视觉特征 |
+|------|---------|
+| `fullbleed` | 深色背景 + 左对齐标题 + 点阵纹理 + 底部色带 |
+| `split` | 左暗右亮分栏 + accent 分割线 |
+| `typographic` | 亮底 + 首词 accent 色 + 水平线 |
+| `minimal` | 近白底 + 仅 8px 左侧 accent 竖条 |
+| `terminal` | 近黑底 + 网格覆盖 + 方括号边框 + 霓虹绿 accent |
+| `diagonal` | SVG 多边形对角切割 |
+
+辅助函数 `_dot_grid()` 和 `_cross_hatch()` 生成 SVG 纹理叠加层。
+
+#### Flowchart 渲染算法
+
+`render_body.py::_render_flowchart_png`：垂直堆叠布局，4 种节点形状（rect/diamond/oval/parallelogram），matplotlib patches 绘制，前向边直线箭头，回溯边弧线 (arc3, rad=0.42)。
+
+#### FILL 和 REFORMAT 路径
+
+- **FILL**：`fill_inspect.py` 递归遍历 AcroForm 字段树解析类型 → `fill_write.py` 类型感知设值 + NeedAppearances 标记
+- **REFORMAT**：`reformat_parse.py` 支持 .md/.txt/.pdf/.json → content.json，然后走 CREATE 管道。内含逐行状态机 Markdown 解析器。
 
 ---
 
-### 2.9 pptx-generator
+### 2.9 pptx-generator + pptx-plugin — 子 Agent 编排架构
 
-**定位**：PowerPoint 创建和编辑——PptxGenJS 驱动的双轨工作流
+**定位**：PowerPoint 创建和编辑——PptxGenJS 驱动 + 业界罕见的子 Agent 编排
 
-独特的**自验证循环**：生成 PPT 后用 markitdown 回读并自检内容是否正确。18 种精心设计的色彩方案 + 7 个"Critical Pitfalls"避坑指南。
+**技术栈选型理由**：选择 PptxGenJS 而非 python-pptx，因为 API 更接近设计师心智模型（addText, addShape, addImage），图表支持丰富（BAR, LINE, PIE, DOUGHNUT, SCATTER, BUBBLE, RADAR），Node.js 生态可直接集成 react-icons 做 SVG 图标。
+
+#### 完整数据流
+
+```
+FROM-SCRATCH 创建:
+  用户需求
+  ├─ color-font-skill: 选择 18 种调色板之一 → theme 对象 (5个key)
+  ├─ design-style-skill: 选择 4 种风格配方之一
+  └─ ppt-orchestra-skill: 规划每张幻灯片的页面类型
+      │
+      ├─ 并行启动 ≤5 个子 Agent:
+      │   ├─ cover-page-generator → slide-01.js
+      │   ├─ table-of-contents-generator → slide-02.js
+      │   ├─ section-divider-generator → slide-03.js
+      │   ├─ content-page-generator → slide-04.js ~ slide-XX.js
+      │   └─ summary-page-generator → slide-XX.js
+      │
+      └─ compile.js (串行加载所有 slide-XX.js)
+          for i = 1..N:
+            require(`./slide-${i}.js`).createSlide(pres, theme)
+          pres.writeFile('./output/presentation.pptx')
+
+QA 循环 (强制至少一轮):
+  生成 → markitdown 提取文本 → grep 检测 "xxxx|lorem|placeholder"
+  → 列出问题 → 修复 → 重新验证
+```
+
+#### Theme 对象合约
+
+全系统唯一的颜色传播机制，**严格禁止使用其他 key 名**：
+
+```javascript
+const theme = {
+  primary: "22223b",    // 最深色, 标题/深色背景
+  secondary: "4a4e69",  // 次深色, 正文文本
+  accent: "9a8c98",     // 中间色调, 强调元素
+  light: "c9ada7",      // 浅色调, 次要元素
+  bg: "f2e9e4"          // 背景色
+};
+```
+
+#### 四种风格配方
+
+| 风格 | rectRadius | padding | 适用场景 |
+|------|-----------|---------|---------|
+| Sharp & Compact | 0-0.05" | 0.1-0.15" | 数据密集型 |
+| Soft & Balanced | 0.05-0.12" | 0.15-0.2" | 商务通用 |
+| Rounded & Spacious | 0.1-0.25" | 0.2-0.3" | 产品营销 |
+| Pill & Airy | 0.3-0.5" | 0.25-0.4" | 品牌发布 |
+
+组件级映射表确保 Button、Card、Avatar 等在同一风格下一致。
+
+#### 关键技术陷阱
+
+| 陷阱 | 后果 | 正确做法 |
+|------|------|---------|
+| hex 颜色带 `#` | 文件损坏 | 使用裸 hex 如 `"FF0000"` |
+| 8 位 hex（含透明度） | 文件损坏 | 用独立 `transparency: 50` 属性 |
+| `require()` 中用 async/await | 幻灯片被静默跳过 | **严禁 async** |
+| 复用 options 对象 | 第二个形状损坏 | PptxGenJS 会原地修改（转 EMU），每次新建 |
+| ElementTree 操作 XML | 命名空间破坏 | 用 `defusedxml.minidom` |
+
+#### 为什么 5 个专化子 Agent？
+
+- 每种页面类型有独立的布局规则、字号层级、内容元素约束
+- 子 Agent **并行执行**（最多 5 个），大幅缩短生成时间
+- 每个子 Agent 自带 QA 循环
+- 职责隔离：封面 Agent 不需要知道图表 API
+- **重复布局是 AI 生成 PPT 的最大视觉问题**——强制每张内容页不同布局是 QA 硬性检查项
 
 ---
 
@@ -307,6 +585,29 @@ Token 化设计系统从"情绪"出发选色（Professional → 蓝灰、Creativ
 项目中第二大的 SKILL.md（30,136 字节），核心是**统一入口 + 模式分发**架构。
 
 TTS 子系统支持标准 TTS、声音克隆、声音设计、多段拼接（可制作多角色有声读物）。视频子系统通过"接力式生成"实现长视频（提取上一段末帧作为下一段首帧）。Media Tools 将 FFmpeg 封装为语义化命令。
+
+---
+
+## Office 四件套全局对比
+
+| 维度 | minimax-docx | minimax-xlsx | minimax-pdf | pptx-generator + plugin |
+|------|-------------|-------------|-------------|------------------------|
+| **技术栈** | .NET 8 + OpenXML SDK 3.x | Python + 原生 XML (ElementTree) | Python (ReportLab) + Node.js (Playwright) | Node.js (PptxGenJS) + Python (markitdown) |
+| **核心哲学** | 三管道路由 + XSD 验证 | 禁止 openpyxl + 公式第一 | Token 化设计传播 | 约束驱动 + 子 Agent 编排 |
+| **文件规模** | ~50+ C# 源文件 + 27 参考文档 + 4 XSD | 10 Python 脚本 + 5 参考文档 + 7 模板文件 | 8 脚本 + 1 设计文档 | 5 Agent 规格 + 5 Skill 定义 |
+| **验证体系** | 三级 (XSD → 业务规则 → Gate-Check) | 二级 (静态扫描 → LibreOffice 重算) | QA 合并检查 (文件大小 + 页数) | markitdown 提取 + grep 循环 |
+| **样式系统** | 13 种美学配方 | 13 槽金融语义样式 | 12 种 mood → 调色板 | 18 种调色板 + 4 种风格配方 |
+
+**统一设计原则：用最接近原始格式的工具操作。** docx 是 OpenXML → 用 OpenXML SDK 直操强类型 API；xlsx 是 ZIP+XML → 用 ElementTree 直操避免抽象层丢失；pdf 需精确排版 → 封面 HTML/CSS + 正文 ReportLab；pptx 需快速生成 → PptxGenJS + 编辑用 XML 直操。
+
+**验证体系对比**：
+
+```
+docx: 结构正确性 (XSD) → 业务逻辑 → 模板完整性 → 自动修复 (fix-order)
+xlsx: 公式正确性 (静态7种错误) → 运行时正确性 (LibreOffice重算) → 半自动修复
+pdf:  文件完整性 (大小/页数) → 优雅降级 (matplotlib缺失 → 等宽文本)
+pptx: 内容完整性 (markitdown提取) → 占位符残留检测 → 人工修复循环
+```
 
 ---
 
