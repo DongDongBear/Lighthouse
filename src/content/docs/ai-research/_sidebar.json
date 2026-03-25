@@ -1,6 +1,12 @@
 {
   "groups": [
     {
+      "text": "每日深度解读",
+      "dir": "daily-deep-reads",
+      "collapsed": false,
+      "dynamicSubdirs": true
+    },
+    {
       "text": "LLM 零基础入门",
       "dir": "fundamentals",
       "collapsed": true
@@ -10,7 +16,11 @@
       "dir": "llm-research",
       "collapsed": false,
       "subgroups": [
-        { "text": "论文导读", "dir": "paper-read", "collapsed": true }
+        {
+          "text": "论文导读",
+          "dir": "paper-read",
+          "collapsed": true
+        }
       ]
     },
     {
@@ -18,7 +28,11 @@
       "dir": "agent",
       "collapsed": false,
       "subgroups": [
-        { "text": "论文导读", "dir": "paper-read", "collapsed": true }
+        {
+          "text": "论文导读",
+          "dir": "paper-read",
+          "collapsed": true
+        }
       ]
     }
   ]

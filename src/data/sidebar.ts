@@ -85,12 +85,20 @@ interface SidebarConfigGroup {
   sortBy?: string;
   formatTitle?: string;
   subgroups?: SidebarConfigSubgroup[];
+  dynamicSubdirs?: boolean;
 }
 
 interface SidebarConfigSubgroup {
   text: string;
   dir: string;
   collapsed?: boolean;
+}
+
+interface SidebarConfigDynamicSubgroups {
+  text: string;
+  dir: string;
+  collapsed?: boolean;
+  dynamicSubdirs?: boolean;  // auto-discover date subdirectories
 }
 
 interface SidebarConfig {
@@ -149,6 +157,22 @@ function getModulesForSubdir(parentDir: string, subDir: string): Record<string, 
   return getModulesFor(`${parentDir}/${subDir}`);
 }
 
+/** Discover all subdirectory names under a given dir path */
+function discoverSubdirs(dirPath: string): string[] {
+  const prefix = `../content/docs/${dirPath}/`;
+  const subdirs = new Set<string>();
+  for (const path of Object.keys(allModules)) {
+    if (path.startsWith(prefix)) {
+      const rest = path.slice(prefix.length);
+      const slashIdx = rest.indexOf('/');
+      if (slashIdx > 0) {
+        subdirs.add(rest.slice(0, slashIdx));
+      }
+    }
+  }
+  return Array.from(subdirs).sort().reverse(); // newest date first
+}
+
 /** Build sidebar groups from a config */
 function buildFromConfig(section: string, config: SidebarConfig): SidebarGroup[] {
   return config.groups.map((groupConfig) => {
@@ -187,6 +211,23 @@ function buildFromConfig(section: string, config: SidebarConfig): SidebarGroup[]
       const indexKey = Object.keys(modules).find(k => k.endsWith('/index.md'));
       if (indexKey) {
         items.push({ text: '总览', link: urlPrefix });
+      }
+
+      // Dynamic subdirectories (e.g. daily-deep-reads/2026-03-26/)
+      if (groupConfig.dynamicSubdirs) {
+        const subdirNames = discoverSubdirs(dirPath);
+        for (const subName of subdirNames) {
+          const subModules = getModulesForSubdir(dirPath, subName);
+          const subUrlPrefix = `/${dirPath}/${subName}/`;
+          const subItems: SidebarItem[] = buildItemsFromGlob(subModules, subUrlPrefix);
+          if (subItems.length > 0) {
+            items.push({
+              text: subName, // e.g. "2026-03-26"
+              collapsed: true,
+              items: subItems,
+            });
+          }
+        }
       }
 
       // Subgroups first
