@@ -10,6 +10,8 @@ title: LLM 论文导读
 
 ## 模型架构与效率
 
+- [GDDS：离散扩散首次在大规模任务上击败自回归模型](./gdds-discrete-diffusion-snapshots) — Snapshot ELBO + 语义感知噪声核，Text8 BPC 1.01 SOTA，打破自回归垄断
+- [Sebastian Raschka：现代 LLM 注意力变体可视化指南](./raschka-visual-attention-variants-2026) — 从 MHA 到 GQA、MLA、滑动窗口、稀疏注意力，配合 45+ 架构 Gallery
 - [2026年春季开源LLM架构全景：10个模型的技术演化](./raschka-dream-of-spring-open-weight-llms) — Sebastian Raschka 对 Trinity 400B、Kimi K2.5 1T、GLM-5 744B、Qwen3.5 397B 等 10+ 模型的架构横评
 - [Mamba-3：首个以推理效率为核心设计的状态空间模型](./mamba-3-inference-first-ssm) — 指数梯形离散化 + 复数值状态 + MIMO 变体，1.5B 规模超越 Transformer
 - [IndexCache：砍掉 75% 稀疏注意力索引器，推理加速 1.82x](./indexcache-sparse-attention-cross-layer-reuse) — 跨层 top-k 索引复用，已在 GLM-5 744B 验证

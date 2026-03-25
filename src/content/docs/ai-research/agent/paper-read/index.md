@@ -8,6 +8,10 @@ Agent 方向的论文深度解读，按主题分类。
 
 ---
 
+## Agent 自改进与元认知
+
+- [Hyperagents：Meta 提出能改进自身改进机制的自引用 AI Agent](./hyperagents-meta-self-improving-agents) — DGM-Hyperagents 将元修改机制纳入可修改范围，实现 metacognitive self-modification，跨域迁移累积
+
 ## Agent 训练与强化学习
 
 - [KARL：用多任务 RL 训练企业搜索 Agent](./karl-knowledge-agents-reinforcement-learning) — Databricks 多任务 off-policy RL + agentic 合成数据，Pareto 优于 Claude 4.6

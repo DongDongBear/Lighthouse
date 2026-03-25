@@ -12,6 +12,8 @@
 
 ## 按日期归档
 
+- [2026-03-25 上午 ｜ LiteLLM 供应链攻击窃取全系统凭证，Jensen Huang 宣称 AGI 已实现，OpenAI 洽购 Helion 核聚变电力](/ai-product-analysis/news/2026-03-25-morning/)
+- [2026-03-24 上午 ｜ Meta Hyperagents 实现自我改进的自我改进，iPhone 17 Pro 本地跑 400B 大模型，Walmart ChatGPT 结账转化率暴跌 3 倍](/ai-product-analysis/news/2026-03-24-morning/)
 - [2026-03-23 上午 ｜ Moxie Marlinspike 将为 Meta AI 带来端到端加密，Flash-MoE 在笔记本上跑 397B 参数模型，2025 图灵奖首次颁给量子计算](/ai-product-analysis/news/2026-03-23-morning/)
 - [2026-03-22 上午 ｜ Mamba-3 重新定义推理效率击败 Transformer，NVIDIA Nemotron-Cascade 2 用 3B 活跃参数达到 IMO 金牌水平，OpenCode 开源编程 Agent 爆红](/ai-product-analysis/news/2026-03-22-morning/)
 - [2026-03-21 上午 ｜ Super Micro联合创始人涉25亿美元AI芯片走私被捕，arXiv宣布脱离康奈尔独立运营，Confer为Meta AI带来端到端加密](/ai-product-analysis/news/2026-03-21-morning/)
