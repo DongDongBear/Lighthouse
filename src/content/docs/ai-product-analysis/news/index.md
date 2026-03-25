@@ -17,7 +17,7 @@
 
 ## 按日期归档
 
-- [2026-03-26 AI 日报 ｜ Anthropic 推出 Claude Mac 桌面控制 + 科学博客，OpenAI 关停 Sora，Arm 联合 Meta 发布首颗 AI 数据中心 CPU，Jensen Huang 宣称 AGI 已到来](/ai-product-analysis/news/2026-03-26-daily/)
+- [2026-03-26 AI 日报 ｜ Anthropic 起诉五角大楼推出 Mac 控制 + 科学博客，OpenAI 关停 Sora，Google 发 Gemini 3.1 Flash-Lite，Arm × Meta 发布首颗 AI CPU，Signal 加密 Meta AI，AI 音乐欺诈 $8M 认罪](/ai-product-analysis/news/2026-03-26-daily/)
 - [2026-03-25 上午 ｜ LiteLLM 供应链攻击窃取全系统凭证，Jensen Huang 宣称 AGI 已实现，OpenAI 洽购 Helion 核聚变电力](/ai-product-analysis/news/2026-03-25-morning/)
 - [2026-03-24 上午 ｜ Meta Hyperagents 实现自我改进的自我改进，iPhone 17 Pro 本地跑 400B 大模型，Walmart ChatGPT 结账转化率暴跌 3 倍](/ai-product-analysis/news/2026-03-24-morning/)
 - [2026-03-23 上午 ｜ Moxie Marlinspike 将为 Meta AI 带来端到端加密，Flash-MoE 在笔记本上跑 397B 参数模型，2025 图灵奖首次颁给量子计算](/ai-product-analysis/news/2026-03-23-morning/)
