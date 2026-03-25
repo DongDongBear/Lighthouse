@@ -10,6 +10,7 @@ title: LLM 论文导读
 
 ## 模型架构与效率
 
+- [Attention Residuals：Kimi 团队用注意力机制重新定义残差连接](./attention-residuals-kimi) — softmax 注意力替代固定残差累加，解决 PreNorm 隐状态稀释问题，Kimi Linear 48B 验证
 - [GDDS：离散扩散首次在大规模任务上击败自回归模型](./gdds-discrete-diffusion-snapshots) — Snapshot ELBO + 语义感知噪声核，Text8 BPC 1.01 SOTA，打破自回归垄断
 - [Sebastian Raschka：现代 LLM 注意力变体可视化指南](./raschka-visual-attention-variants-2026) — 从 MHA 到 GQA、MLA、滑动窗口、稀疏注意力，配合 45+ 架构 Gallery
 - [2026年春季开源LLM架构全景：10个模型的技术演化](./raschka-dream-of-spring-open-weight-llms) — Sebastian Raschka 对 Trinity 400B、Kimi K2.5 1T、GLM-5 744B、Qwen3.5 397B 等 10+ 模型的架构横评
@@ -21,6 +22,7 @@ title: LLM 论文导读
 
 ## 训练、对齐与强化学习
 
+- [RLCF：AI 可以学习科学品味——用引文信号训练 AI 的科学判断力与创意力](./rlcf-ai-can-learn-scientific-taste) — 70 万引文对比对训练 Scientific Judge，超越 GPT-5.2，RLCF 范式开创科学品味学习
 - [V₀.₅：用预训练 Value Model 先验解决 RLVR 稀疏 Rollout 的方差爆炸](./v05-value-model-prior-sparse-rl-rollouts) — Shrinkage estimator + 实时统计检验，group size=4 超过 GRPO G=16
 - [Tree Search Distillation：用 MCTS + PPO 蒸馏搜索策略到语言模型](./tree-search-distillation-ppo) — AlphaZero 范式迁移到 LLM，PPO 在线蒸馏
 - [Neural Thickets：预训练权重邻域中藏着密集的任务专家](./neural-thickets-random-guessing-post-training) — RandOpt 用 O(1) 步训练 + 集成投票，竞争力可比 PPO/GRPO

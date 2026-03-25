@@ -14,6 +14,7 @@ Agent 方向的论文深度解读，按主题分类。
 
 ## Agent 训练与强化学习
 
+- [OpenSeeker：首个全开源前沿搜索 Agent，学术团队打破工业数据壁垒](./openseeker-democratizing-search-agents) — 11.7k 合成样本 + 纯 SFT 超越通义 DeepResearch，完整数据和模型全开源
 - [KARL：用多任务 RL 训练企业搜索 Agent](./karl-knowledge-agents-reinforcement-learning) — Databricks 多任务 off-policy RL + agentic 合成数据，Pareto 优于 Claude 4.6
 - [OpenClaw-RL：让 Agent 边用边学](./openclaw-rl-train-agent-by-talking) — 首个将所有 Agent 交互信号统一为在线 RL 训练源的框架
 - [RetroAgent：回顾式双重内在反馈驱动 Agent 在线 RL](./retroagent-evolving-via-retrospective-dual-intrinsic-feedback) — 双重内在反馈（数值进步信号 + UCB 记忆检索），Sokoban +27.1pp vs GRPO

@@ -10,6 +10,11 @@
 - 发布形式：每一期单独成文，标题格式为发布时间（示例：`2026-03-05 16:00（UTC+8）`）
 - 每条必须包含：时间、来源、标题、链接、一句话解读
 
+## 深度解读
+
+- [Anthropic 发布 Science Blog：Vibe Physics、长时运行 Claude 与 AI 科学加速](/ai-product-analysis/news/deep-anthropic-science-blog-vibe-physics/) — 2026-03-26 ｜ 哈佛教授让 Claude 独立完成理论物理论文，Anthropic 展示多日自主 Agent 科学计算工作流
+- [Anthropic 经济指数第五期：学习曲线——AI 使用经验如何决定收益差距](/ai-product-analysis/news/deep-anthropic-economic-index-5/) — 2026-03-26 ｜ 高经验用户成功率 +4pp，AI 使用中存在显著"学习效应"，技能偏向性技术变革实证
+
 ## 按日期归档
 
 - [2026-03-26 AI 日报 ｜ Anthropic 推出 Claude Mac 桌面控制 + 科学博客，OpenAI 关停 Sora，Arm 联合 Meta 发布首颗 AI 数据中心 CPU，Jensen Huang 宣称 AGI 已到来](/ai-product-analysis/news/2026-03-26-daily/)
