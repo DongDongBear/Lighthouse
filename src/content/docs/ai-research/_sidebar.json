@@ -1,38 +1,26 @@
 {
   "groups": [
     {
-      "text": "每日深度解读",
-      "dir": "daily-deep-reads",
+      "text": "每日 News",
+      "dir": "news",
       "collapsed": false,
       "dynamicSubdirs": true
     },
     {
-      "text": "LLM 零基础入门",
-      "dir": "fundamentals",
-      "collapsed": true
-    },
-    {
-      "text": "LLM 进阶研究",
-      "dir": "llm-research",
+      "text": "LLM",
+      "dir": "llm",
       "collapsed": false,
       "subgroups": [
-        {
-          "text": "论文导读",
-          "dir": "paper-read",
-          "collapsed": true
-        }
+        { "text": "零基础入门", "dir": "fundamentals", "collapsed": true },
+        { "text": "精选解读", "dir": "paper-read", "collapsed": true }
       ]
     },
     {
-      "text": "Agent 研究",
+      "text": "Agent",
       "dir": "agent",
       "collapsed": false,
       "subgroups": [
-        {
-          "text": "论文导读",
-          "dir": "paper-read",
-          "collapsed": true
-        }
+        { "text": "精选解读", "dir": "paper-read", "collapsed": true }
       ]
     }
   ]

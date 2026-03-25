@@ -112,9 +112,7 @@ const configs: Record<string, SidebarConfig> = {};
 import aiResearchConfig from '../content/docs/ai-research/_sidebar.json';
 configs['ai-research'] = aiResearchConfig as SidebarConfig;
 
-// ai-product-analysis
-import aiProductConfig from '../content/docs/ai-product-analysis/_sidebar.json';
-configs['ai-product-analysis'] = aiProductConfig as SidebarConfig;
+// ai-product-analysis removed — merged into ai-research/news
 
 // unity-tutorial
 import unityConfig from '../content/docs/unity-tutorial/_sidebar.json';
@@ -271,7 +269,6 @@ function buildFromConfig(section: string, config: SidebarConfig): SidebarGroup[]
 
 const aiResearchGroups = [
   ...buildFromConfig('ai-research', configs['ai-research']),
-  ...buildFromConfig('ai-product-analysis', configs['ai-product-analysis']),
 ];
 
 export const sidebar: Record<string, SidebarGroup[]> = {
@@ -279,7 +276,6 @@ export const sidebar: Record<string, SidebarGroup[]> = {
   '/electron-tutorial/': buildFromConfig('electron-tutorial', configs['electron-tutorial']),
   '/rust-tutorial/': buildFromConfig('rust-tutorial', configs['rust-tutorial']),
   '/ai-research/': aiResearchGroups,
-  '/ai-product-analysis/': aiResearchGroups,
 };
 
 // ─── Public API ───
