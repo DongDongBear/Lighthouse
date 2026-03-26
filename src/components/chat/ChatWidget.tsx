@@ -29,6 +29,9 @@ export default function ChatWidget() {
   const [selectedText, setSelectedText] = useState('');
   const [articleContent, setArticleContent] = useState('');
   const lastGoodSelection = useRef('');
+  const [hasOpened, setHasOpened] = useState(() =>
+    typeof window !== 'undefined' && localStorage.getItem('lh-chat-opened') === '1'
+  );
 
   function grabSelection(): string {
     if (typeof window === 'undefined') return '';
@@ -84,17 +87,34 @@ export default function ChatWidget() {
     }
   }, []);
 
+  // Cmd/Ctrl+Shift+L toggle
+  const handleToggleShortcut = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'L' && e.shiftKey && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      if (!activated) return;
+      setOpen(v => {
+        if (!v && !hasOpened) {
+          setHasOpened(true);
+          localStorage.setItem('lh-chat-opened', '1');
+        }
+        return !v;
+      });
+    }
+  }, [activated, hasOpened]);
+
   useEffect(() => {
     if (localStorage.getItem(STORAGE_KEY) === '1') {
       setActivated(true);
     }
     document.addEventListener('keydown', handleGlobalKeydown, true);
+    document.addEventListener('keydown', handleToggleShortcut);
     document.addEventListener('mouseup', onMouseUp);
     return () => {
       document.removeEventListener('keydown', handleGlobalKeydown, true);
+      document.removeEventListener('keydown', handleToggleShortcut);
       document.removeEventListener('mouseup', onMouseUp);
     };
-  }, [handleGlobalKeydown, onMouseUp]);
+  }, [handleGlobalKeydown, handleToggleShortcut, onMouseUp]);
 
   function onFabMouseDown() {
     const text = grabSelection();
@@ -119,9 +139,17 @@ export default function ChatWidget() {
         onClearSelection={() => { setSelectedText(''); setArticleContent(''); }}
       />
       <button
-        className={`cw-fab ${open ? 'open' : ''}`}
+        className={`cw-fab${open ? ' open' : ''}${!hasOpened && !open ? ' cw-fab-pulse' : ''}`}
         onMouseDown={(e) => { e.preventDefault(); onFabMouseDown(); }}
-        onClick={() => setOpen(v => !v)}
+        onClick={() => {
+          setOpen(v => {
+            if (!v && !hasOpened) {
+              setHasOpened(true);
+              localStorage.setItem('lh-chat-opened', '1');
+            }
+            return !v;
+          });
+        }}
         aria-label="打开助手"
       >
         {!open ? (

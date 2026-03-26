@@ -49,37 +49,152 @@ function deriveTitle(messages: Msg[]): string {
 }
 
 function renderMd(text: string): string {
-  let html = text
+  // Extract code blocks first to protect them from other transformations
+  const codeBlocks: string[] = [];
+  let processed = text.replace(/```(\w*)\n([\s\S]*?)```/g, (_m, lang, code) => {
+    const escaped = code.trim()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    const langLabel = lang ? `<span class="cw-code-lang">${lang}</span>` : '';
+    const placeholder = `\x00CB${codeBlocks.length}\x00`;
+    codeBlocks.push(
+      `<div class="cw-code-block">${langLabel}<button class="cw-code-copy" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').textContent).then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='复制',1500)})">复制</button><pre><code class="lang-${lang}">${escaped}</code></pre></div>`
+    );
+    return placeholder;
+  });
+
+  // Escape HTML in remaining text
+  processed = processed
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_m, lang, code) => {
-    const langLabel = lang ? `<span class="cw-code-lang">${lang}</span>` : '';
-    return `<div class="cw-code-block">${langLabel}<button class="cw-code-copy" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').textContent).then(()=>{this.textContent='已复制';setTimeout(()=>this.textContent='复制',1500)})">复制</button><pre><code class="lang-${lang}">${code.trim()}</code></pre></div>`;
+  // LaTeX blocks: $$...$$ and $...$ → render as code to avoid garbled output
+  processed = processed.replace(/\$\$([\s\S]*?)\$\$/g, '<pre class="cw-latex-block"><code>$1</code></pre>');
+  processed = processed.replace(/\$([^\n$]+?)\$/g, '<code class="cw-inline-code cw-latex">$1</code>');
+
+  // Inline code (after LaTeX to avoid conflicts)
+  processed = processed.replace(/`([^`]+?)`/g, '<code class="cw-inline-code">$1</code>');
+
+  // Bold & italic
+  processed = processed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  processed = processed.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Images
+  processed = processed.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img class="cw-img" src="$2" alt="$1" loading="lazy" />');
+
+  // Links
+  processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" class="cw-link">$1</a>');
+
+  // Horizontal rules
+  processed = processed.replace(/^(\*{3,}|-{3,}|_{3,})\s*$/gm, '<hr class="cw-hr">');
+
+  // Headings
+  processed = processed.replace(/^#{3}\s+(.+)$/gm, '<h3 class="cw-h3">$1</h3>');
+  processed = processed.replace(/^#{2}\s+(.+)$/gm, '<h2 class="cw-h2">$1</h2>');
+  processed = processed.replace(/^#{1}\s+(.+)$/gm, '<h1 class="cw-h1">$1</h1>');
+
+  // Tables: detect lines with | and parse
+  processed = processed.replace(/((?:^[^\n]*\|[^\n]*$\n?){2,})/gm, (tableBlock) => {
+    const rows = tableBlock.trim().split('\n').filter(r => r.trim());
+    if (rows.length < 2) return tableBlock;
+    // Check if 2nd row is separator
+    const sep = rows[1].trim();
+    if (!/^[\s|:-]+$/.test(sep)) return tableBlock;
+    const parseRow = (row: string) =>
+      row.split('|').map(c => c.trim()).filter((_, i, a) => !(i === 0 && a[0] === '') || true).filter(c => c !== '' || false);
+    const cleanRow = (row: string) => {
+      let cells = row.replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+      return cells;
+    };
+    const headers = cleanRow(rows[0]);
+    const bodyRows = rows.slice(2);
+    let html = '<div class="cw-table-wrap"><table class="cw-table"><thead><tr>';
+    headers.forEach(h => { html += `<th>${h}</th>`; });
+    html += '</tr></thead><tbody>';
+    bodyRows.forEach(row => {
+      const cells = cleanRow(row);
+      html += '<tr>';
+      cells.forEach(c => { html += `<td>${c}</td>`; });
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    return html;
   });
 
-  html = html.replace(/`(.+?)`/g, '<code class="cw-inline-code">$1</code>');
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  html = html.replace(/^#{3}\s+(.+)$/gm, '<div class="cw-h3">$1</div>');
-  html = html.replace(/^#{2}\s+(.+)$/gm, '<div class="cw-h2">$1</div>');
-  html = html.replace(/^#{1}\s+(.+)$/gm, '<div class="cw-h1">$1</div>');
-  html = html.replace(/^- (.+)$/gm, '<li class="cw-li">$1</li>');
-  html = html.replace(/((?:<li class="cw-li">.*<\/li>\n?)+)/g, '<ul class="cw-ul">$1</ul>');
-  html = html.replace(/^\d+\.\s+(.+)$/gm, '<li class="cw-oli">$1</li>');
-  html = html.replace(/((?:<li class="cw-oli">.*<\/li>\n?)+)/g, '<ol class="cw-ol">$1</ol>');
-  html = html.replace(/^&gt;\s?(.+)$/gm, '<blockquote class="cw-bq">$1</blockquote>');
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" class="cw-link">$1</a>');
-  html = html.replace(/(^|[^"=])(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener" class="cw-link">$2</a>');
-  html = html.replace(/\n/g, '<br>');
+  // Nested lists: support 2-space or 4-space indent
+  // Unordered lists
+  processed = processed.replace(/^( *)- (.+)$/gm, (_, indent, content) => {
+    const level = Math.floor(indent.length / 2);
+    return `<li class="cw-li" data-level="${level}">${content}</li>`;
+  });
+  processed = processed.replace(/((?:<li class="cw-li"[^>]*>.*<\/li>\n?)+)/g, (match) => {
+    // Build nested UL structure
+    let result = '';
+    let currentLevel = 0;
+    let openLists = 0;
+    const items = match.trim().split('\n').filter(Boolean);
+    for (const item of items) {
+      const levelMatch = item.match(/data-level="(\d+)"/);
+      const level = levelMatch ? parseInt(levelMatch[1]) : 0;
+      const content = item.replace(/<li class="cw-li" data-level="\d+">(.*)<\/li>/, '$1');
+      while (currentLevel < level) { result += '<ul class="cw-ul cw-nested">'; openLists++; currentLevel++; }
+      while (currentLevel > level) { result += '</ul></li>'; openLists--; currentLevel--; }
+      result += `<li class="cw-li">${content}`;
+      if (currentLevel === level) result += '</li>';
+    }
+    while (openLists > 0) { result += '</ul></li>'; openLists--; }
+    return `<ul class="cw-ul">${result}</ul>`;
+  });
 
-  return html;
+  // Ordered lists
+  processed = processed.replace(/^\d+\.\s+(.+)$/gm, '<li class="cw-oli">$1</li>');
+  processed = processed.replace(/((?:<li class="cw-oli">.*<\/li>\n?)+)/g, '<ol class="cw-ol">$1</ol>');
+
+  // Blockquotes (merged consecutive lines)
+  processed = processed.replace(/^&gt;\s?(.+)$/gm, '<blockquote class="cw-bq">$1</blockquote>');
+  processed = processed.replace(/<\/blockquote>\n<blockquote class="cw-bq">/g, '<br>');
+
+  // Auto-link bare URLs (not already in href="...")
+  processed = processed.replace(/(^|[^"=])(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener" class="cw-link">$2</a>');
+
+  // Paragraphs: double newline → paragraph break
+  processed = processed.replace(/\n{2,}/g, '</p><p class="cw-p">');
+  processed = processed.replace(/\n/g, '<br>');
+  processed = `<p class="cw-p">${processed}</p>`;
+  // Clean up empty paragraphs around block elements
+  processed = processed.replace(/<p class="cw-p">(\s*<(?:div|h[1-3]|ul|ol|blockquote|table|pre|hr|img))/g, '$1');
+  processed = processed.replace(/(<\/(?:div|h[1-3]|ul|ol|blockquote|table|pre|hr)>\s*)<\/p>/g, '$1');
+  processed = processed.replace(/<p class="cw-p"><\/p>/g, '');
+
+  // Restore code blocks
+  for (let i = 0; i < codeBlocks.length; i++) {
+    processed = processed.replace(`\x00CB${i}\x00`, codeBlocks[i]);
+  }
+
+  return processed;
 }
 
 function truncate(text: string, max: number): string {
   return text.length > max ? text.slice(0, max) + '…' : text;
 }
+
+function getSuggestions(): { label: string; prompt: string }[] {
+  const title = typeof document !== 'undefined' ? document.title.replace(/\s*[|–—]\s*.*/g, '').trim() : '';
+  if (title && title.length > 2 && title.length < 60) {
+    return [
+      { label: `总结《${title.length > 16 ? title.slice(0, 16) + '…' : title}》的要点`, prompt: `请总结一下《${title}》这篇文章的核心要点` },
+      { label: '用简单语言解释', prompt: '能用更简单的语言解释一下这篇文章吗？' },
+    ];
+  }
+  return [
+    { label: '核心观点是什么？', prompt: '这篇文章的核心观点是什么？' },
+    { label: '用简单语言解释', prompt: '能用更简单的语言解释一下吗？' },
+  ];
+}
+
+const CW_WIDTH_KEY = 'lh-chat-width';
 
 export default function ChatWindow({ visible, onClose, selectedText, articleContent, onClearSelection }: Props) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -92,6 +207,13 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const abortRef = useRef<AbortController | null>(null);
   const [userScrolled, setUserScrolled] = useState(false);
+  const [cwWidth, setCwWidth] = useState(() => {
+    if (typeof window === 'undefined') return 400;
+    const saved = localStorage.getItem(CW_WIDTH_KEY);
+    return saved ? Math.max(320, Math.min(Number(saved), 800)) : 400;
+  });
+  const resizingRef = useRef(false);
+  const cwRef = useRef<HTMLDivElement>(null);
 
   // Load conversations from IndexedDB on mount
   useEffect(() => {
@@ -166,6 +288,33 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [visible, onClose, showHistory]);
+
+  // Resize handle logic
+  const startResize = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    resizingRef.current = true;
+    const startX = e.clientX;
+    const startW = cwWidth;
+    function onMove(ev: MouseEvent) {
+      if (!resizingRef.current) return;
+      const delta = startX - ev.clientX; // dragging left = wider
+      const newW = Math.max(320, Math.min(startW + delta, 800));
+      setCwWidth(newW);
+    }
+    function onUp() {
+      resizingRef.current = false;
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      // persist
+      setCwWidth(w => { localStorage.setItem(CW_WIDTH_KEY, String(w)); return w; });
+    }
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  }, [cwWidth]);
 
   function stopGeneration() {
     if (abortRef.current) {
@@ -358,8 +507,12 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
   const isStreaming = loading && lastMsg?.role === 'bot' && lastMsg.content !== '';
   const isWaiting = loading && lastMsg?.role === 'bot' && lastMsg.content === '';
 
+  const suggestions = getSuggestions();
+
   return (
-    <div className="cw">
+    <div className="cw" ref={cwRef} style={{ width: cwWidth }}>
+      {/* Resize handle */}
+      <div className="cw-resize-handle" onMouseDown={startResize} />
       {/* Header */}
       <div className="cw-header">
         <div className="cw-header-left">
@@ -433,8 +586,9 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
                 <p className="cw-empty-title">有什么不明白的？</p>
                 <p className="cw-empty-sub">选中文档文字后提问，效果更好</p>
                 <div className="cw-suggestions">
-                  <button onClick={() => { setInput('这篇文章的核心观点是什么？'); textareaRef.current?.focus(); }}>核心观点是什么？</button>
-                  <button onClick={() => { setInput('能用更简单的语言解释一下吗？'); textareaRef.current?.focus(); }}>用简单语言解释</button>
+                  {suggestions.map((s, i) => (
+                    <button key={i} onClick={() => { setInput(s.prompt); textareaRef.current?.focus(); }}>{s.label}</button>
+                  ))}
                 </div>
               </div>
             )}
