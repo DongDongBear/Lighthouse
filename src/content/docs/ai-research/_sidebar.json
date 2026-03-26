@@ -1,27 +1,23 @@
 {
   "groups": [
     {
-      "text": "每日 News",
-      "dir": "news",
-      "collapsed": false,
-      "dynamicSubdirs": true
-    },
-    {
       "text": "LLM",
       "dir": "llm",
       "collapsed": false,
       "subgroups": [
-        { "text": "零基础入门", "dir": "fundamentals", "collapsed": true },
-        { "text": "精选解读", "dir": "paper-read", "collapsed": true }
+        { "text": "零基础入门", "dir": "fundamentals", "collapsed": true }
       ]
     },
     {
       "text": "Agent",
       "dir": "agent",
+      "collapsed": false
+    },
+    {
+      "text": "每日 News",
+      "dir": "news",
       "collapsed": false,
-      "subgroups": [
-        { "text": "精选解读", "dir": "paper-read", "collapsed": true }
-      ]
+      "dynamicSubdirs": true
     }
   ]
 }
