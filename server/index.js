@@ -1,6 +1,10 @@
 import express from 'express'
 import cors from 'cors'
-import { execFile } from 'child_process'
+import { exec } from 'child_process'
+import { appendFileSync, writeFileSync, unlinkSync } from 'fs'
+import { randomBytes } from 'crypto'
+
+function dbg(msg) { appendFileSync("/tmp/lh-chat-debug.txt", new Date().toISOString() + " " + msg + "\n") }
 
 const app = express()
 
@@ -30,6 +34,8 @@ app.post('/api/verify', (req, res) => {
 })
 
 app.post('/api/chat', async (req, res) => {
+  dbg("[CHAT] handler invoked, message: " + (req.body?.message || "<empty>"))
+  console.error("HANDLER CALLED", new Date().toISOString())
   const { message, history, articleContent } = req.body
   if (!message) return res.status(400).json({ error: 'message required' })
 
@@ -49,48 +55,46 @@ app.post('/api/chat', async (req, res) => {
   res.setHeader('Cache-Control', 'no-cache')
   res.setHeader('Connection', 'keep-alive')
 
+  const tmpFile = `/tmp/lh-chat-prompt-${randomBytes(8).toString('hex')}.txt`
+
   try {
-    // Use bash -c to pipe prompt into claude
-    const escaped = prompt.replace(/'/g, "'\\''")
-    const cmd = `echo '${escaped}' | su - codeuser -c 'cd /tmp/Lighthouse && claude --print --permission-mode bypassPermissions'`
-    
-    const { exec } = await import('child_process')
-    const child = exec(cmd, { maxBuffer: 10 * 1024 * 1024, timeout: 120000 })
-    
-    let fullText = ''
-    
-    child.stdout.on('data', (chunk) => {
-      const text = chunk.toString()
-      fullText += text
-      const sseData = JSON.stringify({ choices: [{ delta: { content: text } }] })
-      res.write(`data: ${sseData}\n\n`)
-    })
+    writeFileSync(tmpFile, prompt, { mode: 0o644 })
+    dbg("[CHAT] wrote tmp file: " + tmpFile + ", prompt length: " + prompt.length)
 
-    child.stderr.on('data', (chunk) => {
-      console.error('Claude stderr:', chunk.toString())
-    })
+    const cmd = `cat ${tmpFile} | su - codeuser -c "cd /tmp/Lighthouse && claude --print --permission-mode bypassPermissions"`
 
-    child.on('close', (code) => {
-      if (!fullText.trim()) {
+    const child = exec(cmd, {
+      maxBuffer: 10 * 1024 * 1024,
+      timeout: 120000,
+    }, (error, stdout, stderr) => {
+      if (stderr) {
+        dbg("[CHAT] claude stderr: " + stderr.substring(0, 200))
+        console.error('Claude stderr:', stderr.substring(0, 500))
+      }
+
+      dbg("[CHAT] exec done, code=" + (error ? error.code : 0) + " stdout=" + stdout.length)
+      console.error("DEBUG: exec done, error:", error?.message || "none", "stdout length:", stdout.length)
+
+      if (!stdout.trim()) {
         res.write(`data: ${JSON.stringify({ error: 'AI 服务暂时不可用' })}\n\n`)
+      } else {
+        const sseData = JSON.stringify({ choices: [{ delta: { content: stdout } }] })
+        res.write(`data: ${sseData}\n\n`)
       }
       res.write('data: [DONE]\n\n')
       res.end()
-    })
 
-    child.on('error', (err) => {
-      console.error('Exec error:', err)
-      res.write(`data: ${JSON.stringify({ error: '连接失败' })}\n\n`)
-      res.write('data: [DONE]\n\n')
-      res.end()
+      try { unlinkSync(tmpFile) } catch (_) {}
+      dbg("[CHAT] tmp file cleaned: " + tmpFile)
     })
 
     req.on('close', () => {
-      child.kill('SIGTERM')
+      if (child.pid) child.kill('SIGTERM')
     })
 
   } catch (err) {
     console.error('Chat error:', err)
+    try { unlinkSync(tmpFile) } catch (_) {}
     res.write(`data: ${JSON.stringify({ error: '连接失败' })}\n\n`)
     res.write('data: [DONE]\n\n')
     res.end()
