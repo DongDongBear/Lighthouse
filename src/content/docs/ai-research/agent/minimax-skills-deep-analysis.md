@@ -1,8 +1,8 @@
 ---
-title: MiniMax Skills 深度源码分析 — AI Agent Skill 生态的工程标杆
+title: 'MiniMax Skills 深度源码分析'
+description: '对 MiniMax-AI/skills 项目的完整源码分析，涵盖 11 个 AI 编程 Skill 的架构设计、Office 四件套深度解读、质量控制体系和多平台适配策略'
 ---
 
-# MiniMax Skills 深度源码分析
 
 > 分析日期：2026-03-26
 > 分析范围：MiniMax-AI/skills 仓库全部源码（约 287 个非二进制文件）
