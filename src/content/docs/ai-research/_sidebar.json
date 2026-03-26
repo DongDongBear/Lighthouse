@@ -7,21 +7,17 @@
       "dynamicSubdirs": true
     },
     {
-      "text": "LLM",
+      "text": "LLM Research",
       "dir": "llm",
       "collapsed": false,
       "subgroups": [
-        { "text": "零基础入门", "dir": "fundamentals", "collapsed": true },
-        { "text": "精选解读", "dir": "paper-read", "collapsed": true }
+        { "text": "零基础入门", "dir": "fundamentals", "collapsed": true }
       ]
     },
     {
-      "text": "Agent",
+      "text": "Agent Research",
       "dir": "agent",
-      "collapsed": false,
-      "subgroups": [
-        { "text": "精选解读", "dir": "paper-read", "collapsed": true }
-      ]
+      "collapsed": false
     }
   ]
 }
