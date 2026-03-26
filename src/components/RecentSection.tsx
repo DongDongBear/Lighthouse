@@ -21,8 +21,7 @@ function getLabel(slug: string): string {
   if (slug.startsWith('unity-tutorial')) return 'Unity';
   if (slug.startsWith('electron-tutorial')) return 'Electron';
   if (slug.startsWith('rust-tutorial')) return 'Rust';
-  if (slug.startsWith('ai-product-analysis')) return 'AI 研究';
-  if (slug.startsWith('ai-research')) return 'AI Research';
+  if (slug.startsWith('ai-research')) return 'AI 研究';
   return 'Doc';
 }
 

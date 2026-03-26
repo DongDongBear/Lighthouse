@@ -34,8 +34,7 @@ const cleanSlug = slug.replace(/\.md$/, '');
 const slugSegments = cleanSlug.split('/').filter(Boolean);
 const heroLabel = (() => {
   if (slugSegments[0] === 'ai-research' && slugSegments[1] === 'agent') return 'Agent';
-  if (cleanSlug.startsWith('ai-product-analysis/news/')) return 'News';
-  if (cleanSlug.startsWith('ai-product-analysis/')) return 'AI 产品分析';
+  if (cleanSlug.startsWith('ai-research/news/')) return 'News';
   if (cleanSlug.startsWith('ai-research/')) return 'AI Research';
   if (cleanSlug.startsWith('unity-tutorial/')) return 'Unity';
   if (cleanSlug.startsWith('electron-tutorial/')) return 'Electron';

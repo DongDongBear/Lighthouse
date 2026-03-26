@@ -20,7 +20,7 @@ const cardBackgrounds = [
 const productCards = [
   {
     category: 'AI 产品',
-    href: `${base}/ai-product-analysis/`,
+    href: `${base}/ai-research/`,
     linkTitle: '查看 AI Research',
     title: 'AI Research',
     bg: 'bg45.png',
@@ -60,7 +60,7 @@ const allDocs = await getCollection('docs');
 
 // News entries (up to 6 to ensure we can fill the grid)
 const newsEntries = allDocs
-  .filter(e => e.id.startsWith('ai-product-analysis/news/') && !e.id.endsWith('index.md'))
+  .filter(e => e.id.startsWith('ai-research/news/') && !e.id.endsWith('index.md'))
   .map(e => {
     // Try body heading first, then fall back to frontmatter title
     const m = e.body?.match(/^#\s+(.+)$/m);
