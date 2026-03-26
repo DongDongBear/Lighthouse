@@ -620,9 +620,9 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
           <div className="cw-body" ref={listRef} onScroll={onBodyScroll}>
             {!hasMessages && (
               <div className="cw-empty">
-                <p className="cw-empty-lead">关于这篇文章</p>
-                <p className="cw-empty-title">你想了解什么？</p>
-                <p className="cw-empty-hint">选中文档文字后提问，获得更精确的回答</p>
+                <p className="cw-empty-lead">Lighthouse</p>
+                <p className="cw-empty-title">有什么可以帮你？</p>
+                <p className="cw-empty-hint">可以选中文档内容后提问，获得更精准的回答</p>
                 <div className="cw-suggestions">
                   {suggestions.map((s, i) => (
                     <button key={i} onClick={() => { setInput(s.prompt); textareaRef.current?.focus(); }}>{s.label}</button>

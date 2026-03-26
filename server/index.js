@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import { spawn } from 'child_process'
 
 const app = express()
 
@@ -19,10 +20,8 @@ app.use(cors({
 app.use(express.json())
 
 const SECRET_PHRASE = 'I AM DONGDONG SEND'
-const OPENCLAW_URL = 'http://127.0.0.1:18789/v1/chat/completions'
-const OPENCLAW_TOKEN = '15dfbe164686b4d12544dca9e6f1f8d2666305d703d23df8b2a00b7bbf53ad26'
 
-const BASE_SYSTEM_PROMPT = '你是 LightHouse 文档助手。用户正在阅读 LightHouse 学习资料库的文档，请帮助他们解答技术问题。回复简洁、准确，使用中文。支持 Markdown 格式。'
+const SYSTEM_PROMPT = '你是 Lighthouse 文档助手。你的工作目录是 Lighthouse 项目（Astro 文档站），可以读取项目文件来回答问题。用户正在阅读文档并提问。回复简洁准确，使用中文，支持 Markdown。'
 
 app.post('/api/verify', (req, res) => {
   const { phrase } = req.body
@@ -36,58 +35,123 @@ app.post('/api/chat', async (req, res) => {
   const { message, history, articleContent } = req.body
   if (!message) return res.status(400).json({ error: 'message required' })
 
-  let systemPrompt = BASE_SYSTEM_PROMPT
+  // Build prompt: system context + article + history + user message
+  let prompt = SYSTEM_PROMPT + '\n\n'
   if (articleContent) {
-    systemPrompt += `\n\n用户正在阅读以下文章：\n\n${articleContent}\n\n请基于这篇文章内容回答问题。`
+    prompt += `用户正在阅读以下文章：\n\n${articleContent}\n\n请基于这篇文章内容回答问题。\n\n`
   }
-
-  const messages = [
-    { role: 'system', content: systemPrompt }
-  ]
-  if (Array.isArray(history)) {
+  if (Array.isArray(history) && history.length > 0) {
     for (const h of history.slice(-20)) {
-      messages.push({ role: h.role === 'user' ? 'user' : 'assistant', content: h.content })
+      const role = h.role === 'user' ? 'User' : 'Assistant'
+      prompt += `${role}: ${h.content}\n\n`
     }
   }
-  messages.push({ role: 'user', content: message })
+  prompt += `User: ${message}`
 
   res.setHeader('Content-Type', 'text/event-stream')
   res.setHeader('Cache-Control', 'no-cache')
   res.setHeader('Connection', 'keep-alive')
 
   try {
-    const response = await fetch(OPENCLAW_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${OPENCLAW_TOKEN}`,
-        'Content-Type': 'application/json',
-        'x-openclaw-agent-id': 'main'
-      },
-      body: JSON.stringify({ model: 'openclaw:main', messages, stream: true, user: 'lighthouse-chat' })
+    const claudeCmd = 'claude --print --output-format stream-json --permission-mode bypassPermissions'
+    const child = spawn('su', ['-', 'codeuser', '-c', claudeCmd], {
+      cwd: '/tmp/Lighthouse',
+      stdio: ['pipe', 'pipe', 'pipe'],
     })
 
-    if (!response.ok) {
-      const err = await response.text()
-      console.error('OpenClaw error:', response.status, err)
-      res.write(`data: ${JSON.stringify({ error: 'AI 服务暂时不可用' })}\n\n`)
-      res.write('data: [DONE]\n\n')
-      return res.end()
-    }
+    child.stdin.write(prompt)
+    child.stdin.end()
 
-    const reader = response.body
-    const decoder = new TextDecoder()
-    for await (const chunk of reader) {
-      const text = typeof chunk === 'string' ? chunk : decoder.decode(chunk, { stream: true })
-      const lines = text.split('\n')
+    let buffer = ''
+    let fullText = ''
+    let streamJsonWorked = false
+
+    child.stdout.on('data', (chunk) => {
+      buffer += chunk.toString()
+      const lines = buffer.split('\n')
+      buffer = lines.pop() || ''
+
       for (const line of lines) {
-        if (line.startsWith('data: ')) {
-          res.write(line + '\n\n')
-          if (line.trim() === 'data: [DONE]') return res.end()
+        if (!line.trim()) continue
+        try {
+          const obj = JSON.parse(line)
+          // Extract text from various possible stream-json formats
+          let text = ''
+          if (obj.type === 'content_block_delta' && obj.delta?.text) {
+            text = obj.delta.text
+          } else if (obj.type === 'assistant' && typeof obj.text === 'string') {
+            text = obj.text
+          } else if (typeof obj.content === 'string' && obj.type !== 'message_start') {
+            text = obj.content
+          } else if (obj.type === 'result' && typeof obj.result === 'string') {
+            // Final result object — only use if we haven't streamed anything yet
+            if (!fullText) text = obj.result
+          }
+          if (text) {
+            streamJsonWorked = true
+            fullText += text
+            const sseData = JSON.stringify({ choices: [{ delta: { content: text } }] })
+            res.write(`data: ${sseData}\n\n`)
+          }
+        } catch {
+          // Not valid JSON — accumulate as plain text fallback
+          if (!streamJsonWorked) {
+            fullText += line + '\n'
+          }
         }
       }
-    }
-    res.write('data: [DONE]\n\n')
-    res.end()
+    })
+
+    child.stderr.on('data', (chunk) => {
+      console.error('Claude stderr:', chunk.toString())
+    })
+
+    child.on('close', (code) => {
+      // Process remaining buffer
+      if (buffer.trim()) {
+        try {
+          const obj = JSON.parse(buffer)
+          let text = ''
+          if (obj.type === 'content_block_delta' && obj.delta?.text) text = obj.delta.text
+          else if (obj.type === 'assistant' && typeof obj.text === 'string') text = obj.text
+          else if (typeof obj.content === 'string' && obj.type !== 'message_start') text = obj.content
+          else if (obj.type === 'result' && typeof obj.result === 'string' && !fullText) text = obj.result
+          if (text) {
+            fullText += text
+            const sseData = JSON.stringify({ choices: [{ delta: { content: text } }] })
+            res.write(`data: ${sseData}\n\n`)
+          }
+        } catch {
+          if (!streamJsonWorked) fullText += buffer
+        }
+      }
+
+      // Fallback: if stream-json didn't produce incremental output, send all collected text at once
+      if (!streamJsonWorked && fullText.trim()) {
+        const sseData = JSON.stringify({ choices: [{ delta: { content: fullText.trim() } }] })
+        res.write(`data: ${sseData}\n\n`)
+      }
+
+      if (!fullText.trim() && code !== 0) {
+        res.write(`data: ${JSON.stringify({ error: 'AI 服务暂时不可用' })}\n\n`)
+      }
+
+      res.write('data: [DONE]\n\n')
+      res.end()
+    })
+
+    child.on('error', (err) => {
+      console.error('Spawn error:', err)
+      res.write(`data: ${JSON.stringify({ error: '连接失败' })}\n\n`)
+      res.write('data: [DONE]\n\n')
+      res.end()
+    })
+
+    // Abort on client disconnect
+    req.on('close', () => {
+      child.kill('SIGTERM')
+    })
+
   } catch (err) {
     console.error('Chat error:', err)
     res.write(`data: ${JSON.stringify({ error: '连接失败' })}\n\n`)
