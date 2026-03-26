@@ -48,6 +48,42 @@ function deriveTitle(messages: Msg[]): string {
   return text + (first.content.length > 30 ? '…' : '');
 }
 
+function highlightSyntax(code: string, lang: string): string {
+  if (!lang) return code;
+  const tokens: { ph: string; html: string }[] = [];
+  let idx = 0;
+  function extract(re: RegExp, cls: string) {
+    code = code.replace(re, (m) => {
+      const ph = `\x02${idx++}\x02`;
+      tokens.push({ ph, html: `<span class="${cls}">${m}</span>` });
+      return ph;
+    });
+  }
+  // Comments
+  extract(/(\/\/[^\n]*)/g, 'cw-syn-cmt');
+  extract(/(\/\*[\s\S]*?\*\/)/g, 'cw-syn-cmt');
+  if (/^(python|py|bash|sh|ruby|rb|yaml|yml|toml|r|perl)$/.test(lang)) {
+    extract(/(#[^\n]*)/g, 'cw-syn-cmt');
+  }
+  if (/^(html|xml|svg|vue)$/.test(lang)) {
+    extract(/(&lt;!--[\s\S]*?--&gt;)/g, 'cw-syn-cmt');
+  }
+  // Strings
+  extract(/("(?:[^"\\]|\\.)*")/g, 'cw-syn-str');
+  extract(/('(?:[^'\\]|\\.)*')/g, 'cw-syn-str');
+  extract(/(`(?:[^`\\]|\\.)*`)/g, 'cw-syn-str');
+  // Keywords
+  const kw = 'abstract|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|if|implements|import|in|instanceof|interface|let|match|new|null|of|package|private|protected|pub|public|return|static|super|switch|this|throw|try|type|typeof|undefined|var|void|while|with|yield|def|self|elif|except|lambda|pass|raise|True|False|None|fn|impl|mut|ref|struct|trait|use|where|mod|move|dyn|crate|println|printf|fmt|int|float|str|bool|list|dict|tuple|set';
+  code = code.replace(new RegExp(`\\b(${kw})\\b`, 'g'), '<span class="cw-syn-kw">$1</span>');
+  // Numbers
+  code = code.replace(/\b(\d+\.?\d*(?:e[+-]?\d+)?)\b/gi, '<span class="cw-syn-num">$1</span>');
+  // Restore
+  for (const t of tokens) {
+    code = code.replace(t.ph, t.html);
+  }
+  return code;
+}
+
 function renderMd(text: string): string {
   // Extract code blocks first to protect them from other transformations
   const codeBlocks: string[] = [];
@@ -56,10 +92,12 @@ function renderMd(text: string): string {
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
+    const highlighted = highlightSyntax(escaped, lang || '');
     const langLabel = lang ? `<span class="cw-code-lang">${lang}</span>` : '';
+    const copyBtn = `<button class="cw-code-copy" onclick="navigator.clipboard.writeText(this.closest('.cw-code-block').querySelector('code').textContent).then(()=>{this.textContent='\\u2713';setTimeout(()=>this.textContent='\\u590d\\u5236',1500)})">复制</button>`;
     const placeholder = `\x00CB${codeBlocks.length}\x00`;
     codeBlocks.push(
-      `<div class="cw-code-block">${langLabel}<button class="cw-code-copy" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').textContent).then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='复制',1500)})">复制</button><pre><code class="lang-${lang}">${escaped}</code></pre></div>`
+      `<div class="cw-code-block"><div class="cw-code-bar">${langLabel}${copyBtn}</div><pre><code class="lang-${lang}">${highlighted}</code></pre></div>`
     );
     return placeholder;
   });
@@ -582,9 +620,9 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
           <div className="cw-body" ref={listRef} onScroll={onBodyScroll}>
             {!hasMessages && (
               <div className="cw-empty">
-                <div className="cw-empty-mark">?</div>
-                <p className="cw-empty-title">有什么不明白的？</p>
-                <p className="cw-empty-sub">选中文档文字后提问，效果更好</p>
+                <p className="cw-empty-lead">关于这篇文章</p>
+                <p className="cw-empty-title">你想了解什么？</p>
+                <p className="cw-empty-hint">选中文档文字后提问，获得更精确的回答</p>
                 <div className="cw-suggestions">
                   {suggestions.map((s, i) => (
                     <button key={i} onClick={() => { setInput(s.prompt); textareaRef.current?.focus(); }}>{s.label}</button>
