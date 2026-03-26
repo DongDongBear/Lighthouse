@@ -435,6 +435,7 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
         signal: controller.signal,
         body: JSON.stringify({
           message: fullMessage,
+          phrase: 'I AM DONGDONG SEND',
           history: messages.filter(m => !m.error).map(m => ({
             role: m.role === 'user' ? 'user' : 'assistant',
             content: m.content,

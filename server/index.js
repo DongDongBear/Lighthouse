@@ -36,7 +36,10 @@ app.post('/api/verify', (req, res) => {
 app.post('/api/chat', async (req, res) => {
   dbg("[CHAT] handler invoked, message: " + (req.body?.message || "<empty>"))
   console.error("HANDLER CALLED", new Date().toISOString())
-  const { message, history, articleContent } = req.body
+  const { message, history, articleContent, phrase } = req.body
+  if (!phrase || phrase.trim().toUpperCase() !== SECRET_PHRASE) {
+    return res.status(403).json({ error: '未授权' })
+  }
   if (!message) return res.status(400).json({ error: 'message required' })
 
   let prompt = SYSTEM_PROMPT + '\n\n'
@@ -75,14 +78,16 @@ app.post('/api/chat', async (req, res) => {
       dbg("[CHAT] exec done, code=" + (error ? error.code : 0) + " stdout=" + stdout.length)
       console.error("DEBUG: exec done, error:", error?.message || "none", "stdout length:", stdout.length)
 
-      if (!stdout.trim()) {
-        res.write(`data: ${JSON.stringify({ error: 'AI 服务暂时不可用' })}\n\n`)
-      } else {
-        const sseData = JSON.stringify({ choices: [{ delta: { content: stdout } }] })
-        res.write(`data: ${sseData}\n\n`)
+      if (!res.writableEnded) {
+        if (!stdout.trim()) {
+          res.write(`data: ${JSON.stringify({ error: 'AI 服务暂时不可用' })}\n\n`)
+        } else {
+          const sseData = JSON.stringify({ choices: [{ delta: { content: stdout } }] })
+          res.write(`data: ${sseData}\n\n`)
+        }
+        res.write('data: [DONE]\n\n')
+        res.end()
       }
-      res.write('data: [DONE]\n\n')
-      res.end()
 
       try { unlinkSync(tmpFile) } catch (_) {}
       dbg("[CHAT] tmp file cleaned: " + tmpFile)
