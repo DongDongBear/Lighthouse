@@ -3,6 +3,18 @@ import ChatWindow from './ChatWindow';
 import './chat.css';
 
 const STORAGE_KEY = 'lh-chat-activated';
+const ARTICLE_MAX_LEN = 8000;
+
+function getArticleContent(): string {
+  const container = document.querySelector('main article')
+    || document.querySelector('main .content')
+    || document.querySelector('main');
+  if (!container) return '';
+  const clone = container.cloneNode(true) as HTMLElement;
+  clone.querySelectorAll('nav, .sidebar, .cw, .cw-widget, footer, .VPDocFooter, .VPDocAsideOutline, aside, .table-of-contents').forEach(el => el.remove());
+  const text = clone.textContent?.replace(/\s+/g, ' ').trim() || '';
+  return text.slice(0, ARTICLE_MAX_LEN);
+}
 
 function getApiBase(): string {
   if (typeof window === 'undefined') return '';
@@ -15,6 +27,7 @@ export default function ChatWidget() {
   const [activated, setActivated] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedText, setSelectedText] = useState('');
+  const [articleContent, setArticleContent] = useState('');
   const lastGoodSelection = useRef('');
 
   function grabSelection(): string {
@@ -36,6 +49,7 @@ export default function ChatWidget() {
       if (text) {
         setSelectedText(text);
         lastGoodSelection.current = text;
+        setArticleContent(getArticleContent());
       }
     }, 10);
   }, []);
@@ -87,6 +101,7 @@ export default function ChatWidget() {
     if (text) {
       setSelectedText(text);
       lastGoodSelection.current = text;
+      setArticleContent(getArticleContent());
     } else if (lastGoodSelection.current) {
       setSelectedText(lastGoodSelection.current);
     }
@@ -100,7 +115,8 @@ export default function ChatWidget() {
         visible={open}
         onClose={() => setOpen(false)}
         selectedText={selectedText}
-        onClearSelection={() => setSelectedText('')}
+        articleContent={articleContent}
+        onClearSelection={() => { setSelectedText(''); setArticleContent(''); }}
       />
       <button
         className={`cw-fab ${open ? 'open' : ''}`}

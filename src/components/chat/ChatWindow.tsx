@@ -12,6 +12,7 @@ interface Props {
   visible: boolean;
   onClose: () => void;
   selectedText: string;
+  articleContent?: string;
   onClearSelection: () => void;
 }
 
@@ -80,7 +81,7 @@ function truncate(text: string, max: number): string {
   return text.length > max ? text.slice(0, max) + '…' : text;
 }
 
-export default function ChatWindow({ visible, onClose, selectedText, onClearSelection }: Props) {
+export default function ChatWindow({ visible, onClose, selectedText, articleContent, onClearSelection }: Props) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -251,6 +252,7 @@ export default function ChatWindow({ visible, onClose, selectedText, onClearSele
             role: m.role === 'user' ? 'user' : 'assistant',
             content: m.content,
           })),
+          ...(quote && articleContent ? { articleContent } : {}),
         }),
       });
 
@@ -495,6 +497,7 @@ export default function ChatWindow({ visible, onClose, selectedText, onClearSele
             <div className="cw-sel">
               <span className="cw-sel-label">引用</span>
               <span className="cw-sel-text">{truncate(selectedText, 50)}</span>
+              {articleContent && <span className="cw-sel-ctx">+ 全文</span>}
               <button className="cw-sel-x" onClick={onClearSelection}>&times;</button>
             </div>
           )}

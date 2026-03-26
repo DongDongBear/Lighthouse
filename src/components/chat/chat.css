@@ -552,6 +552,17 @@
   flex: 1;
   min-width: 0;
 }
+.cw-sel-ctx {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--vp-c-text-3);
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 3px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+}
 .cw-sel-x {
   background: none;
   border: none;

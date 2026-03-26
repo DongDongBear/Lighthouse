@@ -1,5 +1,5 @@
-import express from 'express'
-import cors from 'cors'
+const express = require('express')
+const cors = require('cors')
 
 const app = express()
 
@@ -22,8 +22,6 @@ const SECRET_PHRASE = 'I AM DONGDONG SEND'
 const OPENCLAW_URL = 'http://127.0.0.1:18789/v1/chat/completions'
 const OPENCLAW_TOKEN = '15dfbe164686b4d12544dca9e6f1f8d2666305d703d23df8b2a00b7bbf53ad26'
 
-const BASE_SYSTEM_PROMPT = '你是 LightHouse 文档助手。用户正在阅读 LightHouse 学习资料库的文档，请帮助他们解答技术问题。回复简洁、准确，使用中文。支持 Markdown 格式。'
-
 app.post('/api/verify', (req, res) => {
   const { phrase } = req.body
   if (phrase && phrase.trim().toUpperCase() === SECRET_PHRASE) {
@@ -33,16 +31,14 @@ app.post('/api/verify', (req, res) => {
 })
 
 app.post('/api/chat', async (req, res) => {
-  const { message, history, articleContent } = req.body
+  const { message, history } = req.body
   if (!message) return res.status(400).json({ error: 'message required' })
 
-  let systemPrompt = BASE_SYSTEM_PROMPT
-  if (articleContent) {
-    systemPrompt += `\n\n用户正在阅读以下文章：\n\n${articleContent}\n\n请基于这篇文章内容回答问题。`
-  }
-
   const messages = [
-    { role: 'system', content: systemPrompt }
+    {
+      role: 'system',
+      content: '你是 LightHouse 文档助手。用户正在阅读 LightHouse 学习资料库的文档，请帮助他们解答技术问题。回复简洁、准确，使用中文。支持 Markdown 格式。'
+    }
   ]
   if (Array.isArray(history)) {
     for (const h of history.slice(-20)) {
@@ -98,5 +94,5 @@ app.post('/api/chat', async (req, res) => {
 
 const PORT = process.env.PORT || 3456
 app.listen(PORT, () => {
-  console.log(`LightHouse Chat Server running on http://localhost:${PORT}`)
+  console.log(`🏠 LightHouse Chat Server running on http://localhost:${PORT}`)
 })
