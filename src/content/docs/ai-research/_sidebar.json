@@ -5,13 +5,23 @@
       "dir": "llm",
       "collapsed": false,
       "subgroups": [
-        { "text": "零基础入门", "dir": "fundamentals", "collapsed": true }
+        { "text": "零基础入门", "dir": "fundamentals", "collapsed": true },
+        { "text": "模型架构", "dir": "architecture", "collapsed": true },
+        { "text": "训练与对齐", "dir": "training", "collapsed": true },
+        { "text": "推理优化", "dir": "inference", "collapsed": true },
+        { "text": "多模态", "dir": "multimodal", "collapsed": true }
       ]
     },
     {
       "text": "Agent Research",
       "dir": "agent",
-      "collapsed": false
+      "collapsed": false,
+      "subgroups": [
+        { "text": "工程实践", "dir": "engineering", "collapsed": true },
+        { "text": "Agent 训练", "dir": "training", "collapsed": true },
+        { "text": "框架与技能", "dir": "framework", "collapsed": true },
+        { "text": "Agent 评估", "dir": "evaluation", "collapsed": true }
+      ]
     },
     {
       "text": "每日 News",
