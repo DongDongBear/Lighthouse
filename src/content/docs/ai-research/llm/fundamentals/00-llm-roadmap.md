@@ -31,6 +31,6 @@ title: "LLM 入门路线图：从零到读懂前沿论文"
 
 ---
 
-## 读完之后
+## 深度解读
 
-→ [KARL 深度解读全文](../karl-knowledge-agents-rl)
+### [14. KARL 深度解读全文](../14-karl-knowledge-agents-rl)
