@@ -208,9 +208,9 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
   const abortRef = useRef<AbortController | null>(null);
   const [userScrolled, setUserScrolled] = useState(false);
   const [cwWidth, setCwWidth] = useState(() => {
-    if (typeof window === 'undefined') return 400;
+    if (typeof window === 'undefined') return 520;
     const saved = localStorage.getItem(CW_WIDTH_KEY);
-    return saved ? Math.max(320, Math.min(Number(saved), 800)) : 400;
+    return saved ? Math.max(380, Math.min(Number(saved), 900)) : 520;
   });
   const resizingRef = useRef(false);
   const cwRef = useRef<HTMLDivElement>(null);
@@ -298,7 +298,7 @@ export default function ChatWindow({ visible, onClose, selectedText, articleCont
     function onMove(ev: MouseEvent) {
       if (!resizingRef.current) return;
       const delta = startX - ev.clientX; // dragging left = wider
-      const newW = Math.max(320, Math.min(startW + delta, 800));
+      const newW = Math.max(380, Math.min(startW + delta, 900));
       setCwWidth(newW);
     }
     function onUp() {

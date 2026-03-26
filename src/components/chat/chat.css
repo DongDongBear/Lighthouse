@@ -72,9 +72,9 @@
   position: fixed;
   bottom: 84px;
   right: 28px;
-  width: 400px;
+  width: 520px;
   max-width: calc(100vw - 24px);
-  height: 560px;
+  height: 680px;
   max-height: calc(100vh - 100px);
   background: var(--vp-c-bg);
   border: 1px solid var(--vp-c-divider);
