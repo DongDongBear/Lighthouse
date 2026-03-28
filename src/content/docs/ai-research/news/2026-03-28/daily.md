@@ -1,9 +1,81 @@
 ---
-title: "2026-03-28 AI 日报：OpenAI GPT-5.4 mini/nano发布+收购Astral、Anthropic科学博客+经济指数+Claude Code Auto Mode、Apple Siri开放第三方AI接入、Meta裁员700人All-in超智能、微软Copilot Wave 3重组、TSMC能源危机、EU AI法案修正"
-description: "【头条】OpenAI发布GPT-5.4 mini/nano并宣布收购Python工具链公司Astral。Anthropic密集发布：科学博客上线、经济指数报告揭示学习曲线、Claude Code Auto Mode重新定义Agent安全、基础设施噪声量化颠覆SWE-bench认知。Apple计划iOS 27开放Siri接入第三方AI助手。Meta裁员700人加速超智能转型、El Paso数据中心投资暴涨至$100亿。微软Copilot Wave 3发布+AI领导层重组。xAI遭巴尔的摩起诉深度伪造。TSMC能源危机、EU AI法案Omnibus修正、Helsing €6亿D轮、IQuest-Coder-V1刷屏、MiroThinker逼近GPT-5、LLM安全崩塌95.3%。"
+title: "2026-03-28 AI 日报：豆包深度思考+腾讯AI Lab重组混元3.0+百度文心5.0+DeepSeek V4泄露、OpenAI GPT-5.4 mini/nano发布+收购Astral、Anthropic科学博客+经济指数+Claude Code Auto Mode、Apple Siri开放第三方AI接入、Meta裁员700人All-in超智能、微软Copilot Wave 3重组、TSMC能源危机、EU AI法案修正"
+description: "【头条】字节豆包上线边想边搜深度思考、腾讯撤销AI Lab并入大模型体系混元3.0将发、百度文心5.0多模态升级、DeepSeek V4万亿参数架构泄露、智谱GLM-4.7面向Agentic Coding、钉钉CLI开源、中国大模型十强榜出炉。OpenAI发布GPT-5.4 mini/nano并宣布收购Python工具链公司Astral。Anthropic密集发布：科学博客上线、经济指数报告揭示学习曲线、Claude Code Auto Mode重新定义Agent安全、基础设施噪声量化颠覆SWE-bench认知。Apple计划iOS 27开放Siri接入第三方AI助手。Meta裁员700人加速超智能转型、El Paso数据中心投资暴涨至$100亿。微软Copilot Wave 3发布+AI领导层重组。xAI遭巴尔的摩起诉深度伪造。TSMC能源危机、EU AI法案Omnibus修正、Helsing €6亿D轮、IQuest-Coder-V1刷屏、MiroThinker逼近GPT-5、LLM安全崩塌95.3%。"
 ---
 
 # 2026-03-28 AI 日报
+
+---
+
+## 🇨🇳 中国区
+
+### 1. [A] ⭐ 豆包新版深度思考功能正式测试——"边想边搜"
+
+**概述：** 3 月 28 日，字节跳动宣布豆包上线新版深度思考功能，核心创新是将推理链与搜索引擎深度结合。系统可在推理过程中自动识别信息缺口，实时制定搜索策略并整合外部信息，实现"边想边搜"的闭环。
+
+**意义：** 这是国内大模型产品首次将 Chain-of-Thought 推理与实时搜索做原生融合，而非简单的 RAG 检索增强。豆包月活已达 3.15 亿、日活破亿（据钛媒体 3 月榜单），该功能有望进一步巩固其在中国消费级 AI 市场的领先地位，同时对 Perplexity 等搜索型 AI 产品构成差异化竞争。
+
+**信源：** https://news.pconline.com.cn/1907/19076153.html
+
+---
+
+### 2. [A] ⭐ 腾讯撤销近十年 AI Lab 并入大模型体系，混元 3.0 即将发布
+
+**概述：** 3 月 27 日，腾讯集团高级执行副总裁汤道生在 2026 腾讯云城市峰会上海站宣布，撤销运营近十年的 AI Lab，全面并入大模型体系，由首席 AI 科学家姚顺雨（27 岁，前 OpenAI 研究员、普林斯顿博士）统筹技术方向。混元 3.0 预计 4 月正式发布，激活参数降低的同时提升复杂推理、长记忆和 Agent 能力。CodeBuddy 已覆盖腾讯超 90% 工程师，同步发布 Agent 产品全景图（WorkBuddy + QClaw 开箱即用）。
+
+**意义：** 这是中国大厂中最激进的 AI 组织重构——撤销独立研究院、由 27 岁科学家全面主导，信号极其明确：腾讯正从"研究驱动"全面转向"产品驱动"的大模型战略。混元 3.0 若在效率和 Agent 能力上实现突破，将直接影响微信、企业微信等十亿级用户入口的 AI 化进程。
+
+**信源：** https://news.qq.com/rain/a/20260327A07N9L00 / https://cxgn.cn/9085.html
+
+---
+
+### 3. [A] 百度文心 5.0（ERNIE 5.0）正式发布——多模态全面升级
+
+**概述：** 3 月 26 日，百度正式发布文心大模型 5.0（ERNIE 5.0），从单一文本对话升级为支持文本、图像、语音等多种模态的统一交互系统。这是文心系列自 4.0 以来最大幅度的架构升级。
+
+**意义：** 百度在搜索和自动驾驶场景拥有海量多模态数据积累，文心 5.0 的多模态能力若落地效果良好，将强化百度在企业级 AI 应用（搜索、地图、Apollo）中的差异化优势。在钛媒体 3 月榜单中百度文心排名第七，多模态升级是其追赶头部梯队的关键一步。
+
+**信源：** https://www.aihowhub.com/ai-tools/ai-writing-tool/wenxinyiyan/
+
+---
+
+### 4. [A] 钉钉 CLI 以 Apache-2.0 协议正式开源
+
+**概述：** 3 月 27 日，阿里钉钉将其命令行工具 DingTalk CLI 以 Apache-2.0 协议上架 GitHub 开源。首批开放 AI 表格、日历、日志、待办等 10 项核心产品能力，原生支持 Claude Code、Cursor 等主流 AI 编程与 Agent 执行环境。
+
+**意义：** 这是中国大厂首次面向国际 AI Agent 生态做深度集成。以 Apache-2.0 宽松协议开源，直接对接 Claude Code 和 Cursor，意味着钉钉正从"中国企业协作工具"向"全球 AI Agent 基础设施"转型。对于使用 Claude Code 的开发者而言，现在可以直接通过 CLI 操作钉钉的企业级能力。
+
+**信源：** 36氪快讯 2026-03-27
+
+---
+
+### 5. [B] 钛媒体发布 2026 年 3 月中国通用大模型十强榜单
+
+**概述：** 钛媒体发布最新月度榜单：豆包（字节）以月活 3.15 亿、日活破亿登顶，通义千问（阿里）凭借 LMArena 全球第 6、中国第 1 排名第二。前十依次为：豆包、通义千问、DeepSeek、智谱 AI、Kimi、MiniMax、文心、腾讯元宝、阶跃星辰、小米 MiMo。
+
+**意义：** 这份榜单清晰展现了中国大模型市场的三梯队格局：字节+阿里遥遥领先，DeepSeek/智谱/Kimi 构成第二梯队，百度/腾讯/阶跃/小米为第三梯队。小米 MiMo 首次进入前十，标志着手机厂商自研大模型已具竞争力。
+
+**信源：** https://www.firecat-web.com/daily-news/3495
+
+---
+
+### 6. [B] 智谱 AI 发布 GLM-4.7 系列——面向 Agentic Coding 深度优化
+
+**概述：** 智谱 AI 发布 GLM-4.7 系列模型，针对 Agentic Coding 场景进行深度优化，强化了编码能力、长程任务规划与工具协同能力。在开源模型中表现出色。
+
+**意义：** 随着 AI 编程从"代码补全"进入"自主 Agent 编码"阶段，GLM-4.7 瞄准的正是这个方向。智谱作为中国开源大模型的代表力量，其在 Agentic Coding 上的突破将直接受益于钉钉 CLI 等 Agent 基础设施的开放。
+
+**信源：** https://docs.bigmodel.cn/cn/guide/models/text/glm-4.7
+
+---
+
+### 7. [B] DeepSeek V4 架构论文泄露——万亿参数 MoE + 原生多模态 + 百万上下文
+
+**概述：** 据泄露的技术文档，DeepSeek V4 预计 4 月发布，采用万亿参数（1T）MoE 架构，支持 100 万 token 上下文窗口，引入 Engram 记忆架构实现原生多模态能力。
+
+**意义：** 若属实，DeepSeek V4 将是中国首个公开的万亿参数 MoE 模型。100 万 token 上下文和 Engram 记忆架构将使其在长文档处理和复杂 Agent 任务上具备与 GPT-5/Claude 正面竞争的能力。结合 DeepSeek 一贯的开源策略，这可能重塑全球开源大模型的竞争格局。
+
+**信源：** https://www.nxcode.io/zh/resources/news/deepseek-v4-release-specs-benchmarks-2026
 
 ---
 
