@@ -214,3 +214,169 @@ description: "[占位]"
 ---
 
 COLLECT_CHINA_DONE — 8条
+
+---
+
+## 🇪🇺 欧洲区
+
+> 注：本轮我补查了 Mistral、Wayve、Hugging Face、DeepMind、Stability AI、Aleph Alpha、欧盟 AI Act 执法进展及相关 KOL/研究线索。能确认且信息密度足够高的，优先保留以下 4 条；欧洲源在北京时间近 24 小时的一手新增相对稀疏，因此不强行凑数。
+
+### 9. [A] ⭐ Mistral 发布 Voxtral TTS，把“开源可控语音层”正式补齐
+
+**概述：** Mistral AI 最新发布 Voxtral TTS，这是其首个文本转语音模型，参数规模 4B，主打多语言、低延迟、可快速适配新声音，同时给出 API、Studio 试玩和开源权重三条落地路径。官方声称在人类评测中，自然度优于 ElevenLabs Flash v2.5，并在质量上接近 ElevenLabs v3。
+
+**技术/产业意义：** 这条很关键，因为它意味着欧洲头部模型公司不再只做“文本大模型”，而是在补齐完整语音 Agent 栈。对企业客户来说，真正有价值的不是单点 TTS，而是“转写 + 理解 + 生成 + 部署可控”的一体化语音能力，Mistral 正在把这条链路做完整。
+
+**深度分析：**
+- Voxtral TTS 支持 9 种语言，且支持方言和跨语言 voice adaptation，明显瞄准全球客服、语音助手和实时 Agent 场景。
+- 官方披露其首包音频延迟很低，典型样本下模型延迟约 70ms，这对实时对话体验是核心指标。
+- 模型架构基于 transformer + flow matching + 自研音频 codec，本质上是在兼顾自然度、可控性与部署效率，而不是只追求 demo 级效果。
+- 更重要的是商业路径：API 定价、Studio 测试、HF 开源权重同时给出，意味着 Mistral 试图把“欧洲可控语音基础设施”直接推向开发者和企业采购端。
+
+**评论观察：**
+- 🟢 支持：语音是 Agent 下一轮真正高频的人机接口，Mistral 这步不是边角料，而是平台化补全。
+- 🔴 质疑：商业授权、品牌声音合规和企业级语音 IP 保护，仍决定它能否真正挑战 ElevenLabs 这类成熟玩家。
+
+**信源：** https://mistral.ai/news/voxtral-tts
+
+**关联行动：** 持续追踪 Voxtral TTS 的商业授权细则、第三方自然度评测，以及与 Voxtral Transcribe 的整合进展。
+
+---
+
+### 10. [A] ⭐ Wayve 联手 Qualcomm，把端到端自动驾驶 AI 往量产 ADAS 平台里塞
+
+**概述：** Wayve 与 Qualcomm 于 3 月 10 日宣布技术合作，将 Wayve AI Driver 作为端到端自动驾驶智能层，预集成到 Qualcomm Snapdragon Ride 与 Active Safety 软件栈中，面向全球车厂提供从 hands-off ADAS 到更高阶自动驾驶的量产级方案。
+
+**技术/产业意义：** 这不是普通合作稿，而是欧洲 embodied AI/自动驾驶公司向“规模量产平台”迈出的关键一步。Wayve 过去更像前沿自动驾驶 AI 公司；这次如果真能借 Qualcomm 平台进入全球 OEM 车型规划，意味着其能力开始从 demo 和试点走向标准供应链。
+
+**深度分析：**
+- Qualcomm 提供的是已经进入全球多个车型项目的车规级 SoC 与安全栈，Wayve 提供的是基于大规模真实数据学习的端到端 AI Driver，二者结合的意义在于减少车厂集成复杂度。
+- 官方反复强调 time-to-market、可扩展、安全和全球部署，说明车厂现在真正关心的不是“模型是不是最聪明”，而是能不能更快量产、更低风险落地。
+- Wayve 的 vehicle-agnostic 路线很有野心：目标不是为单一车企定制，而是成为跨车型、跨平台、跨地区的通用驾驶智能层。
+- 若这条路跑通，欧洲 AI 公司的价值将不只是“卖算法能力”，而是嵌入全球汽车供应链的基础软件层。
+
+**评论观察：**
+- 🟢 支持：端到端驾驶要真正出圈，必须进量产平台，而不是停留在城市路测叙事里。
+- 🔴 质疑：预集成不等于大规模 SOP，真正决定价值的仍是车厂签单、法规适配与长期安全数据。
+
+**信源：** https://wayve.ai/press/qualcomm-wayve-collaboration/
+
+**关联行动：** 跟踪 Wayve 是否披露具体 OEM 客户、量产时间表，以及其在 Snapdragon Ride 上的成本/功耗/安全冗余指标。
+
+---
+
+### 11. [A] ⭐ Wayve、Uber、日产瞄准东京 Robotaxi，欧洲自动驾驶公司开始借平台出海
+
+**概述：** Wayve、Uber 与日产 3 月 12 日宣布签署合作备忘录，目标是在 2026 年底前于东京启动 robotaxi 试点。方案将采用搭载 Wayve AI Driver 的日产 LEAF，并通过 Uber 平台向乘客提供服务。这也是 Uber 在日本的首个自动驾驶合作。
+
+**技术/产业意义：** 这条信号很强，因为它展示了 Wayve 的另一条商业化路径：不是只做 ADAS 供应商，而是同时切入 robotaxi 网络。东京又是高密度、复杂路网、高安全要求市场，如果能跑通，Wayve 的“无 HD 地图、跨城市泛化”叙事含金量会明显上升。
+
+**深度分析：**
+- Wayve 把核心卖点直接写成“可从真实世界数据学习，并在新城市泛化，不依赖 HD map”，这正是其与传统自动驾驶堆图路线的最大区别。
+- Uber 提供调度平台，日产提供量产车体，Wayve 提供 AI Driver，三方分工非常清晰：欧洲算法、日本整车、美国平台。
+- 这也说明 robotaxi 商业化越来越像供应链协同，而不是单家公司闭门造车。
+- 若东京试点进展顺利，Wayve 有可能从英国/欧洲技术公司，升级为跨区域 autonomous mobility 软件提供商。
+
+**评论观察：**
+- 🟢 支持：东京这种高难市场更能检验“端到端泛化”是不是实货。
+- 🔴 质疑：试点阶段仍有安全员，距离真正无人商业化还有明显距离，节奏不能高估。
+
+**信源：** https://wayve.ai/press/wayve-nissan-uber-robotaxi-collaboration/
+
+**关联行动：** 后续重点看东京试点的法规进展、运营方式，以及 Wayve 是否同步扩展到伦敦等更多城市。
+
+---
+
+### 12. [B] 欧盟 AI Act 执法框架进入落地期，真正考验从“立法”转向“执行”
+
+**概述：** 欧洲议会研究服务相关解读在 3 月中旬系统梳理 AI Act 执法框架：AI Act 采用中央 + 成员国混合执法模式，高风险 AI 系统主要由各成员国市场监管体系执行，GPAI 模型则由欧盟委员会 AI Office 负责。文章同时指出，截至 2026 年 3 月，27 个成员国中仅 8 个完成单一联络点列表登记，执行落地仍不均衡。
+
+**技术/产业意义：** 这条虽然不是“新模型发布”，但对欧洲 AI 产业影响极大。过去一年大家谈的多是 AI Act 立法文本，现在真正进入难点——谁来查、怎么查、成员国之间怎么协同，以及 GPAI 系统风险到底如何被实操监管。
+
+**深度分析：**
+- AI Act 对高风险系统与 GPAI 采用不同执法逻辑：前者偏国家层，后者更偏欧盟中央层，这会直接影响跨境部署和合规成本。
+- 文中明确提到系统性风险 GPAI 模型需要额外模型评估与风险评估，这对 OpenAI、Google、Mistral 等头部模型厂都会形成持续约束。
+- 真正的难点不是法条，而是成员国执行能力不均衡；截至 2026 年 3 月，仅 8 个国家列出单一联络点，说明“纸面监管”到“实操监管”之间还有不小断层。
+- 对创业公司而言，未来竞争力的一部分将不只是模型性能，还包括合规工程与文档能力。
+
+**评论观察：**
+- 🟢 支持：欧洲终于开始把“可信 AI”从理念推向具体执法框架，这是它区别于中美路线的核心标签。
+- 🔴 质疑：若成员国执行节奏长期不一致，最终可能增加企业不确定性，而不是降低不确定性。
+
+**信源：** https://epthinktank.eu/2026/03/18/enforcement-of-the-ai-act/
+
+**关联行动：** 持续跟踪 AI Office 后续指南、成员国监管机构补位情况，以及 GPAI 系统性风险的具体认定口径。
+
+---
+
+## 📚 学术 / 硬件
+
+> 注：本轮补查了 arXiv（cs.AI / cs.CL / cs.LG / cs.CV / cs.MA / cs.SE / cs.RO）、Hugging Face Papers、Papers with Code、Sebastian Raschka、Reddit 社区。最后保留 3 条最值得写进日报的高信号论文/benchmark。
+
+### 13. [A] ⭐ NVIDIA AVO：让 Agent 自己去进化注意力内核，B200 上反超 cuDNN 与 FlashAttention-4
+
+**概述：** NVIDIA 新论文《AVO: Agentic Variation Operators for Autonomous Evolutionary Search》提出把传统进化搜索中的固定 mutation / crossover，替换成自治 coding agent。作者在 Blackwell B200 GPU 上做注意力内核搜索，7 天连续自治进化后，发现的 multi-head attention kernel 相比 cuDNN 最多提升 3.5%，相比 FlashAttention-4 最多提升 10.5%；迁移到 GQA 后，仅 30 分钟额外适配，仍能相对 cuDNN 提升 7.0%、相对 FA4 提升 9.3%。
+
+**技术/产业意义：** 这条非常硬。它说明 Agent 不只是写业务代码，而是开始进入极端底层、高度专家化的 GPU kernel 优化区。若这类方法成熟，未来“编译器/内核/系统优化工程师”的一部分工作，会被自治搜索 Agent 重构。
+
+**深度分析：**
+- AVO 的关键不是“让 LLM 提建议”，而是把 agent 变成 variation operator：可读取 lineage、利用知识库、根据执行反馈修复与验证修改。
+- 选择 attention kernel 作为目标非常有说服力，因为这是目前 AI 系统里最卷、最吃底层优化的模块之一。
+- 在 B200 上反超 cuDNN 和 FA4，意味着 agent 已能发现人类专家工程里都很难手工穷举的微架构级优化。
+- 这会强化一个判断：下一轮 AI infra 竞争，不只是更强模型，也包括“更强 agent 帮你把硬件吃满”。
+
+**评论观察：**
+- 🟢 支持：这是 agent 真正切入 AI 基础设施核心层的信号，含金量远高于一般 coding demo。
+- 🔴 质疑：目前验证任务仍聚焦注意力 kernel，距离更一般化的系统优化自动化还有距离。
+
+**信源：** https://arxiv.org/abs/2603.24517
+
+**关联行动：** 持续追踪 AVO 是否开源更多搜索轨迹与代码，以及是否扩展到 GEMM、MoE 路由、通信调度等更广系统任务。
+
+---
+
+### 14. [A] S2D2：扩散语言模型的无训练自推测解码，把速度再往前推一截
+
+**概述：** 论文《S2D2: Fast Decoding for Diffusion LLMs via Training-Free Self-Speculation》提出一种无需额外训练的自推测解码框架：把同一个 block-diffusion 模型在 block size=1 时当作 verifier，用于校验其并行 diffusion draft。作者称，在 SDAR 上可相对 autoregressive decoding 达到最高 4.7× 加速，相对调优后的动态解码基线最高 1.57× 加速，同时准确率最多提升 4.5 个点。
+
+**技术/产业意义：** 这条重要在于它不是单纯再造一个更大的模型，而是在现有 diffusion LM 路线下，直接优化“怎么更快把 token 吐出来”。推理效率始终是产业大问题，这类 decoding 层创新一旦可复用，商业价值极高。
+
+**深度分析：**
+- S2D2 的核心巧思是：同一模型在 block size=1 时天然变成 AR verifier，因此不需要额外小模型或蒸馏器。
+- 它瞄准的是 block-diffusion 目前最痛的点：few-step regime 下，速度和质量很难两全，阈值过激会掉质量，保守又浪费步数。
+- 论文结果显示它在多个主流 block-diffusion family 上都改善 accuracy-speed frontier，说明不是单模型特例。
+- 如果 diffusion LM 未来真的形成独立路线，S2D2 这类 inference-time 技术很可能成为标准配件。
+
+**评论观察：**
+- 🟢 支持：不改模型参数、只改解码策略却能明显提速，最容易被业界快速吸收。
+- 🔴 质疑：前提仍是扩散 LLM 生态本身要继续做大，否则再好的 decoding trick 也可能停留在研究圈。
+
+**信源：** https://arxiv.org/abs/2603.25702
+
+**关联行动：** 跟踪 S2D2 是否在更大规模 block-diffusion 模型、真实长上下文任务和商用推理栈中复现优势。
+
+---
+
+### 15. [B] FinMCP-Bench：MCP Agent 终于有了更像真实业务流的金融基准
+
+**概述：** 《FinMCP-Bench: Benchmarking LLM Agents for Real-World Financial Tool Use under the Model Context Protocol》提出面向真实金融工具调用场景的 MCP benchmark。数据集包含 613 个样本、10 个主场景、33 个子场景，覆盖 65 个真实金融 MCP，任务类型包括 single-tool、multi-tool 和 multi-turn，并显式评估工具调用准确性与推理能力。
+
+**技术/产业意义：** 这条不是“最炫”的论文，但非常实用。现在 MCP 很热，真正缺的是有业务结构、真实工具依赖、跨多轮对话的 benchmark。FinMCP-Bench 说明 Agent 评测正在从“会不会调一个天气 API”，走向“能不能在真实工作流里稳定连多步工具链”。
+
+**深度分析：**
+- 其数据来源不是纯合成 prompt，而是基于生产金融 Agent 历史日志与专家流程，再结合增强方法构建复杂链路样本，可信度明显高于玩具 benchmark。
+- 65 个真实金融 MCP、288 条工具依赖边，意味着它不仅评最终答案，还在考查工具选择顺序与依赖管理。
+- 对 MCP 生态来说，这类 benchmark 会加速模型厂从“宣称支持 MCP”走向“给出任务完成率与调用准确率”。
+- 更广义看，垂直行业 Agent 的下一步不是再做通用聊天，而是把复杂 SOP、合规流程和工具链路标准化进 eval 体系。
+
+**评论观察：**
+- 🟢 支持：真正能推动行业进步的，往往是这种更接近生产现实的 benchmark，而不是花哨 demo。
+- 🔴 质疑：金融场景高度垂直，结论能否外推到通用企业 Agent，还需要更多跨行业验证。
+
+**信源：** https://arxiv.org/abs/2603.24943
+
+**关联行动：** 继续跟踪是否会出现法律、客服、BI、运维等垂直版 MCP Bench，推动 Agent 评测进一步产业化。
+
+---
+
+COLLECT_EUROPE_DONE — 欧洲区 4 条 + 学术/硬件 3 条，共补充 7 条，全篇累计 15 条
