@@ -228,3 +228,230 @@ description: "[占位]"
 ---
 
 COLLECT_CHINA_DONE — 9条
+
+---
+
+## 🇪🇺 欧洲区
+
+> 注：本轮手工补查了 Mistral、Hugging Face、Google DeepMind，以及欧洲创业公司/开源生态相关一手页面。过去 24-72 小时内，真正值得写进日报的高信号新增主要集中在“语音层、Hub 基础设施、开源生态数据、低成本图像训练方法论”这几条线上，因此不强行凑数。
+
+### 10. [A] ⭐ Mistral 发布 Voxtral TTS，正式把欧洲开源语音层补上
+
+**概述：** Mistral AI 发布首个文本转语音模型 Voxtral TTS，参数规模 4B，支持 9 种语言、3 秒参考音频快速适配新声音，并同时给出 API、Studio 试玩和 Hugging Face 开源权重。官方披露在人类偏好评测中，Voxtral TTS 在自然度上优于 ElevenLabs Flash v2.5，质量接近 ElevenLabs v3。
+
+**技术/产业意义：** 这条很关键，因为 Mistral 终于不只是“做文本模型的欧洲公司”，而是在补齐语音 Agent 的输出层。对企业客户来说，真正重要的是“转写 + 理解 + 语音生成 + 本地可控部署”的完整栈，而不是单点大模型能力。Voxtral TTS 让 Mistral 在欧洲主权 AI 叙事里多了一层非常实用的语音基础设施。
+
+**深度分析：**
+- 官方给出的卖点很明确：9 语种、多口音、支持跨语言 voice adaptation，直接对准客服、语音助手和多语种 Agent 场景。
+- 延迟指标也不差：典型样本下模型延迟约 70ms，适合实时语音交互，而不只是离线配音 demo。
+- 架构上采用 transformer + flow matching + 自研 codec，本质上是在自然度、延迟和部署成本之间做均衡，而不是只冲极限分数。
+- 商业路径同样值得注意：API 定价 $0.016/1k 字符，Studio 可试玩，权重上 Hugging Face，说明它在主动抢开发者和企业落地入口。
+
+**评论观察：**
+- 🟢 支持：语音是 Agent 下一轮最高频的人机接口之一，Mistral 补这层非常对路。
+- 🔴 质疑：开源许可、品牌语音保护、企业级语音合规，仍决定它能不能真正吃到大单。
+
+**信源：** https://mistral.ai/news/voxtral-tts
+
+**关联行动：** 后续持续跟踪第三方自然度测评、企业授权条款，以及 Voxtral TTS 与 Voxtral Transcribe 的端到端整合能力。
+
+---
+
+### 11. [A] Hugging Face 推出 Storage Buckets，把“训练中间态存储层”正式做进 Hub
+
+**概述：** Hugging Face 发布 Storage Buckets：面向 checkpoints、optimizer states、处理后的数据分片、logs、agent traces 等高频变动文件的非版本化存储层。产品形态接近可浏览、可脚本化、可 CLI 管理的 S3-like 对象存储，但直接挂在 HF Hub 体系内，并由 Xet 的 chunk-based backend 做去重。
+
+**技术/产业意义：** 这不是简单的“多了个存储功能”，而是在给 Hugging Face Hub 补一层过去缺失很久的工作流基础设施：模型/数据 repo 适合发最终产物，但不适合承接训练过程中的海量中间状态。Buckets 让 HF 从“发布平台”继续向“AI 开发工作平台”推进。
+
+**深度分析：**
+- 它直指 Git 在 AI 工程里的不适配：训练集群会不断写 checkpoints、反复覆盖中间文件、同步目录、删除陈旧文件，这都不是 Git 的强项。
+- Xet 的 chunk dedup 很适合 AI 工件：连续 checkpoint、原始/处理后数据集、agent traces 往往大面积内容重复，节省带宽和存储成本。
+- HF 同时提供 CLI、Python API、JavaScript SDK 和 fsspec/HfFileSystem 接入，说明它想直接嵌进训练脚本、数据管线和服务侧代码，而不是只做网页功能。
+- 这也和 Agent 工作流越来越契合：官方文案直接点名 traces、memory、shared knowledge graphs，说明 HF 很清楚自己的平台正在从“模型社区”演化为“Agent 基础设施入口”。
+
+**评论观察：**
+- 🟢 支持：这类基础设施层升级，比再发一个排行榜模型更能改变开发者工作流。
+- 🔴 质疑：企业最终是否把高频热数据放在 HF，而不是云厂商原生对象存储，还要看网络、权限和成本细节。
+
+**信源：** https://huggingface.co/blog/storage-buckets
+
+**关联行动：** 继续跟踪 Buckets 是否支持更完整的 repo↔bucket promotion 流水线，以及企业客户采用情况。
+
+---
+
+### 12. [A] Hugging Face 发布《Spring 2026 开源生态报告》：中国下载量反超美国，欧洲仍靠“中腰部高质量贡献”撑住位置
+
+**概述：** Hugging Face 春季 2026 开源生态报告披露：平台已增长到 1300 万用户、200 万+ 公共模型、50 万+ 公共数据集；中国模型在月度和总体下载量上已超过美国，2025 年中国模型占到 41% 下载份额；同时行业开发占比下降、独立开发者与小团体的影响力显著上升。报告也特别点到法国、德国、英国仍通过研究机构、国家 AI 计划和特色模型家族维持重要存在感。
+
+**技术/产业意义：** 这份报告的价值不在于“又有一份行业白皮书”，而在于它直接给出 HF 生态内部的真实流量与结构变化。对欧洲来说，信号很明确：头部不再只看美国，真正有生命力的是能否在开放生态里持续输出可复用的模型、工具链和主权 AI 能力。
+
+**深度分析：**
+- 平台体量仍在高速增长，但分布极其集中：前 0.01% 的模型拿走 49.6% 下载量，说明开源 AI 也已进入强头部结构。
+- 行业占比从 2022 年前后的约 70% 降到 2025 年的 37%，独立开发者升到 39%，说明开源扩散越来越依赖二次封装、量化、再分发，而不是只靠原始模型厂。
+- 对欧洲最值得注意的是“主权”叙事被显著放大：开放权重、可本地部署、法律框架内微调，正在成为政府与公共机构讨论 AI 基础设施时的核心关键词。
+- 报告对欧洲的定位其实很现实：法国、德国、英国不是绝对流量中心，但仍是高质量研究和特色开源路线的重要产地。
+
+**评论观察：**
+- 🟢 支持：这份报告比泛泛而谈“开源很重要”更有价值，因为它把参与者结构和地理变化说清楚了。
+- 🔴 质疑：HF 下载量不等于真实商业部署量，生态热度与产业利润之间仍有明显鸿沟。
+
+**信源：** https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026
+
+**关联行动：** 后续持续跟踪欧洲主权 AI 项目（尤其法国/德国/英国）在 HF 生态上的真实扩张速度，而不是只看政策口号。
+
+---
+
+### 13. [B] 法国创业公司 Photoroom 公开 PRX Part 3：32 张 H200、24 小时、约 1500 美元训练一个可用文生图模型
+
+**概述：** Photoroom 在其 PRX 系列第三篇里公开一套极度工程化的 text-to-image speedrun 方案：32 张 H200、24 小时训练、总算力预算约 1500 美元，组合 pixel-space training、LPIPS + DINO perceptual losses、TREAD token routing、REPA + DINOv3、Muon optimizer 等技巧，在一天内训出“已经可用”的图像生成模型，并开源训练代码与实验框架。
+
+**技术/产业意义：** 这条对产业特别重要，因为它把“低成本训练一个像样扩散模型”从口号拉到工程 recipe。对欧洲创业公司来说，这类公开方法论的价值很高：不是靠堆无限算力，而是靠训练体系和配方优化缩小门槛。
+
+**深度分析：**
+- 关键不只是省钱，而是把多种近一年有效技巧系统组合，而不是逐项实验室式炫技。
+- 直接从 512px 起步，再上 1024px 微调，说明现在扩散训练的经验越来越务实：先跑吞吐、再补细节。
+- Pixel-space + perceptual losses 的路线很值得看，它在架构和监督层同时压缩了 latent diffusion 传统栈的复杂度。
+- 开源代码比博客本身更重要，因为它把“欧洲创业公司内部 know-how”直接外溢到社区，可能带动更多中小团队复现。
+
+**评论观察：**
+- 🟢 支持：这种“把可复现实验 recipe 摊开讲”的帖子，对行业推进价值很大。
+- 🔴 质疑：24 小时 speedrun 很亮眼，但要从“能用”走到“真能打”，数据规模和长期训练仍是大头。
+
+**信源：** https://huggingface.co/blog/Photoroom/prx-part3
+
+**关联行动：** 继续观察 PRX 后续是否把这套 recipe 扩展到更大规模训练，以及社区复现实验结果。
+
+---
+
+### 14. [B] Google DeepMind 提出 AGI 认知测量框架，并把评测设计外包给 Kaggle 社区共建
+
+**概述：** Google DeepMind 发布《Measuring Progress Toward AGI: A Cognitive Taxonomy》，尝试用认知科学视角定义 10 类关键能力（感知、生成、注意、学习、记忆、推理、元认知、执行功能、问题求解、社会认知），并同时在 Kaggle 发起评测黑客松，用 20 万美元奖金鼓励社区设计对应 eval。
+
+**技术/产业意义：** 这条值得写，不是因为“又有人谈 AGI”，而是 DeepMind 开始把 AGI 讨论从愿景口号拉到 eval taxonomy。对于英国/欧洲的前沿研究阵地来说，这类工作仍代表他们在“如何定义下一代能力评测”上的方法论话语权。
+
+**深度分析：**
+- 最大价值在于把 AGI 评估拆成具体可定义的认知能力，而不是继续用单一 benchmark 或模糊宣言。
+- 它强调 AI 与人类基线的相对分布比较，而不是只比排行榜分数，这一点比常规模型宣传更科学。
+- 让 Kaggle 社区参与构建评测，本质上是在把评估体系做成开放协作工程，而不是闭门自说自话。
+- 对行业的真正挑战是：认知 taxonomy 说得通，不代表马上能形成稳定、抗污染、可持续的评测集。
+
+**评论观察：**
+- 🟢 支持：前沿实验室开始认真讨论“怎么测”，总比继续空谈“多接近 AGI”强得多。
+- 🔴 质疑：认知能力的定义再漂亮，落成 benchmark 后仍会面临数据污染和刷榜问题。
+
+**信源：** https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/
+
+**关联行动：** 后续跟踪 Kaggle 共建评测的提交质量，以及这套 taxonomy 是否被更多实验室采纳。
+
+---
+
+## 📚 学术 / 硬件
+
+> 注：本轮补查了 arXiv、Hugging Face Papers、Sebastian Raschka、NVIDIA 官方技术博客等来源，最终保留 5 条对模型、Agent、RAG 和 AI 基础设施更有信号密度的条目。
+
+### 15. [A] ⭐ Voxtral TTS 论文公开：3 秒声音参考、68.4% 人类偏好胜率，Mistral 的语音层不是单纯营销稿
+
+**概述：** Voxtral TTS 对应论文已上 arXiv。摘要披露：模型可用最少 3 秒参考音频进行多语种 voice cloning，在人工评测中相对 ElevenLabs Flash v2.5 取得 68.4% 胜率；整体采用“语义 token 自回归 + 声学 token flow matching + 自研 codec”的混合架构，并以 CC BY-NC 许可开放权重。
+
+**技术/产业意义：** 论文把产品稿里的关键卖点坐实了：Mistral 不是在包装一个普通 TTS API，而是在用自研 codec + 语义/声学双层建模，补全其多语音 Agent 体系。
+
+**深度分析：**
+- 最核心的是它把“自然度、表达性、跨语言声音迁移、低延迟”同时打包，明显不是只追一项指标。
+- 语义 token + acoustic latent 的拆层设计，说明其目标是兼顾语言内容控制和细节音色重建。
+- 选择 CC BY-NC 也说明：它愿意扩散研究影响力，但商业闭环仍留在 API/企业方案侧。
+
+**评论观察：**
+- 🟢 支持：论文细节一出，产品可信度立刻高很多。
+- 🔴 质疑：商业场景里真正难的仍是品牌声线授权和大规模语音安全治理。
+
+**信源：** https://arxiv.org/abs/2603.25551
+
+**关联行动：** 关注第三方复现、开源社区 finetune 情况，以及对 ElevenLabs / Cartesia / OpenAI Realtime 生态的冲击。
+
+---
+
+### 16. [A] Hyperagents：把 task agent 和 meta agent 写进同一个可编辑程序，进一步推进“可自我改造的 Agent”
+
+**概述：** Hyperagents 提出一种自指式 agent 框架：把负责完成任务的 task agent 与负责修改系统自身的 meta agent 合并进同一个可编辑程序中，允许系统不仅改进任务执行行为，也改进“如何产生下一次改进”的机制。作者将其实现为 DGM-Hyperagents，并宣称可在多种计算任务上持续改进、优于无自我改进或仅有限元改进的基线。
+
+**技术/产业意义：** 这条很硬，因为它把“Agent 会不会自己越来越强”从 prompt folklore 往系统结构层推进了一步。真正值得注意的不是它会写代码，而是它开始修改自己的改进机制。
+
+**深度分析：**
+- 论文对准的是 Darwin Gödel Machine 的局限：原先自我改进更多依赖 coding 域内能力对齐，不容易外推到更广任务。
+- Hyperagents 的关键是在 meta level 上也允许被编辑，因此不只是 task performance 变好，而是 self-improvement pipeline 本身可演化。
+- 如果这条路线跑通，未来 Agent 框架竞争会从“谁更会调工具”走向“谁更会升级自己”。
+
+**评论观察：**
+- 🟢 支持：这是少数真正触到 agent 自进化核心机制的工作。
+- 🔴 质疑：离稳定、可控、可验证的产业级自我改造系统仍然很远。
+
+**信源：** https://huggingface.co/papers/2603.19461
+
+**关联行动：** 后续持续追踪该框架在非 coding 任务与长期运行中的稳定性表现。
+
+---
+
+### 17. [A] LeWorldModel：只用两项 loss，就把 JEPA 世界模型从像素端到端稳定训起来
+
+**概述：** LeWorldModel（LeWM）提出一种从原始像素端到端稳定训练 JEPA world model 的方法，只用“next-embedding prediction loss + 约束 latent 服从高斯分布的正则项”两项损失，就避免了过往 JEPA 依赖 EMA、预训练编码器、多项 loss 或额外监督来防止 collapse 的复杂体系。论文称其 1500 万参数模型可在单 GPU、数小时内完成训练，并在多种 2D/3D 控制任务上保持竞争力，同时计划速度可比 foundation-model world models 快 48×。
+
+**技术/产业意义：** 这条对 embodied/world model 方向很重要，因为它在努力把“世界模型训练得稳”这个老大难问题变简单。如果成立，意味着很多世界模型实验不再需要一整套脆弱 trick 才能开跑。
+
+**深度分析：**
+- 论文最大卖点不是 absolute SOTA，而是把超参数和训练技巧大幅收敛。
+- 它强调 latent collapse 的形式化抑制，这比单纯经验 trick 更有长期价值。
+- 若 JEPA 路线继续升温，LeWM 这种“更轻、更稳、更便宜”的 recipe 会很有传播性。
+
+**评论观察：**
+- 🟢 支持：世界模型最缺的就是稳定、便宜、可复现实验范式。
+- 🔴 质疑：小模型和控制任务上的成功，离大规模开放环境仍有明显距离。
+
+**信源：** https://huggingface.co/papers/2603.19312
+
+**关联行动：** 继续关注是否有人把这套方法扩到更大视觉输入、更复杂 embodied 任务和长时规划。
+
+---
+
+### 18. [A] WriteBack-RAG：把知识库当成“可训练组件”，而不是永远静态的文档堆
+
+**概述：** WriteBack-RAG 提出一个很实用的思路：RAG 不只优化检索器和生成器，知识库本身也应该被“训练”。做法是利用标注样本识别哪些检索成功、哪些文档真正有用，再将证据蒸馏成紧凑知识单元，回写到语料库中，作为离线预处理。论文称在 4 种 RAG 方法、6 个 benchmark、2 个 LLM backbone 上全部带来提升，平均增益约 +2.14%。
+
+**技术/产业意义：** 这条特别产业化。很多企业 RAG 做不好，不是模型不够强，而是知识库本身写得碎、脏、散。WriteBack-RAG 的贡献在于把“改知识库”从人工文档工程提升成系统化优化环节。
+
+**深度分析：**
+- 它把 improvement 放在 corpus 侧，而不是继续微调模型，部署门槛相对更低。
+- 跨方法迁移也有增益，说明收益确实来自知识单元本身，而不只是某条特定 pipeline 的 overfit。
+- 对企业来说，这比再加一层 reranker 更实际：先把库写清楚，后面所有 RAG 方案都受益。
+
+**评论观察：**
+- 🟢 支持：这是很“脏活累活”但真正有生产价值的研究。
+- 🔴 质疑：平均 +2.14% 不算爆炸性提升，但胜在通用和容易落地。
+
+**信源：** https://arxiv.org/abs/2603.25737
+
+**关联行动：** 后续可重点观察是否出现针对企业文档、代码库、客服 SOP 的 write-back 类工程化产品。
+
+---
+
+### 19. [A] ⭐ NVIDIA Nemotron 3 Super 发布：1M 上下文、Hybrid Mamba-Transformer MoE，明显冲着 Agent 工作负载来
+
+**概述：** NVIDIA 发布 Nemotron 3 Super：总参数 120B、激活参数 12B，原生 1M context，采用 Hybrid Mamba-Transformer MoE、Latent MoE、多 token prediction 和 NVFP4 预训练。官方称其在 PinchBench 上达到 85.6%，并强调这是为软件开发、网络安全分析等长上下文 agentic workloads 设计的开放模型，权重、数据集和 recipe 一并开放。
+
+**技术/产业意义：** 这条对基础设施和 Agent 都很重要。它不是单纯再堆一个“更大开源模型”，而是在架构上明确回应 agent 时代的两大痛点：context explosion 和 thinking tax。
+
+**深度分析：**
+- Mamba 层负责长序列效率，Transformer 层补精确检索，MoE 保持激活成本可控，这个组合很明显就是为长任务、长链路、长上下文而来。
+- Latent MoE 和 multi-token prediction 都非常工程导向：前者让更多专家以相近成本参与，后者直接冲生成速度与 speculative decoding。
+- NVFP4 原生预训练也值得看，它不只是后量化，而是从训练开始就针对 Blackwell 低精度栈做适配。
+
+**评论观察：**
+- 🟢 支持：这是少数明确按 agent 工作负载来设计的开源大模型发布。
+- 🔴 质疑：真实生产价值还要看在 OpenHands/OpenClaw、代码代理和安全工作流中的长期稳定性，而不是单次 benchmark。
+
+**信源：** https://developer.nvidia.com/blog/introducing-nemotron-3-super-an-open-hybrid-mamba-transformer-moe-for-agentic-reasoning/
+
+**关联行动：** 持续跟踪其在 agent benchmark、代码代理和安全场景中的第三方验证结果。
+
+---
+
+COLLECT_EUROPE_DONE — 欧洲区 5 条 + 学术/硬件 5 条，共补充 10 条，全篇累计 19 条
