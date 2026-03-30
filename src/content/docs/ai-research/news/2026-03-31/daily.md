@@ -246,3 +246,302 @@ description: "[占位]"
 ---
 
 COLLECT_CHINA_DONE — 10条
+
+---
+
+## 🇪🇺 欧洲区
+
+> 注：本轮补查了 Mistral、Google DeepMind、Hugging Face、Stability AI、Wayve、AISI，以及欧洲 AI 主权/监管相关页面；也尝试检索 Yann LeCun、Thomas Wolf、Clément Delangue、Peter Steinberger、Demis Hassabis、Jeff Dean 近 24-48h 的公开动态，但 X / 搜索镜像反爬限制明显，未发现足够稳定、可核验且达到 A/B 级的新推文信号，因此不单列“推文条目”，避免编造。
+
+### 11. [A] ⭐ Mistral 发布 Voxtral TTS，欧洲开源大模型开始补齐语音输出层
+
+**概述：** Mistral AI 发布首个文本转语音模型 Voxtral TTS，模型规模 4B，支持英语、法语、德语、西语、荷兰语、葡语、意大利语、印地语、阿拉伯语共 9 种语言，可用最短 3 秒参考音频适配新声音；同时上线 API、Mistral Studio 试玩和 Hugging Face 开源权重。
+
+**技术/产业意义：** 这条很硬，因为它让 Mistral 不再只是“欧洲文本模型代表”，而是开始往完整语音 Agent 栈走。欧洲主权 AI 过去最大短板之一就是语音输出层和多语种本地化能力薄弱，Voxtral TTS 把这块直接补到产品层。
+
+**深度分析：**
+- 官方强调的不是单点音色，而是“自然度 + 情绪表达 + 低延迟 + 可定制”四件事一起做。对客服、语音助手、跨语种 Agent 来说，这比单纯的 TTS MOS 分更有意义。
+- 在对 ElevenLabs Flash v2.5 的人工对比里，Mistral给出的结论是自然度更优、延迟相近；同时质量接近 ElevenLabs v3。这说明它不是做一个便宜替代品，而是直接把目标瞄准高端语音工作流。
+- 模型延迟约 70ms（典型 10 秒参考音频、500 字符输入），配合约 9.7x real-time factor，意味着它更像实时交互组件，而不是只能离线配音的长任务模型。
+- 架构上采用基于 Ministral 3B 的 transformer decoder + flow-matching acoustic transformer + 自研 neural codec。这个组合很明显是在平衡自然度、延迟和部署成本。
+- API 定价 $0.016 / 1k characters，叠加开源权重和 Studio 试玩，说明 Mistral 想同时拿下开发者入口和企业落地入口。
+
+**评论观察：**
+- 🟢 支持：语音是 Agent 下一轮最高频入口之一，Mistral 现在补这层非常对路。
+- 🔴 质疑：品牌声线授权、滥用治理和企业语音合规，仍会决定它能不能真正吃到大单。
+
+**信源：** https://mistral.ai/news/voxtral-tts
+
+**关联行动：** 持续跟踪第三方自然度评测、企业授权条款，以及 Voxtral TTS 与 Voxtral Transcribe 的端到端整合能力。
+
+---
+
+### 12. [A] Google DeepMind 推出 Gemini 3.1 Flash Live，把实时语音 Agent 的“自然度 + 稳定性”同时抬高
+
+**概述：** 3 月 26 日，Google 发布 Gemini 3.1 Flash Live，定位为其最高质量音频/语音模型，已接入 Gemini Live、Search Live、AI Studio 的 Gemini Live API，以及企业客服场景。官方披露，该模型在 ComplexFuncBench Audio 上得分 90.8%，在 Scale AI Audio MultiChallenge 上开“thinking”时得分 36.1%。
+
+**技术/产业意义：** 这条重要，不只是因为 Google 又发了一个语音模型，而是因为它把“复杂任务执行能力”和“更自然的实时对话体验”捆绑推进。对欧洲/英国的 DeepMind 线来说，这仍代表全球语音 Agent 顶层能力的方向标。
+
+**深度分析：**
+- 3.1 Flash Live 的核心卖点不是“会说话”，而是能在真实语音交互里更可靠地完成复杂任务。ComplexFuncBench Audio 90.8% 这个数字说明 Google 重点在 multi-step function calling，而不是单纯聊天陪伴。
+- 它特别强调 tonal understanding 和对用户沮丧/困惑情绪的动态响应，这意味着模型在声学层面不再只做 STT/TTS 管道，而是开始把语气、节奏、打断、迟疑都作为交互信号使用。
+- Gemini Live 响应更快、可跟随更长对话线索，Search Live 也扩展到 200+ 国家和地区，这显示 Google 已把实时音频能力从 demo 推到全球产品层。
+- 所有生成音频都加上 SynthID 水印，也说明 Google 在语音模型扩张时仍把可检测性当作默认安全层，而不是事后补丁。
+
+**评论观察：**
+- 🟢 支持：这是把语音模型从“能聊天”推进到“能稳定完成复杂工作”的关键信号。
+- 🔴 质疑：真实企业客服里，系统链路稳定性、延迟抖动和长链路函数调用成功率，仍要看更多第三方实测。
+
+**信源：** https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-live/
+
+**关联行动：** 继续关注第三方语音 Agent 基准、客服场景落地案例，以及与 OpenAI Realtime / ElevenLabs / Cartesia 的直接对比。
+
+---
+
+### 13. [A] Hugging Face 推出 Storage Buckets，把训练中间态和 Agent traces 正式做进 Hub
+
+**概述：** Hugging Face 发布 Storage Buckets：用于 checkpoints、optimizer states、处理后数据分片、logs、agent traces、memory 等高频变化工件的非版本化存储层，支持 CLI、Python API、JavaScript SDK 与 fsspec / HfFileSystem 接入，底层由 Xet 的 chunk-based backend 做去重。
+
+**技术/产业意义：** 这不是简单“多了个云存储功能”，而是 HF 在把自己从模型发布平台继续往 AI 工作平台推进。对于训练工作流和 Agent 工作流来说，真正难管的往往不是最终 repo，而是中间态、缓存和 traces；Buckets 补的正是这层。
+
+**深度分析：**
+- 训练集群会不断写 checkpoint、反复覆盖中间文件、删除陈旧日志，这些都不是 Git / repo 机制擅长处理的。HF 现在等于把“仓库适合发版本，bucket 适合跑工作流”这件事产品化了。
+- Xet 的 chunk 去重很适合 AI 工件，因为连续 checkpoint、处理中间数据和 traces 往往存在大量重叠内容，能显著节约带宽与存储成本。
+- 官方文案直接点名 agent traces、memory 和 shared knowledge graphs，说明 HF 对平台演化方向非常清楚：下一步不只是托管模型，而是托管 Agent 系统运行产生的状态与知识层。
+- 这对欧洲开源生态也很关键。HF 总部在巴黎，Storage Buckets 这种基础设施升级，比再发一个热门模型更能增强其平台控制力。
+
+**评论观察：**
+- 🟢 支持：这类基础设施层更新，通常比表面上的“新模型上线”更能改变开发者工作流。
+- 🔴 质疑：企业最终是否把高频热数据放在 HF 而不是原生云厂商对象存储，还要看权限、网络、成本和跨区策略。
+
+**信源：** https://huggingface.co/blog/storage-buckets
+
+**关联行动：** 后续重点跟踪 Bucket 与 repo 之间的 promotion 流水线，以及企业用户是否开始把 Agent traces 真正沉到 HF 体系里。
+
+---
+
+### 14. [A] Hugging Face 春季 2026 开源生态报告：开源生态已明显从“美国主导”转向“中美双极 + 欧洲特色贡献”
+
+**概述：** Hugging Face 发布《State of Open Source on Hugging Face: Spring 2026》。报告披露平台已增长至 1300 万用户、200 万+ 公共模型、50 万+ 公共数据集；中国模型在月度和总体下载量上均已超过美国，2025 年占到 41% 下载份额；行业开发占比降至约 37%，独立开发者与小团体贡献显著上升。
+
+**技术/产业意义：** 这份报告的价值不只是“又一份行业总结”，而是直接给出 HF 生态内部真实的流量和组织结构变化。对欧洲来说，关键信号是：法国、德国、英国虽然不是总量第一，但仍在研究机构、国家 AI 计划和特色模型家族上保持重要存在感。
+
+**深度分析：**
+- 平台规模还在迅速扩大，但分布非常集中：前 0.01% 模型拿走 49.6% 下载量。这意味着开源 AI 已经不是平均主义市场，而是强头部 + 大量长尾协作生态并存。
+- 中国超越美国成为下载主力，说明“开源扩散中心”已经明显东移；但欧洲仍在主权 AI、研究质量和特色模型路线中保持存在感，而不是完全边缘化。
+- 行业占比下降、独立开发者上升很关键，意味着开源 AI 的扩散越来越依赖量化、改版、再分发者，而不是原始模型厂单点输出。
+- 报告把主权 AI 与开放权重、可本地部署、法律框架内微调联系起来，这也与欧洲政策讨论高度一致：技术选择已经和数字主权绑定。
+
+**评论观察：**
+- 🟢 支持：HF 这类一手平台数据，比泛泛而谈“开源很重要”更有参考价值。
+- 🔴 质疑：下载量和关注度不等于真实商业化利润，欧洲能否把“主权叙事”转成产业结果仍要继续看。
+
+**信源：** https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026
+
+**关联行动：** 持续跟踪法国/德国/英国主权 AI 项目在 HF 生态里的实际扩张，而不只看政策口号。
+
+---
+
+### 15. [A] ⭐ Wayve 宣布累计拿到 15 亿美元融资，并把 end-to-end 自动驾驶从研究叙事推向商业部署
+
+**概述：** 英国自动驾驶公司 Wayve 2 月 25 日宣布完成 12 亿美元 Series D，总融资支持规模扩大至 15 亿美元，微软、英伟达、Uber 以及 Mercedes-Benz、Nissan、Stellantis 等产业方参投。Wayve 表示将于 2026 年启动商业 robotaxi 试点，并计划 2027 年把 supervised autonomy 软件部署到消费级车型中。
+
+**技术/产业意义：** 这条是欧洲 AI 公司里最接近“产业格局级”变化的一条。因为 Wayve 不只是又融一轮钱，而是把 embodied AI / end-to-end driving 从研究领先，推进到多车厂、多市场的商业 rollout 叙事。
+
+**深度分析：**
+- Wayve 押注的是不依赖高精地图、可跨城市泛化的 end-to-end embodied AI 路线。它声称已在一年内零样本驶过欧洲、北美、日本 500 多座城市，这种 generalization 叙事正是它吸引车厂和平台资本的核心。
+- 融资阵容非常说明问题：微软给云和基础设施，英伟达给算力与生态，Uber 给 robotaxi 分发网络，车厂则给上车路径。Wayve 本质上在做“自动驾驶软件层”的全球联盟化落地。
+- 官方明确把 2026 robotaxi trials 和 2027 消费级车辆部署分开，也说明它并不是单押 L4 robotaxi，而是在同时做 L2+/L3/L4 的平台化路线。
+- 对欧洲 AI 来说，Wayve 很少见地同时具备研究话语权、资本支持和商业化出口，属于必须长期盯的公司。
+
+**评论观察：**
+- 🟢 支持：这说明 end-to-end 自动驾驶不再只是论文共识，而是在资本和车厂层面被真正下注。
+- 🔴 质疑：从试点到规模化部署，中间仍横着监管、责任认定、成本和长尾安全四道硬坎。
+
+**信源：** https://wayve.ai/press/series-d/
+
+**关联行动：** 继续跟踪 Wayve 与 Uber / 日产 /欧洲车厂的具体部署节奏，以及真实上路表现。
+
+---
+
+### 16. [B] Wayve 押注全球统一监管框架，欧洲自动驾驶开始从“技术可行”转向“监管可部署”
+
+**概述：** Wayve 2 月 10 日披露，其参与推动 UNECE 通过首个全球协调的辅助驾驶与自动驾驶监管框架。新规则覆盖 Level 3/4 Automated Driving Systems，以及 DCAS Phase 3 对更高阶辅助驾驶能力的放宽，从 2027 年起将在欧洲、英国、日本等 type-approval 市场生效。
+
+**技术/产业意义：** 这条虽然没有融资新闻那么炸，但对产业落地极关键。自动驾驶一直卡在“模型能跑、法规不通”，而全球统一监管路径一旦形成，资本、车厂和消费者预期都会变得更可计算。
+
+**深度分析：**
+- Wayve 特别强调这是 technology-agnostic 的 outcome-based 框架，即监管不是规定你必须用规则系统还是端到端 AI，而是要求你证明安全性。这对 AV2.0 / 端到端路线非常关键。
+- 新规同时覆盖 type approval 和 self-certification 市场之间的对齐，意味着未来跨市场部署成本可能下降，减少过去“每个国家一套规则”的碎片化痛点。
+- DCAS Phase 3 对 highway hands-off、系统发起换道、环岛通行等能力的放开，会直接影响消费级辅助驾驶体验，而不只是实验车队。
+- 对欧洲来说，这也是“监管成为产业基础设施”的典型案例：不是只管，而是给出可部署的共通路径。
+
+**评论观察：**
+- 🟢 支持：如果监管框架真的能全球对齐，自动驾驶商业化的不确定性会明显下降。
+- 🔴 质疑：统一纸面规则不等于统一执行尺度，企业实际合规成本仍可能高度地区化。
+
+**信源：** https://wayve.ai/thinking/a-global-regulatory-breakthrough-for-assisted-and-automated-driving/
+
+**关联行动：** 后续持续跟踪欧洲、英国、日本等 type-approval 市场的具体执行细则，以及车厂/自动驾驶公司如何适配。
+
+---
+
+## 🌐 学术/硬件
+
+> 注：本轮补查了 arXiv 七个主要分类页、Hugging Face Papers、Papers with Code、Reddit 三个子版块、Raschka / The Batch / Import AI / Lil'Log / AI Snake Oil / The Gradient，以及 NVIDIA / AMD / Intel / TSMC 官方入口。Raschka 已核对 feed，暂无 3 月 22 日之后的新文；AMD / Intel / TSMC 入口页本轮未浮现足够 A/B 级的 AI 新信号，因此不硬凑条目。
+
+### 17. [A] Trace2Skill：把局部轨迹经验蒸馏成可迁移 Agent Skill，Qwen 团队给出一条更像工程系统的自进化路线
+
+**概述：** 论文《Trace2Skill》提出一种用并行子代理分析大量执行轨迹、再分层合并为统一 skill directory 的框架，用于自动“加深”已有技能或从零创建新技能。作者来自 ETH、苏黎世大学、北大、浙大与阿里 Qwen 团队。论文称，Qwen3.5-35B 演化出的技能可让 Qwen3.5-122B 在 WikiTableQuestions 上提升最高 57.65 个绝对百分点。
+
+**技术/产业意义：** 这条很值得盯，因为它把 Agent 的“经验积累”从松散 memory 或 retrieval 提升成可迁移、可声明式复用的 skill 文档。对真正做 Agent 系统的人来说，这比单纯做参数微调更像可维护路线。
+
+**深度分析：**
+- 论文核心不是让模型逐条记住成功/失败轨迹，而是先让多个 analyst agents 并行审视 execution pool，再把局部经验合并成冲突可控的 SOP/skill。这个结构比 sequential editing 更不容易被单条轨迹带偏。
+- 它同时支持 deepening 和 creation，两种模式都比依赖参数知识或碎片记忆更稳，说明作者是在认真解决“技能如何长期演化”而不是一次性 patch。
+- 论文特别强调跨模型规模迁移和 OOD 泛化，这一点很重要：如果 evolved skills 只对原模型有用，那工程价值就很有限；而这里给出的结果指向 skill 可以变成跨模型资产。
+- 对 OpenClaw / Codex / 企业 Agent 这类系统来说，这条路线意味着未来竞争可能不只是谁模型更强，而是谁更会把运行经验沉淀成可维护技能层。
+
+**评论观察：**
+- 🟢 支持：这比“Agent 会自己变强”这类空话更落地，因为它把经验沉淀成了可审计的文档资产。
+- 🔴 质疑：复杂真实环境里的 skill 合并冲突、版本管理和长期漂移问题，还远没完全解决。
+
+**信源：** https://huggingface.co/papers/2603.25158
+
+**关联行动：** 后续值得重点跟踪其在非表格类任务、长周期生产环境和多模型协作中的稳定性。
+
+---
+
+### 18. [A] Hybrid Memory / HyDRA：视频世界模型开始认真补“目标暂时离开视野后还能记住并预测它”这块硬骨头
+
+**概述：** 论文《Out of Sight but Not Out of Mind: Hybrid Memory for Dynamic Video World Models》提出 Hybrid Memory 范式和 HyDRA 架构，并构建 5.9 万条高保真视频的 HM-World 数据集。论文聚焦一个世界模型老问题：动态目标暂时离开视野后，现有系统常会把它冻结、扭曲或直接丢失。
+
+**技术/产业意义：** 这是世界模型从“能生成好看视频”走向“能维护持续物理/运动一致性”的重要一步。对自动驾驶和具身智能来说，真正关键的不是画面漂亮，而是离屏对象重新出现时模型还能保留身份和运动连续性。
+
+**深度分析：**
+- 作者指出现有 memory 机制大多把世界当静态画布，只擅长记背景，不擅长跟踪“暂时看不见但仍在运动的物体”。这个问题一旦落到真实物理环境，就是致命短板。
+- HM-World 数据集的设计很有针对性：17 个场景、49 类主体、带 exit-entry 事件的 5.9 万视频，让“目标出视野再返回”不再只是偶然案例，而成为可系统评估的问题。
+- HyDRA 把 memory 压成 token，再按时空相关性做 retrieval，把最关键的运动和外观线索拉回当前生成过程，本质上是在给世界模型增加“继续脑补未见运动轨迹”的能力。
+- 如果这个方向持续有效，世界模型评测接下来会更多看 hidden-subject consistency，而不是只看整体美观度。
+
+**评论观察：**
+- 🟢 支持：这条研究切的是真问题，含金量远高于普通视频生成 demo。
+- 🔴 质疑：当前验证仍主要在特定数据和 controlled setting，离开放世界物理环境还有距离。
+
+**信源：** https://huggingface.co/papers/2603.25716
+
+**关联行动：** 继续关注该数据集是否被更多世界模型采用，以及在具身和自动驾驶场景里的外部复现结果。
+
+---
+
+### 19. [A] ShotStream：多镜头视频生成开始从“离线批量合成”转向“可交互实时导演”
+
+**概述：** 论文《ShotStream》提出一种 causal multi-shot 架构，把多镜头视频生成改写为“基于历史上下文的下一镜头生成”，支持 streaming prompts 和实时交互式叙事。论文称可在单 GPU 上实现 16 FPS、亚秒级延迟，并生成 5 个连续镜头、共 405 帧的连贯视频。
+
+**技术/产业意义：** 这条重要，因为它把多镜头视频生成从“先写完全部 prompt、等几十分钟出片”推进到更接近真实创作工作流：边生成、边改剧情、边调镜头。对 AI 影视和互动叙事来说，这是方向性变化。
+
+**深度分析：**
+- 过去多镜头视频模型大多依赖 bidirectional 架构，质量高但不交互、延迟高。ShotStream 直接改成 autoregressive next-shot generation，本质是把“电影生成”往“实时导演工具”推。
+- 双缓存设计很关键：global context cache 负责跨镜头一致性，local context cache 负责当前镜头连续性，再用 RoPE discontinuity indicator 区分历史和当前上下文，避免模型混淆。
+- 作者还设计了两阶段 progressive distillation，先 intra-shot self-forcing，再 inter-shot self-forcing，对抗 autoregressive 视频生成最常见的 error accumulation。
+- 如果这类架构继续成熟，视频生成的竞争点会从单镜头质量转向长叙事可控性与交互性。
+
+**评论观察：**
+- 🟢 支持：这比单纯拉长秒数更有意义，因为它直接贴近创作流程。
+- 🔴 质疑：真实商用里，长片一致性、人物身份锁定和镜头语言可控性仍是大关。
+
+**信源：** https://huggingface.co/papers/2603.25746
+
+**关联行动：** 继续关注项目页、开源代码和更多长叙事 benchmark 上的验证结果。
+
+---
+
+### 20. [A] PackForcing：短视频训练就能外推出 2 分钟长视频，长上下文视频生成的 KV-cache 瓶颈被正面处理
+
+**概述：** 论文《PackForcing》提出三分区 KV-cache 管理框架：sink tokens、mid tokens、recent tokens，并通过中段上下文压缩与动态 top-k 选择，把长视频生成的历史上下文压到可控内存内。论文称能在单张 H200 上以 16 FPS 生成 2 分钟、832×480 视频，KV cache 仅约 4GB，实现从 5 秒训练外推到 120 秒采样的 24× 时间扩展。
+
+**技术/产业意义：** 这条很强，因为视频长上下文一直被 KV-cache 增长和误差累积卡死。PackForcing 没有回避这个工程硬坎，而是直接从 cache 组织方式下手，给出“短训练、长采样”的具体 recipe。
+
+**深度分析：**
+- Sink / Mid / Recent 三分区思路很实用：最早的 anchor 帧保全局语义，中间历史做强压缩，最近上下文保局部连贯，兼顾长程记忆和局部质量。
+- Mid tokens 通过双分支网络做约 32× 时空压缩，再配动态 top-k 选择，说明作者不是单纯截断历史，而是在尝试“保留最有用的历史”。
+- 连续 Temporal RoPE Adjustment 用来重对齐被压缩/丢弃后的时序位置，这点非常工程化，因为长视频里位置编码错一点，后面会一路漂。
+- 论文给出的 VBench 指标和 H200 单卡设定，都说明这不是只讲理论，而是冲着实用长视频生成来的。
+
+**评论观察：**
+- 🟢 支持：这类 cache 级创新，比再堆参数更有可能真正推动长视频可用性。
+- 🔴 质疑：120 秒样例漂亮不等于能稳定覆盖更复杂叙事或开放环境，泛化仍需更多外测。
+
+**信源：** https://huggingface.co/papers/2603.25730
+
+**关联行动：** 值得继续跟踪社区是否把这套 cache 策略迁移到其他 autoregressive 视频模型上。
+
+---
+
+### 21. [A] EVA：语音 Agent 评测开始同时看“任务完成率”和“对话体验”，不再只盯通话结果
+
+**概述：** ServiceNow AI 在 Hugging Face 发布 EVA（Evaluating Voice Agents）框架，面向完整多轮语音对话的端到端评测，输出 EVA-A（Accuracy）与 EVA-X（Experience）两大指标。首批 airline 数据集包含 50 个场景、15 个工具，并评测了 20 个 cascade 与 audio-native 系统。
+
+**技术/产业意义：** 这条值得收，因为语音 Agent 现在最缺的不是再多一个 demo，而是靠谱的 end-to-end eval。EVA 的关键贡献在于承认“把事办成”和“说得自然”是两个必须同时成立的维度，而不是二选一。
+
+**深度分析：**
+- EVA-A 把 task completion、faithfulness、speech fidelity 三层拆开，尤其把“语音输出是否准确读出关键实体”单独拿出来，非常贴近真实客服痛点。
+- EVA-X 则看 conciseness、conversation progression、turn-taking，意味着它不再把语音交互简化成一个最终是否成功的二元任务，而是真正重视 spoken UX。
+- 官方一个重要发现是 accuracy-experience tradeoff：越会完成任务的系统，往往体验越差；体验好的系统，任务完成反而不稳定。这恰好揭示了语音 Agent 当前最真实的矛盾。
+- 对产业来说，这类 benchmark 一旦被采用，会迫使厂商从“能接电话”升级到“能高质量地把电话打完”。
+
+**评论观察：**
+- 🟢 支持：终于有人认真做语音 Agent 的完整评测框架，而不是只看 ASR/TTS 单点。
+- 🔴 质疑：LLM-as-judge 和音频 judge 仍有偏差风险，不同领域泛化还要更多数据集验证。
+
+**信源：** https://huggingface.co/blog/ServiceNow-AI/eva
+
+**关联行动：** 后续可重点观察 EVA 是否扩展到金融、医疗、客服等更复杂行业数据集。
+
+---
+
+### 22. [A] SPEED-Bench：Speculative Decoding 终于有了更像真实生产环境的统一基准
+
+**概述：** NVIDIA 在 Hugging Face 发布 SPEED-Bench，用于评测 speculative decoding 的 draft 质量与系统级吞吐表现。基准包含 Qualitative split（11 类、880 条提示）和 Throughput split（1k-32k ISL 桶、每桶 1536 条提示），并接入 TensorRT-LLM、vLLM、SGLang 等生产级推理引擎。
+
+**技术/产业意义：** 这条很重要，因为 SD 已经是 LLM 推理加速的核心技术之一，但过去 benchmark 很碎、样本太少、输入太短，导致很多“加速结论”并不代表真实服务场景。SPEED-Bench 是在把 SD 评测真正工程化。
+
+**深度分析：**
+- 它把 semantic diversity 和 serving regime 分开建 benchmark：前者看 acceptance quality，后者看高并发、长上下文下的真实系统吞吐。这比过去只看 batch size 1 的玩具测试靠谱得多。
+- Throughput split 覆盖 1k-32k 输入长度，直接瞄准 coding assistant、RAG、长上下文应用，这是 2026 年真正的主流负载。
+- 官方特别指出 random token throughput benchmarking 会严重扭曲结论，这个提醒很重要，因为很多推理优化文章都喜欢用不真实输入做漂亮数字。
+- 一旦大家开始共同使用 SPEED-Bench，SD 研究的比较基线会更统一，也更难靠选择性场景“秀成绩”。
+
+**评论观察：**
+- 🟢 支持：这类 benchmark 基础设施，是推理工程从 demo 文化走向可比较科学的必要一步。
+- 🔴 质疑：再真实的 benchmark 也覆盖不了所有在线 serving 细节，最终还要靠具体业务负载回归。
+
+**信源：** https://huggingface.co/blog/nvidia/speed-bench
+
+**关联行动：** 值得持续关注 vLLM / TRT-LLM / SGLang 社区是否开始把 SPEED-Bench 作为标准披露口径。
+
+---
+
+### 23. [A] NVIDIA Nemotron 3 Nano 4B：小模型开始真正冲 edge / local agent 场景，而不是只做“参数更小”的陪衬 SKU
+
+**概述：** NVIDIA 发布 Nemotron 3 Nano 4B，采用 hybrid Mamba-Transformer 架构，定位本地/边缘 AI，支持 Jetson Thor、Jetson Orin Nano、DGX Spark、RTX 等平台。模型由 9B 父模型通过 Nemotron Elastic 压缩蒸馏到 4B，并给出 FP8 与 Q4_K_M GGUF 版本。
+
+**技术/产业意义：** 这条值得收，因为小模型赛道终于不再只是“旗舰模型的缩小版”，而是开始按真实 edge 部署场景做专门设计：更低 VRAM、更快 TTFT、更强 instruction following 和 tool use。
+
+**深度分析：**
+- Nemotron Elastic 的压缩路线很有意思：不是粗暴剪枝，而是用 router 在 Mamba heads、hidden dim、FFN channels、depth 四个轴上联合搜索，再配合知识蒸馏恢复性能。
+- 4B 模型主打 instruction following、gaming agency、tool use 和 hallucination avoidance，说明它瞄准的是本地助理、设备端 persona、嵌入式机器人之类需要“能做事”的 workload。
+- 量化策略也很工程化：FP8 保留部分关键层 BF16，Q4_K_M GGUF 做到与 BF16 相比 100% median accuracy recovery；在 Jetson Orin Nano 8GB 上可达 18 tok/s，约是 Nemotron Nano 9B v2 的 2 倍。
+- 这类模型会进一步推动“旗舰模型做云端规划，小模型做边缘执行”的系统分层。
+
+**评论观察：**
+- 🟢 支持：这才是小模型真正有产业意义的方向——按场景定制，而不是单纯缩参。
+- 🔴 质疑：4B 模型在复杂多步任务上的上限仍然有限，很多 edge 场景最终还是要依赖云边协同。
+
+**信源：** https://huggingface.co/blog/nvidia/nemotron-3-nano-4b
+
+**关联行动：** 后续可重点跟踪它在 Jetson / RTX 本地 Agent、机器人和游戏内推理场景的第三方实测。
+
+---
+
+COLLECT_EUROPE_DONE — 欧洲区 6 条 + 学术/硬件 7 条，共补充 13 条，全篇累计 23 条
