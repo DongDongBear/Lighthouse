@@ -1,6 +1,6 @@
 ---
-title: "2026-03-31 AI 日报：[占位，最后由北美采集轮填写]"
-description: "[占位]"
+title: "2026-03-31 AI 日报：Qwen3.5-Omni、Gemini 3.1 Flash Live、微软 Copilot 多模型、苹果开放 Siri、xAI 法律压力升温"
+description: "中国区看 Qwen3.5-Omni、DeepSeek 网页升级信号与 AGI4S 基础设施；欧洲区看 Voxtral TTS、Gemini 3.1 Flash Live 与 Hugging Face 基础设施；北美区看微软 Copilot 多模型、苹果 Siri 开放、xAI 安全诉讼、Perplexity Health 与 GitHub/HN 社区风向。"
 ---
 
 # 2026-03-31 AI 日报
@@ -20,6 +20,16 @@ description: "[占位]"
 **5. 中国开源会不会在“文档/OCR/研发工具”这类基础赛道拿到真正全球份额？** PaddleOCR GitHub Star 超过 Tesseract、aiX-apply-4B 这类企业研发小模型开始冒头，都说明中国团队正在基础工具链上抢更实的地盘。
 
 ---
+
+## 三大厂官方动态速览（Anthropic / OpenAI / Google）
+
+> 注：本轮逐页复查了 Anthropic News / Engineering / Research / Models 文档页、OpenAI Blog / Index / Research / API Changelog、Google Blog AI / DeepMind Blog / Developers Blog / Google AI Research。结论很明确：**过去 24 小时三大厂没有新的 A/B 级官方博文或研究稿件落地**，因此这里不硬凑旧闻，直接给动向判断。
+
+- **Anthropic：今日无新增官方稿件。** News / Engineering / Research 入口仍以此前几篇重量级内容为主，包括 Anthropic Science、long-running Claude、vibe physics、Claude Code auto mode 等；模型总览页本轮未看到足以单列日报的新变更。
+- **OpenAI：今日无新增官方博客或 API 变更。** Blog / Research / Changelog 本轮未浮现新的产品稿、研究稿或接口级 changelog；可视为前几天连续高频发文后的短暂停顿。
+- **Google：今日无新增达到日报阈值的官方新稿。** DeepMind / Developers Blog 仍以 Gemini 3.1 Flash Live、Gemini 3 Flash in CLI、Antigravity、Lyria 3 Pro 等 3 月既有更新为主，过去 24 小时未见新的 A/B 级条目。
+
+**一句判断：** 今天三大厂的核心不是“又发了什么”，而是 **Google 继续领跑语音/实时 Agent，Anthropic 与 OpenAI 进入前几轮密集发布后的消化期**。因此本期真正新增密度更高的内容，转而集中在中国区、欧洲区、北美平台战和社区风向。
 
 ## 🇨🇳 中国区
 
@@ -545,3 +555,175 @@ COLLECT_CHINA_DONE — 10条
 ---
 
 COLLECT_EUROPE_DONE — 欧洲区 6 条 + 学术/硬件 7 条，共补充 13 条，全篇累计 23 条
+
+---
+
+## 🇺🇸 北美区
+
+> 注：本轮补查了 Reuters、CNBC、AWS News Blog、GitHub Trending、Hacker News，以及苹果 / 微软 / xAI / Perplexity / AWS 相关入口。DuckDuckGo / X 检索本轮多次触发 bot challenge，因此北美区优先采用**可直接抓取的原文、权威媒体和官方页**，不拿不稳定镜像硬拼结论。
+
+### 24. [A] ⭐ 微软把 Copilot 明确推向“多模型协作 + 长任务代理”，Researcher/Cowork 开始像真正的工作执行层
+
+**概述：** Reuters 3 月 30 日报道，微软为 Copilot Researcher 推出 **Critique** 与 **Council** 两项能力：前者让 OpenAI GPT 与 Anthropic Claude 在同一工作流里协作、互相审校，后者支持并排比较不同模型输出；同时，Copilot Cowork 正向 Frontier 早期客户更广泛开放。微软 3 月 9 日官方博文则已把这一路线定义为 Wave 3：多模型 intelligence、chat-first execution、app-native agent 与 Agent 365 治理平面一起推进。
+
+**技术/产业意义：** 这条是今天北美区最值得标星的内容之一。微软已经不满足于“把大模型接进 Office”，而是在试图把 **模型编排、长任务执行、企业上下文接入、治理控制面** 做成一整层产品基础设施。
+
+**深度分析：**
+- Reuters 披露的 Critique 机制很关键：不是让用户手动切模型，而是让 GPT 负责生成、Claude 负责审校，未来还会双向审查。这意味着模型协作正在从“用户技巧”变成平台默认能力。
+- Council 则把“模型比较”产品化。过去大家要手动开多个窗口对答案，现在微软直接承认多模型时代是常态，并试图把决策成本收进 Copilot 自己的界面层。
+- 官方 Wave 3 博文进一步说明，微软真正押注的是 **Copilot = 企业工作入口 + Agent 编排层**。Cowork 负责多步长任务，Work IQ 负责企业上下文，Agent 365 负责安全、观测和治理。
+- 更狠的一点是，微软不再把“用哪家模型”当作前台品牌问题，而是当作后台供应链优化问题处理。这会持续挤压纯单模型助手的差异化空间。
+
+**评论观察：**
+- 🟢 支持：微软终于把“多模型 + 企业治理 + 长任务”三件事整成了一套，而不是零散功能。
+- 🔴 质疑：实际体验能不能比“自己开 ChatGPT + Claude + Office 插件”更顺，最终还是要看质量、延迟和价格。
+
+**信源：** https://www.reuters.com/business/microsoft-unveils-ai-upgrades-rolls-out-copilot-cowork-early-access-customers-2026-03-30/ ；https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/09/powering-frontier-transformation-with-copilot-and-agents/
+
+**关联行动：** 持续跟踪 Critique / Council 是否从 Frontier 扩到主线 Copilot，以及企业客户是否愿意把多模型编排直接交给微软托管。
+
+---
+
+### 25. [A] 苹果被曝计划把 Siri 开放给 Gemini / Claude 等第三方 AI，iPhone 可能从“单一助手”转向“AI 路由层”
+
+**概述：** Reuters 3 月 26 日援引 Bloomberg 报道称，苹果计划在 iOS 27 中把 Siri 开放给 ChatGPT 之外的第三方 AI 服务，让用户把请求路由给 Gemini、Claude 等模型；苹果还可能通过 App Store 订阅分成，从第三方 AI 服务销售中抽成。
+
+**技术/产业意义：** 这条的含义非常大。苹果如果真这么做，等于默认承认 **Siri 自身能力不足以独占入口**，并把 iPhone 重新定位成 AI 服务分发与编排平台。
+
+**深度分析：**
+- 过去 Siri 的价值是“唯一默认语音入口”；如果未来可以把请求转给 Gemini / Claude，苹果就从“自己做最强模型”改成“自己掌控分发、权限和结算”。
+- 这和 App Store 的历史逻辑完全一致：不一定自己做每个垂类应用，但一定控制最关键的入口、账户和支付层。
+- 对第三方模型厂来说，这既是机会也是新依赖。能进 Siri，流量会暴涨；但分发规则、默认排序和收入分成也会被苹果牢牢卡住。
+- 对行业格局来说，这比再发一个手机端小模型更重要，因为它会直接重塑“手机 OS 与大模型厂”的权力边界。
+
+**评论观察：**
+- 🟢 支持：如果真开放，用户体验会立刻提升，苹果也更像现实主义者而不是死守 Siri 面子工程。
+- 🔴 质疑：苹果最后可能只给极少数合作方开放，真实开放程度与调用权限层级还要看 WWDC。
+
+**信源：** https://www.reuters.com/business/apple-plans-open-siri-rival-ai-services-bloomberg-news-reports-2026-03-26/
+
+**关联行动：** 重点跟踪 WWDC 是否正式宣布、第三方模型能接入到什么权限层，以及苹果是否引入默认 AI 选择器。
+
+---
+
+### 26. [A] xAI 因 Grok 生成色情深伪内容面临持续法律压力，安全短板开始反噬增长叙事
+
+**概述：** Reuters 3 月 16 日报道，两名未成年人在内的三名田纳西州原告起诉 xAI，指控 Grok 图像生成功能会基于真人照片生成色情内容；CNBC 3 月 24 日进一步报道，巴尔的摩成为首个就 Grok 深伪色情问题起诉 xAI 的美国大城市，要求其修改平台设计与营销方式。
+
+**技术/产业意义：** 这条不是普通负面舆情，而是 **产品安全缺陷开始进入持续诉讼和监管阶段**。对所有做原生图像/视频/多模态生成的公司来说，这都是高强度警报。
+
+**深度分析：**
+- Reuters 披露的重点不只是“有人起诉”，而是诉状直指 xAI **明知系统可被用于生成可识别真人的性化图像，却未充分安装防护**。这会把问题从“用户滥用”升级为“产品责任”。
+- CNBC 报道则把事件进一步推向市政诉讼层面：巴尔的摩不仅要赔偿和罚金，还要求平台修改设计与营销逻辑。这意味着监管不再只盯模型输出，而是开始盯增长策略和默认交互。
+- 更麻烦的是，Grok 属于 Musk 生态里高度宣传、强社交传播的产品，放大效应远大于纯 API 工具。一旦安全事故和“官方玩梗”捆在一起，法律风险会更快外溢。
+- 对行业来说，这也再次说明：多模态生成的真正护城河不只是模型能力，还有默认安全策略、审计、限权和滥用响应速度。
+
+**评论观察：**
+- 🟢 支持：把责任从“用户自己乱用”追到“平台默认能力与营销设计”上，是必要纠偏。
+- 🔴 质疑：诉讼推进很慢，xAI 也可能先修补功能、再拖长法律战线，短期未必立即改变竞争格局。
+
+**信源：** https://www.reuters.com/world/us/tennessee-minors-sue-musks-xai-alleging-grok-generated-sexual-images-them-2026-03-17/ ；https://www.cnbc.com/2026/03/24/musk-xai-sued-baltimore-grok-deepfake-porn.html
+
+**关联行动：** 持续跟踪是否出现更多州/城市层面的跟进诉讼，以及 xAI 是否公开新的图像安全限制与审计机制。
+
+---
+
+### 27. [B] AWS 把 NVIDIA Nemotron 3 Super 接进 Bedrock，并同步推出 Nova Forge SDK，云厂商继续把“模型超市 + 定制层”做厚
+
+**概述：** AWS 3 月 23 日在 Weekly Roundup 中宣布，**NVIDIA Nemotron 3 Super 现已进入 Amazon Bedrock**，开发者可以通过统一 Bedrock API 调用；同时发布 **Nova Forge SDK**，用于面向企业场景定制 Amazon Nova 模型，并直接部署回 Bedrock。
+
+**技术/产业意义：** 这条不是单一模型发布，而是北美云厂商继续把竞争焦点从“谁自家模型最强”转向 **谁能把多模型接入、定制与托管链路做得更省事**。
+
+**深度分析：**
+- Nemotron 3 Super 上 Bedrock，本质上是 AWS 在继续强化“统一 API 下的第三方模型聚合能力”。企业不一定忠于某个模型厂，但会忠于能少改架构的云入口。
+- Nova Forge SDK 的意义更大：它把“定制 Nova → 再回到 Bedrock 托管”这条链路产品化，让企业不用自己折腾一堆训练与部署细节。
+- 这和微软 Copilot 的逻辑其实同源：前台可能讲模型，后台真正争夺的是 **编排层、定制层、治理层**。
+- 对 NVIDIA 来说，Nemotron 进入 Bedrock 也扩大了它从芯片层向云端模型分发层渗透的机会。
+
+**评论观察：**
+- 🟢 支持：企业最需要的不是天天看新模型，而是低摩擦接入、定制和上线的连续工作流。
+- 🔴 质疑：Nova Forge 真正能否形成生态，还是得看企业是否愿意围绕 AWS 自家模型持续做二次训练与迁移。
+
+**信源：** https://aws.amazon.com/blogs/aws/aws-weekly-roundup-nvidia-nemotron-3-super-on-amazon-bedrock-nova-forge-sdk-amazon-corretto-26-and-more-march-23-2026/
+
+**关联行动：** 持续跟踪 Bedrock 对第三方模型的调用量变化，以及 Nova Forge 是否出现更公开的企业案例。
+
+---
+
+### 28. [B] Perplexity Health 接入 Apple Health 与大规模医疗记录连接器，AI 搜索开始切进高价值健康场景
+
+**概述：** MacRumors 3 月 19 日报道，Perplexity 推出 **Perplexity Health**，可接入 Apple Health、Fitbit、Ultrahuman、Withings，以及覆盖 170 万+ 医疗服务提供者的电子病历连接器；该功能先向美国 Pro / Max 用户推出，并强调健康数据不会用于训练模型或出售给第三方。
+
+**技术/产业意义：** 这条值日报，不是因为它“又加了个插件”，而是因为 Perplexity 正把搜索问答从通用信息场景推向 **高价值、强隐私、强持续使用频率** 的健康工作流。
+
+**深度分析：**
+- Apple Health 接入意味着 Perplexity 可以读取更长期、更连续的个人指标，而不是只回答一次性问题；这会把 AI 搜索变成一种“持续追踪 + 个性化解释”的服务。
+- 它同时接 EHR、穿戴设备和实验室结果，说明产品方向是做跨系统聚合，而不是只当一个聊天壳子。
+- Perplexity 还专门成立了 Health Advisory Board，表明它知道健康场景的风险远大于普通网页搜索，需要临床与内容审核层面的持续背书。
+- 这也说明 2026 年 AI 产品竞争已经从“谁回答得快”转向“谁能切进真正高价值、愿付费、且有数据壁垒的垂类工作流”。
+
+**评论观察：**
+- 🟢 支持：如果做得稳，健康会是比普通搜索更高频、更高价值的 AI 入口之一。
+- 🔴 质疑：健康场景的容错率极低，隐私、责任边界和建议准确性一旦出事，反噬会非常大。
+
+**信源：** https://www.macrumors.com/2026/03/19/perplexity-apple-health-integration/
+
+**关联行动：** 持续观察 Perplexity Health 是否扩到更多支付方 / 医疗系统，以及是否引入更明确的临床免责声明与审计机制。
+
+---
+
+## 🧠 KOL / 社区风向
+
+> 注：本轮尝试直接检索 Sam Altman、Elon Musk、Dario Amodei、Satya Nadella、Andrej Karpathy、Jim Fan 等公开动态，但 X / 搜索镜像持续触发反爬挑战。因此 KOL / 社区区本轮改为收 **GitHub Trending + Hacker News 上已经形成讨论强度、且能直接读原文的信号**，避免拿不稳定推文截图硬编内容。
+
+### 29. [B] GitHub Trending 被 Claude Code / Agent 工具链刷屏，开发者注意力正从“聊模型”转向“怎么把代理系统真正跑起来”
+
+**概述：** GitHub Trending 本轮最醒目的不是单个大模型仓库，而是一串围绕 **Claude Code / agent orchestration / skills** 的项目同时冲榜：如 `claude-howto`、`oh-my-claudecode`、`everything-claude-code`、`hermes-agent` 等。与此同时，`microsoft/VibeVoice`、`SakanaAI/AI-Scientist-v2` 也处在高热区。
+
+**技术/产业意义：** 这说明社区注意力已经明显从“哪个底模榜单高”切到 **代理工作流、工具编排、技能沉淀、长任务执行和语音/科研代理** 这些更贴近真实生产的层面。
+
+**深度分析：**
+- 一堆 Claude Code 生态仓库同时上榜，本质上反映的是开发者开始默认“代码代理”是主流工作形态之一，竞争点从模型本身外溢到 memory、skills、subagents、hooks、review workflow。
+- `VibeVoice` 的高热则代表语音输入/输出仍是 Agent 下一轮的重要入口；`AI-Scientist-v2` 热度高，说明“科研代理”仍强烈吸引极客和研究圈。
+- 这类榜单不是产业收入，但它经常提前暴露开发者最想解决的真实痛点，比很多 PR 稿更有前瞻性。
+
+**评论观察：**
+- 🟢 支持：今年社区最真实的风向就是——大家不再满足于问答，开始认真折腾可执行代理系统。
+- 🔴 质疑：GitHub Trending 热度更像注意力领先指标，不等于这些工具会长期留存或形成稳定商业模式。
+
+**信源：** https://github.com/trending ；https://github.com/trending?since=weekly
+
+**关联行动：** 后续值得继续跟踪哪些项目从“爆红”走到稳定 release、真实团队采用和企业化治理。
+
+---
+
+### 30. [B] HN 开始把“AI Agent 安全事故库”顶上讨论面，社区对代理安全的焦虑正在从理论变成工程 checklist
+
+**概述：** Hacker News newest 本轮出现 `awesome-ai-agent-incidents` 相关帖子，仓库本身则系统整理了真实世界的 agent 事故、prompt injection、MCP 攻击、supply chain、memory poisoning、observability 与防御工具，并把 EchoLeak、GitHub MCP prompt injection、Atlas attack chain 等案例串成知识库。
+
+**技术/产业意义：** 这条非常值得盯。过去大家说 agent 安全时，很多内容还停留在论文或抽象风险；现在社区开始主动建设 **事故库、攻击面分类与审计工具索引**，说明安全已经进入工程必选项，而不是可选阅读材料。
+
+**深度分析：**
+- 这个仓库最重要的不是收集链接，而是把 incidents、attack taxonomy、MCP vectors、defensive tools 放在一个框架下。它会直接影响团队怎么做 checklist、review 与上线前红队。
+- HN 出现这类内容，也说明开发者已经不再把 prompt injection 当作“奇怪的实验室演示”，而是把它视为随时会打到生产环境的真实风险。
+- 对 2026 年的 Agent 产业来说，谁能把观测、回放、审计、权限限制做成默认能力，谁才更可能活过安全洗牌。
+
+**评论观察：**
+- 🟢 支持：社区开始主动建设事故知识库，是成熟的标志，不是悲观的标志。
+- 🔴 质疑：安全仓库热度高不等于大家会真正按 checklist 落地，很多团队还是会继续先冲功能再补洞。
+
+**信源：** https://github.com/h5i-dev/awesome-ai-agent-incidents ；https://news.ycombinator.com/newest
+
+**关联行动：** 后续继续看这类 incident corpus 是否演化成 benchmark、lint / trace / audit 工具链的事实标准。
+
+---
+
+## 下期追踪问题
+
+1. **微软的 Copilot 多模型协作** 会不会从 Frontier 试验快速下放到更广泛的 Microsoft 365 主线用户？如果会，企业多模型编排层的竞争可能提前定型。
+2. **苹果是否会在 WWDC 前后正式确认 Siri 的第三方 AI 路由策略？** 一旦成真，手机 OS 与模型厂的权力边界会重画。
+3. **xAI 会不会因为持续诉讼压力而大幅收紧 Grok 图像能力？** 这会成为多模态生成安全治理的行业样板。
+4. **Perplexity Health 这类高隐私垂类入口** 能不能证明“AI 搜索 = 垂类工作流”而不是只做更花哨的问答壳？
+5. **GitHub / HN 的代理社区热潮** 里，哪些项目能真正沉淀为稳定工具链，哪些只是短期注意力泡沫？
+
+COLLECT_NA_DONE — 北美区 5 条 + 社区/KOL 2 条；三大厂官方页已复查并确认今日无新增 A/B 级官方稿件；全篇累计 30 条

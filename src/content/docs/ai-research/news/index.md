@@ -4,7 +4,7 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
-- [2026-03-31](/ai-research/news/2026-03-31/daily/) — 中国区已采集：Qwen3.5-Omni、DeepSeek 网页升级信号、AGI4S 珠穆朗玛计划、GigaWorld-1、PaddleOCR、群核 IPO
+- [2026-03-31](/ai-research/news/2026-03-31/daily/) — ⭐ 已补全：Qwen3.5-Omni、Gemini 3.1 Flash Live、微软 Copilot 多模型、苹果开放 Siri、xAI 法律压力、Perplexity Health、GitHub/HN 代理社区风向
 - [2026-03-30](/ai-research/news/2026-03-30/daily/) — ⭐ 已补深读：Claude Opus 4.6、Voxtral TTS 论文、Nemotron 3 Super、Meta 100 亿美元 AI 数据中心、Token 经济、蓝芯算力、论芯 AI for EDA
 - [2026-03-29](/ai-research/news/2026-03-29/daily/) — ⭐ 华为盘古核心人事变动、Mistral 补齐 TTS、Wayve 联手 Qualcomm、Arm 自研 AGI CPU 下场、Stanford 警告 AI 奉承风险
 - [2026-03-28](/ai-research/news/2026-03-28/daily/) — ⭐ OpenAI 六大新动作（Model Spec/安全赏金/购物/基金会/Agent 监控/Sora 安全）+ Anthropic Harness 工程新范式 + 三大厂 10 篇新文章 + 北美 9 条 + GitHub Agent 工具爆发
