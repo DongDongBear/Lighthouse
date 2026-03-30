@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const allDocs = await getCollection('docs');
+
+const sectionMeta = {
+  engineering: {
+    title: 'Engineering',
+    description: 'Agent 工程实践、终端 runtime、上下文工程、harness 设计与源码分析。',
+  },
+  framework: {
+    title: 'Framework',
+    description: 'Agent 框架、技能系统、记忆系统与基础抽象。',
+  },
+  evaluation: {
+    title: 'Evaluation',
+    description: 'Agent 评测、奖励建模、技能 benchmark 与文档推理测试。',
+  },
+  training: {
+    title: 'Training',
+    description: 'Agent 训练、自进化、环境合成、持续学习与 RL 方向。',
+  },
+};
+
+const cleanTitle = (entry) => {
+  const h1 = entry.body?.match(/^#\s+(.+)$/m)?.[1]?.trim();
+  return (h1 || entry.data?.title || entry.id.split('/').pop() || '')
+    .replace(/^['\"]|['\"]$/g, '')
+    .trim();
+};
+
+const docs = allDocs
+  .filter((e) => e.id.startsWith('ai-research/agent/') && !e.id.endsWith('/index.md'))
+  .map((e) => {
+    const slug = e.id.replace(/\.md$/, '').replace(/\/index$/, '');
+    const parts = slug.split('/');
+    const section = parts[2] || 'other';
+    const title = cleanTitle(e);
+    const description = e.data?.description || '';
+    return {
+      slug,
+      section,
+      title,
+      description,
+    };
+  })
+  .sort((a, b) => a.slug.localeCompare(b.slug));
+
+const grouped = Object.keys(sectionMeta).map((key) => ({
+  key,
+  ...sectionMeta[key],
+  items: docs.filter((d) => d.section === key),
+}));
+---
+
+<BaseLayout title="Agent Research" description="Agent 研究与工程实践索引" pageClass="agent-index-page">
+  <main class="agent-index-main">
+    <section class="agent-index-hero">
+      <p class="agent-index-kicker">AI Research / Agent</p>
+      <h1>Agent 研究总览</h1>
+      <p class="agent-index-lead">
+        这里收录 Lighthouse 里和 Agent 相关的工程实践、框架分析、评测方法与训练方向文章。
+        如果你关心 coding agent、context engineering、memory、skills、evaluator 或长运行 harness，基本都从这里进。
+      </p>
+    </section>
+
+    <nav class="agent-index-nav">
+      {grouped.map((group) => (
+        <a href={`#${group.key}`}>{group.title}</a>
+      ))}
+    </nav>
+
+    <div class="agent-index-sections">
+      {grouped.map((group) => (
+        <section id={group.key} class="agent-index-section">
+          <div class="agent-index-section-head">
+            <h2>{group.title}</h2>
+            <p>{group.description}</p>
+          </div>
+
+          {group.items.length ? (
+            <div class="agent-index-grid">
+              {group.items.map((item) => (
+                <a class="agent-index-card" href={`${base}/${item.slug}`}>
+                  <h3>{item.title}</h3>
+                  {item.description && <p>{item.description}</p>}
+                  <span>查看文章 →</span>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p class="agent-index-empty">这个分组暂时还没有文章。</p>
+          )}
+        </section>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .agent-index-main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 36px 24px 72px;
+  }
+
+  .agent-index-hero {
+    margin-bottom: 28px;
+  }
+
+  .agent-index-kicker {
+    margin: 0 0 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--vp-c-text-3);
+  }
+
+  .agent-index-hero h1 {
+    margin: 0 0 12px;
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.1;
+    color: var(--vp-c-text-1);
+  }
+
+  .agent-index-lead {
+    margin: 0;
+    max-width: 820px;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--vp-c-text-2);
+  }
+
+  .agent-index-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .agent-index-nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--vp-c-divider);
+    color: var(--vp-c-text-2);
+    text-decoration: none;
+    font-size: 13px;
+    transition: all .18s ease;
+  }
+
+  .agent-index-nav a:hover {
+    color: var(--vp-c-text-1);
+    border-color: var(--vp-c-text-3);
+    transform: translateY(-1px);
+  }
+
+  .agent-index-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+  }
+
+  .agent-index-section-head {
+    margin-bottom: 14px;
+  }
+
+  .agent-index-section-head h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    color: var(--vp-c-text-1);
+  }
+
+  .agent-index-section-head p {
+    margin: 0;
+    color: var(--vp-c-text-3);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .agent-index-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .agent-index-card {
+    display: block;
+    padding: 18px 18px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--vp-c-divider);
+    background: var(--vp-c-bg);
+    text-decoration: none;
+    transition: transform .18s ease, border-color .18s ease, background .18s ease;
+  }
+
+  .agent-index-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--vp-c-text-3);
+    background: var(--vp-c-bg-soft);
+  }
+
+  .agent-index-card h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--vp-c-text-1);
+  }
+
+  .agent-index-card p {
+    margin: 0 0 12px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--vp-c-text-2);
+  }
+
+  .agent-index-card span {
+    font-size: 12px;
+    color: var(--vp-c-text-3);
+  }
+
+  .agent-index-empty {
+    margin: 0;
+    color: var(--vp-c-text-3);
+    font-size: 13px;
+  }
+
+  @media (max-width: 800px) {
+    .agent-index-main {
+      padding: 24px 16px 56px;
+    }
+
+    .agent-index-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
