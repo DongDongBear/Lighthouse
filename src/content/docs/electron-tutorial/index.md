@@ -19,6 +19,7 @@
 11. [11-code-signing-release](./01-electron-basics/11-code-signing-release.md)
 12. [12-cross-platform](./01-electron-basics/12-cross-platform.md)
 13. [13-react-to-electron](./01-electron-basics/13-react-to-electron.md) ⭐ React 开发者速通
+14. [14-pretext-text-layout-engine](./01-electron-basics/14-pretext-text-layout-engine.md) ⭐ 文本排版引擎深度分析
 
 ---
 
