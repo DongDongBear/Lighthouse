@@ -5,8 +5,8 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  site: 'https://dongdongbear.github.io',
-  base: '/Lighthouse/',
+  site: 'https://lighthouse.hetaogomoku.uk',
+  base: '/',
   integrations: [react()],
   markdown: {
     remarkPlugins: [remarkMath],
