@@ -4,7 +4,7 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
-- [2026-04-02](/ai-research/news/2026-04-02/daily/) — ⭐ OpenAI $1220亿融资收官估值$8520亿 / GPT-5.4全系发布 / Claude发现FreeBSD远程内核RCE / 1-bit Bonsai首商用1-bit LLM / Google Antigravity / Qwen3.5-Omni / Anthropic Mythos泄露
+- [2026-04-02](/ai-research/news/2026-04-02/daily/) — ⭐ SpaceX $1.75T IPO / OpenAI $1220亿融资 / GPT-5.4全系 / Claude Code生态13万星爆发 / Gemini 7.5亿MAU / Alphabet暴跌9% / Penguin起诉OpenAI / Copilot Cowork多模型 / Meta BOxCrete / 75+条
 - [2026-03-31](/ai-research/news/2026-03-31/daily/) — ⭐ 已补全：Qwen3.5-Omni、Gemini 3.1 Flash Live、微软 Copilot 多模型、苹果开放 Siri、xAI 法律压力、Perplexity Health、GitHub/HN 代理社区风向
 - [2026-03-30](/ai-research/news/2026-03-30/daily/) — ⭐ 已补深读：Claude Opus 4.6、Voxtral TTS 论文、Nemotron 3 Super、Meta 100 亿美元 AI 数据中心、Token 经济、蓝芯算力、论芯 AI for EDA
 - [2026-03-29](/ai-research/news/2026-03-29/daily/) — ⭐ 华为盘古核心人事变动、Mistral 补齐 TTS、Wayve 联手 Qualcomm、Arm 自研 AGI CPU 下场、Stanford 警告 AI 奉承风险

@@ -1,5 +1,5 @@
 ---
-title: "2026-04-02 AI 日报：OpenAI $1220亿融资 / GPT-5.4全系发布 / Gemini 7.5亿MAU+ARC-AGI-2刷榜 / Alphabet暴跌9%+$1850亿CapEx / Claude Mythos延迟+网安震荡"
+title: "2026-04-02 AI 日报：SpaceX $1.75T IPO / OpenAI $1220亿融资 / GPT-5.4全系发布 / Claude Code生态13万星 / Gemini 7.5亿MAU / Alphabet暴跌9% / Penguin起诉OpenAI"
 description: "OpenAI完成史上最大融资$1220亿、GPT-5.4系列全面上线、Gemini突破7.5亿MAU且ARC-AGI-2得分77.1%领先所有模型、Alphabet股价暴跌9%因$1850亿CapEx指引、Claude Mythos泄露后延迟发布引发网安股暴跌、Claude Code自动发现FreeBSD远程内核RCE、1-bit Bonsai首个商用1-bit LLM、虚拟细胞模型Lingshu-Cell、空地一体化仿真CARLA-Air"
 ---
 
@@ -1128,16 +1128,234 @@ description: "OpenAI完成史上最大融资$1220亿、GPT-5.4系列全面上线
 
 ---
 
+### 43. [A] SpaceX 秘密提交 IPO 申请：估值 $1.75 万亿，AI 竞赛最大的隐形玩家浮出水面
+
+**概述：** 4 月 1 日，Bloomberg 和 WSJ 独家报道 SpaceX 已向 SEC 秘密提交 IPO 申请（S-1 confidential filing），寻求估值高达 $1.75 万亿，可能最早 6 月上市。这将是市场历史上最受关注的上市之一。SpaceX 在 2 月收购了 Elon Musk 的 xAI（估值 $2500 亿），目前正探索太空轨道数据中心以满足 AI 算力需求。IPO 由 Barclays 等国际投行协调，将为 Musk 的 AI 和太空版图提供海量公开市场资本。
+
+**技术/产业意义：** SpaceX IPO 是 2026 年科技 IPO 最大的事件之一。SpaceX 通过 Starlink（占收入一半以上）和 NASA 合同建立了稳定的商业基础，同时通过收购 xAI 和规划太空数据中心将 AI 业务直接嵌入核心架构。$1.75T 估值若成立，将使 SpaceX 成为全球市值最高的未上市→上市公司。
+
+**深度分析：**
+- **与 AI 的交叉：** SpaceX 收购 xAI 后，正在探索太阳能驱动的轨道数据中心——利用太空的零散热成本和 24/7 太阳能来解决地面 AI 算力的能源瓶颈
+- **IPO 窗口：** 与 OpenAI（$8520 亿估值）和 Anthropic 的潜在 IPO 形成 2026 年科技 IPO 超级年
+- **Starlink 收入：** 估计超过 SpaceX 总收入的一半，卫星互联网+AI 数据传输构成持续增长引擎
+- **Musk 财富影响：** 已是全球首富，IPO 成功后将更加接近万亿美元个人净资产
+- **地缘政治：** 乌克兰军方依赖 Starlink 运作战场通信，使 SpaceX 的 IPO 带有明确的地缘战略色彩
+- **xAI/Grok 定位：** 尽管 Grok 在能力上落后于 Claude/ChatGPT，但通过 SpaceX 的基础设施优势可能走出差异化路径
+
+**评论观察：**
+- 🟢 支持：Starlink 的稳定现金流 + 太空 AI 基础设施的想象空间 = 极具吸引力的增长故事
+- 🔴 质疑：Musk 的 DOGE 争议、Grok 深度伪造诉讼、以及 xAI 在 AI 竞争中的落后可能给估值带来折扣
+
+**信源：** https://www.theguardian.com/technology/2026/apr/01/spacex-public-offering-stock-market ; https://www.bloomberg.com/news/articles/2026-04-01/spacex-is-said-to-file-confidentially-for-ipo-ahead-of-ai-rivals
+
+**关联行动：** 密切跟踪 SpaceX IPO 时间表和太空数据中心计划的技术可行性论证
+
+---
+
+### 44. [B] Microsoft Copilot Cowork 正式开放 + Researcher 多模型 Council：企业 AI 协作新范式
+
+**概述：** 3 月 30 日 Microsoft 正式将 Copilot Cowork 通过 Frontier Program 开放给企业用户。Copilot Cowork 整合了 Anthropic 的 Claude 技术，设计用于"长时间运行的多步骤工作"——用户描述目标，Cowork 创建计划、跨工具和文件推理、推进工作并提供可操控的进度展示。同时，Researcher 新增 Critique 功能（GPT 起草 → Claude 审核准确性）和 Model Council（多模型对比侧栏），在 DRACO 基准上提升 13.8%。
+
+**技术/产业意义：** Copilot Cowork 是微软 Wave 3 战略的核心产品，标志着企业 AI 从"聊天助手"向"自主工作代理"的转变。GPT + Claude 的联合工作模式（生成 + 审核分离）是多模型协作在企业场景中的首个大规模商业应用，Capital Group 等金融机构已开始使用。
+
+**深度分析：**
+- **多模型协作的商业化：** GPT 负责规划和草稿、Claude 负责审核和精炼——这种"检查与平衡"模式直接提升了准确性
+- **DRACO +13.8%：** 深度研究准确性、完整性和客观性基准的显著提升，不仅是理论改进
+- **Model Council：** 让用户侧面对比不同模型的输出，看到它们在哪些方面一致、哪些方面分歧——是透明 AI 决策的重要一步
+- **Capital Group 背书：** 管理万亿级资产的投资公司已在使用 Cowork，说明企业 AI Agent 已过"试验期"
+
+**评论观察：**
+- 🟢 支持：多模型协作的"检查与平衡"模式是提升 AI 可靠性的务实路径
+- 🔴 质疑：Frontier Program 限制了可用性；多模型调用增加了成本和延迟
+
+**信源：** https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/ ; https://www.theverge.com/ai-artificial-intelligence
+
+**关联行动：** 关注 Copilot Cowork 向 GA（全面可用）推进的时间表
+
+---
+
+### 45. [B] Penguin Random House 在慕尼黑起诉 OpenAI：ChatGPT 版权"记忆化"成焦点
+
+**概述：** 全球最大出版集团 Penguin Random House 在慕尼黑法院对 OpenAI 欧洲子公司提起版权诉讼。测试显示，当提示"你能写一本关于椰子小龙在火星的儿童书吗？"时，ChatGPT 生成了与 Ingo Siegner 原著《椰子小龙》系列"几乎无法区分"的文字、封面插画（包含标志性橙色龙及两个伙伴）、封底简介甚至自出版投稿指南。该书系已出版 30+ 卷、改编 TV 剧集和 2 部电影。Penguin 称这是 LLM "记忆化"（memorisation）的明确证据。
+
+**技术/产业意义：** 这是继 2025 年 11 月慕尼黑法院判 OpenAI 侵犯 GEMA 音乐版权后的又一欧洲版权诉讼里程碑。来自全球最大出版集团的诉讼可能为其他出版商开创先例。LLM 的"记忆化"问题——模型存储并能复现训练数据的完整段落——正成为 AI 版权争议的核心技术论点。
+
+**深度分析：**
+- **"记忆化" vs "学习"：** 当模型能复现原著的具体角色形象和风格，这已超越"风格学习"而构成实际复制
+- **欧洲法律环境：** 慕尼黑法院已有判 OpenAI 侵权的先例（GEMA 案），对 Penguin 有利
+- **Bertelsmann 的微妙立场：** Penguin 母公司 Bertelsmann 在 2025 年 1 月曾与 OpenAI 签署合作协议，但该协议"未授权访问 Bertelsmann 的媒体档案"——这次诉讼可能改变合作关系
+- **产业影响：** 如果败诉，OpenAI 可能需要实施更激进的"遗忘"机制（machine unlearning）来处理训练数据中的版权内容
+
+**评论观察：**
+- 🟢 支持：出版巨头出手可能迫使 AI 公司建立更透明的训练数据来源机制
+- 🔴 质疑："记忆化"的法律定义仍不明确——模型是否"记住"了内容还是"重新创造"了风格？
+
+**信源：** https://www.theguardian.com/technology/2026/mar/31/penguin-sue-openai-chatgpt-german-childrens-book-kokosnuss
+
+**关联行动：** 跟踪慕尼黑法院审理进展和其他出版商的跟进诉讼
+
+---
+
+### 46. [B] Meta 开源 BOxCrete：AI 优化美国本土生产混凝土 — 数据中心的"隐形 AI 应用"
+
+**概述：** 3 月 30 日 Meta 在美国混凝土学会（ACI）年会上发布 BOxCrete（Bayesian Optimization for Concrete），一个用 AI 设计混凝土配方的开源模型。BOxCrete 基于贝叶斯优化，支持预测混凝土坍落度（工作性指标），并附带系统性混凝土性能基础数据集。Meta 与 Amrize（北美最大水泥混凝土制造商）合作，在明尼苏达数据中心使用 AI 优化配方的混凝土，强度达标速度加快 43%、开裂风险降低近 10%。Pennsylvania 的 Quadrel 平台已将框架嵌入日常配方设计和质量控制工作流。
+
+**技术/产业意义：** 这是 AI 在"老工业"中最接地气的应用之一。美国进口约 23% 的水泥，Meta 的 AI 优化使用本土材料的配方降低了进口依赖，同时提升了建筑性能——一个典型的"AI 赋能传统制造业"案例。AI 数据中心需要海量混凝土基础，AI 优化其自身建筑材料形成了有趣的自引用闭环。
+
+**深度分析：**
+- **贝叶斯优化 vs 传统试错：** 混凝土配方设计传统依赖工程师直觉和实验室试错，BOxCrete 将搜索空间从月级缩短到天级
+- **强度加快 43%：** AI 优化配方在数据中心地基中达到结构强度的时间比原配方快 43%——直接缩短建设周期
+- **reshoring 效应：** 减少水泥进口依赖，配合 "Made in America" 水泥标签，契合美国制造业回流政策
+- **开源策略：** MIT 协议开放，Quadrel 等商业软件公司已集成——Meta 通过开源获得行业影响力
+
+**评论观察：**
+- 🟢 支持：AI + 传统制造的务实案例，比大模型竞赛更有实际经济价值
+- 🔴 质疑：混凝土行业极度保守，AI 优化方法的大规模采用需要更多现场验证
+
+**信源：** https://engineering.fb.com/2026/03/30/data-center-engineering/ai-for-american-produced-cement-and-concrete/
+
+**关联行动：** 关注 BOxCrete 在更多数据中心和基础设施项目中的应用
+
+---
+
+### 47. [B] Claude Code 开源生态大爆发：everything-claude-code 13 万星 + 五大周趋势项目霸榜 GitHub
+
+**概述：** GitHub Trending 本周被 Claude Code 生态项目彻底占领：(1) everything-claude-code（13 万 stars，周增 19,869）——Agent harness 性能优化系统；(2) claude-howto（1.5 万 stars，周增 13,440，日增 3,336）——可视化教程 + 模板指南；(3) oh-my-claudecode（2 万 stars，周增 6,933）——团队多 Agent 编排；(4) agents-observe（HN #13，57 分）——Claude Code Agent 实时可观测仪表盘；(5) deer-flow（字节跳动，5.6 万 stars，周增 13,560）——长时序 SuperAgent 框架。加上 ccunpacked.dev（992 分 + 353 评论）和 NousResearch/hermes-agent（2.1 万 stars），AI 编码 Agent 工具链正经历前所未有的社区爆发。
+
+**技术/产业意义：** Claude Code 已从一个"编码助手"进化为一个完整的 Agent 开发平台生态。community 正在围绕它构建性能优化、团队协作、可观测性、教学教程等全栈工具——这是一个产品获得"平台地位"的典型信号。everything-claude-code 的 13 万 stars 使其成为开源 AI 工具领域增长最快的项目之一。
+
+**深度分析：**
+- **everything-claude-code 13 万：** Skills + Instincts + Memory + Security + Research-first 方法论——不仅是 Claude Code 的，而是通用 Agent harness 的 best practice 集合
+- **claude-howto 日增 3,336：** 对 Claude Code 官方文档的社区补充——"官方描述功能，但没教你怎么组合使用"
+- **agents-observe：** 基于 Hooks 的实时可观测仪表盘——多 Agent 编排的"黑盒"问题终于有了解决方案
+- **deer-flow + hermes-agent：** 字节跳动和 NousResearch 分别提供了长时序和自适应成长的 Agent 框架
+- **生态效应：** 当第三方工具链比官方文档增长更快时，这个产品已经进入"平台生态爆发期"
+
+**评论观察：**
+- 🟢 支持：Claude Code 的社区生态密度已超过 Cursor 和 GitHub Copilot
+- 🔴 质疑：工具碎片化可能带来选择疲劳；官方与社区的功能边界需要明确
+
+**信源：** https://github.com/trending?since=weekly ; https://github.com/simple10/agents-observe ; https://github.com/luongnv89/claude-howto
+
+**关联行动：** 关注 Anthropic 对社区生态的官方态度和可能的平台化策略
+
+---
+
+### 48. [B] Google AI Impact Summit India：$150 亿基础设施 + $6000 万科研基金 + 美印海底光缆
+
+**概述：** Google 在印度举办 AI Impact Summit 2026，宣布一系列重大投资：(1) 此前宣布的 $150 亿印度 AI 基础设施投资持续推进；(2) 新增 America-India Connect 战略光纤路由，连接美国、印度和南半球多地；(3) 发起 $3000 万 "AI for Government Innovation" 全球影响力挑战赛；(4) 发起 $3000 万 "AI for Science" 影响力挑战赛；(5) DeepMind 与印度政府和本地机构建立新合作伙伴关系，提供前沿 AI for Science 模型。数据显示 74% 的全球公共服务人员已在使用 AI，但仅 18% 认为政府有效使用了 AI。
+
+**技术/产业意义：** Google 在印度的 $150 亿 AI 投资是其全球扩张策略的核心组成部分。印度拥有世界最大的开发者社区之一和快速增长的 AI 人才库，Google 通过基础设施+人才+政府合作的三管齐下策略，巩固其在新兴市场的 AI 主导地位。
+
+**深度分析：**
+- **$150 亿印度投资：** 包括数据中心、海底光缆、云基础设施——Google 在印度的投入超过大多数国家
+- **America-India Connect：** 新海底光缆路由增强美印数字连接的冗余和弹性——AI 训练和推理的跨国数据传输需求驱动
+- **74% vs 18% 的"AI 落差"：** 绝大多数公务员已在用 AI，但只有极少数认为政府用好了——这是 AI 应用的典型"使用-效果"鸿沟
+- **DeepMind 国家合作计划：** AI for Science 模型面向国家级科研优先事项——AlphaFold 模式的制度化推广
+
+**评论观察：**
+- 🟢 支持：Google 在新兴市场的基础设施先发优势可能转化为长期 AI 平台锁定
+- 🔴 质疑：$150 亿投资需要印度监管环境的稳定性，政策风险不可忽视
+
+**信源：** https://blog.google/innovation-and-ai/technology/ai/ai-impact-summit-2026-india/
+
+**关联行动：** 跟踪 America-India Connect 海底光缆的建设进度
+
+---
+
+### 49. [B] SwiftLM：原生 Apple Silicon LLM 推理服务器 + TurboQuant 混合量化 — 100B+ MoE 本地运行
+
+**概述：** 开源项目 SwiftLM 登上 HN 热门（66 分），这是一个用纯 Swift 编写的原生 Apple Silicon LLM 推理服务器，支持 OpenAI 兼容 API。核心创新：(1) 实现了 TurboQuant V2+V3 混合架构——在 Metal GPU shader 中原生运行非线性 Lloyd-Max 码本量化，实现"V3 质量 + V2 速度"；(2) SSD Expert Streaming 零拷贝技术，将 MoE 专家层直接从 NVMe SSD 流式传输到 GPU，支持在 M5 Pro 64GB 上运行 Qwen3.5-122B-A10B；(3) KV Cache 约 3.6 bit/维度，3.5× 压缩比。附带 iPhone/iPad 原生推理 app。
+
+**技术/产业意义：** SwiftLM 代表了 Apple Silicon 生态中 LLM 推理的最前沿。通过原生 Metal shader 实现 TurboQuant，绕开 Python/GIL 瓶颈，在消费级 MacBook 上运行 122B 参数的 MoE 模型——这对降低 AI 推理的硬件门槛有重要意义。Google 的 TurboQuant 论文在发布仅数天后就有了社区原生实现。
+
+**深度分析：**
+- **纯 Swift + Metal：** 没有 Python 运行时、没有 GIL、没有不必要的内存拷贝——单一二进制文件，直接利用 Apple Silicon 的 Unified Memory
+- **TurboQuant V2+V3 混合：** K-Cache 4.25 bit（PolarQuant 3-bit + QJL 1-bit），V-Cache 3.125 bit（去掉 QJL），整体 3.6 bit/维度
+- **SSD Expert Streaming：** MoE 模型的专家层从 NVMe 零拷贝流式读取，避免 macOS 统一内存被耗尽导致的内核恐慌
+- **实测配置：** M5 Pro 64GB + Qwen3.5-122B-A10B-4bit = 可运行的 100B+ 模型本地推理
+- **4-bit 是生产标准：** 开发者明确指出 2-bit 量化会严重破坏 JSON 语法——tool calling 场景下 4-bit 是底线
+
+**评论观察：**
+- 🟢 支持：Apple Silicon 上运行 100B+ 模型终于从"理论可行"走向"实际可用"
+- 🔴 质疑：SSD streaming 的延迟和寿命影响需要长期测试
+
+**信源：** https://github.com/SharpAI/SwiftLM ; https://news.ycombinator.com/
+
+**关联行动：** 关注 SwiftLM 在中文模型（Qwen 系列）上的推理质量评测
+
+---
+
+### 50. [B] StepFun 3.5 Flash 在 OpenClaw Arena 成本效率排名 #1：300 场对战数据
+
+**概述：** UniClaw 平台的 OpenClaw Arena 发布了基于 300 场实际 Agent 任务对战的成本效率排名，StepFun 3.5 Flash 夺得 #1。该排名衡量的是"每单位成本完成 OpenClaw 任务的效率"——不仅考虑模型能力，还综合考虑 token 成本和任务完成速度。这是首个面向 AI Agent 实际任务场景（而非传统 benchmark）的成本效率评测。
+
+**技术/产业意义：** AI Agent 场景下的"成本效率"正成为比"绝对能力"更重要的指标。当 Agent 需要连续执行数十次工具调用时，单次调用的成本差异会被放大数十倍。StepFun（阶跃星辰）的 Flash 模型在这一维度上击败了 GPT 和 Claude 系列，说明中国模型厂商在"性价比"赛道上具有竞争力。
+
+**深度分析：**
+- **Agent 场景的成本敏感性：** 传统聊天场景 1-2 次调用，Agent 场景可能 50-100 次调用——成本效率的重要性被指数级放大
+- **OpenClaw Arena 方法论：** 300 场真实对战，非合成 benchmark——反映的是实际 Agent 工作流表现
+- **StepFun 定位：** 阶跃星辰在中国 AI 公司中相对低调，但在 Agent 效率优化上已建立优势
+- **对 OpenClaw 生态的意义：** 成本效率排名为 Agent 开发者提供了实用的模型选择指南
+
+**评论观察：**
+- 🟢 支持：Agent 场景的成本效率评测比传统 benchmark 更有实际参考价值
+- 🔴 质疑：300 场对战的样本量偏小；不同 Agent 任务类型的成本效率可能差异很大
+
+**信源：** https://app.uniclaw.ai/arena?tab=costEffectiveness ; https://news.ycombinator.com/
+
+**关联行动：** 跟踪 OpenClaw Arena 扩大样本量后的排名变化
+
+---
+
 ## 📊 KOL 观点精选
 
-**注意：** 本轮由于 DuckDuckGo 搜索持续遭遇 bot-detection 限流，无法逐一搜索每位 KOL 的最新推文。以下内容综合自已 fetch 的信源中提及的 KOL 观点：
+**说明：** DuckDuckGo 搜索在本轮持续遭遇 bot-detection 限流，KOL 个人推文无法逐一搜索。以下综合了三大厂官方页面、HN 热门讨论、The Verge/Guardian/CNBC 等信源中提及的 KOL 观点，以及从各轮采集中提取的重要人物发言。
 
-1. **Mark Gurman (Bloomberg)** — 苹果 iOS 27 Extensions 将创建"AI App Store"，第三方 AI 聊天机器人可在 Siri 内运行。Nothing 计划 2027H1 推出 AI 智能眼镜。Apple Intelligence 在中国"误上线"后被紧急撤回。
-2. **Mira Murati (Thinking Machines Lab CEO, 前 OpenAI CTO)** — 在 GTC 圆桌上强调多模型协作系统和开源生态的重要性，加入 NVIDIA Nemotron Coalition。
-3. **Todd McKinnon (Okta CEO)** — 在 The Verge 专访中警告"SaaSpocalypse"——AI Agent 将替代传统 SaaS 工作流，"不为 AI 时代做准备是 naive 的"。
-4. **Jensen Huang (NVIDIA CEO)** — 通过 Nemotron Coalition 推动 "Proprietary and open is not a thing. It's proprietary AND open." 的生态理念。NVIDIA 投资 Poolside $10 亿（估值 $120 亿）。
-5. **Young Guru (音乐制作人)** — 在 Rolling Stone 采访中透露 "more than half" 的样本制作 hip-hop 已使用 AI 生成，音乐行业对 AI 采取"don't ask, don't tell"策略。
-6. **Sam Altman (OpenAI CEO)** — OpenAI 融资公告："We are building a unified AI superapp"；"durable access to compute is the strategic advantage"。宣布终止 Sora。
+### Tier 1 — CEO/决策者
+
+1. **Sam Altman (@sama, OpenAI CEO)** — 在 $1220 亿融资公告中明确战略方向："We are building a unified AI superapp"——整合 ChatGPT + Codex + 浏览 + Agent 为 Agent-first 统一体验。宣布终止 Sora 视频生成器。"Durable access to compute is the strategic advantage"暗示芯片多元化战略（NVIDIA + AMD + AWS Trainium + Cerebras + 自研芯片）。广告业务 6 周即达 $1 亿 ARR。**信号：** OpenAI 正从"最好的模型"转向"最大的平台"。
+
+2. **Elon Musk (@elonmusk)** — SpaceX 秘密提交 $1.75T 估值 IPO 申请。2 月收购 xAI（$2500 亿估值）后，SpaceX 正探索太空轨道数据中心。尽管 Grok 在 AI 竞争中落后，但 Musk 通过 SpaceX 的基础设施优势试图走出差异化路径。DOGE 争议和 Grok 深度伪造诉讼（巴尔的摩、田纳西州未成年人诉讼）持续发酵。**信号：** Musk 通过 IPO 将 AI 和太空资产捆绑上市，试图重新定义"AI 基础设施"的外延。
+
+3. **Dario Amodei (@DarioAmodei, Anthropic CEO)** — Anthropic 的"防御者优先"策略因 Mythos/Capybara 数据泄露事件而被放到聚光灯下。Mythos 模型因网络安全攻击能力超出预期而延迟发布。Anthropic 选择在开放模型前先向防御性安全研究者提供早期访问——这一策略正在接受市场检验。**信号：** 安全 vs 竞速的张力到达新高度。
+
+4. **Jensen Huang (@JensenHuang, NVIDIA CEO)** — 通过 Nemotron Coalition 推动"专有 AND 开源"的生态理念。NVIDIA 投资 Poolside $10 亿（估值 $120 亿）。Rubin 平台提前进入全量生产。对 OpenAI 投资的态度从"unhappy"到参与 $1220 亿融资，显示务实的商业策略。**信号：** NVIDIA 正在从芯片供应商转型为 AI 生态系统的超级节点。
+
+5. **Satya Nadella (@satyanadella, Microsoft CEO)** — Copilot Cowork 整合 Claude 正式上线 Frontier Program。Researcher 新增多模型 Council。Wave 3 战略定位："Intelligence and trust must move together"。**信号：** 微软的多模型策略（GPT + Claude + 开源）是对"单一模型锁定"风险的对冲。
+
+6. **Mark Zuckerberg (@zuck, Meta CEO)** — Meta 在 AI 基础设施上继续激进投入：$100 亿 El Paso 数据中心、与 AMD 签署史上最大非 NVIDIA GPU 供应协议（6GW、MI450、五年期）。BOxCrete AI 混凝土开源发布显示 Meta 将 AI 应用延伸到了"砖和灰浆"级别。**信号：** Meta 的开源 + 自有基础设施策略正在重塑 AI 算力竞争格局。
+
+### Tier 2 — 科学家/研究领袖
+
+7. **Andrej Karpathy (@karpathy)** — Claude Code Unpacked 可视化指南爆火（992 分 + 353 评论）的社区讨论中，Karpathy 风格的"从底层理解工具"理念被多次引用。Claude Code 的 52 个内置工具 + 95 个 slash 命令的完整逆向工程反映了社区对"深度理解 AI 工具而非黑盒使用"的强烈需求。
+
+8. **Jim Fan (@jimfan, NVIDIA 研究科学家)** — Nemotron Coalition 的研究支撑来自 NVIDIA Research 对开放生态的投入。Jim Fan 对 Agent 架构的前瞻性观点在 everything-claude-code（13 万 stars）等项目中持续被引用。
+
+9. **Gary Marcus (@GaryMarcus)** — OpenAI 产品墓地（Forbes 盘点）和 Sora 终止引发的讨论中，Marcus 关于"AI 炒作周期"的观点再次获得关注——当 OpenAI 自己也开始砍产品时，行业是否需要更审慎的预期？
+
+### Tier 3 — 技术影响者 + 官方账号
+
+10. **Mark Gurman (Bloomberg)** — 苹果 iOS 27 Extensions 将创建"AI App Store"，第三方 AI 聊天机器人可在 Siri 内运行。Nothing 计划 2027H1 推出 AI 智能眼镜。Apple Intelligence 在中国"误上线"后被紧急撤回。苹果获得 Gemini "完全访问权"用于蒸馏训练小模型。
+
+11. **Todd McKinnon (Okta CEO)** — 在 The Verge 专访中警告"SaaSpocalypse"——AI Agent 将替代传统 SaaS 工作流，"不为 AI 时代做准备是 naive 的"。这一概念与 Oracle 裁员数千人 + $450-500 亿 AI 投资形成呼应。
+
+12. **Young Guru (音乐制作人)** — 在 Rolling Stone 采访中透露 "more than half" 的样本制作 hip-hop 已使用 AI 生成，音乐行业对 AI 采取"don't ask, don't tell"策略。
+
+13. **Mira Murati (Thinking Machines Lab CEO, 前 OpenAI CTO)** — 在 GTC 圆桌上强调多模型协作系统和开源生态的重要性，加入 NVIDIA Nemotron Coalition。其新公司 Thinking Machines Lab 的方向与 Copilot Cowork 的多模型协作理念高度一致。
+
+14. **Ben Affleck** — The Verge 报道 Ben Affleck 的 AI 创业公司将自己定位为"成本节省工具"——好莱坞与 AI 的关系从对抗走向实用主义的又一信号。
+
+### 官方账号动态
+
+- **@AnthropicAI** — Claude Code Auto Mode、Harness 设计、Science Blog、澳大利亚 Economic Index 密集发布。Mythos 延迟发布但无官方声明。
+- **@OpenAI** — $1220 亿融资公告、Safety Bug Bounty、Model Spec、Sora 终止。GPT-5.4 全系列稳定运行。
+- **@GoogleDeepMind** — Gemini 3.1 Flash Live、Nano Banana 2、AGI 认知框架、Lyria 3 Pro 音乐模型。AI Impact Summit India。
+- **@AIatMeta** — BOxCrete 开源、$100 亿 El Paso 数据中心。Facebook 工程博客活跃度提升。
+- **@nvidia** — Rubin 平台全量生产、Nemotron Coalition、投资 Poolside $10 亿、NVLink Fusion。
+- **@huggingface** — TRL v1.0 里程碑、GGML 合并、每 8 秒新增仓库。生态增速维持高位。
+- **@MistralAI** — €8.3 亿债务融资建巴黎数据中心。Voxtral TTS 开源。ARR 从 $20M 增至 $400M。
+- **@deepseek_ai** — V4 泄露信息持续但官方沉默。社区预期 4 月正式发布。
 
 ---
 
@@ -1878,15 +2096,15 @@ description: "OpenAI完成史上最大融资$1220亿、GPT-5.4系列全面上线
 
 ## 下期追踪问题
 
-1. **DeepSeek V4 是否会在 4 月内正式发布？** 泄露信息密度极高但官方持续沉默。
-2. **Qwen 3.6 Plus 正式版何时发布？** Preview 版已上线 OpenRouter，正式版时间表值得关注。
+1. **SpaceX IPO 进展和太空数据中心可行性？** $1.75T 估值 + xAI 整合 + 轨道算力计划——6 月可能上市，需跟踪 S-1 公开后的财务细节。
+2. **DeepSeek V4 是否会在 4 月内正式发布？** 泄露信息密度极高但官方持续沉默，社区预期本月有动作。
 3. **Anthropic Mythos/Capybara 何时正式发布？** 延迟原因明确（网安攻击能力过强），"防御者优先"策略进展如何？
-4. **OpenAI Superapp 整合进度？** Sora 终止后，ChatGPT + Codex + 浏览 + Agent 一体化的时间表。
-5. **Google Antigravity 能否在 AI IDE 市场突围？** 与 Cursor/Claude Code/Codex 的竞争已白热化。
-6. **AI 辅助安全研究的政策讨论？** CVE-2026-4747 + Mythos 网安能力泄露双重事件后的监管反应。
-7. **1-bit LLM 商用可行性验证？** PrismML Bonsai + Google TurboQuant 能否真正改变端侧部署经济学。
-8. **苹果 iOS 27 Extensions / AI App Store 的 WWDC 详情？** 5 月 19-20 日 Google I/O，6 月 WWDC。
-9. **EU AI Act 修正案何时获得理事会批准？** 高风险系统合规延至 2027 年底。
-10. **OpenAI IPO 时间表？** $8520 亿估值 + $20 亿月收入 + 广告 $1 亿 ARR，IPO 窗口开放。
-11. **Alphabet Q1 2026 财报中 AI 变现数据？** $1850 亿 CapEx 指引引发 9% 暴跌后，市场等待 ROI 证据。
-12. **Gemini 3.1 Pro vs GPT-5.4 vs Claude Opus 4.6 独立评测？** ARC-AGI-2 77.1% 是否代表真正的推理突破？
+4. **OpenAI Superapp 整合进度？** Sora 终止后，ChatGPT + Codex + 浏览 + Agent 一体化的时间表。IPO 窗口是否在 H2 2026 打开？
+5. **Claude Code 平台生态的官方响应？** everything-claude-code 13 万 stars + 五大项目周趋势霸榜——Anthropic 是否会推出官方平台化策略？
+6. **Google I/O 2026 (5 月 19-20 日) AI 开发工具发布？** Antigravity + Gemini CLI 是否会成为 Google 的 Agent 开发平台核心？
+7. **1-bit LLM + TurboQuant 量化：端侧部署经济学是否真正改变？** PrismML Bonsai + SwiftLM 原生实现 + Google TurboQuant 论文后的社区验证。
+8. **Copilot Cowork 从 Frontier Program 到 GA 的时间表？** 多模型协作（GPT + Claude）的企业 AI 产品化进展。
+9. **Penguin Random House vs OpenAI 慕尼黑诉讼？** LLM "记忆化"版权问题的法律先例走向。
+10. **Alphabet Q1 2026 财报中 AI 变现数据？** $1850 亿 CapEx 指引引发 9% 暴跌后，市场等待 ROI 证据。Gemini 7.5 亿 MAU 的变现路径。
+11. **AI Agent 成本效率评测标准化？** OpenClaw Arena 等新型 Agent benchmark 是否会取代传统 LMSYS-style 评测？
+12. **2026 科技 IPO 超级年：SpaceX + OpenAI + Anthropic 三大 IPO 对 AI 行业资本结构的影响？**
