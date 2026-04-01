@@ -18,7 +18,7 @@
       "collapsed": false,
       "subgroups": [
         { "text": "工程实践", "dir": "engineering", "collapsed": true },
-        { "text": "🔬 Claude Code 源码研究", "dir": "claude-code", "collapsed": true },
+        { "text": "Claude Code 源码研究", "dir": "claude-code", "collapsed": true },
         { "text": "Agent 训练", "dir": "training", "collapsed": true },
         { "text": "框架与技能", "dir": "framework", "collapsed": true },
         { "text": "Agent 评估", "dir": "evaluation", "collapsed": true }
