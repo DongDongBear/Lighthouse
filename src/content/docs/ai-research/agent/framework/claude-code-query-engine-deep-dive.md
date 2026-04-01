@@ -1,7 +1,7 @@
 ---
 title: Claude Code 深读（二）：QueryEngine 与 query.ts 如何驱动一个 Agent Runtime
 description: 专门拆解 Claude Code 的 QueryEngine、query.ts、输入处理与工具回流机制，理解一次 agent turn 如何真正被执行。
-date: 2026-03-31
+date: "2026-03-31"
 ---
 
 # Claude Code 深读（二）：QueryEngine 与 query.ts 如何驱动一个 Agent Runtime

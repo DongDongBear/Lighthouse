@@ -1,7 +1,7 @@
 ---
 title: 从源码拆解 Claude Code：一个 AI Agent CLI 的系统设计
 description: 基于 npm 发布包与 source map 还原结果，对 Claude Code 的入口、主循环、工具系统、命令系统与架构取舍做工程级分析。
-date: 2026-03-31
+date: "2026-03-31"
 ---
 
 # 从源码拆解 Claude Code：一个 AI Agent CLI 的系统设计

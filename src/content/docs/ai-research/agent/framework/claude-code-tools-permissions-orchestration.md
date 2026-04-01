@@ -1,7 +1,7 @@
 ---
 title: Claude Code 深读（三）：Tool 协议、权限系统与工具调度
 description: 详细拆解 Claude Code 的 Tool.ts、tools.ts、toolOrchestration.ts 与 StreamingToolExecutor，理解它如何把工具做成一个可治理的执行平面。
-date: 2026-03-31
+date: "2026-03-31"
 ---
 
 # Claude Code 深读（三）：Tool 协议、权限系统与工具调度

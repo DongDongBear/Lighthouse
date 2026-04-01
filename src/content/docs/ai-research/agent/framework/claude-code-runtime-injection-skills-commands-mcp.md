@@ -1,7 +1,7 @@
 ---
 title: Claude Code 深读（四）：skills、commands 与 MCP 如何共同注入 runtime
 description: 详细拆解 Claude Code 的 commands、skills、plugins 与 MCP 能力是如何被加载、过滤、治理并最终注入运行时的。
-date: 2026-03-31
+date: "2026-03-31"
 ---
 
 # Claude Code 深读（四）：skills、commands 与 MCP 如何共同注入 runtime
