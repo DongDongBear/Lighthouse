@@ -1,6 +1,6 @@
 ---
 title: "2026-04-05 AI 日报：微软 Agent Framework 开源，AWS×Cerebras 押注拆分推理"
-description: "DeepSeek V4 国产芯片优先 / Gemma 4 Apache 2.0 / 微软 Agent Framework / AWS×Cerebras 拆分推理 / Mercor 供应链泄露 / FlashAttention-4 / 三大厂无新发布 — 全球 36+ 条"
+description: "DeepSeek V4 国产芯片优先 / Gemma 4 Apache 2.0 / 微软 Agent Framework / AWS×Cerebras 拆分推理 / Mercor 供应链泄露 / FlashAttention-4 / 补录 Anthropic 基础设施噪声研究 — 全球 37+ 条"
 ---
 
 # 2026-04-05 AI 每日采集
@@ -22,13 +22,36 @@ description: "DeepSeek V4 国产芯片优先 / Gemma 4 Apache 2.0 / 微软 Agent
 
 ## ⭐ 三大厂动态
 
-**今日三大厂无新发布。** 本轮对 Anthropic / OpenAI / Google DeepMind 共 12 个官方页面进行了逐一检查（含 direct HTTP fallback），结果如下：
+**今日三大厂无同日新发布。** 但本轮对 Anthropic / OpenAI / Google DeepMind 共 12 个官方页面逐一检查（含 direct HTTP fallback）并回看 `ai-news-seen.json` 后，补录到 1 篇此前漏入 seen 的 Anthropic engineering 官方文，结果如下：
 
-- **Anthropic**：最新可见内容仍为 Opus 4.6 发布、3 月 25 日工程博客、4 月 2 日可解释性研究帖，均已在此前日报中覆盖。模型文档页（docs.anthropic.com）通过 direct HTTP fallback 重试访问，未发现新模型家族或定价变更。
+- **Anthropic**：最新可见内容仍以 Opus 4.6、3 月 25 日工程博客、4 月 2 日可解释性研究帖为主；模型文档页（docs.anthropic.com）通过 direct HTTP fallback 重试访问，未发现新的模型家族或定价变更。另补录 1 篇此前漏入 seen 的 engineering 文章《Quantifying infrastructure noise in agentic coding evals》，已全文核验并写入下方。
 - **OpenAI**：最新可见新闻页条目仍为 4 月 2 日 TBPN 收购和 Codex 定价调整，已在此前日报及 seen 记忆中。Changelog 页面检查最近两周窗口，无明确的新 must-write 更新。
 - **Google DeepMind**：最新重要 AI 条目仍为 4 月 Gemma 4 和 3 月 Gemini / 安全 / AGI 框架帖，已在此前轮次覆盖。
 
-> ai-news-seen.json 已读取并比对，本轮无新官方文章 URL 需追加，文件保持不变。
+> ai-news-seen.json 已读取并比对。本轮无新的 same-day 三大厂发布，但已将 Anthropic 历史遗漏官方 URL 与几条此前未写入 seen 的旧官方链接一并补齐，避免后续轮次重复误报。
+
+### BA-1. [A] ⭐ 待深度解读 — Anthropic 量化 agentic coding 评测中的基础设施噪声：同一模型仅因资源配置差异可拉开 6 个百分点
+
+**概述：**
+Anthropic engineering 发文指出，agentic coding eval（如 Terminal-Bench、SWE-bench）并不是纯模型测试，而是“模型 + 运行时环境”的系统测试。在其内部实验中，同一 Claude 模型在 Terminal-Bench 2.0 上仅因资源配置从严格 1x 到 uncapped 的不同，成功率就能拉开 6 个百分点（p < 0.01）。
+
+**技术/产业意义：**
+这篇文章最重要的结论不是“某个模型更强”，而是 leaderboard 上 2-3 个点的差距，很多时候可能反映的是 VM 更大、资源更松、sandbox 更宽容，而不一定是模型真实能力更强。对 2026 年 coding agent 竞争而言，这几乎是在评测基础设施层面解释了为什么“同模型不同 harness / infra，体感能力差很多”。
+
+**深度分析：**
+- 在 Terminal-Bench 2.0 上，1x 严格资源限制时 infra error 为 5.8%，uncapped 降到 0.5%
+- 大约到 3x 之前，额外资源主要是在修复基础设施噪声（例如瞬时峰值导致的 OOM kill）；超过 3x 后，额外资源才开始真正帮助 agent 安装更重依赖、启动更贵 subprocess、跑更吃内存的测试，从而“把题做出来”
+- Anthropic 的核心建议是：benchmark 不该只报一个 pinned spec，而应同时公布 guaranteed allocation 与 hard kill threshold；在资源方法学未标准化前，低于 3 个百分点的 leaderboard 差距都应该谨慎看待
+- 这与近期关于 coding agent 竞争从“模型对模型”转向“模型 + workflow + harness”竞争的判断高度共振：评测分数的漂移，很多时候不是模型突然更聪明了，而是系统层更稳了
+
+**评论观察：**
+- 🟢 支持：这是一篇非常重要的工程校准文，把很多人隐约感受到的“benchmark 漂移”第一次量化了。
+- 🔴 质疑：Anthropic 主要基于自家 eval infra 的观察得出结论，不同 benchmark、不同 provider、不同模型上的外推幅度，仍需要更多第三方复现实验。
+
+**信源：**
+https://www.anthropic.com/engineering/infrastructure-noise
+
+**关联行动：** 跟踪该文是否进入 Terminal-Bench / SWE-bench 社区的 benchmark reporting 规范，并考虑单独做深度解读。
 
 ---
 
@@ -1025,8 +1048,8 @@ https://github.com/trending
 - [x] OpenAI 4 个页面全部检查 ✅（blog / index / research / changelog）
 - [x] Google 4 个页面全部检查 ✅（blog.google / deepmind / developers / ai.google）
 - [x] ai-news-seen.json 已读取并对比 ✅
-- [x] 本轮结论明确写出“今日三大厂无新发布” ✅
-- [x] 无新增高价值官方文章 URL，因此 ai-news-seen.json 保持不变 ✅
+- [x] 本轮结论明确写出“今日三大厂无同日新发布，但补录 1 篇历史遗漏官方文” ✅
+- [x] 已将 Anthropic 历史遗漏官方文章与几条旧官方 URL 补齐到 ai-news-seen.json，避免后续轮次重复误报 ✅
 
 ### 北美公司与英文信源
 - [x] Microsoft / AWS / Cerebras / Together / Perplexity / 数据供应链等核心北美主题已覆盖 ✅
@@ -1049,5 +1072,5 @@ https://github.com/trending
 - [x] 本轮不发飞书，只写入并 push GitHub ✅
 
 **北美区采集总数：10 条（A 级 2 条 + B 级 8 条）**
-**三大厂新增官方文章：0 条**
-**今日全局总条目：36 条（不含 KOL 空缺说明）**
+**三大厂补录/新增官方文章：1 条（Anthropic engineering 历史遗漏）**
+**今日全局总条目：37 条（不含 KOL 空缺说明）**
