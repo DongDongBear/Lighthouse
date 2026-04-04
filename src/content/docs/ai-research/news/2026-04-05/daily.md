@@ -1,12 +1,12 @@
 ---
-title: "2026-04-05 AI 日报：[占位，最后由北美采集轮填写]"
-description: "[占位]"
+title: "2026-04-05 AI 日报：微软 Agent Framework 开源，AWS×Cerebras 押注拆分推理"
+description: "DeepSeek V4 国产芯片优先 / Gemma 4 Apache 2.0 / 微软 Agent Framework / AWS×Cerebras 拆分推理 / Mercor 供应链泄露 / FlashAttention-4 / 三大厂无新发布 — 全球 36+ 条"
 ---
 
 # 2026-04-05 AI 每日采集
 
-> 采集时间：2026-04-05 22:10 CST（北京时间）
-> 覆盖轮次：第 1 轮中国区
+> 采集时间：2026-04-05 22:10 CST（中国区）→ 03:18 CST（欧洲区+学术）→ 06:18 CST（北美区+三大厂）
+> 覆盖轮次：第 1 轮中国区 / 第 2 轮欧洲区+学术 / 第 3 轮北美区+三大厂
 
 ---
 
@@ -17,6 +17,18 @@ description: "[占位]"
 - **DeepSeek V4 发布进展**：4月4日多信源（The Information / 快科技 / 腾讯新闻）确认 DeepSeek V4 已完成华为昇腾 + 寒武纪国产芯片适配，即将发布。详见 CN-1。
 - **Qwen3.6-Plus 后续表现**：上期记录其登顶 OpenRouter 日榜，今日 PingWest 深度分析阿里成立 ATH 事业群推动 Token 工业化战略，Qwen3.6-Plus 在 Code Arena 盲测进入全球前二。详见 CN-3。
 - **华为昇腾芯片生态进展**：IDC 报告确认国产芯片市占率已达 41%，华为单家 20%。详见 CN-2。
+
+---
+
+## ⭐ 三大厂动态
+
+**今日三大厂无新发布。** 本轮对 Anthropic / OpenAI / Google DeepMind 共 12 个官方页面进行了逐一检查（含 direct HTTP fallback），结果如下：
+
+- **Anthropic**：最新可见内容仍为 Opus 4.6 发布、3 月 25 日工程博客、4 月 2 日可解释性研究帖，均已在此前日报中覆盖。模型文档页（docs.anthropic.com）通过 direct HTTP fallback 重试访问，未发现新模型家族或定价变更。
+- **OpenAI**：最新可见新闻页条目仍为 4 月 2 日 TBPN 收购和 Codex 定价调整，已在此前日报及 seen 记忆中。Changelog 页面检查最近两周窗口，无明确的新 must-write 更新。
+- **Google DeepMind**：最新重要 AI 条目仍为 4 月 Gemma 4 和 3 月 Gemini / 安全 / AGI 框架帖，已在此前轮次覆盖。
+
+> ai-news-seen.json 已读取并比对，本轮无新官方文章 URL 需追加，文件保持不变。
 
 ---
 
@@ -730,30 +742,312 @@ https://huggingface.co/papers/trending
 
 ---
 
-## 📊 欧洲区+学术/硬件自检清单
+## 🇺🇸 北美区
 
-- [x] Mistral AI 搜索 ✅（Voxtral TTS，3 月 23 日发布）
-- [x] DeepMind 搜索 ✅（Gemma 4 / AGI 认知框架 / 10 年 AlphaGo 回顾）
-- [x] Hugging Face Blog 搜索 ✅（Gemma 4 / TRL v1.0 / Holo3 / Falcon Perception / Granite 4.0）
-- [x] Stability AI 搜索 ✅（DuckDuckGo 限流，直接信源无新重大消息）
-- [x] 其他欧洲公司（Poolside/Synthesia/Wayve 等）——DuckDuckGo 完全限流，通过 The Verge/Ars Technica 覆盖
-- [x] KOL 推文——DuckDuckGo 限流严重无法搜索 X.com，通过间接信源覆盖（LeCun 未有重大新推文；Hassabis 通过 DeepMind 博客覆盖）
-- [x] EU 政策——Penguin Random House 版权诉讼 + Perplexity 隐私诉讼覆盖
-- [x] arXiv cs.CL 列表已 fetch ✅（89 篇新提交，通过 HF Papers 交叉筛选）
-- [x] HF Papers 页面 fetch ✅（每日 + 趋势）
-- [x] Reddit 3 个子版块——Reddit API 403 被拒，通过 HF Papers 和 The Verge 间接覆盖
-- [x] Sebastian Raschka 博客检查 ✅（最新 3 月 22 日，无新文章）
-- [x] Lilian Weng 博客检查 ✅（最新 2025 年 5 月，无新文章）
-- [x] NVIDIA/AMD/Intel/TSMC——DuckDuckGo 限流无法直接搜索，OpenAI 融资公告中提及 NVIDIA 作为核心基础设施伙伴
-- [x] Raschka-known.json 已检查，无新文章，无需更新
-- [x] 所有条目都有原始链接 ✅
-- [x] ⭐ 标记合理：Gemma 4 / Holo3 / OpenAI $1220亿 / SpaceX Grok 强制订阅
-- [x] 每条收录的新闻都经过 A/B/C 分级 ✅，C 级已丢弃
-- [x] 每条新闻分析深入 ✅
-- [⚠️] DuckDuckGo 全面限流是本轮最大障碍，多次返回 bot-detection challenge
-- [⚠️] Reddit API 返回 403，X.com 推文搜索不可用
-- [⚠️] 通过直接 fetch 信源页面（DeepMind Blog / HF Blog / The Verge / Ars Technica / OpenAI / arXiv）补偿搜索引擎不可用的影响
+### NA-1. [A] ⭐ Microsoft 开源 Agent Framework，试图把企业 Agent 编排层收回一体化平台
 
-**欧洲区采集总数：7 条（A 级 3 条 + B 级 4 条）**
-**学术/硬件采集总数：9 条（A 级 2 条 + B 级 7 条）**
-**本轮总计新增：16 条**
+**概述：**
+Hacker News newest 与 GitHub Trending 同时抬升了 Microsoft 新开源的 `agent-framework` 仓库。项目定位非常明确：面向 Python 和 .NET 的多语言 Agent 框架，覆盖从单 Agent 到多 Agent workflow 的构建、编排与部署。
+
+**技术/产业意义：**
+这不是又一个玩具级 Agent demo，而是 Microsoft 试图把当下分裂在 AutoGen、Semantic Kernel、LangGraph、各类工作流引擎之间的企业 Agent 栈，重新收拢成自家一套“默认答案”。对 Azure Foundry、OpenAI on Azure 和企业 Copilot 生态，这个动作很关键。
+
+**深度分析：**
+- README 明确给出从 **Semantic Kernel** 和 **AutoGen** 迁移指南，信号非常直接：不是并存，而是想成为上层统一框架
+- 核心能力包括 **graph-based workflows、streaming、checkpointing、human-in-the-loop、time-travel、OpenTelemetry observability**
+- 同时支持 Python / .NET，符合 Microsoft 在企业开发栈上的双线布局
+- 对企业客户而言，真正稀缺的不是“能不能调模型”，而是 **状态管理、可观测性、恢复能力、人工接管点**；这个仓库正好围着这些痛点来
+
+**评论观察：**
+- 🟢 支持：Microsoft 正在把 Agent 从“prompt 工程玩具”推进到“可治理的业务流程系统”，这比再发一个小模型更有平台意义。
+- 🔴 质疑：Agent 框架市场已经很挤，Microsoft 能否真把开发者从 LangGraph / AutoGen 等迁回来，还取决于易用性和生态兼容性。
+
+**信源：**
+https://github.com/microsoft/agent-framework
+https://news.ycombinator.com/newest
+
+**关联行动：** 继续跟踪该项目 star 增速、Azure Foundry 的默认集成方式，以及是否出现大规模从 Semantic Kernel/AutoGen 迁移的案例。
+
+---
+
+### NA-2. [B] AWS Bedrock Guardrails 支持跨账号集中管理，企业级安全治理继续前移
+
+**概述：**
+AWS 宣布 Amazon Bedrock Guardrails 新增 **cross-account safeguards with centralized control and management**。这不是模型层 headline，而是企业大规模落地生成式 AI 时最关键、也最容易被忽略的“基础设施治理层”。
+
+**技术/产业意义：**
+大型企业通常有多个 AWS 账号、多个业务单元、多个 AI 团队。Guardrails 能否跨账号统一下发和审计，决定了 AI 安全策略到底是“口号”还是“真实可执行的控制面”。
+
+**深度分析：**
+- Guardrails 从“单项目能力”向“组织级控制平面”演进
+- 这会降低大型企业在 Bedrock 上做统一合规治理的运维成本
+- 对金融、医疗、跨国公司这类多 BU 组织特别关键，因为它们最怕每个团队各写一套过滤 / 拒答 / 审计逻辑
+- 这类更新虽然不够性感，但往往直接决定平台能不能进生产
+
+**评论观察：**
+- 🟢 支持：AWS 很清楚企业 AI 的真实决策链——先问治理，再问模型。
+- 🔴 质疑：Guardrails 的实际效果仍取决于策略表达能力和误杀率；“支持集中管理”不等于“安全问题解决”。
+
+**信源：**
+https://aws.amazon.com/blogs/aws/amazon-bedrock-guardrails-supports-cross-account-safeguards-with-centralized-control-and-management/
+
+**关联行动：** 持续观察 Bedrock Guardrails 后续是否补齐更强的审计回放、策略版本化和跨区域治理能力。
+
+---
+
+### NA-3. [A] ⭐ Cerebras 与 AWS 联手做“拆分式推理”，Trainium 负责 prefill、WSE 负责 decode
+
+**概述：**
+Cerebras 宣布其 **CS-3 系统将进入 AWS 数据中心**，并通过 AWS Bedrock 提供服务。更重要的是，双方提出了一种明确的 **disaggregated inference** 架构：让 AWS Trainium 处理 prefill，让 Cerebras WSE 专注 decode，通过 EFA 互联配合。
+
+**技术/产业意义：**
+这是对“单芯片同时做 prefill + decode”的主流 GPU 推理范式的正面挑战。如果 agentic coding、RL rollout、长上下文应用持续推高 decode 压力，那么按工作负载分拆硬件角色，可能成为下一代推理基础设施的重要方向。
+
+**深度分析：**
+- Cerebras 明确把 agentic coding 当作典型场景，指出这类任务每次请求产生的 token 量远高于普通聊天
+- 官方说法是：该方案可在相同硬件占地上提供 **5x 高速 token 容量**
+- Trainium 被定位为 prefill 计算端，Cerebras WSE 负责 memory-bandwidth 极重的 decode 端，这是非常典型的“按瓶颈分工”
+- 如果这条路线成立，推理基础设施竞争就不再只是 GPU vs GPU，而是 **系统级异构协同**
+
+**评论观察：**
+- 🟢 支持：这是近阶段少数真正有“架构层新意”的云推理动作，不只是堆更多卡。
+- 🔴 质疑：官方宣称的吞吐优势要经过真实 Bedrock 生产流量验证；跨芯片协同也会引入新的复杂性和调度开销。
+
+**信源：**
+https://www.cerebras.ai/blog/cerebras-is-coming-to-aws
+
+**关联行动：** 跟踪 Bedrock 正式上线后的吞吐、延迟、价格和适用模型范围，尤其关注 coding / long-context workload 的真实表现。
+
+---
+
+### NA-4. [B] Perplexity 的“隐身模式”遭遇隐私诉讼，AI 搜索产品开始碰到信任反噬
+
+**概述：**
+Ars Technica 报道，Perplexity 因其所谓 **incognito mode** 仍允许 Meta / Google tracker 工作而遭到诉讼，原告认为其“隐身”承诺与实际行为不符。
+
+**技术/产业意义：**
+AI 搜索本质上是高频收集用户意图的产品，一旦隐私承诺与技术实现脱节，影响的不只是合规风险，更是用户信任与企业采购意愿。对所有“AI 搜索 + 浏览器 + 助手”类产品，这都是警告信号。
+
+**深度分析：**
+- Perplexity 当前的竞争优势建立在“更快、更好、更懂搜索”之上，但用户对这类产品最敏感的恰恰是数据去向
+- 在 AI 搜索赛道，广告、推荐、追踪和隐私承诺之间的张力会越来越大
+- 一旦法律层面认定营销术语与实际实现不一致，产品的 brand damage 可能远超罚款本身
+
+**评论观察：**
+- 🟢 支持：这会倒逼 AI 搜索公司把隐私声明从文案层拉回工程层。
+- 🔴 质疑：诉讼阶段的指控仍需法院和更多技术证据验证，不宜先下定论。
+
+**信源：**
+https://arstechnica.com/tech-policy/2026/04/perplexitys-incognito-mode-is-a-sham-lawsuit-says/
+
+**关联行动：** 继续跟踪案件中的技术证据披露，以及 Perplexity 是否调整隐身模式实现或对外表述。
+
+---
+
+### NA-5. [B] Mercor 安全泄露冲击 AI 训练数据供应链，Meta 暂停合作、OpenAI 调查中
+
+**概述：**
+Wired 报道，AI 训练数据供应链公司 **Mercor** 出现安全事件，Meta 已暂停相关合作，OpenAI 也在调查影响范围。Mercor 处在 AI 行业很少被公开讨论、但极其关键的一层：训练数据、标注、劳务与流程协调。
+
+**技术/产业意义：**
+过去行业更关注模型权重泄露、API 被刷、GPU 短缺；这次事件把焦点拉回了 **第三方数据供应链安全**。随着前沿模型训练越来越依赖外部标注与操作流程，训练供应链本身已经成为 AI 公司新的脆弱面。
+
+**深度分析：**
+- 训练数据供应商往往接触到标注规范、数据样本、流程文档，甚至部分敏感任务上下文
+- 一旦这类节点被攻破，泄露的可能不只是数据，而是训练方法和业务优先级等“行业机密”
+- Meta 直接暂停合作，说明至少在内部风险评估上，这不是轻微事件
+- 这类事件可能促使头部模型公司把更多高敏感训练流程重新收回内建体系
+
+**评论观察：**
+- 🟢 支持：AI 供应链安全终于被正视，这会推动行业补上第三方治理短板。
+- 🔴 质疑：当前外部可见信息仍有限，泄露规模、客户影响和责任界面尚未完全清晰。
+
+**信源：**
+https://www.wired.com/story/meta-pauses-work-with-mercor-after-data-breach-puts-ai-industry-secrets-at-risk/
+
+**关联行动：** 跟踪事件后续披露、受影响客户范围，以及头部实验室是否因此调整数据外包策略。
+
+---
+
+### NA-6. [B] Together AI 借 AI Native Conf 强化“研究直达生产”的 AI Native Cloud 叙事
+
+**概述：**
+Together AI 在 AI Native Conf 上集中发布多项研究与产品更新，包括 **FlashAttention-4、RL API、ThunderAgent、ATLAS-2、together.compile** 等，核心叙事不是“我们也能托管模型”，而是“我们能把 kernel / RL / inference research 直接变成生产能力”。
+
+**技术/产业意义：**
+这代表北美中型 AI 基础设施公司正在走出“提供 GPU 和推理 API”的同质化红海，转而用 **research-to-production speed** 做差异化。其叙事明显对标云厂商和通用推理平台。
+
+**深度分析：**
+- Together 在文中高频强调自己的研究 lineage：FlashAttention、ThunderKittens、编译优化、Turbo speculator 等
+- 明确点名 Cursor、Decagon、Hedra 等客户，强调研究成果已经吃到生产流量
+- 这种打法试图回答一个关键问题：为什么客户不直接上 hyperscaler？答案是“我们比云更懂 AI 工作负载本身”
+
+**评论观察：**
+- 🟢 支持：如果 Together 真能持续把 research transfer 到 production，它会是北美 AI infra 市场里少数有技术护城河的中型选手。
+- 🔴 质疑：发布很多不等于商业转化成功，客户最终仍会看稳定性、价格和运维可控性。
+
+**信源：**
+https://www.together.ai/blog/ai-native-conf-research-and-product-announcements
+
+**关联行动：** 继续观察 Together 在 RL、compile、speculative decoding 方向的产品化节奏，以及客户案例是否持续扩张。
+
+---
+
+### NA-7. [B] FlashAttention-4 针对 Blackwell 做硬件-软件协同优化，最高号称比 cuDNN 9.13 快 1.3 倍
+
+**概述：**
+Together AI 与合作研究者发布 **FlashAttention-4**，明确把优化目标锁定在 NVIDIA Blackwell 的“张量吞吐增速快于共享内存 / SFU / ALU”的不对称硬件演进趋势上。
+
+**技术/产业意义：**
+这说明 attention kernel 竞争已经进入新的阶段：不是“有没有更快 kernel”，而是“谁能跟着新一代芯片架构做联合设计”。未来模型效率提升越来越依赖底层 kernel 与硬件特性的共同演进。
+
+**深度分析：**
+- 官方给出的数字是 **B200 上 1605 TFLOPs/s、71% 利用率**
+- 宣称相对 **cuDNN 9.13 提升最高 1.3x**，相对 Triton 提升最高 2.7x
+- 关键方法包括：新的 pipeline、利用 FMA 近似 softmax exponential、用 TMEM 和 2-CTA MMA 缓解共享内存压力
+- 对长上下文视频理解、coding agents、test-time compute scaling 等场景尤其关键
+
+**评论观察：**
+- 🟢 支持：这类工作比单纯 benchmark 更重要，因为它直接决定 Blackwell 一代的真实单位成本曲线。
+- 🔴 质疑：领先幅度能否在更多模型、更多框架和生产环境里稳定复现，还需要更广泛验证。
+
+**信源：**
+https://www.together.ai/blog/flashattention-4
+
+**关联行动：** 跟踪 FlashAttention-4 代码在主流训练/推理框架中的落地速度，以及 NVIDIA 官方栈的后续追赶。
+
+---
+
+### NA-8. [B] Mamba-3 把 SSM 重新拉回战场：这次不拼训练速度，直接拼推理经济性
+
+**概述：**
+Together AI 与学术合作者发布 **Mamba-3**，明确宣称这是一个以 **inference efficiency** 为第一目标设计的 state space model，而不是像 Mamba-2 那样优先优化训练效率。
+
+**技术/产业意义：**
+当 agentic coding、RL rollout、长上下文推理越来越耗 decode，架构竞争的关键指标正在从“预训练快不快”转向“生成时每 token 成本高不高”。Mamba-3 的定位切中了这个转向。
+
+**深度分析：**
+- 文中明确点名 Codex、Claude Code、OpenClaw 等 agent workflow 推高了 inference demand
+- Mamba-3 在 1.5B 规模上宣称 prefill+decode latency 优于 Mamba-2、Gated DeltaNet，甚至优于 Llama-3.2-1B
+- 核心路线是更 expressive 的 recurrence、complex-valued SSM 和 MIMO 设计
+- 同时开源 Triton / TileLang / CuTe DSL kernels，说明其目标并非只做论文，而是争取工程采用
+
+**评论观察：**
+- 🟢 支持：这是少数明确围绕“推理经济性”重做架构的尝试，方向是对的。
+- 🔴 质疑：SSM 是否真能在更大规模、更复杂任务上稳定威胁 Transformer 生态，还远没定局。
+
+**信源：**
+https://www.together.ai/blog/mamba-3
+
+**关联行动：** 关注 Mamba-3 后续开源实现、复现结果，以及是否被真实推理平台纳入生产栈。
+
+---
+
+### NA-9. [B] Onyx 登上 GitHub Trending，开源买家开始偏好“LLM 应用层一体机”
+
+**概述：**
+`onyx-dot-app/onyx` 在 GitHub Trending 获得较强可见度。项目定位不是单点工具，而是一个完整的 **Open Source AI Platform**：RAG、web search、code execution、artifacts、MCP/actions、deep research、voice mode、企业协作与治理能力基本都打包进来。
+
+**技术/产业意义：**
+这反映出北美开源需求正在从“给我一个 model wrapper”升级为“给我一个能直接落地给团队用的 AI 工作台”。Onyx 代表的是 **application layer for LLMs** 这个产品层的成熟化。
+
+**深度分析：**
+- 同时支持自托管和专有模型提供商，明显是为了企业现实环境做兼容
+- 提供 CE / EE 分层与 lite / standard 部署模式，说明其商业化和开源分工已经比较清晰
+- MCP、web search、code execution、deep research 被打包到一起，方向上与“企业内部通用 AI 门户”高度一致
+
+**评论观察：**
+- 🟢 支持：这类项目更接近企业真实采购对象，而不是只给开发者 demo。
+- 🔴 质疑：功能面越大，工程复杂度和稳定性压力越高，部署门槛也会抬升。
+
+**信源：**
+https://github.com/onyx-dot-app/onyx
+https://github.com/trending
+
+**关联行动：** 跟踪其 star 增速、企业部署案例，以及与 Danswer / Open WebUI / LibreChat 等开源阵营的分化。
+
+---
+
+### NA-10. [B] `oh-my-codex` 走红，编码 Agent 市场开始出现“工作流壳层”竞争
+
+**概述：**
+`Yeachan-Heo/oh-my-codex` 在 GitHub Trending 抬头。项目并不替代 Codex CLI，而是包装出一层更强的工作流壳：默认更强会话、hooks、agent teams、HUD、`.omx/` 状态目录，以及 `$deep-interview`、`$ralplan`、`$team`、`$ralph` 等固定流。
+
+**技术/产业意义：**
+这说明 coding agent 市场正在分裂成两层：底层是模型 / runtime，上层是 **workflow shell / orchestration UX**。谁掌握“默认工作流”，谁就有机会掌握用户心智，而不必自己训练模型。
+
+**深度分析：**
+- 项目强调“Codex does the actual agent work，OMX adds workflow/runtime/state”
+- 这本质上是在抢占 agent 使用过程中的控制点：澄清、计划、并行执行、持久化状态
+- 如果这类壳层大量出现，未来 Codex / Claude Code / Gemini CLI 之间的差异化可能会更多发生在上层体验而不是底层模型本身
+
+**评论观察：**
+- 🟢 支持：这类工具抓到了真实痛点——开发者需要的不是多一个模型名字，而是更稳定的执行流程。
+- 🔴 质疑：壳层一多就会碎片化，学习成本和兼容性问题也会随之上升。
+
+**信源：**
+https://github.com/Yeachan-Heo/oh-my-codex
+https://github.com/trending
+
+**关联行动：** 继续观察 Codex 生态是否出现更多 workflow layer，以及 OpenAI 官方是否会把这部分能力内建。
+
+---
+
+## 📊 KOL 观点精选
+
+本轮对 Tier 1/2/3 KOL 与官方账号做了广泛搜索尝试，但 **没有抓到足够可靠、可直接核验、且有新增信息密度的推文/线程**。主要问题有两类：
+
+- **DuckDuckGo / X 反爬严重**：大量 `site:x.com` 检索直接落到 bot-detection 或低质量结果
+- **不接受二手截图**：本轮拒绝把无法回到原帖的截图、转述或聚合站内容硬写进日报
+
+因此本轮不单列“某 CEO 又发了一条推文”的低可信内容，而是把社区实时风向主要通过以下替代信号捕捉：
+
+- **HN newest / top**：Microsoft Agent Framework、Anthropic 与第三方工具生态摩擦、Agent 工程实践讨论
+- **GitHub Trending**：Onyx、oh-my-codex 等工具层项目抬头
+- **官方工程博客**：Microsoft / AWS / Cerebras / Together 的一手工程与产品更新
+
+> 结论：本轮 **KOL 面无可核验高价值新增推文**，选择空缺而不编造。
+
+---
+
+## 下期追踪问题
+
+1. **Microsoft Agent Framework** 会不会迅速成为 Azure/Foundry 默认 Agent 编排层，并实质性替代 Semantic Kernel / AutoGen？
+2. **AWS × Cerebras 拆分式推理** 上线后，是否真能在 Bedrock 生产负载中兑现吞吐 / 延迟 / 成本三方面优势？
+3. **Perplexity 隐私诉讼 + Mercor 供应链泄露** 会不会推动企业在采购 AI 产品时，把隐私与第三方供应链审计提升到和模型能力同等的优先级？
+
+---
+
+## 📊 本轮（北美区+三大厂）自检清单
+
+### 三大厂
+- [x] Anthropic 4 个页面全部检查 ✅（含 docs 页面 direct HTTP fallback）
+- [x] OpenAI 4 个页面全部检查 ✅（blog / index / research / changelog）
+- [x] Google 4 个页面全部检查 ✅（blog.google / deepmind / developers / ai.google）
+- [x] ai-news-seen.json 已读取并对比 ✅
+- [x] 本轮结论明确写出“今日三大厂无新发布” ✅
+- [x] 无新增高价值官方文章 URL，因此 ai-news-seen.json 保持不变 ✅
+
+### 北美公司与英文信源
+- [x] Microsoft / AWS / Cerebras / Together / Perplexity / 数据供应链等核心北美主题已覆盖 ✅
+- [x] HN 首页 + newest 已 fetch ✅
+- [x] GitHub Trending + weekly 已 fetch ✅
+- [x] The Verge / Ars / Wired / TechCrunch / MIT TR / IEEE / Reuters 等页已尝试覆盖 ✅
+- [⚠️] Meta / Apple / xAI / Databricks / Scale 等部分页面提取质量一般，未发现足够强的新 A/B 级条目
+- [⚠️] 其他 15+ 公司做了 direct fetch / 搜索尝试，但部分站点 404、抽取失败或信息陈旧
+
+### KOL / X
+- [x] Tier 1/2/3 与官方账号做了广泛搜索尝试 ✅
+- [⚠️] DuckDuckGo 与 X 反爬严重，无法稳定拿到可核验原帖
+- [x] 未把二手截图、转述或无法回源内容写入日报 ✅
+
+### 质量检查
+- [x] 所有新增条目均有原始链接 ✅
+- [x] 新增条目均经过 A/B/C 分级，C 级已丢弃 ✅
+- [x] daily.md 已补齐三大厂 / 北美区 / KOL / 下期追踪问题结构 ✅
+- [x] index.md 已更新 ✅
+- [x] 本轮不发飞书，只写入并 push GitHub ✅
+
+**北美区采集总数：10 条（A 级 2 条 + B 级 8 条）**
+**三大厂新增官方文章：0 条**
+**今日全局总条目：36 条（不含 KOL 空缺说明）**

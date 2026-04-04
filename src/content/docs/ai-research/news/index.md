@@ -4,6 +4,7 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-05](/ai-research/news/2026-04-05/daily/) — ⭐ DeepSeek V4 国产芯片优先 / 微软 Agent Framework 开源 / AWS×Cerebras 拆分推理 / Mercor 供应链泄露 / FlashAttention-4 / 三大厂本轮无新发布 — 全球 36+ 条
 - [2026-04-03](/ai-research/news/2026-04-03/daily/) — ⭐⭐ Gemma 4 Apache 2.0 开源 / Anthropic 发现 LLM 情绪概念 / OpenAI 收购 TBPN + Codex 灵活定价 / Cursor 3 重磅发布 / AMD Lemonade 开源 / IBM×Arm / Qwen3.6-Plus / 昇腾 950PR 量产 — 全球 23+ 条
 - [2026-04-02](/ai-research/news/2026-04-02/daily/) — ⭐ SpaceX $1.75T IPO / OpenAI $1220亿融资 / GPT-5.4全系 / Claude Code生态13万星爆发 / Gemini 7.5亿MAU / Alphabet暴跌9% / Penguin起诉OpenAI / Copilot Cowork多模型 / Meta BOxCrete / 75+条
 - [2026-03-31](/ai-research/news/2026-03-31/daily/) — ⭐ 已补全：Qwen3.5-Omni、Gemini 3.1 Flash Live、微软 Copilot 多模型、苹果开放 Siri、xAI 法律压力、Perplexity Health、GitHub/HN 代理社区风向
