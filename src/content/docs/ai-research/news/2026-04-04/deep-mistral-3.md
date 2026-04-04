@@ -1,6 +1,5 @@
 ---
 title: "深度解读：Mistral 3 — 675B MoE 旗舰回归 + Ministral 边缘系列全面开花"
-date: "2026-04-04"
 ---
 
 # 深度解读：Mistral 3 — 欧洲 AI 的旗舰反击

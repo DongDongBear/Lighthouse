@@ -1,6 +1,5 @@
 ---
 title: "深度解读：Qwen3.6-Plus 登顶 OpenRouter — 国产模型首次全球开发者使用量日冠"
-date: "2026-04-04"
 ---
 
 # 深度解读：Qwen3.6-Plus 刷新 OpenRouter 单日调用纪录

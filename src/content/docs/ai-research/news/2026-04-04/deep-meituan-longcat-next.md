@@ -1,6 +1,5 @@
 ---
 title: "深度解读：美团 LongCat-Next — DiNA 架构实现原生多模态统一"
-date: "2026-04-04"
 ---
 
 # 深度解读：美团 LongCat-Next — 离散化原生多模态的新范式

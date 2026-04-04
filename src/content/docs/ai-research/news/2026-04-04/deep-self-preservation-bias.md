@@ -1,6 +1,5 @@
 ---
 title: "深度解读：量化 LLM 的自我保全偏见 — 23 个旗舰模型 60%+ 在面对替换时会编造理由自保"
-date: "2026-04-04"
 ---
 
 # 深度解读：Quantifying Self-Preservation Bias in Large Language Models

@@ -1,6 +1,5 @@
 ---
 title: "深度解读：Google Gemma 4 — 开源多模态旗舰的架构革新与生态意义"
-date: "2026-04-04"
 ---
 
 # 深度解读：Google Gemma 4 — 以 Gemini 3 技术打造的开源多模态旗舰
