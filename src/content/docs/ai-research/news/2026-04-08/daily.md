@@ -1,6 +1,6 @@
 ---
 title: "2026-04-08 AI 日报：Anthropic 发起 Glasswing，Google 和 OpenAI 都在补 AI 时代的基础设施"
-description: "国际线聚焦 Glasswing、TBPN 收购、Google 印度基建；中国区 12 条；欧洲区 10 条：EU AI Act 执行危机仅 8/27 成员国就位、Wayve $15 亿 D 轮自动驾驶、LeCun $10 亿创 AMI Labs 宣战 LLM 路线、Amnesty 联合 127 组织反对 Digital Omnibus；学术/硬件 14 条：NVIDIA Rubin $1 万亿订单簿、AMD MI400 发布 40 PFLOPS、TSMC 2nm 量产良率 70%、MegaTrain 单卡训练千亿模型、Video-MME-v2 揭示视频模型关键缺陷。"
+description: "国际线聚焦 Glasswing、TBPN 收购、Google 印度基建；中国区 12 条；欧洲区 12 条：EU AI Act 执行危机仅 8/27 成员国就位、Wayve $15 亿 D 轮自动驾驶、LeCun $10 亿创 AMI Labs 宣战 LLM 路线、Mistral Forge 企业平台发布冲击 $10 亿 ARR、Poolside AI 估值 $120 亿获 NVIDIA $10 亿押注；学术/硬件 16 条：NVIDIA Rubin $1 万亿订单簿、AMD MI400 发布 40 PFLOPS、TSMC 2nm 量产良率 70%、MegaTrain 单卡训练千亿模型、DARE 统一扩散语言模型后训练框架、Intel Gaudi 转向企业推理。"
 ---
 
 # 2026-04-08 AI 日报
@@ -585,6 +585,52 @@ Hacker News 热帖中的项目 `gemma-tuner-multimodal`，已经把 Gemma 4 / 3n
 
 ---
 
+### EU-11. [A] Mistral Forge 企业级自主训练平台发布，ARR 逼近 $10 亿，欧洲 AI 主权叙事落地
+
+**概述：**Mistral AI 于 3 月 17 日 NVIDIA GTC 2026 上发布 Mistral Forge——允许企业在自有数据上从零训练定制 AI 模型的全栈平台，覆盖预训练、后训练和强化学习全生命周期，区别于竞品仅提供微调或 RAG 的路线。首批客户包括 ASML、Ericsson、欧洲航天局（ESA）、意大利咨询公司 Reply 和新加坡国防科技局。CEO Arthur Mensch 确认公司 ARR 正朝 $10 亿迈进。同期 Accenture 宣布与 Mistral 达成多年战略合作，共同推进欧洲企业"战略自主"AI 部署，数据全部留在欧盟境内服务器。
+
+**技术/产业意义：**Mistral Forge 是欧洲 AI 公司首次在企业级全生命周期模型训练上与 OpenAI/Anthropic 正面竞争。与 Accenture（全球最大 IT 咨询公司）合作意味着 Mistral 获得了真正的全球分发网络，"主权 AI"不再只是政策口号而是有商业落地的产品。
+
+**深度分析：**
+- Forge 配备前置部署工程师团队（借鉴 Palantir/IBM 模式），直接嵌入客户团队——这是面向高价值企业的重运营模式
+- ESA 和 ASML 作为首批客户说明 Forge 瞄准的是数据高度敏感的高端垂直领域
+- Accenture 合作确保客户数据留在欧盟境内，满足 GDPR 和 AI Act 合规要求
+- $10 亿 ARR 目标若达成，Mistral 将成为欧洲首个 $10 亿级 AI 模型公司
+- 同期发布 Mistral Small 4 和 Voxtral TTS（零样本语音克隆），产品矩阵在快速扩展
+
+**评论观察：**
+- 🟢 支持：企业自主训练能力是真正的差异化——OpenAI 和 Anthropic 目前不提供从零训练的全栈服务
+- 🔴 质疑：企业从零训练模型的实际需求规模存疑，且 Forge 面临 Databricks/Snowflake 等数据平台巨头的侧翼竞争
+
+**信源：**https://techcrunch.com/2026/03/17/mistral-forge-nvidia-gtc-build-your-own-ai-enterprise/
+
+**关联行动：**关注 Forge 首批客户的公开案例及 Mistral 2026 年 ARR 实际达成情况。
+
+---
+
+### EU-12. [B] Poolside AI 估值飙至 $120 亿，NVIDIA 拟投 $10 亿押注欧洲 AI 编程
+
+**概述：**巴黎/旧金山双总部的 AI 编程公司 Poolside 正进行 $20 亿融资轮，NVIDIA 拟投入高达 $10 亿，估值从一年前的 $30 亿飙升至 $120 亿（4 倍跳涨）。公司由前 GitHub CTO Jason Warner 和 Eiso Kant 创立，专注构建全自主编程 Agent。但近期 CoreWeave 终止了与 Poolside 在德克萨斯 2GW AI 园区（Project Horizon，计划部署 4 万+ NVIDIA GPU）的合作，Poolside 需寻找新的算力基础设施合作方。
+
+**技术/产业意义：**Poolside 是继 Mistral 之后欧洲第二家估值超 $100 亿的 AI 公司。NVIDIA 同时大额投资 Mistral 和 Poolside，说明其在欧洲的投资策略是"广撒网、深绑定"。CoreWeave 退出合作则暴露了高速扩张中的基础设施风险。
+
+**深度分析：**
+- 一年内估值 4 倍增长反映市场对 AI 编程 Agent 赛道的极端热情
+- Poolside 的技术路线与 Cursor/Windsurf 等编辑器级工具不同，瞄准的是完全自主的代码生成
+- CoreWeave 终止合作的原因未公开，但可能与 CoreWeave 自身资本优先级调整有关
+- NVIDIA 投资逻辑：编程 Agent 是 GPU 推理需求最密集的应用场景之一
+- 与 LeCun 的 AMI Labs（EU-4）同属欧洲 $100 亿级 AI 公司阵营，欧洲 AI 独角兽集群正在形成
+
+**评论观察：**
+- 🟢 支持：AI 编程市场预计 2027 年达 $400 亿，Poolside 的全栈自主方案定位精准
+- 🔴 质疑：$120 亿估值对应的收入基础极其薄弱，且失去 CoreWeave 算力合作是实质性风险
+
+**信源：**https://techfundingnews.com/nvidia-prepares-up-to-1b-investment-as-poolsides-valuation-jumps-to-12b/
+
+**关联行动：**关注 Poolside 新算力合作伙伴选择及 $20 亿融资轮的最终完成情况。
+
+---
+
 ## 🌐 学术/硬件
 
 > 本轮覆盖全球学术论文、AI 硬件及基础设施动态。
@@ -893,6 +939,51 @@ Hacker News 热帖中的项目 `gemma-tuner-multimodal`，已经把 Gemma 4 / 3n
 
 ---
 
+### AH-15. [B] DARE：首个统一扩散语言模型后训练框架，终结 dLLM 研究碎片化
+
+**概述：**上海交大/商汤团队发布 DARE（dLLMs Alignment and Reinforcement Executor），首个统一的扩散大语言模型（dLLM）开源后训练框架。集成 SFT、PEFT、偏好优化和多种 dLLM 特有的 RL 算法，同时支持 Masked Diffusion LM（MDLM）和 Block Diffusion LM（BDLM）两大技术路线，覆盖 LLaDA、Dream、SDAR、LLaDA-MoE、LLaDA2.x 等全部主流模型族。基于 verl（训练）和 OpenCompass（评估）构建。HuggingFace Papers 167 upvotes。
+
+**技术/产业意义：**扩散语言模型正在成为自回归 LLM 的有力替代方案——通过迭代去噪而非逐 token 生成来工作，允许并行解码。但此前各模型家族的后训练代码各自为政，复现和公平比较极为困难。DARE 是首个将 SFT→RLHF→评估全流程统一的框架，对加速 dLLM 范式成熟至关重要。
+
+**深度分析：**
+- 解决了 dLLM 领域"每篇论文一套代码"的碎片化问题——此前 LLaDA、Dream 等各有独立训练代码，无法公平比较
+- 框架作用类似 HuggingFace Transformers 之于自回归 LLM：标准化基础设施加速整个范式的研究迭代
+- 167 HF upvotes 的社区热度表明 dLLM 赛道正从边缘实验走向主流关注
+- 如果 dLLM 在推理速度上展现决定性优势（并行解码 vs 逐 token），该框架将成为关键基础设施
+
+**评论观察：**
+- 🟢 支持：标准化框架对新范式成熟不可或缺，DARE 填补了 dLLM 生态的关键空白
+- 🔴 质疑：dLLM 在实际任务上仍未展现对自回归模型的决定性优势，框架价值取决于范式本身的前景
+
+**信源：**https://arxiv.org/abs/2604.04215
+
+**关联行动：**关注 DARE 框架下各 dLLM 模型族的标准化 benchmark 对比结果。
+
+---
+
+### AH-16. [B] Intel Gaudi 战略转向企业推理，Jaguar Shores 瞄准 HBM4E 但要等到 2027
+
+**概述：**Intel AI 加速器 Gaudi 3 在数据中心 GPU 市场份额仍低于 10%，但 2024 年末战略转向"企业 AI 推理"后开始获得牵引力——IBM、Dell 在 2025 年中开始集成 Gaudi 3 部署开源模型（Llama 3 等），Inflection AI 也转用 Gaudi 3。CES 2026 上 Intel 展示了 Panther Lake 消费 AI 芯片和 Gaudi 3 企业推理方案。下一代"Jaguar Shores"将跳过 HBM4 直接采用 HBM4E，成为 Intel 首款对标 NVIDIA 高端训练平台的芯片，但预计 2027 年才上市。
+
+**技术/产业意义：**Intel 在 AI 加速器市场的困境是"硬件尚可但软件生态（对标 CUDA）缺失"的典型案例。选择放弃与 NVIDIA 正面竞争训练市场、转而主攻成本敏感的企业推理场景，是务实但空间有限的策略。Jaguar Shores + HBM4E 是其重返训练市场的长期押注。
+
+**深度分析：**
+- Gaudi 3 定价策略：以比 NVIDIA H100 低 30-40% 的价格吸引推理工作负载
+- IBM 和 Inflection AI 转用 Gaudi 3 是迄今最重要的客户案例，验证了推理定位的可行性
+- Jaguar Shores 选择 HBM4E 而非 HBM4 暗示 Intel"等待更成熟版本"的保守策略
+- 在 AMD MI400（HBM4, 2026）和 NVIDIA Rubin 夹击下，2027 年上市的 Jaguar Shores 将面临激烈竞争
+- Intel Foundry 代工业务的走向对 Gaudi 长期成本结构有决定性影响
+
+**评论观察：**
+- 🟢 支持：企业推理市场需要更多竞争者压低价格，Gaudi 3 的性价比对中小企业有吸引力
+- 🔴 质疑：<10% 市场份额 + 2027 年才有竞争力产品 = Intel 在 AI 加速器市场的窗口正在快速关闭
+
+**信源：**https://aihardwareindex.com/blog/intel-ces-2026-panther-lake-gaudi-3-and-the-crushing-amd-nar
+
+**关联行动：**关注 Jaguar Shores 正式发布时间及 Intel Foundry 运营进展。
+
+---
+
 ## 📌 结论
 
 今天最重要的不是”又有哪个模型刷了多少分”，而是 AI 行业的竞争层次正在继续上移：
@@ -904,9 +995,9 @@ Hacker News 热帖中的项目 `gemma-tuner-multimodal`，已经把 Gemma 4 / 3n
 - Mistral 代表欧洲开始认真补上游底座
 - 中国模型则在全球调用层打出越来越硬的真实使用数据
 
-欧洲区信号：EU AI Act 执行出现系统性危机（仅 8/27 成员国就位），但 Amnesty 联合 127 组织对 Digital Omnibus 的反击说明欧洲的治理博弈远未结束。Wayve $15 亿融资、LeCun $10 亿 AMI Labs、英国三巨头集群——欧洲的 AI 版图正在从”政策驱动”向”资本+产品驱动”转型。
+欧洲区信号：EU AI Act 执行出现系统性危机（仅 8/27 成员国就位），但 Amnesty 联合 127 组织对 Digital Omnibus 的反击说明欧洲的治理博弈远未结束。Wayve $15 亿融资、LeCun $10 亿 AMI Labs、英国三巨头集群——欧洲的 AI 版图正在从”政策驱动”向”资本+产品驱动”转型。Mistral Forge 企业平台加上 Accenture 全球分发、Poolside $120 亿估值获 NVIDIA 重注——欧洲 AI 不再只有模型和政策，开始有真正的产品和客户。
 
-学术/硬件信号：NVIDIA Rubin $1 万亿订单簿和 AMD MI400 的 40 PFLOPS 标志着算力军备竞赛进入新量级。TSMC 2nm 70% 良率提前达标锁定 2-3 年制造领先。学术界最值得关注的是 Agent 安全研究的三重交叉验证——DeepMind 攻击分类 + Claw-Eval 44% 安全漏检 + OpenClaw 真实世界审计，共同指向一个结论：当前 Agent 安全评估体系严重不足。
+学术/硬件信号：NVIDIA Rubin $1 万亿订单簿和 AMD MI400 的 40 PFLOPS 标志着算力军备竞赛进入新量级。TSMC 2nm 70% 良率提前达标锁定 2-3 年制造领先。Intel Gaudi 转向企业推理、Jaguar Shores 瞄准 2027，三巨头格局（NVIDIA/AMD/Intel）的分化越来越清晰。学术界两个方向值得关注：一是 Agent 安全研究的三重交叉验证（DeepMind 攻击分类 + Claw-Eval 44% 安全漏检 + OpenClaw 真实世界审计），共同指向当前 Agent 安全评估体系严重不足；二是 DARE 框架标志着扩散语言模型从零散实验走向系统化研究，自回归不再是唯一范式。
 
 一句话总结：谁能把安全、算力、分发和生态一起攥住，谁就是下一阶段的赢家——而这场竞赛现在是三大洲同时在跑。
 
@@ -951,6 +1042,8 @@ Hacker News 热帖中的项目 `gemma-tuner-multimodal`，已经把 Gemma 4 / 3n
 - DeepMind Agent 攻击分类: https://www.securityweek.com/google-deepmind-researchers-map-web-attacks-against-ai-agents/
 - EU AI Act 裸体化禁令: https://www.europarl.europa.eu/news/en/agenda/plenary-news/2026-03-25/2/artificial-intelligence-parliament-to-vote-on-nudification-ban
 - EU InvestAI 3 亿招标: https://digital-strategy.ec.europa.eu/en/news/eu-invests-over-eu307-million-artificial-intelligence-and-related-technologies
+- Mistral Forge 企业平台: https://techcrunch.com/2026/03/17/mistral-forge-nvidia-gtc-build-your-own-ai-enterprise/
+- Poolside AI $120 亿估值: https://techfundingnews.com/nvidia-prepares-up-to-1b-investment-as-poolsides-valuation-jumps-to-12b/
 
 ### 🌐 学术/硬件信源
 - NVIDIA Rubin 平台: https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer
@@ -967,3 +1060,5 @@ Hacker News 热帖中的项目 `gemma-tuner-multimodal`，已经把 Gemma 4 / 3n
 - Action Images 机器人策略: https://arxiv.org/abs/2604.06168
 - AI 数据中心能源危机: https://www.cnbc.com/2026/04/06/ai-data-centers-financing-insurance-deals-gpu-debt.html
 - OpenClaw 安全审计: https://arxiv.org/abs/2604.04759
+- DARE 扩散 LLM 框架: https://arxiv.org/abs/2604.04215
+- Intel Gaudi 战略转向: https://aihardwareindex.com/blog/intel-ces-2026-panther-lake-gaudi-3-and-the-crushing-amd-nar
