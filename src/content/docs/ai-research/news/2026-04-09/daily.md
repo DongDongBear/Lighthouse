@@ -1,6 +1,6 @@
 ---
-title: "2026-04-09 AI 日报：[占位，最后由北美采集轮填写]"
-description: "[占位]"
+title: "2026-04-09 AI 日报：Gemma 4 开源提速，Mistral 重押主权算力，视频评测进入反刷榜时代"
+description: "今日聚焦 Google Gemma 4、Mistral 债务融资建数据中心、Generalist GEN-1、Video-MME-v2、In-Place TTT 与先进封装瓶颈。"
 ---
 
 # 2026-04-09 AI 日报
