@@ -4,6 +4,7 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-08](/ai-research/news/2026-04-08/daily/) — ⭐ Anthropic Glasswing AI 网络安全联盟 / OpenAI TBPN 收购+"AI 新政" / Google TorchTPU+印度 $150 亿基建 / Meta 半封闭 Avocado/Mango / Musk 强制银行买 Grok / NVIDIA-Groq $200 亿反垄断 / Cerebras IPO $250 亿 / Q1 风投 $3000 亿 AI 占 80% / 智谱 GLM-5.1 开源登顶 SWE-bench / EU AI Act 执行危机 — 全球 57+ 条
 - [2026-04-06](/ai-research/news/2026-04-06/daily/) — ⭐ 微软 MAI 自研模型 / AWS Bedrock Guardrails 跨账号 GA / NVIDIA×Marvell NVLink Fusion / CoreWeave $85亿贷款 / Gemma 4 端侧生态扩散 — 全球 37+ 条
 - [2026-04-05](/ai-research/news/2026-04-05/daily/) — ⭐ DeepSeek V4 国产芯片优先 / 微软 Agent Framework 开源 / AWS×Cerebras 拆分推理 / Mercor 供应链泄露 / FlashAttention-4 / 补录 Anthropic 基础设施噪声研究 — 全球 37+ 条
 - [2026-04-03](/ai-research/news/2026-04-03/daily/) — ⭐⭐ Gemma 4 Apache 2.0 开源 / Anthropic 发现 LLM 情绪概念 / OpenAI 收购 TBPN + Codex 灵活定价 / Cursor 3 重磅发布 / AMD Lemonade 开源 / IBM×Arm / Qwen3.6-Plus / 昇腾 950PR 量产 — 全球 23+ 条
