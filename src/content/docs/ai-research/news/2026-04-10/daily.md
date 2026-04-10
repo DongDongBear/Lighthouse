@@ -1,6 +1,6 @@
 ---
 title: "2026-04-10 AI 日报：Anthropic 进军美国国防 + Claude 获得网页搜索 + NVIDIA 因出口管制面临 $5.5B 冲击"
-date: 2026-04-10
+date: "2026-04-10"
 description: "Lighthouse AI 每日情报 — 三大厂动态 + 北美区 + 欧洲区 + 学术/硬件"
 ---
 
