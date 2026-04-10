@@ -1,0 +1,106 @@
+---
+title: "2026-03-06 17:26（UTC+8）｜核心摘要：Agent 检索与验证范式继续收敛，算力供应链不确定性上行"
+description: "本期聚焦 Agent/LLM 底层研究（AgentIR、V1、KARL）、可复现工程安全（Clinejection）、以及全球 AI 芯片许可制对 NVIDIA/AMD 交付链条的潜在冲击。"
+date: "2026-03-07 14:31"
+---
+
+# 2026-03-06 17:26（UTC+8）｜核心摘要：Agent 检索与验证范式继续收敛，算力供应链不确定性上行
+
+## 本期学习主线
+
+- Agent 时代的检索器正在从“语义匹配”转向“推理感知”（Reasoning-aware Retrieval）。
+- Test-time scaling 的核心瓶颈逐步从“多采样”转向“高效验证”。
+- 企业级知识 Agent 开始出现可训练、可迁移、可降本的 RL 范式。
+- AI 自动化进入“供应链安全实战期”，Prompt Injection 已不再是纸面风险。
+- 芯片出口管制若升级为全球许可制，将直接改变算力交付节奏与系统架构决策窗口。
+
+## 追踪更新
+
+> 追踪来源说明：按文件名排序，最新一期 `2026-03-06-1521.md` 未包含“下期追踪问题”；本期继承最近一期含追踪问题文件 `2026-03-06-0526.md` 的 3 个问题继续跟踪。
+
+1. **AgentIR 是否进入主流 RAG 框架（LangChain/LlamaIndex）并出现第三方复现？**  
+   - **暂无更新**：未见官方发布“已集成”声明；公开讨论仍以论文和实验复现实验为主。
+2. **AMD MI455X / NVIDIA VR200 的 2H 2026 交付时间线是否有新确认？**  
+   - **部分更新**：目前仍以厂商口径与媒体跟进为主，尚无足够公开证据形成“已确定量产交付节点”的一致结论。
+3. **Stoneforge 的早期采用信号（Stars/Issues）是否显著？**  
+   - **暂无更新**：有持续讨论，但尚未看到足够强的生产级案例沉淀（公开 issue 仍偏探索与反馈阶段）。
+
+## 重点条目
+
+### 研究
+
+#### 1) AgentIR：Reasoning-Aware Retrieval 把 Agent 推理链正式纳入检索建模
+
+- **事件**：AgentIR（arXiv:2603.04384）提出将 Agent 搜索前推理轨迹（reasoning trace）与 query 联合建模，并在 BrowseComp-Plus 上报告显著增益。
+- **学习价值**：可学习“检索器应服务推理状态，而非仅服务文本 query”这一设计原则；对 RAG/Deep Research 产品迭代有直接启发。
+- **技术分析**：这类方法本质是把检索从静态编码升级为“状态条件检索（state-conditioned retrieval）”，可提升复杂问题分解时的信息命中率。
+- **风险与边界**：数据合成质量、不同 Agent 框架泛化性、线上延迟预算仍是核心不确定项。
+- **评论观察**：
+  - 🟢 支持（Hacker News）：认为“把推理过程带入检索”是 Deep Research 产品自然演进方向。([HN 讨论](https://news.ycombinator.com/item?id=47267389))
+  - 🔴 质疑（Reddit / r/MachineLearning）：担心收益来自更长上下文而非检索器结构本身。([Reddit 搜索](https://www.reddit.com/r/MachineLearning/search/?q=AgentIR&restrict_sr=1&sort=new))
+- **关联行动**：在自有 RAG 流水线做 A/B：baseline retriever vs reasoning-aware query expansion + rerank，记录 Recall@k 与端到端正确率。
+- **链接**：[主信源](https://arxiv.org/abs/2603.04384) · [辅助信源](https://news.ycombinator.com/item?id=47267389)
+
+#### 2) V1 并行推理框架：从“多生成”走向“强验证”
+
+- **事件**：V1（arXiv:2603.04304）提出 pairwise self-verification 与锦标赛式排序，强调验证策略是 test-time scaling 性能上限关键。
+- **学习价值**：可学习把预算从盲目增大 sample 数，转向“不确定性驱动验证”分配。
+- **技术分析**：pairwise 比较在长链推理任务中通常更稳定，且更适合构建可控、可解释的后验筛选层。
+- **风险与边界**：当候选规模扩大时，验证成本仍可能上升；对不同任务分布（代码/数学/开放问答）敏感。
+- **评论观察**：
+  - 🟢 支持（Papers with Code）：test-time scaling 相关论文高密度出现，方向共识增强。([Papers with Code - latest](https://paperswithcode.com/latest))
+  - 🔴 质疑（X/Twitter 讨论聚合）：有人质疑在真实产品 SLA 下验证开销是否可接受。([X 搜索](https://x.com/search?q=V1%20pairwise%20self-verification%20LLM&src=typed_query))
+- **关联行动**：在 coding benchmark 上加入 pairwise verifier，对比 Best-of-N 的成本/效果曲线，确定拐点。
+- **链接**：[主信源](https://arxiv.org/abs/2603.04304) · [辅助信源](https://paperswithcode.com/latest)
+
+#### 3) KARL：多任务 RL 企业搜索 Agent 的可训练范式
+
+- **事件**：Databricks 发布 KARL（arXiv:2603.05218），展示多任务 RL + 合成数据在企业检索任务上的系统化收益。
+- **学习价值**：可学习“任务混合 + 行为多样性 + 合成数据”如何共同改善搜索 Agent 泛化。
+- **技术分析**：相比单任务优化，KARL 更像训练“搜索策略模型”，对长期迭代的企业知识库更友好。
+- **风险与边界**：自建 benchmark 的外部可比性有限；跨行业数据域迁移仍需额外验证。
+- **评论观察**：
+  - 🟢 支持（Hugging Face 社区）：认为其训练 recipe 对企业落地价值高。([HF 论文页](https://huggingface.co/papers/2603.05218))
+  - 🔴 质疑（Reddit / LocalLLaMA）：担心复现门槛较高，数据构造细节决定成败。([Reddit 搜索](https://www.reddit.com/r/LocalLLaMA/search/?q=KARL%20retrieval%20agent&restrict_sr=1&sort=new))
+- **关联行动**：先做小规模“2 任务 + 合成 query”试验，不直接上全量多任务 RL，验证收益后再扩。
+- **链接**：[主信源](https://arxiv.org/abs/2603.05218) · [辅助信源](https://huggingface.co/papers/2603.05218)
+
+### 工程
+
+#### 4) Clinejection：Prompt Injection 到供应链投毒的工程警报
+
+- **事件**：公开案例显示，攻击者可经 GitHub Issue 文本注入影响 AI 自动化链路，并最终触达 CI/npm 发布环节。
+- **学习价值**：学习“输入即不可信代码”治理思路：输入清洗、权限最小化、动作白名单、发布前人审。
+- **技术分析**：Agent 工程的核心安全边界不在模型本身，而在工具执行权限与流水线信任链。
+- **风险与边界**：个案不必然代表全部 AI coding 工具，但暴露了通用薄弱点。
+- **评论观察**：
+  - 🟢 支持（Hacker News）：将其视为 AI DevOps 安全的里程碑案例。([HN 讨论](https://news.ycombinator.com/item?id=47267105))
+  - 🔴 质疑（GitHub 社区评论）：认为根因主要是权限配置与流程缺陷，而非“AI 本身失控”。([GitHub Security 文档](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions))
+- **关联行动**：本周内完成一次 AI workflow 审计：禁用通配执行权限、增加 publish 人工签核、引入依赖完整性校验。
+- **链接**：[主信源](https://grith.ai/blog/clinejection-when-your-ai-tool-installs-another) · [辅助信源](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions)
+
+### 硬件 / 产业
+
+#### 5) 全球 AI 芯片许可制预期升温：NVIDIA/AMD 交付与地区算力规划承压
+
+- **事件**：多家媒体持续跟进美国可能升级 AI 芯片出口规则，市场关注点从“是否限制”转向“审批机制与交付可预期性”。
+- **学习价值**：对工程团队而言，硬件 roadmap 需要把“政策延迟”纳入容量与成本模型，而非只看峰值算力。
+- **技术分析**：若进入逐笔审批模式，算力建设将出现更高 lead time 波动，影响训练/推理集群排产与资本开支节奏。
+- **风险与边界**：政策尚未完全落地前，媒体报道存在前瞻性偏差；厂商实际发货与官方口径可能错位。
+- **评论观察**：
+  - 🟢 支持（Tom’s Hardware）：认为将推动更多地区建设主权算力和本地替代。([Tom's Hardware](https://www.tomshardware.com/tech-industry/artificial-intelligence/us-govt-preps-sweeping-export-controls-for-nvidia-amd-ai-hardware-worldwide-licensing-system-would-give-trump-admin-broad-authority-to-block-global-sales))
+  - 🔴 质疑（SemiAnalysis 观点汇总）：担心过强管制反向削弱美系厂商全球份额。([SemiAnalysis](https://semianalysis.com/))
+- **关联行动**：为未来 2 个季度准备“算力双方案”：A（美系供给稳定）/B（审批延迟），分别估算训练计划与云资源替代路径。
+- **链接**：[主信源](https://www.tomshardware.com/tech-industry/artificial-intelligence/us-govt-preps-sweeping-export-controls-for-nvidia-amd-ai-hardware-worldwide-licensing-system-would-give-trump-admin-broad-authority-to-block-global-sales) · [辅助信源](https://semianalysis.com/)
+
+## 本期必学清单
+
+- **深读 1**：KARL 论文（arXiv:2603.05218）——看清企业知识 Agent 的 RL 训练配方。
+- **复现 1**：给现有 RAG 增加 reasoning-aware query 构造 + rerank，做小样本离线评估。
+- **跟踪 1**：全球 AI 芯片许可制的正式文本与厂商财报口径是否出现一致信号。
+
+## 下期追踪问题
+
+- AgentIR / V1 是否出现跨框架、跨任务的第三方复现实验报告（尤其是生产环境指标）？
+- NVIDIA/AMD 是否给出更明确的交付节点或审批影响量化口径？
+- AI coding workflow 的安全基线（最小权限、发布签核、依赖完整性）是否在主流模板中默认开启？
