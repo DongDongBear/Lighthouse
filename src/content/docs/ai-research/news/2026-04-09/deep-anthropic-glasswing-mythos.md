@@ -123,3 +123,37 @@ Glasswing 的成员名单值得逐个看：
 - **配套捐赠**：向 Alpha-Omega/OpenSSF 捐 $250 万，向 Apache 软件基金会捐 $150 万
 - **SWE-bench Pro 编码得分**：77.8%（vs Opus 4.6 的 53.4%）
 - **Fortune 后续报道**："too dangerous to release" 的内部叙事得到二次确认，Anthropic IPO 前借这次发布展示责任叙事
+
+---
+
+## 📌 2026-04-12 更新
+
+### 全球金融监管连锁反应：G7 三大央行级别紧急响应
+
+Mythos 的网络安全能力已从 AI 安全技术议题升级为全球金融系统稳定性议题，72 小时内触发三个 G7 国家央行级别的同步响应——这在 AI 模型发布史上前所未有。
+
+**美国（4 月 10 日）：**
+- 财长 Scott Bessent 与联储主席 Jerome Powell **联合紧急召见**美国主要银行 CEO，专题讨论 Mythos 对金融系统的网络安全风险
+- 出席者：Jane Fraser（Citigroup）、Ted Pick（Morgan Stanley）、Brian Moynihan（Bank of America）、Charlie Scharf（Wells Fargo）、David Solomon（Goldman Sachs）
+- **Jamie Dimon（JPMorganChase）受邀但缺席**——值得注意的是 JPMorgan 同时是 Glasswing 联盟的 12 家创始成员之一
+- Powell + Bessent 联合召见银行 CEO 极为罕见，通常只在金融危机或系统性风险场景出现
+
+**英国（4 月 11 日）：**
+- 英国央行（BOE）宣布将在下一次 **CMORG（跨市场运营韧性小组）** 及新设的 **CMORG AI Taskforce** 会议上专题讨论 Mythos 风险
+- 参与方包括英国财政部、FCA（金融行为监管局）和 NCSC（国家网络安全中心）
+- **NCSC 将 Mythos 评定为"评估过的最具网络攻击能力的模型"**——这一定性直接触发了金融监管议程升级
+
+**加拿大（4 月 11 日）：**
+- 加拿大央行同日与银行和金融公司召开紧急会议，讨论 Mythos 相关网络安全风险
+- 三国央行的同步响应表明已超越双边层面，正在形成 G7 级别的协调立场
+
+**技术侧进展：**
+- AWS Bedrock 已上线 Claude Mythos Preview（受限研究预览，仅 us-east-1 区域）
+- 这是 Mythos 首次通过云平台以 API 形态可访问，但仍限制在安全研究用途
+
+**产业含义：**
+- 对 Anthropic 而言是双刃剑：NCSC "最具能力"的定性强化技术领先叙事，但央行级监管关注可能延长金融机构客户的采购决策周期
+- 下一步关注点：BIS（国际清算银行）或 FSB（金融稳定委员会）是否在 30 天内发布 AI 网络安全相关金融稳定声明
+- 这一事件实质上重新定义了前沿 AI 模型的"风险评估主体"——从 AI 公司自律扩展到主权金融监管体系
+
+**信源：** CNBC 2026-04-10 / Bloomberg 2026-04-10 / Bloomberg 2026-04-11 (BOE CMORG) / AWS Bedrock 文档
