@@ -113,3 +113,13 @@ Glasswing 的成员名单值得逐个看：
 - https://www.anthropic.com/news/project-glasswing
 - https://www.anthropic.com/glasswing
 - Anthropic Frontier Red Team Blog（待持续跟踪）
+
+---
+
+## 📌 2026-04-11 更新
+
+- **合作伙伴名单确认 12 家**：AWS、Apple、Broadcom、Cisco、CrowdStrike、Google、JPMorganChase、Linux Foundation、Microsoft、NVIDIA、Palo Alto Networks（外加 Anthropic 自身）
+- **定价披露**：Mythos Preview 定为 $25 输入 / $125 输出 per MTok，明确为 B2B 安全企业级工具
+- **配套捐赠**：向 Alpha-Omega/OpenSSF 捐 $250 万，向 Apache 软件基金会捐 $150 万
+- **SWE-bench Pro 编码得分**：77.8%（vs Opus 4.6 的 53.4%）
+- **Fortune 后续报道**："too dangerous to release" 的内部叙事得到二次确认，Anthropic IPO 前借这次发布展示责任叙事

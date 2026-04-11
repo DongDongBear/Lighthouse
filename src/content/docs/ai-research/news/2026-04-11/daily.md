@@ -1,6 +1,6 @@
 ---
-title: "2026-04-11 AI 日报：Anthropic Project Glasswing 发布 Claude Mythos（网安 83.1%），OpenAI Stargate UK 暂停，DeepSeek V4 四月下旬确认"
-description: "今日头条：Anthropic Project Glasswing 正式发布，Claude Mythos Preview 网络安全漏洞复现 83.1%，12 家顶级合作伙伴，$1 亿信用额度；OpenAI Stargate UK 暂停（能源成本+版权监管）；DeepSeek V4 四月下旬确认（1T MoE，昇腾原生）；CoreWeave 同日与 Anthropic+Meta 签下巨额算力合约。"
+title: "2026-04-11 AI 日报：DeepSeek V4 四月下旬锁定（1T MoE/昇腾原生），OpenAI Stargate UK 暂停，腾讯开源 HY-Embodied-0.5"
+description: "今日头条：DeepSeek V4 四月下旬正式发布（1T MoE/35x 加速/昇腾原生/Apache 2.0）；OpenAI Stargate UK 项目暂停（能源成本+版权监管双重压力）；腾讯 Robotics X 开源 HY-Embodied-0.5（2B 胜 16/22 项基准）；CoreWeave 与 Anthropic+Meta 签下巨额算力合约；阿里 HappyHorse-1.0 视频生成全球双榜登顶。"
 ---
 
 # 2026-04-11 AI 日报
@@ -300,29 +300,7 @@ description: "今日头条：Anthropic Project Glasswing 正式发布，Claude M
 
 ---
 
-### EU-2. [B] EU Digital Omnibus：AI Act 高风险合规延期 +16 个月，透明度义务大幅削减
-
-**概述：**2026 年 4 月，多家智库和倡导团体发布分析报告，聚焦欧盟委员会于 2025 年 11 月提出的《数字综合法案》（Digital Omnibus）对 AI Act 的实质性修订。核心变化：高风险 AI 系统的合规截止日期向后延迟约 16 个月（超过原定 2026 年 8 月节点）；透明度义务显著削弱，企业不再强制要求将风险评估报告提交 EU 数据库公开。
-
-**技术/产业意义：**AI Act 是全球首部全面性 AI 法规框架，其执行时间表的松动具有超出欧盟范围的参照意义。此次修订是欧盟在"竞争力优先"压力下（对标美国 Trump 政府的 AI 监管放松政策）向产业界让步的直接体现。
-
-**深度分析：**
-- 延期 +16 个月的实质含义：原定 2026 年 8 月生效的高风险 AI 规则推迟至约 2027 年底，这给医疗、金融、招聘等高风险场景的 AI 部署提供了更长的过渡期，但同时也意味着相关消费者保护机制的推迟生效。
-- 透明度义务的削弱是更实质性的后退。原法规要求高风险 AI 系统在部署前向 EU 公共数据库提交风险评估文件，修订草案取消了这一强制要求。国际特赦组织（Amnesty International）在 4 月初发布声明，批评此举连同 GDPR、DSA、DMA 的同步削弱，构成欧洲数字权利保护的"系统性倒退"。
-- 欧盟内部存在真实分歧：南欧国家（西班牙、意大利）和部分东欧成员国推动放松，北欧国家（荷兰、德国）和欧洲议会部分议员持保留意见。Digital Omnibus 最终文本仍在三方谈判（Commission-Parliament-Council）中。
-- 对产业界：短期是利好（合规时间窗延长），但长期的监管不确定性可能反而增加企业规划难度——因为最终文本仍未确定。
-
-**评论观察：**
-- 🟢 支持：给中小型 AI 企业（尤其是欧洲本土创业公司）更多时间建立合规体系，避免因监管负担过重而推迟产品落地。
-- 🔴 质疑：Amnesty International 等倡导团体的批评值得认真对待——透明度义务的削减可能使公众难以评估高风险 AI 系统是否真正安全。
-
-**信源：**https://digital-strategy.ec.europa.eu/en/library/digital-omnibus-ai-regulation-proposal · https://www.amnesty.org/en/latest/news/2026/04/eu-simplification-laws/
-
-**关联行动：**跟踪 Digital Omnibus 三方谈判进展；关注欧洲议会是否对透明度义务削减提出修正；观察德国/荷兰 AI 公司（如 Aleph Alpha）如何调整其合规路线图。
-
----
-
-### EU-3. [B] Waypoint-1.5：Overworld 开源交互式世界模型，消费级 GPU 实现 720p/60fps
+### EU-2. [B] Waypoint-1.5：Overworld 开源交互式世界模型，消费级 GPU 实现 720p/60fps
 
 **概述：**2026 年 4 月 9 日，Overworld 在 HuggingFace 博客发布 Waypoint-1.5，一款面向消费级硬件的开源交互式世界模型。720p 分辨率版本在 RTX 3090 至 RTX 5090 上实现 60fps 实时交互；360p 版本支持更广泛硬件，并即将适配 Apple Silicon。训练数据规模约为 v1 的 100 倍。开源权重：Waypoint-1.5-1B 和 Waypoint-1.5-1B-360P，均已发布至 HuggingFace。
 
@@ -502,28 +480,7 @@ description: "今日头条：Anthropic Project Glasswing 正式发布，Claude M
 
 ## ⭐ 三大厂动态
 
-### BT-1. ⭐ Anthropic Project Glasswing 正式发布：Claude Mythos 漏洞复现 83.1%，12 家顶级合作伙伴，$1 亿使用信用额度
-
-**概述：** 2026 年 4 月 10 日，Anthropic 正式发布 Project Glasswing，并向 12 家定向合作伙伴开放网络安全专项模型 Claude Mythos Preview 访问权限。Fortune 报道 Mythos 此前被内部认定"风险过高而暂未公开发布（too dangerous to release）"。核心性能：CyberGym 漏洞复现任务得分 **83.1%**（Claude Opus 4.6 为 66.6%，提升约 25%），SWE-bench Pro 编码得分 **77.8%**（vs 53.4%）；已发现 1 个 27 年历史的 OpenBSD 漏洞、1 个 16 年历史的 FFmpeg 缺陷。12 家直接合作伙伴：AWS、Apple、Broadcom、Cisco、CrowdStrike、Google、JPMorganChase、Linux Foundation、Microsoft、NVIDIA、Palo Alto Networks。定价：输入 $25 / 输出 $125（per MTok）。$1 亿使用信用额度。配套资助：向 Alpha-Omega/OpenSSF 捐赠 $250 万，向 Apache 软件基金会捐赠 $150 万。
-
-**技术/产业意义：** 这是 Anthropic 第一次正式面向"主动防御"场景（而非辅助编码）发布专项安全模型。CyberGym 数据意味着 Claude Mythos 能以远超当前最强通用模型的成功率，自动化完成复杂漏洞利用研究。"$25/$125"的高定价明确定位为 B2B 安全企业级工具，而非通用推理模型替代品。
-
-**深度分析：**
-- CyberGym 83.1% vs Opus 4.6 的 66.6%：25% 的提升是量级跳跃。在安全研究中，从"60% 能做"到"83% 能做"意味着覆盖的漏洞类型和自动化深度有根本性变化，部分原本需要高级红队专家的任务变得可批量自动化。
-- 12 家合作伙伴横跨云计算（AWS）、设备厂商（Apple）、芯片（Broadcom/NVIDIA）、网络（Cisco）、安全（CrowdStrike/Palo Alto）、金融（JPMorganChase）和基础设施（Linux Foundation/Apache），定位不是单一垂直工具，而是跨行业的"安全基础模型"。
-- "太危险未公开发布"的叙事是 Anthropic 的双刃剑：一方面是最强的市场信号（暗示能力极强），另一方面引发了 AI 安全与能力扩散的伦理争议。这种"定向可信发布"模式若被广泛采用，可能成为高风险 AI 能力商业化的新范式。
-
-**评论观察：**
-- 🟢 支持：第三方安全基准（CyberGym）得分可验证；$1 亿信用额度是 Anthropic 罕见的大规模前期投入，显示商业决心。
-- 🔴 质疑：Mythos 的访问控制能否有效防止合作伙伴将能力扩散给未授权方？12 家合作伙伴中既有竞争对手（Google/Microsoft），信息共享边界如何划定？
-
-**信源：** https://www.anthropic.com/glasswing · https://fortune.com/2026/04/10/anthropic-too-dangerous-to-release-ai-model-means-for-its-upcoming-ipo/
-
-**关联行动：** ① 跟踪 CrowdStrike/Palo Alto 的 Mythos 渗透测试使用报告；② 是否有第三方安全研究员独立验证 CyberGym 83.1% 成绩；③ Glasswing 是否引发 OpenAI Cyber 能力的对标反应。
-
----
-
-### BT-2. [B] Anthropic Managed Agents 架构文档更新：Claude 大脑与执行基础设施分离
+### BT-1. [B] Anthropic Managed Agents 架构文档更新：Claude 大脑与执行基础设施分离
 
 **概述：** 2026 年 4 月 10 日，Anthropic 更新了 Managed Agents 工程博文（原文发布于 2026 年 2 月）。核心架构理念：将 Claude 的推理核心（brain）与工具调用、状态管理、执行环境（execution infra）解耦，形成"托管式 Agent"服务模式——开发者无需手动管理 Agent 生命周期，由 Anthropic 基础设施负责调度。
 
@@ -543,7 +500,7 @@ description: "今日头条：Anthropic Project Glasswing 正式发布，Claude M
 
 ---
 
-### BT-3. ⭐ OpenAI Stargate UK 项目暂停：能源成本 + 版权监管双重压力
+### BT-2. ⭐ OpenAI Stargate UK 项目暂停：能源成本 + 版权监管双重压力
 
 **概述：** 2026 年 4 月 9 日（Bloomberg/CNBC/Engadget），OpenAI 宣布暂停英国 Stargate 数据中心项目。该项目于 2025 年 9 月特朗普国事访问期间宣布，计划采购 8,000 块 Nvidia GPU（可扩展至 31,000），总投资约 £31 亿。暂停原因：英国能源价格过高、版权监管环境不确定性（OpenAI 正面临英国出版商版权诉讼）。OpenAI 发言人表示"将在监管和能源成本条件改善后推进"。
 
@@ -561,25 +518,6 @@ description: "今日头条：Anthropic Project Glasswing 正式发布，Claude M
 **信源：** https://www.bloomberg.com/news/articles/2026-04-09/openai-pauses-stargate-uk-data-center-effort-citing-energy-costs · https://www.cnbc.com/2026/04/09/openai-halts-uk-stargate-project.html
 
 **关联行动：** ① 英国政府是否推出能源补贴方案挽回 Stargate UK；② OpenAI IPO 招股说明书是否将 Stargate UK 暂停列为风险因素；③ 其他 AI 公司是否借机填补英国数据中心空缺。
-
----
-
-### BT-4. [B] Google TorchTPU 开源：PyTorch 代码无需修改直接跑 Cloud TPU ⚠️ 7日前
-
-**概述：** 2026 年 4 月 7 日（超出 24h 窗口，高价值补充），Google 开源 TorchTPU，允许 PyTorch 代码直接在 Google Cloud TPU（v4/v5e/v5p）上运行，无需改写原始代码。核心能力：自动 XLA 编译、TPU 分布式训练支持、FSDP/DDP 兼容。
-
-**技术/产业意义：** NVIDIA CUDA 生态在训练框架层的垄断一直是 Google TPU 商业化最大障碍。TorchTPU 正面解决切换成本问题，使 Hugging Face 生态和初创公司的训练流程无需改动即可在 TPU 上运行。
-
-**深度分析：**
-- 与 JAX-on-TPU 的差异：JAX 从零构建，性能极限更高但学习曲线陡；TorchTPU 侧重"减少摩擦"而非"极限性能"，面向不同用户群体，两条路线并行。
-- PyTorch 的事实标准地位意味着 TorchTPU 的潜在受益者是几乎所有现有 ML 工程师，这比说服用户学 JAX 的阻力小得多。
-
-**评论观察：**
-- 🟢 支持：降低 TPU 采用门槛，有助于 Google Cloud 在 AWS/Azure 争取 AI 训练市场份额。
-
-**信源：** https://github.com/google/torchtpu · https://cloud.google.com/blog/products/ai-machine-learning/torchtpu-pytorch-on-tpus
-
-**关联行动：** 测试 TorchTPU 在 HuggingFace Trainer 场景的兼容性表现；关注 Google 是否将其整合进 Vertex AI 训练工作流。
 
 ---
 
@@ -633,23 +571,7 @@ description: "今日头条：Anthropic Project Glasswing 正式发布，Claude M
 
 ---
 
-### NA-4. [B] 报道：NVIDIA 拟约 $200 亿收购 Groq，整合 LPU 推理加速架构
-
-**概述：** 近期媒体报道 NVIDIA 正与 AI 推理芯片公司 Groq 进行约 $200 亿收购谈判。Groq 以其 LanguageProcessingUnit（LPU）架构著称，在低延迟推理场景（特别是 long-context token 生成速度）上具有相对 GPU 的显著优势。
-
-**技术/产业意义：** 若收购成真，NVIDIA 将把最具竞争力的 ASIC 推理路线并入自身生态，进一步巩固其在 AI 芯片全栈的垄断位置——同时消除推理侧最有可能撼动其地位的竞争对手。
-
-**深度分析：**
-- Groq LPU 核心差异：确定性内存架构（SRAM 全片上），token/s 吞吐在 Llama 3 等模型上号称超过 A100 数倍。若被 NVIDIA 整合，可能成为 NIM 推理优化路线的补充。
-- 反垄断风险：NVIDIA 已是 GPU 训练市场绝对主导，收购最强推理 ASIC 竞争对手可能触发美欧监管审查。
-
-**信源：** https://www.reuters.com/technology/nvidia-groq-acquisition-talks-2026-04/
-
-**关联行动：** 等待官方确认；关注 FTC/欧盟是否启动反垄断审查。
-
----
-
-### NA-5. [B] Cerebras Systems 拟 4 月 NASDAQ 上市，目标估值 $220-250 亿
+### NA-4. [B] Cerebras Systems 拟 4 月 NASDAQ 上市，目标估值 $220-250 亿
 
 **概述：** Cerebras Systems 计划于 2026 年 4 月在 NASDAQ 完成 IPO，目标估值 $220-$250 亿。Cerebras 以 WSE-3（晶圆级引擎）芯片著称，单芯片 AI 算力是传统 GPU 数倍，主要客户包括 Abu Dhabi 国家 AI 项目（G42）和多家政府超算中心。
 
@@ -661,51 +583,9 @@ description: "今日头条：Anthropic Project Glasswing 正式发布，Claude M
 
 ---
 
-### NA-6. [B] Microsoft 发布三款 MAI 基础模型：转录/语音/图像全模态布局 ⚠️ 9日前
-
-**概述：** 2026 年 4 月 2 日（超出 24h 窗口，重要补充），Microsoft 在 Azure Foundry 发布三款自研 MAI 基础模型：① **MAI-Transcribe-1** —— 语音转文字，FLEURS Top 25 语言 SOTA，速度 2.5x 现有 Azure Fast，$0.36/小时；② **MAI-Voice-1** —— 高保真语音合成，60 秒音频 1 秒生成，$22/MTok 字符；③ **MAI-Image-2** —— 图像生成 Arena.ai Top 3，Copilot 生成速度 2x 提升。
-
-**技术/产业意义：** 这是 Microsoft"AI 自主性"战略的首批实质落地：不再完全依赖 OpenAI 模型，以自研模型覆盖特定模态（语音/图像/转录），逐步建立 Azure AI Foundry 的能力闭环。Mustafa Suleyman 六个月前组建的 superintelligence 团队在此次发布中得到首次公开验证。
-
-**信源：** https://microsoft.ai/news/today-were-announcing-3-new-world-class-mai-models-available-in-foundry/ · https://techcrunch.com/2026/04/02/microsoft-takes-on-ai-rivals-with-three-new-foundational-models/
-
-**关联行动：** 关注 MAI 与 OpenAI GPT 系列的场景边界划分；Mustafa Suleyman 团队后续大模型发布时间表。
-
----
-
 ## 📊 KOL 观点精选
 
-### K-1. Andrej Karpathy：LLM Wiki —— 用 LLM 构建结构化知识库取代 RAG ⚠️ 约一周前
-
-**来源：** [GitHub Gist - llm-wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) | **时间：** 2026 年 4 月初（约 5-7 天前） | **热度：** 🔥 1200 万+ X 浏览量
-
-**摘要：** Karpathy 在 GitHub Gist 发布"LLM Wiki"概念，2026 年 4 月初获超 1200 万次 X 浏览量。核心主张：RAG 每次查询从头检索，无法"积累知识"；LLM Wiki 让模型预先将知识库编译成结构化 Markdown wiki 并持续维护。三层架构：① 原始数据源（只读）② LLM 维护的 Wiki（动态更新）③ Schema（结构规则）。
-
-**深度思考：** LLM Wiki 的思维跳跃在于将 LLM 从"回答者"变成"知识管理者"——但这预设了 wiki 质量能随知识库更新实时同步，且 LLM 不会在长期维护中产生幻觉漂移。这是 Karpathy 给工程师的思维框架，不是即用型方案。当前模型 context window 的扩大（Gemini 2M、Claude 200K）正在挑战 RAG 存在的前提，LLM Wiki 是从另一个方向思考同一问题。
-
----
-
-### K-2. Sam Altman：AI 将破坏经济，建议废除 10 万美元以下收入所得税 ⚠️ 5日前
-
-**来源：** [Fortune](https://fortune.com/2026/04/07/sam-altman-vinod-khosla-openai-tax-code-american-income-tax-100k/) · [The Hill](https://thehill.com/policy/technology/5817906-openai-ai-policy-recommendations/) | **时间：** 2026 年 4 月 6-7 日 | **热度：** 🔥 广泛转发
-
-**摘要：** OpenAI 发布 13 页《Intelligence Age 产业政策》白皮书，Sam Altman 与 Vinod Khosla 联合主张：AI 将系统性替代劳动力，建议对年收入 10 万美元以下美国人免征联邦所得税，对资本利得和自动化生产征税补充财政缺口，同时设立"机器人税"和公共财富基金（类 Alaska Permanent Fund 模式）。
-
-**深度思考：** "废除工薪所得税"的叙事背后是 Altman 对 AGI 经济冲击时间表的判断——若他认为 10 年内出现大规模结构性失业，这是合理的预防性政策主张。但同时这也是议程设置：把 OpenAI 定位为"负责任的 AI 推手"，在 IPO 前塑造有利舆论。
-
----
-
-### K-3. Dario Amodei 投资人担忧：情绪管理被批"不称职" ⚠️ 5日前
-
-**来源：** [Yahoo Finance / Business Insider](https://finance.yahoo.com/sectors/technology/articles/anthropic-backers-fret-over-ai-100000492.html) | **时间：** 2026 年 4 月 6 日前后
-
-**摘要：** 多家 Anthropic 投资人向媒体表达私下担忧：Dario Amodei 在 Anthropic 被五角大楼供应链风险名单列入后公开反击，发出情绪化备忘录，被至少一名股东描述为"无法控制情绪，不符合 CEO 形象"。背景：Dario 与 Altman 的积怨被部分投资人视为影响商业判断的个人因素。
-
-**深度思考：** 此类报道信源匿名，需注意可能存在竞争对手推动的 narrative 管理。但若属实，Anthropic 在 IPO 前的 CEO 稳定性问题将成为重要投资人风险因素——尤其今日 Project Glasswing 的发布需要 Dario 同时应对能力展示和负面舆论两条战线。
-
----
-
-### K-4. Jensen Huang：NVIDIA 高利润不可持续，竞争加剧将压低利润率
+### K-1. Jensen Huang：NVIDIA 高利润不可持续，竞争加剧将压低利润率
 
 **来源：** 媒体报道 | **时间：** 2026 年 4 月 10 日 | **热度：** 📈 行业关注
 
@@ -715,7 +595,7 @@ description: "今日头条：Anthropic Project Glasswing 正式发布，Claude M
 
 ---
 
-### K-5. GitHub Trending 第一：NousResearch/hermes-agent 单日 +7,674 Star，累计突破 51K
+### K-2. GitHub Trending 第一：NousResearch/hermes-agent 单日 +7,674 Star，累计突破 51K
 
 **来源：** GitHub Trending（今日实时）| **时间：** 2026 年 4 月 11 日 | **热度：** 🔥 Real-time #1
 
@@ -727,7 +607,7 @@ description: "今日头条：Anthropic Project Glasswing 正式发布，Claude M
 
 ---
 
-### K-6. Hacker News 热议：MCP 捐赠 Linux Foundation 争议帖 400+ 点
+### K-3. Hacker News 热议：MCP 捐赠 Linux Foundation 争议帖 400+ 点
 
 **来源：** Hacker News | **时间：** 今日 | **热度：** 🔥 400+ points
 
