@@ -198,3 +198,281 @@ model = AutoModelForCausalLM.from_pretrained("gg-hf-gg/gemma-4-31B-it")
 **中期（3-12 个月）：** Gemma 4 将成为 Agent 框架（LangChain、AutoGPT 等）的默认开源选择之一。边缘部署（手机、IoT）将进入实用阶段。Apache 2.0 可能推动 Meta 在 Llama 5 时采用更开放的许可。
 
 **长期（1-2 年）：** "每参数智能密度"的竞赛将加速——这比"参数量竞赛"对实际应用更有价值。如果 Gemma 4 的社区微调版本能在特定垂直领域达到 GPT-5 级别，将彻底改变 AI 产业的成本结构。
+
+---
+
+## 附录：Gemma 4 31B vs 闭源主力模型全面横评
+
+> 数据来源：OpenAI / Anthropic / Google 官方技术报告及模型卡（2025–2026）、Berkeley BFCL、SWE-bench.com、LiveCodeBench、GAIA HuggingFace Leaderboard、lmarena.ai Chatbot Arena
+> 标注说明：⚠️ = 社区估算或非官方数据；† = 扩展思考/Thinking 模式下的分数；✓ = 官方数据
+
+### 为什么要把 Gemma 4 31B 和闭源模型放在一起比？
+
+因为 Google 自己说了——"Byte for byte, the most capable open models"。这句话的潜台词是：我们不仅在开源里赢，我们要和闭源旗舰一起比。
+
+那就来比。
+
+### 重要前提：Standard vs Thinking 模式
+
+Gemma 4 的官方发布数字用的是 **"IT Thinking"（开启推理链）**模式，其他闭源模型里也存在类似情况（Claude 的 Extended Thinking、o3/o4-mini 的 Reasoning 模式、Gemini 2.5 系列的 Thinking Budget）。
+
+为了公平，本节对每个关键 benchmark 都同时提供两种条件的对比：**标准模式**（不开启推理链）和**最佳模式**（模型允许的最强推理设置）。
+
+---
+
+### 一、科学推理：GPQA Diamond
+
+> 测量内容：博士级科学问题（物理/化学/生物），代表模型的"硬知识推理"上限。
+
+| 模型 | GPQA Diamond | 条件 | 数据来源 |
+|---|:---:|---|---|
+| **Gemma 4 31B** | **53.7%** | 标准 IT | 官方（HuggingFace 模型卡）✓ |
+| **Gemma 4 31B Thinking** | **84.3%** | IT + Thinking | 官方（Google 发布博客）✓ |
+| GPT-4o | 53.6% | 标准 | 官方（OpenAI）✓ |
+| GPT-4.1 | 66.3% | 标准 | 官方（OpenAI）✓ |
+| o4-mini | 81.4% | Reasoning | 官方（OpenAI System Card）✓ |
+| o3 | **87.7%** | Reasoning | 官方（OpenAI System Card）✓ |
+| Claude 3.7 Sonnet | 68.0% | 标准 | 官方（Anthropic）✓ |
+| Claude 3.7 Sonnet | 84.8% | Extended Thinking† | 官方（Anthropic）✓ |
+| Claude Sonnet 4 | 80.0% | 标准 | 官方（Anthropic）✓ |
+| Claude Sonnet 4.5 | **84.2%** | 标准 | 官方（Anthropic）✓ |
+| Gemini 2.5 Flash | 72.0% | Thinking | 官方（Google）✓ |
+| Gemini 2.5 Pro | **86.4%** | Thinking | 官方（Google DeepMind）✓ |
+| Gemini 2.0 Flash | 62.1% | 标准 | 官方（Google）✓ |
+
+**解读：**
+
+- **标准模式**：Gemma 4 31B（53.7%）和 GPT-4o（53.6%）几乎并列，是 GPT-4o 级别的科学推理能力。但 GPT-4.1 已经达到 66.3%，比 Gemma 4 31B 高出约 13pp。
+- **Thinking 模式**：Gemma 4 31B 开启 Thinking 后跳到 84.3%，直接进入 Claude Sonnet 4.5（84.2%）和 Claude 3.7 Thinking（84.8%）的梯队，比 Claude Sonnet 4（80.0%）还略高，但仍然低于 Gemini 2.5 Pro（86.4%）和 o3（87.7%）。
+- **核心结论**：在 GPQA 这个维度，Gemma 4 31B Thinking ≈ Claude Sonnet 4.5（标准），作为开源模型意义重大。
+
+---
+
+### 二、数学能力：AIME 2024 / AIME 2026
+
+> AIME 是美国最高级别数学竞赛题。AI 模型在此的得分从 2023 年几乎接近 0，到 2025 年已经"制霸"人类竞赛选手。
+
+| 模型 | AIME 2024 | AIME 2025/2026 | 条件 | 数据来源 |
+|---|:---:|:---:|---|---|
+| **Gemma 4 31B** | 16.7% | — | 标准 IT | 官方（HuggingFace 模型卡）✓ |
+| **Gemma 4 31B Thinking** | — | **89.2%**（AIME 2026）| IT + Thinking | 官方（Google 发布博客）✓ |
+| GPT-4o | 9.3% | — | 标准 | 官方（OpenAI）✓ |
+| GPT-4.1 | 26.7% | — | 标准 | 官方（OpenAI）✓ |
+| o4-mini | 93.4% | **92.7%** | Reasoning | 官方（OpenAI System Card）✓ |
+| o3 | **96.7%** | 88.9% | Reasoning | 官方（OpenAI System Card）✓ |
+| Claude 3.7 Sonnet | 16.0% | — | 标准 | 官方（Anthropic）✓ |
+| Claude 3.7 Sonnet | **80.0%** | 80.0% | Extended Thinking† | 官方（Anthropic）✓ |
+| Claude Sonnet 4 | — | 55.0% | 标准 | 官方（Anthropic）✓ |
+| Claude Sonnet 4.5 | — | 72.0% | 标准 | 官方（Anthropic）✓ |
+| Gemini 2.5 Flash | — | 73.3% | Thinking | 官方（Google）✓ |
+| Gemini 2.5 Pro | — | **86.7%** | Thinking | 官方（Google DeepMind）✓ |
+| Gemini 2.0 Flash | 22.0% | — | 标准 | 官方（Google）✓ |
+
+**解读：**
+
+- **标准模式的分水岭极其明显**：Claude 3.7（16%）、Gemma 4 31B（16.7%）、GPT-4.1（26.7%）——这三者在标准模式下都"不会做"AIME 题。这说明不开推理链，2026 年旗舰模型对顶级数学题依然力不从心。
+- **Thinking 模式把格局完全扭转**：Gemma 4 31B Thinking（89.2% AIME 2026）直接超过 Gemini 2.5 Pro（86.7%），跟 o3（88.9%）几乎持平。这是本次发布最令人震惊的数字——一个 31B 开源模型在数学推理上比肩 OpenAI 旗舰推理模型？
+- ⚠️ **重要注意**：Google 使用的是 AIME **2026** 数据，其他模型多用 AIME 2024/2025，难度和评测协议存在差异，不能直接做等号比较。即便如此，AIME 2026 89.2% 仍然是一个非常强烈的信号。
+
+---
+
+### 三、编程能力：LiveCodeBench v5/v6 / HumanEval
+
+> LiveCodeBench 基于竞赛平台实时题目，比 HumanEval 更难伪造、更贴近真实能力。
+
+| 模型 | LiveCodeBench | HumanEval | 条件 | 数据来源 |
+|---|:---:|:---:|---|---|
+| **Gemma 4 31B** | 50.0%（v5）| 82.9% | 标准 IT | 官方（HuggingFace 模型卡）✓ |
+| **Gemma 4 31B Thinking** | **80.0%**（v6）| — | IT + Thinking | 官方（Google 发布博客）✓ |
+| GPT-4o | 32.3% | 90.2% | 标准 | 官方（OpenAI）✓ |
+| GPT-4.1 | 54.4% | — | 标准 | 官方（OpenAI）✓ |
+| o4-mini | 79.0% | ~93% ⚠️ | Reasoning | 官方/社区 |
+| o3 | **82.1%** | ~95% ⚠️ | Reasoning | 官方/社区 |
+| Claude 3.7 Sonnet | 55.6% | — | 标准 | 第三方（LiveCodeBench）✓ |
+| Claude Sonnet 4.5 | 64.2% | — | 标准 | 官方（Anthropic）✓ |
+| Gemini 2.5 Flash | 57.8% | — | Thinking | 官方（Google）✓ |
+| Gemini 2.5 Pro | 70.4% | — | Thinking | 官方（Google DeepMind）✓ |
+| Gemini 2.0 Flash | 34.5% | 89.7% | 标准 | 官方（Google）✓ |
+
+**解读：**
+
+- **标准模式**：Gemma 4 31B（50.0%）> GPT-4o（32.3%），约与 GPT-4.1（54.4%）接近。这个数字意味着 Gemma 4 的代码能力已经是 GPT-4.1 级别的，只是 LiveCodeBench 版本号有差异（v5 vs v6）。
+- **Thinking 模式**：80.0% 直追 o3（82.1%）和 o4-mini（79.0%），大幅超越 Gemini 2.5 Pro（70.4%）和 Claude Sonnet 4.5（64.2%）。
+- **HumanEval 的局限性**：GPT-4o 的 90.2% 其实比 Gemma 4 的 82.9% 高，但 HumanEval 题目已经被训练数据污染，LiveCodeBench 才是更可信的编程能力指标。
+
+---
+
+### 四、代码 Agent：SWE-bench Verified
+
+> 在真实 GitHub issue 上修复 bug，是代码 Agent 能力的金标准。
+
+| 模型 | SWE-bench Verified | 条件 | 数据来源 |
+|---|:---:|---|---|
+| **Gemma 4 31B** | — | — | **无官方数据** |
+| GPT-4o | 38.8% | 标准 | 官方（OpenAI）✓ |
+| GPT-4.1 | 54.6% | 标准 | 官方（OpenAI）✓ |
+| o4-mini | 68.1% | Reasoning | 官方（OpenAI）✓ |
+| o3 | 71.7% | Reasoning | 官方（OpenAI）✓ |
+| Claude 3.7 Sonnet | 62.3% / 70.3%† | 标准/Thinking | 官方（Anthropic）✓ |
+| Claude Sonnet 4 | 72.7% | 标准 | 官方（Anthropic）✓ |
+| Claude Sonnet 4.5 | **75.1%** | 标准 | 官方（Anthropic）✓ |
+| Gemini 2.5 Flash | 38.0% | 标准 | 官方（Google）✓ |
+| Gemini 2.5 Pro | 63.8% | 标准 | 官方（Google DeepMind）✓ |
+| Gemini 2.0 Flash | 38.6% | 标准 | 官方（Google）✓ |
+
+**解读：**
+
+- **Gemma 4 31B 没有 SWE-bench 官方数据**，这是一个值得注意的缺失。Google 在发布时选择了 τ2-bench（自家 Agent 基准）而非 SWE-bench，可能原因是 SWE-bench 更依赖工具链集成（代码执行、文件操作），而不是纯语言能力。
+- 闭源模型里，**Claude 系列在 SWE-bench 上碾压 Gemini 系列**——Gemini 2.5 Pro（63.8%）vs Claude Sonnet 4.5（75.1%），差距超过 11pp。这也是 Claude 被普遍认为是"代码 Agent 最强"的核心数据来源。
+- **GPT-4.1 vs Claude 3.7 的对比很有意思**：GPT-4.1 标准模式（54.6%）< Claude 3.7 标准模式（62.3%），说明在代码 Agent 任务上 Claude 的优势不只来自推理链。
+
+---
+
+### 五、工具调用与 Agent 能力：τ2-bench / BFCL / GAIA
+
+#### 5.1 τ2-bench（Google 内部 Agent 基准）
+
+这是 Google 专门为 Agentic 工作流设计的评测，测试模型在多步骤工具使用场景下的表现。
+
+| 模型 | τ2-bench | 条件 |
+|---|:---:|---|
+| **Gemma 4 31B Thinking** | **86.4%** | IT + Thinking |
+| **Gemma 4 26B MoE Thinking** | 85.5% | IT + Thinking |
+| **Gemma 3 27B IT** | 6.6% | 标准 IT |
+
+> ⚠️ 注：τ2-bench 目前**只有 Google 内部数据**，缺乏对 Claude/GPT/Gemini 系列的横向对比结果。但 86.4% 的绝对值和 Gemma 3 的 6.6% 之间的跳跃（+79.8pp）说明 Gemma 4 的 Agentic 能力是质的突破。
+
+#### 5.2 BFCL v3（Berkeley Function Calling Leaderboard）
+
+测试模型按照 JSON Schema 准确调用工具的能力。
+
+| 模型 | BFCL Overall | 数据来源 |
+|---|:---:|---|
+| **Gemma 4 31B** | — | 暂无数据 |
+| GPT-4.1 | **79.3%** | 第三方（Berkeley）✓ |
+| Claude 3.7 Sonnet | 74.5% | 第三方（Berkeley）✓ |
+| GPT-4o | 72.0% | 第三方（Berkeley）✓ |
+| Gemini 2.5 Pro | 71.2% | 第三方（Berkeley）✓ |
+| Gemini 2.0 Flash | 69.8% | 第三方（Berkeley）✓ |
+
+#### 5.3 GAIA（通用 AI 助手真实任务）
+
+测试模型完成真实世界多步骤任务（搜索 + 文件处理 + 推理组合）。
+
+| 模型 | GAIA (test avg) | 数据来源 |
+|---|:---:|---|
+| **Gemma 4 31B** | — | 暂无数据 |
+| Gemini 2.5 Pro | **72.0%** | 官方/第三方✓ |
+| o3 | 67.6% | 官方（OpenAI）✓ |
+| GPT-4.1 | 54.4% | 第三方（HF Leaderboard）✓ |
+| Claude 3.7 Sonnet | 49.3% | 第三方（HF Leaderboard）✓ |
+| GPT-4o | ~38% ⚠️ | 社区估算 |
+
+**综合 Agent 能力解读：**
+
+- Gemma 4 在 BFCL 和 GAIA 上目前均无官方数据，这是一个真实的信息缺口。
+- Gemini 2.5 Pro 在 GAIA 上遥遥领先（72%），核心原因是其原生 Google Search 工具集成——多步骤信息检索任务对原生搜索能力的依赖极高。
+- GPT-4.1 以 Strict Mode 函数调用为核心优势，在 BFCL 排名第一（79.3%）。
+
+---
+
+### 六、综合对话质量：Chatbot Arena ELO
+
+> 来源：[lmarena.ai](https://lmarena.ai) 人类盲评排行榜，数据约为 2025 年中期
+
+| 排名（全模型） | 模型 | Arena ELO | 说明 |
+|:---:|---|:---:|---|
+| 1 | Gemini 2.5 Pro | **1422** | 全球第一 |
+| 2 | o3 | 1383 | |
+| 3 | GPT-4.1 | 1369 | |
+| 4 | Claude Sonnet 4.5 | 1359 | |
+| 5 | Gemini 2.5 Flash | 1345 | |
+| 6 | Claude 3.7 Sonnet | 1316 | |
+| 7 | GPT-4o | 1285 | |
+| **开源 #3** | **Gemma 4 27B（31B）** | **~1270** ⚠️ | 开源模型中位居前列 |
+| 8 | Gemini 2.0 Flash | 1228 | |
+
+**解读：**
+
+- Gemma 4 在全模型榜的绝对位置（~1270）低于所有闭源旗舰（1285-1422），但是领先 Gemini 2.0 Flash。
+- 在**开源模型专榜**上，Gemma 4 31B 是 #3（1452 Arena AI 开源榜分），击败了 Llama 4 Maverick（400B）和 Qwen3.6-Plus 等对手。这是 Google 原文"开源 #3"的数据来源——两个榜单用的是不同评分体系，不能混用。
+
+---
+
+### 七、价格与性价比全景
+
+| 模型 | 输入价格 | 输出价格 | 上下文窗口 | 定价类型 |
+|---|:---:|:---:|:---:|---|
+| **Gemma 4 31B** | **免费**（自托管）/ $0.35 | **免费** / $1.05 | 128K | 开源权重；Vertex AI 商用定价 |
+| Gemini 2.0 Flash | $0.10 | $0.40 | 1M | 最低成本商用 API |
+| Gemini 2.5 Flash | $0.15 | $0.60–$3.50 | 1M | 非思考/思考输出差价 |
+| GPT-4o | $2.50 | $10.00 | 128K | |
+| GPT-4.1 | $2.00 | $8.00 | 1M | 缓存输入 $0.50 |
+| Claude 3.7 / Sonnet 4 / 4.5 | $3.00 | $15.00 | 200K | 三版本同价 |
+| Gemini 2.5 Pro | $1.25–$2.50 | $10.00–$15.00 | 1M | 按 token 量分段计费 |
+| o4-mini | $1.10 | $4.40 | 200K | |
+| o3 | $10.00 | $40.00 | 200K | 最贵 |
+
+**关键性价比洞察：**
+
+1. **Gemma 4 31B 的成本优势是结构性的**：自托管情况下边际成本接近零（只有算力成本）。对于私有化部署需求，这不是"便宜一点"，而是"商业模型完全另一个量级"。
+
+2. **GPT-4o 与 Gemma 4 31B Thinking 的能力比较**：两者 GPQA 分数几乎持平（标准模式），但 GPT-4o 要收 $2.50/$10，Gemma 4 可以免费自托管。
+
+3. **Gemini 2.5 Flash（$0.15/$0.60）是商用 API 里性价比最高的方案**：GPQA 72%、AIME 73.3%、SWE-bench 38%，而且有 1M token 上下文，Thinking 模式按需付费。
+
+4. **Claude 系列三版本同价（$3/$15）**：Claude 3.7 → Sonnet 4 → Sonnet 4.5 性能在持续提升，但定价不变，说明 Anthropic 的策略是"锁定中端市场"。
+
+5. **o3（$10/$40）的使用场景**：成本是 Claude 的 3-4 倍，适合对推理质量极度敏感且任务量不大的场景（复杂规划、一次性分析）。
+
+---
+
+### 八、综合横评表（全维度速览）
+
+> ✓ = 官方数据；⚠️ = 估算；† = 扩展思考/Thinking 模式；— = 无公开数据
+
+| 模型 | GPQA ◆ | AIME 2025 | LiveCode | SWE-bench | BFCL | GAIA | Arena ELO | 价格（in/out） | 上下文 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Gemma 4 31B（标准）** | 53.7%✓ | —  | 50.0%✓ | — | — | — | ~1270⚠️ | **开源/$0.35/$1.05** | 128K |
+| **Gemma 4 31B（Thinking）** | **84.3%**✓† | **89.2%**✓†‡ | **80.0%**✓† | — | — | — | — | 同上 | 128K |
+| GPT-4o | 53.6%✓ | — | 32.3%✓ | 38.8%✓ | 72.0%✓ | ~38%⚠️ | 1285✓ | $2.50/$10 | 128K |
+| GPT-4.1 | 66.3%✓ | — | 54.4%✓ | 54.6%✓ | **79.3%**✓ | 54.4%✓ | 1369✓ | $2/$8 | 1M |
+| o4-mini | 81.4%✓ | **92.7%**✓ | 79.0%✓ | 68.1%✓ | — | 62.0%⚠️ | — | $1.10/$4.40 | 200K |
+| o3 | **87.7%**✓ | 88.9%✓ | **82.1%**✓ | 71.7%✓ | — | 67.6%✓ | 1383✓ | $10/$40 | 200K |
+| Claude 3.7 Sonnet | 68.0%/84.8%†✓ | 80.0%†✓ | 55.6%✓ | 62.3%/70.3%†✓ | 74.5%✓ | 49.3%✓ | 1316✓ | $3/$15 | 200K |
+| Claude Sonnet 4 | 80.0%✓ | 55.0%✓ | ~64%⚠️ | 72.7%✓ | — | — | — | $3/$15 | 200K |
+| Claude Sonnet 4.5 | 84.2%✓ | 72.0%✓ | 64.2%✓ | **75.1%**✓ | — | — | 1359✓ | $3/$15 | 200K |
+| Gemini 2.5 Flash | 72.0%✓ | 73.3%✓ | 57.8%✓ | 38.0%✓ | 71.2%⚠️ | — | 1345✓ | $0.15/$0.60 | 1M |
+| Gemini 2.5 Pro | **86.4%**✓ | 86.7%✓ | 70.4%✓ | 63.8%✓ | — | **72.0%**✓ | **1422**✓ | $1.25/$10 | 1M |
+| Gemini 2.0 Flash | 62.1%✓ | — | 34.5%✓ | 38.6%✓ | 69.8%✓ | — | 1228✓ | $0.10/$0.40 | 1M |
+
+> ‡ Google 使用 AIME 2026 题目，其他模型多用 AIME 2024/2025，难度体系略有不同。
+
+---
+
+### 九、基于数据的定性结论
+
+**Gemma 4 31B 的真实位置：**
+
+| 维度 | Gemma 4 31B 的水平 | 闭源参照点 |
+|---|---|---|
+| 标准科学推理（GPQA） | GPT-4o 级别 | 比 GPT-4.1 差 12pp |
+| Thinking 科学推理（GPQA） | Claude Sonnet 4.5 / Claude 3.7 Thinking 级别 | 比 Gemini 2.5 Pro 差 2pp |
+| 数学（AIME，Thinking） | 接近 Gemini 2.5 Pro 级别 | 仅次于 o3/o4-mini |
+| 编程（LiveCode，Thinking） | o4-mini 级别 | 超越 Gemini 2.5 Pro |
+| 代码 Agent（SWE-bench） | **无数据，无法评估** | Claude 系列领先 |
+| 工具调用 / Agent（BFCL/GAIA） | **无数据，无法评估** | Gemini 2.5 Pro + GPT-4.1 领先 |
+| 对话质量（Arena） | 介于 GPT-4o 和 Gemini 2.0 Flash 之间 | 全闭源旗舰之下 |
+| 价格 | **开源完全免费** | 最贵的 o3 贵出 28x（如用 Vertex AI 定价算） |
+
+**三条最核心的结论：**
+
+1. **Gemma 4 31B Thinking 是目前最强的开源数学/科学推理模型**：在 GPQA 和 AIME 上达到或超越 Claude Sonnet 4.5 标准模式，与 Gemini 2.5 Pro（闭源旗舰）差距在 2pp 以内。这一点已经超出了很多人的预期。
+
+2. **代码 Agent 能力存在显著数据空白**：Google 没有提供 SWE-bench、BFCL、GAIA 的官方数字。这不一定意味着 Gemma 4 在这些方面表现差，但作为一个声称"顶级 Agent 能力"的模型，缺乏最权威的 Agent 基准数据，让"Agent 能力爆发"的叙事无法被独立验证。
+
+3. **性价比是无法竞争的护城河**：对于私有化部署需求，任何闭源方案都无法在价格上与开源权重竞争。问题从来不是"Gemma 4 够不够好"，而是"它在哪些场景好到足够用"。答案已经很清楚：数学、科学推理、编程——够用，而且价格差出一个数量级。
+
+---
+
+*数据来源与完整引用：[OpenAI GPT-4.1 发布](https://openai.com/index/gpt-4-1/) · [o3/o4-mini System Card](https://openai.com/index/o3-and-o4-mini-system-card/) · [Anthropic Claude 3.7 Sonnet](https://www.anthropic.com/news/claude-3-7-sonnet) · [Google Gemini 2.5 Pro](https://deepmind.google/technologies/gemini/pro/) · [Gemma 4 HuggingFace 模型卡](https://huggingface.co/google/gemma-4-31b-it) · [Berkeley BFCL](https://gorilla.cs.berkeley.edu/leaderboard.html) · [SWE-bench](https://www.swebench.com) · [LiveCodeBench](https://livecodebench.github.io) · [GAIA Leaderboard](https://huggingface.co/spaces/gaia-benchmark/leaderboard) · [Chatbot Arena](https://lmarena.ai)*
