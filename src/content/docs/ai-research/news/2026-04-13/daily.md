@@ -1,6 +1,6 @@
 ---
-title: "2026-04-13 AI 日报：WIC亚太峰会港开幕，BoE紧急审议Mythos金融安全风险，TSMC Q1创纪录$357亿，约半数美国数据中心延迟/取消，英国£5亿AI主权基金4月16日启动，智元4月17日发布4机器人+4大模型"
-description: "中国区：世界互联网大会亚太峰会今日在港开幕（AI治理/智能体/数字金融，50+国家部长级会议）；生数科技完成近20亿元B轮（阿里云领投，估值超120亿元，拟H1港股IPO）；Fortune深度——中国日处理140万亿Token（较2024年初增1400倍），港股AI IPO潮创五年新高；智元机器人4月17日大会官宣4款机器人+4个AI大模型。欧洲区：英格兰银行CMORG紧急会议审议Anthropic Mythos金融系统安全（Bloomberg 4/11）；英国£5亿AI主权基金4月16日Wayve启动；EU AI大陆行动计划一周年——19个AI工厂部署、€100亿拨款；NVIDIA Physical AI四模型发布（Cosmos 3/GR00T N1.7/Alpamayo 1.5）。学术/硬件：TSMC Q1营收创纪录$357亿（+35% YoY，毛利率63-65%历史最高）；Sightline分析约50%美国数据中心延迟或取消（电力设备短缺+中国变压器关税）；DeepMind AlphaGenome覆盖98%非编码DNA；Dell+Intel Gaudi 3服务器性价比对标H100；arXiv本周7篇A级论文亮点。"
+title: "2026-04-13 AI 日报：Sam Altman住所一周两次遇袭（燃烧瓶+枪击三人被捕），Anthropic上诉失败五角大楼维持供应链风险标签，Apple AI智能眼镜曝光+AI主管离职，OpenAI遭朝鲜供应链攻击，Anthropic企业采购逼近OpenAI，WIC亚太峰会港开幕，BoE审议Mythos，TSMC Q1创纪录$357亿"
+description: "中国区：世界互联网大会亚太峰会今日在港开幕（AI治理/智能体/数字金融，50+国家部长级会议）；生数科技完成近20亿元B轮（阿里云领投，估值超120亿元，拟H1港股IPO）；Fortune深度——中国日处理140万亿Token（较2024年初增1400倍），港股AI IPO潮创五年新高；智元机器人4月17日大会官宣4款机器人+4个AI大模型。欧洲区：英格兰银行CMORG紧急会议审议Anthropic Mythos金融系统安全（Bloomberg 4/11）；英国£5亿AI主权基金4月16日Wayve启动；EU AI大陆行动计划一周年——19个AI工厂部署、€100亿拨款；NVIDIA Physical AI四模型发布（Cosmos 3/GR00T N1.7/Alpamayo 1.5）。学术/硬件：TSMC Q1营收创纪录$357亿（+35% YoY，毛利率63-65%历史最高）；Sightline分析约50%美国数据中心延迟或取消（电力设备短缺+中国变压器关税）；DeepMind AlphaGenome覆盖98%非编码DNA；Dell+Intel Gaudi 3服务器性价比对标H100；arXiv本周7篇A级论文亮点。三大厂：Sam Altman住所一周两次遇袭（4/10燃烧瓶+4/12枪击，三人被捕）；Anthropic上诉失败DC联邦法院维持五角大楼供应链风险标签（5/19口头辩论）；OpenAI Axios npm供应链遭朝鲜Sapphire Sleet攻击影响macOS签名流程；Anthropic发布智能体信任五原则框架；Sundar Pichai 60 Minutes专访称Search将成智能体管理器。北美区：Apple AI智能眼镜设计曝光+Giannandrea本周离职Subramanya接任；xAI起诉科罗拉多州挑战全美首个AI反歧视法；Codex 0.119.0实时语音+MCP扩展；Anthropic企业采购率~30%逼近OpenAI 35%；Blackwell GPU云租赁涨48%至$4.08/h。KOL：Altman攻击后博文呼吁降温；Pichai agent manager愿景；Willison暗工厂模式警告。"
 ---
 
 # 2026-04-13 AI 日报
@@ -369,40 +369,207 @@ description: "中国区：世界互联网大会亚太峰会今日在港开幕（
 
 ---
 
+## ⭐ 三大厂动态
+
+### BT-1. ⭐ Sam Altman 住所一周遭两次袭击：燃烧瓶（4/10）+ 枪击（4/12），三人被捕
+
+**概述：** OpenAI CEO Sam Altman 在旧金山的住所一周内遭遇两次独立袭击。第一起（4 月 10 日凌晨 4 时）：20 岁得克萨斯州男子 Daniel Alejandro Moreno-Gama 向 Altman 位于 North Beach 的住所投掷燃烧瓶（Molotov cocktail），引燃外部大门后逃逸；凌晨 5 时，同一嫌疑人在 OpenAI Mission Bay 总部威胁纵火，被警方逮捕。Moreno-Gama 运营 Substack 博客，将 AI 发展描述为人类灭绝路径，称 Altman 为"赌上人类未来的病态说谎者"，曾在 AI 聊天中写下"我们已接近午夜，是时候真正行动了"。第二起（4 月 12 日）：Amanda Tom（25 岁）和 Muhamad Hussein（23 岁）驾车经过 Altman 住所并从副驾驶座开枪射击，无人受伤，警方从车内缴获三支枪械。
+
+**分析：**
+- 两次袭击性质不同（反 AI 意识形态驱动的单人行动 vs. 枪击），表明 AI 领袖面临的安全威胁已从边缘化抗议升级为多源物理暴力。
+- Altman 4 月 11 日发表博文回应，同时回应《纽约客》Ronan Farrow 百源调查。承认"处理与前董事会冲突时表现糟糕"，呼吁"减少修辞和行动的升级，在更少的房子里发生更少的爆炸——字面和比喻都是如此"。
+- 这是 AI 行业首次出现 CEO 住所被连续物理攻击的事件，可能加速科技高管安保支出升级。OpenAI 同期推动"AI New Deal"政策白皮书，SF Standard 报道称攻击使政策倡导更具紧迫感。
+
+**信源：** SF Standard · CNBC · NBC News · Al Jazeera · KTVU FOX 2 · Attack of the Fanboy
+
+**关联行动：** ① 第二起嫌疑人动机和背景调查结果；② OpenAI/Altman 安保方案升级情况；③ PauseAI 组织声明和立场澄清。
+
+---
+
+### BT-2. Anthropic 上诉失败：联邦上诉法院维持五角大楼"供应链风险"标签
+
+**概述：** 4 月 8 日，华盛顿特区联邦上诉法院拒绝了 Anthropic 的紧急动议——请求在诉讼期间临时阻止国防部"供应链风险"标签生效。三名法官组成的合议庭承认 Anthropic"在缺乏中止令的情况下可能遭受不可挽回的损害"，但认为公司利益"本质上主要是经济性质的"，且"Anthropic 未能证明其言论在诉讼期间受到了压制"。法院表示将加速审理，口头辩论定于 5 月 19 日。
+
+**背景与分析：**
+- 这是 Anthropic 在华盛顿特区的法律挫折。此前 Anthropic 已在旧金山联邦法院就同一议题获得有利裁决，双线诉讼反映 AI 安全限制与军事部署需求间的深层张力。
+- 核心争议：五角大楼要求 Claude 在所有合法用途中不受限制地部署，Anthropic 坚持不用于完全自主武器或国内大规模监控。国防部长 Pete Hegseth 2 月底将 Anthropic 列为供应链风险——首次将该标签用于美国公司（此前仅针对外国对手）。
+- Fortune 4 月 11 日报道：五角大楼与 Anthropic 的裂痕催生了小型国防 AI 创业潮，Smack Technologies、EdgeRunner AI 等初创公司报告将军和作战指挥官的询问显著增加。
+- 矛盾信号：TechCrunch 4 月 12 日报道 Trump 官员可能在鼓励银行测试 Anthropic 的 Mythos 模型——五角大楼黑名单与行政部门推广同时并存，政策信号混乱。
+
+**信源：** CNBC · Bloomberg · Federal News Network · Axios · Military.com · Fortune · TechCrunch
+
+**关联行动：** ① 5 月 19 日口头辩论结果预判；② 旧金山案件全国性禁令可能性；③ 五角大楼黑名单对 Anthropic IPO 估值影响。
+
+---
+
+### BT-3. OpenAI Axios npm 供应链攻击：朝鲜 Sapphire Sleet 影响 macOS 签名流程
+
+**概述：** 4 月 10-11 日，OpenAI 披露其 macOS 应用签名流程受到 Axios npm 库供应链攻击影响。朝鲜关联黑客组织 Sapphire Sleet 在 3 月底向 Axios npm 包注入恶意代码，该恶意版本被 OpenAI 的 GitHub Actions 签名工作流下载，可能暴露签名证书和 Apple 公证材料。OpenAI 评估认为签名凭证"大概率未被成功窃取"（时序和流程因素），确认无用户数据泄露，随即通知所有 Mac 应用（ChatGPT、Codex）用户立即更新。
+
+**技术意义：**
+- 首个影响 AI 大厂代码签名管线的国家级供应链攻击。尽管 OpenAI 声称影响有限，事件暴露了 AI 应用分发链条对 npm 生态依赖的脆弱性。
+- Microsoft 安全博客 4 月 1 日已发布 Axios npm 攻击缓解指南，说明波及面远超 OpenAI 单家。
+- 随着 AI 工具（Claude Code、Codex、Cursor 等）成为开发者核心工作流，其供应链安全已不仅是企业风险，更是开发者生态系统安全问题。
+
+**信源：** Axios · 9to5Mac · PYMNTS · Microsoft Security Blog
+
+**关联行动：** ① npm/Axios 恶意版本全面影响评估；② Apple 公证材料安全状态确认；③ AI IDE 供应链安全审计加速。
+
+---
+
+### BT-4. Anthropic 发布《Trustworthy Agents in Practice》：智能体信任框架五原则
+
+**概述：** 4 月 9 日，Anthropic 发布研究文章《Trustworthy Agents in Practice》，提出构建"既有用又值得信赖"的 AI 智能体五项核心原则：① 保持人类控制（用户决定 Claude 能做和不能做的事情，如始终允许读取日历但需批准才能发送邀请）；② 与人类价值观对齐；③ 确保智能体交互安全；④ 维护透明度；⑤ 保护隐私。文章通过人类控制、用户期望对齐和安全三个维度的具体产品设计案例展示原则落地方式，并呼吁建立开放标准和行业级证据共享机制。
+
+**意义：** 在 Mythos 自主逃逸沙箱事件和五角大楼黑名单风波的背景下，这篇文章是 Anthropic 安全叙事的"建设性输出"——展示"我们正在构建解决方案"。五原则框架与 NIST AI 安全框架交叉但更具产品落地性，可能成为行业标准基础。发布时间与企业客户快速增长（~30% 美国企业付费使用）相呼应，为企业采购决策提供信任依据。
+
+**信源：** Anthropic Research Blog
+
+**关联行动：** ① 五原则框架是否获 NIST/ISO 参考；② 竞品是否发布对标文件；③ 企业客户是否纳入供应商评估标准。
+
+---
+
+### BT-5. Sundar Pichai CBS 60 Minutes 专访：美国必须主导 AI，Google Search 将成"智能体管理器"
+
+**概述：** 4 月 12 日，Google CEO Sundar Pichai 接受 CBS 60 Minutes 专访。核心观点：① 美国"必须在 AI 领域取得领先地位"，应"大胆且负责任地发展 AI，使每个美国人受益"；② Google Search 正从"返回结果"演变为"智能体管理器"（agent manager）——协调多个专用智能体完成复杂任务的中枢系统。Pichai 在近期播客中进一步描述 Search 作为调度金融、旅行、编码等垂直智能体的中枢平台。
+
+**信号意义：** "Agent manager"是 Google 首次从最高层明确表达 Search 向智能体编排平台转型的愿景，与近期发布的 ADK Go 1.0、ADK Java 1.0.0、Antigravity 平台形成一致的智能体基础设施战略叙事。在 Anthropic Claude 和 OpenAI Codex 主导开发者工具市场的背景下，Google 选择从 Search 入手——全球最大流量入口的智能体化改造——是差异化竞争的关键着力点。
+
+**信源：** CBS News 60 Minutes · Search Engine Land
+
+---
+
+## 🇺🇸 北美区
+
+### NA-1. ⭐ Apple AI 智能眼镜设计细节曝光 + AI 主管 Giannandrea 本周正式离职
+
+**概述：** 4 月 12 日，Bloomberg Mark Gurman 独家报道 Apple 首款 AI 智能眼镜设计细节，包括样式、颜色方案和相机配置。同期确认 Apple AI 主管 John Giannandrea 将于本周（4 月 15 日股票归属日）正式完成离职交接。Giannandrea 2018 年从 Google 加入 Apple 领导 ML 和 Siri 团队，但 2025 年 Apple Intelligence 推出不顺和 Siri 升级延迟后角色被削减，2025 年 12 月宣布退休转顾问。继任者 Amar Subramanya（前 Microsoft AI 研究员）将领导 Apple Foundation Models、ML 研究和 AI 安全评估，直接向工程主管 Craig Federighi 汇报。
+
+**分析：**
+- AI 智能眼镜是 Apple 继 Vision Pro 后的第二条空间计算产品线，定位更轻便日常，与 Meta Ray-Ban 形成直接竞争。设计细节曝光意味着硬件已进入较成熟阶段。
+- Giannandrea → Subramanya 标志着 Apple AI 从"Google 基因"向"Microsoft 基因"的领导层转变。Subramanya 的基础模型 + 安全评估双重职责暗示 Apple 加速自研 LLM 能力建设。
+- Tim Cook 近期确认 Apple 正积极 AI 并购，重建 LLM 版 Siri"进展顺利，预计明年发布"——Apple 在生成式 AI 领域至少落后竞品一个完整年度。
+
+**信源：** Bloomberg (Mark Gurman) · Apple Newsroom · 9to5Mac · MacRumors
+
+**关联行动：** ① 智能眼镜正式发布窗口（WWDC 还是秋季发布会）；② Subramanya 上任后 AI 战略调整方向；③ Apple Foundation Model 基准数据。
+
+---
+
+### NA-2. xAI 起诉科罗拉多州：挑战全美首个 AI 反歧视法
+
+**概述：** 4 月 10 日，Elon Musk 旗下 xAI 向联邦法院起诉，要求阻止科罗拉多州全美首个 AI 反歧视法（针对 AI 在就业决策中的歧视性使用）。xAI 主张该法"严重阻碍" AI 发展并违反《第一修正案》。同日 xAI CFO Anthony Armstrong 离职。xAI 还面临密西西比州电厂（41 台天然气涡轮机）许可证反对。此前 SpaceX 2 月收购 xAI，合并实体估值 $1.25 万亿。
+
+**信号意义：** 这是 AI 公司首次直接起诉州政府 AI 法规——此前行业反对多通过游说渠道。科罗拉多法律禁止在招聘中使用产生歧视性影响的 AI 系统，被视为州级 AI 监管标杆。如果 xAI 胜诉（第一修正案路线），将为推翻其他州 AI 法规创造判例——截至 2026 年已有 600+ 州级 AI 法案提出。Trump 白宫 AI 政策框架主张联邦轻触监管 + 优先于冲突州法，DOJ AI 诉讼工作组已被授权挑战"不一致"的州法——xAI 诉讼方向与行政立场高度一致。
+
+**信源：** Bloomberg
+
+**关联行动：** ① 联邦法院初裁和初步禁令结果；② 其他 AI 公司是否加入或提交 amicus brief；③ 科罗拉多州 AG 回应策略。
+
+---
+
+### NA-3. OpenAI Codex CLI 0.119.0 重大更新：实时语音 + MCP 扩展 + 远程工作流
+
+**概述：** 4 月 10 日，OpenAI 发布 Codex CLI 0.119.0，三大特性方向：① **实时语音会话**默认使用 v2 WebRTC 路径，支持可配置传输、语音选择和原生 TUI 媒体支持；② **MCP Apps** 深度扩展——资源读取、工具调用元数据、自定义服务器工具搜索、服务器驱动 elicitation、文件参数上传；③ **远程/应用服务器工作流**——egress WebSocket 传输、远程 `--cd` 转发、沙箱感知文件系统 API、实验性 `codex exec-server` 子命令。Codex 周活用户达 300 万，Altman 宣布每增 100 万用户（至 1000 万）就重置所有计划用量限制。
+
+**技术意义：** 实时语音 + MCP 组合使 Codex 从"终端编码助手"进化为"多模态智能体开发平台"。v2 WebRTC 意味着语音交互延迟大幅降低。`exec-server` 子命令暗示 Codex 构建远程持久执行环境——与 Anthropic Claude Code background agent 形成直接竞争。0.119-0.121 的快速迭代节奏（每 1-2 天一个 alpha 版本）反映 OpenAI 对 AI IDE 市场高度重视。
+
+**信源：** GitHub openai/codex releases · Releasebot · OpenAI Developers
+
+**关联行动：** ① 语音交互实际编码场景采纳率；② exec-server 稳定版时间表；③ 与 Claude Code auto-mode 功能对比。
+
+---
+
+### NA-4. Anthropic 企业采购率快速逼近 OpenAI：约 30% 美国企业付费使用
+
+**概述：** PYMNTS 报道，接近三分之一的美国企业现在付费使用 Anthropic 工具，月环比增长超 6 个百分点。OpenAI 企业采购率约 35%，差距正快速缩小。CNBC 报道 HumanX 大会（6500 人）上"Claude Mania"现象——几乎所有参会者在讨论 Claude，多位企业 CTO 表示核心工作流已迁移到 Claude。Anthropic ARR 突破 $300 亿，超过 OpenAI 的 $250 亿。
+
+**信号意义：** Anthropic 首次在企业市场与 OpenAI 形成可比竞争态势。6 个百分点月增长如持续，意味着 2-3 个月内企业渗透率可能超越 OpenAI。$300 亿 ARR 超 OpenAI $250 亿是里程碑——Anthropic 首次在营收指标上领先。推动力：Claude Opus 4.6 编码优势、Claude Code 开发者生态、Mythos/Glasswing 安全叙事、HumanX 大会口碑。
+
+**信源：** PYMNTS · CNBC (HumanX) · Latent Space
+
+---
+
+### NA-5. Blackwell GPU 云租赁费率暴涨 48%：智能体 AI 驱动算力需求飙升
+
+**概述：** 据 LLM Stats 统计，NVIDIA Blackwell GPU 每小时云租赁费率达 $4.08，两个月内涨 48%。涨价主要由智能体 AI 工作负载爆发式增长驱动——智能体需持续运行的推理实例，而非传统批量处理，导致 GPU 利用率和租赁时长双升。Anthropic 同期宣布与 Google/Broadcom 签署 3.5 吉瓦计算资源协议，进一步推高顶级 GPU 竞争压力。
+
+**行业影响：**
+- 48% 涨幅远超同期通胀（~3%），反映智能体 AI 对 GPU 需求的非线性增长。每个活跃 AI 智能体需持续占用推理实例，与传统 LLM API 突发调用模式根本不同。
+- CoreWeave 本周与 Meta（$210 亿通过 2032 年）和 Anthropic 签署大额计算协议，股价周涨 28%，验证 GPU 云作为 AI 基础设施核心资产的投资逻辑。
+- 对中小开发者影响：GPU 成本上升 + AI 工具免费层缩减（HN 上 Claude Code Pro Max 5x 配额 1.5 小时耗尽帖获 578↑），形成 AI 开发的"成本天花板"。
+
+**信源：** LLM Stats · Motley Fool (CoreWeave) · GitHub anthropics/claude-code#45756
+
+---
+
+## 📊 KOL 观点精选
+
+### KOL-1. Sam Altman 攻击后博文：承认"处理冲突很糟糕"，呼吁"更少的爆炸"
+
+4 月 11 日，Altman 在住所遭燃烧瓶袭击后发表博文，同时回应《纽约客》Ronan Farrow 长篇调查。承认"我天生回避冲突"，坦言"在与前董事会的冲突中处理得很糟糕，导致了一场大混乱"。结语："我们应该降低修辞和行动的升级……在更少的房子里发生更少的爆炸——无论是字面意义还是比喻意义。"这是 AI 行业 CEO 首次在遭受物理攻击后公开回应，语调克制但暗含对反 AI 暴力升级的警告。（TechCrunch · SF Standard）
+
+### KOL-2. Sundar Pichai：Google Search 将成"智能体管理器"，美国必须主导 AI
+
+Pichai 4 月 12 日 CBS 60 Minutes 核心信号：Search 不再只是"返回结果"，而是作为"智能体管理器"协调多个专用 AI 完成复杂任务。在近期播客中具体化——Search 作为中枢，调度金融、旅行、编码等垂直智能体。与 Google 密集发布的 ADK Go/Java、Antigravity 平台形成战略一致性。AI 行业正从"谁的模型最强"转向"谁的编排层最好"。（CBS News · Search Engine Land）
+
+### KOL-3. Simon Willison："暗工厂"模式已到来——没人写代码，没人审代码
+
+Simon Willison 近期在 Lenny's Podcast 发表广泛传播的观点：2025 年 11 月是 AI 编码的转折点——"智能体终于真的能用了。"描述正在形成的"暗工厂"（dark factory）模式：没有人写代码，也没有人审查代码——全部由 AI 生成、AI 测试。同时警告 AI 面临的"致命三角"（lethal trifecta）：① 提示注入仍无解决方案；② AI 生成代码无法被完全信任；③ 用户对 AI 行为可预测性缺乏保障。在 AI 编码工具快速普及的当下，"暗工厂"既是效率跃升也是安全隐患的极端体现。（Lenny's Newsletter）
+
+---
+
+## 🔥 HN / GitHub 热榜精选
+
+**Hacker News 今日 AI 焦点：**
+- **Exploiting the most prominent AI agent benchmarks**（505↑, 130 评论）：Berkeley 安全团队揭示主流 AI 智能体基准存在系统性可利用漏洞，简单提示工程即可大幅提升跑分而不提升实际能力，对智能体评估方法论提出根本质疑。（rdi.berkeley.edu）
+- **Pro Max 5x quota exhausted in 1.5 hours**（578↑, 526 评论）：Claude Code 用户反映最高档订阅配额 1.5 小时耗尽，引发 AI 编码工具定价可持续性和 GPU 成本传导的激烈讨论。（GitHub anthropics/claude-code#45756）
+
+**GitHub Trending 今日 AI 精选：**
+- **NousResearch/hermes-agent**（70,174★ +7,454 today）：开源 AI 智能体框架，连续多日霸榜。
+- **shiyu-coder/Kronos**（16,161★ +1,985 today）：金融市场语言基础模型，专注金融文本理解和市场预测。
+- **OpenBMB/VoxCPM**（11,574★ +1,278 today）：无分词器多语言 TTS 系统。
+- **microsoft/markitdown**（105,487★ +2,513 today）：微软官方文件转 Markdown 工具，持续高热。
+- **coleam00/Archon**（17,230★）：首个开源 AI 编码 harness builder，确定性执行。
+
+**信源：** Hacker News · GitHub Trending
+
+---
+
 ## 下期追踪问题
 
-**1. Mythos 金融监管后续：BIS/FSB 是否发布 AI 网络安全金融稳定声明？**
-三大央行级响应后已过 3 天，多边机构层面是否有升级动作？Anthropic 金融行业白皮书何时发布？
+**1. Mythos 金融监管后续：CMORG 紧急会议结果和 BIS/FSB 多边声明？**
+BoE CMORG 会议即将召开，FCA 已将智能体 AI 列为显著关切。跨大西洋监管协调是否正式升级？
 
-**2. TSMC "核准芯片设计商"新规生效后首周执行数据？**
-新规已于今日（4 月 13 日）生效。首批获批中国公司名单、审批平均周期、中芯国际是否获客户回流——本周应有初步数据。
+**2. TSMC "核准芯片设计商"新规生效首周执行数据？**
+新规已于今日生效。首批获批中国公司名单、审批周期、中芯国际客户回流——本周应有初步数据。
 
 **3. Cohere × Aleph Alpha 合并谈判最终结果？**
 谈判持续中，正式签约时间、最终估值、技术整合方案待确认。
 
 **4. Musk v. OpenAI 4 月 27 日奥克兰听证会？**
-听证会倒计时 14 天。OpenAI 是否提交反驳动议？
+听证会倒计时 14 天。OpenAI 是否提交反驳动议？Altman 遇袭事件是否影响法庭舆论环境？
 
-**5. 生数科技港股 IPO 进展？**
-B 轮完成 + 股份制改造已就绪，H1 递交招股书窗口是否启动？
+**5. Sam Altman 安全事件后续和反 AI 暴力升级？**
+两次独立袭击后 OpenAI/Altman 安保升级情况？PauseAI 与第一起嫌疑人关联调查？是否出现模仿犯罪？
 
-**6. 世界互联网大会亚太峰会成果报告内容？**
-峰会 4 月 13-14 日举行，十余份成果报告（尤其 AI 治理和智能体相关）和部长级会议联合声明内容？
+**6. Anthropic vs 五角大楼：5 月 19 日口头辩论前动态？**
+DC 上诉法院定于 5 月 19 日口头辩论。旧金山联邦法院是否发布全国性禁令对冲华盛顿败诉？对 Anthropic IPO 估值的影响？
 
-**7. 智元 4 月 17 日合作伙伴大会发布内容？**
+**7. Axios npm 供应链攻击全景影响评估？**
+Sapphire Sleet 攻击影响范围（OpenAI 之外）、Apple 公证材料安全确认、AI IDE 供应链安全审计是否加速？
+
+**8. 世界互联网大会亚太峰会成果报告？**
+峰会 4 月 13-14 日举行，十余份成果报告和部长级联合声明内容，尤其 AI 治理和智能体方向？
+
+**9. 智元 4 月 17 日合作伙伴大会发布内容？**
 4 款机器人 + 4 个 AI 大模型的具体规格、应用场景和开源计划？
 
-**8. 腾讯混元 3.0 四月发布是否定档？**
-仍在四月窗口内，内部测试已覆盖 900+ 业务单元。具体发布日期和基准数据？
-
-**9. 第二届酒仙桥论坛产业政策信号？**
-4 月 14-16 日论坛期间是否发布国产芯片 + AI 相关政策文件或技术路线图？
-
-**10. 英国 £5 亿 AI 主权基金首批投资标的？**
-4 月 16 日 Wayve 启动仪式后，James Wise（Balderton）首任主席领导下的首批投资方向和标的公司？是否优先 foundation model 或 applied AI？
+**10. Apple AI 智能眼镜发布窗口和 Subramanya AI 战略？**
+Giannandrea 4 月 15 日正式离职后，Subramanya 的 Apple Foundation Model 路线图？智能眼镜目标 WWDC 还是秋季？
 
 **11. TSMC 4 月 16 日财报电话会议 Q2 指引？**
-Q1 创纪录 $357 亿后，Q2 指引是否维持 35%+ 增速？AI 加速器占比是否突破 50%？美国亚利桑那厂产能爬坡进度？
+Q1 创纪录 $357 亿后，Q2 是否维持 35%+ 增速？AI 加速器占比是否突破 50%？亚利桑那厂产能爬坡？
 
-**12. 美国数据中心电力基础设施瓶颈政策应对？**
-Sightline 分析显示约 50% 数据中心延迟/取消，电力设备短缺 + 中国变压器关税是核心瓶颈。联邦/州级是否有加速审批或产业政策响应？地理再分布（冰岛/北欧/加拿大）趋势是否加速？
+**12. xAI 诉科罗拉多州 AI 反歧视法初裁？**
+联邦法院初步禁令结果、其他 AI 公司是否加入、科罗拉多州 AG 回应策略？对 600+ 州级 AI 法案的判例影响？
