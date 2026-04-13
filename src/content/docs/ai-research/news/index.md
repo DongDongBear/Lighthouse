@@ -4,6 +4,7 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-14](/ai-research/news/2026-04-14/daily/) — ⭐⭐ Claude Cowork GA + Advisor Tool 级联路由 / AISI Mythos 附条件放行 / Meta Zuckerberg AI 分身 / Gallup 50% 美国人用 AI / PwC 74%价值集中20%公司 / MiniMax M2.7 开源争议 / Stanford HAI Index / GPT-6 Spud 预训练完成 / New Yorker 18月调查 / Gary Marcus 赞 Claude Code — BT4+CN4+EU2+AH7+NA6+KOL3 共 26 条
 - [2026-04-13](/ai-research/news/2026-04-13/daily/) — ⭐⭐ Sam Altman 住所一周两次遇袭（燃烧瓶+枪击三人被捕）/ Anthropic 上诉失败五角大楼维持供应链风险标签 / Apple AI 智能眼镜曝光+AI 主管离职 / OpenAI 遭朝鲜供应链攻击 / Anthropic 企业采购逼近 OpenAI / WIC 亚太峰会港开幕 / BoE 审议 Mythos / TSMC Q1 创纪录 $357 亿 — BT5+CN5+EU4+NA5+KOL3+AH5 共 27+ 条
 - [2026-04-12](/ai-research/news/2026-04-12/daily/) — ⭐⭐ Mythos 引发美英加三大央行紧急响应 / Claude Mania 称霸 HumanX / Meta Muse Spark 闭源转向 / Musk 要求解雇 Altman / 五部门 AI 拟人化互动新规 / Cohere×Aleph Alpha 合并 / Q1 VC $3000 亿 AI 占 87% — BT3+CN9+EU3+NA5+KOL2+AH4 共 26+ 条
 - [2026-04-11](/ai-research/news/2026-04-11/daily/) — ⭐⭐ Anthropic Project Glasswing 发布 Claude Mythos（网安 CyberGym 83.1%，12 合作伙伴，$1 亿信用额度）/ OpenAI Stargate UK 暂停（能源+版权监管）/ CoreWeave 同日签 Anthropic+Meta（$350 亿算力）/ DeepSeek V4 四月下旬确认（1T MoE 昇腾原生）/ Q1 全球风投 $3000 亿破纪录（AI 占 80%）/ NVIDIA-Groq $200 亿收购传言 / Cerebras IPO — BT4+NA6+KOL6 共 35+ 条
