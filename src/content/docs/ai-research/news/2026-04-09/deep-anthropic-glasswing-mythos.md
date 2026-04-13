@@ -157,3 +157,28 @@ Mythos 的网络安全能力已从 AI 安全技术议题升级为全球金融系
 - 这一事件实质上重新定义了前沿 AI 模型的"风险评估主体"——从 AI 公司自律扩展到主权金融监管体系
 
 **信源：** CNBC 2026-04-10 / Bloomberg 2026-04-10 / Bloomberg 2026-04-11 (BOE CMORG) / AWS Bedrock 文档
+
+---
+
+## 📌 2026-04-13 更新
+
+### BoE CMORG 紧急会议正式排期：跨大西洋金融监管进入"准系统性风险"级别
+
+- **英格兰银行风险主管 Duncan Mackinnon 将在两周内主持 CMORG（Cross Market Operational Resilience Group）紧急会议**，专题审议 Claude Mythos 对金融系统的安全影响（Bloomberg 4/11 报道确认）
+- **CMORG 是英国金融市场基础设施的最高级别韧性协调机制**，此前仅在 2020 年 COVID 市场动荡和 2023 年英国养老金危机时启动——为一个**未发布**的 AI 模型启动 CMORG 在历史上前所未有
+- **FCA（金融行为监管局）4 月记录首次将"智能体 AI 在支付和金融市场中的风险增长"列为显著关切**，与 CMORG 议程形成监管联动
+- **跨大西洋同步升级**：美联储主席 Powell 和财政部长 Bessent 此前已与美国主要银行 CEO 举行闭门会议（4/10），英国 CMORG 响应（4/11）构成 72 小时内的跨大西洋协调——距 G7/FSB 多边框架仅一步之遥
+- **矛盾信号浮现**：TechCrunch 4/12 报道 Trump 行政官员可能在鼓励银行测试 Mythos 模型，与五角大楼供应链风险黑名单形成政策冲突——Anthropic 同时面临"被监管"和"被推广"的双重压力
+
+**新增基准数据：**
+- CyberGym 83.1%（vs Opus 4.6 的 66.6%）
+- Terminal-Bench 2.0: 82%
+- GPQA Diamond: 94.5%
+
+**Glasswing 联盟最新进展：**
+- $1 亿计算资源 + $400 万开源安全捐款的承诺已进入执行阶段
+- AWS Bedrock 已上线 Claude Mythos Preview（受限研究预览，仅 us-east-1 区域）
+
+**下一步关注点：** ① CMORG 会议具体日期（两周内 ≈ 4 月 25 日前后）和结论声明；② BIS/FSB 是否跟进发布多边 AI 安全金融稳定声明；③ FCA 是否出台针对智能体 AI 的具体金融监管指引；④ Mythos 有限发布时间表是否因监管压力调整
+
+**信源：** Bloomberg 2026-04-11 / CNBC 2026-04-10 / Yahoo Finance / TechCrunch 2026-04-12
