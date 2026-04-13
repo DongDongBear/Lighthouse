@@ -1,6 +1,6 @@
 ---
 title: "2026-04-14 AI 日报"
-description: "中国区 Round 1：MiniMax M2.7"开源"争议（非商用许可引爆社区，230B/10B MoE 接近 Opus 性能），Stanford HAI 2026 AI Index（中国抹平美国 AI 领先优势），酒仙桥论坛开幕 | 欧洲区：UK 金融监管三驾马车紧急审查 Claude Mythos Preview（零日漏洞发现能力引发系统性风险评估） | 学术/硬件：OpenAI GPT-6 Spud 预训练完成（4/14传闻未经证实），EquiformerV3 MIT 三大基准 SOTA，FORGE 制造场景评估基准，ELT 弹性循环 Transformer，去中心化训练后门攻击 | 三大厂：Claude Cowork GA + Advisor Tool Beta | 北美区：Meta AI 分身，Gallup 50% 美国人用 AI，PwC AI 价值集中度 | KOL：New Yorker 18 个月深度调查"
+description: "中国区 Round 1：MiniMax M2.7「开源」争议（非商用许可引爆社区，230B/10B MoE 接近 Opus 性能），Stanford HAI 2026 AI Index（中国抹平美国 AI 领先优势），酒仙桥论坛开幕 | 欧洲区：UK 金融监管三驾马车紧急审查 Claude Mythos Preview（零日漏洞发现能力引发系统性风险评估） | 学术/硬件：OpenAI GPT-6 Spud 预训练完成（4/14传闻未经证实），EquiformerV3 MIT 三大基准 SOTA，FORGE 制造场景评估基准，ELT 弹性循环 Transformer，去中心化训练后门攻击 | 三大厂：Claude Cowork GA + Advisor Tool Beta | 北美区：Meta AI 分身，Gallup 50% 美国人用 AI，PwC AI 价值集中度 | KOL：New Yorker 18 个月深度调查"
 ---
 
 # 2026-04-14 AI 日报
