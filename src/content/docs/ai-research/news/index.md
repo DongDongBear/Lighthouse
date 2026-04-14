@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-15](/ai-research/news/2026-04-15/daily/) — ⭐ Anthropic 董事会引入 Novartis CEO 强化高监管治理 / Google Chrome Skills 上线把 AI 工作流推向浏览器入口 / OpenAI 四大官方入口本轮无可验证新发布 / HN 与 GitHub Trending 持续转向 agent workflow 与记忆层 — BT3+CN2+EU3+AH6+NA4+KOL1 共 19 条
+
 - [2026-04-14](/ai-research/news/2026-04-14/daily/) — ⭐⭐ Claude Cowork GA + Advisor Tool 级联路由 / AISI Mythos 附条件放行 / Meta Zuckerberg AI 分身 / Gallup 50% 美国人用 AI / PwC 74%价值集中20%公司 / MiniMax M2.7 开源争议 / Stanford HAI Index / GPT-6 Spud 预训练完成 / New Yorker 18月调查 / Gary Marcus 赞 Claude Code — BT4+CN4+EU2+AH7+NA6+KOL3 共 26 条
 - [2026-04-13](/ai-research/news/2026-04-13/daily/) — ⭐⭐ Sam Altman 住所一周两次遇袭（燃烧瓶+枪击三人被捕）/ Anthropic 上诉失败五角大楼维持供应链风险标签 / Apple AI 智能眼镜曝光+AI 主管离职 / OpenAI 遭朝鲜供应链攻击 / Anthropic 企业采购逼近 OpenAI / WIC 亚太峰会港开幕 / BoE 审议 Mythos / TSMC Q1 创纪录 $357 亿 — BT5+CN5+EU4+NA5+KOL3+AH5 共 27+ 条
 - [2026-04-12](/ai-research/news/2026-04-12/daily/) — ⭐⭐ Mythos 引发美英加三大央行紧急响应 / Claude Mania 称霸 HumanX / Meta Muse Spark 闭源转向 / Musk 要求解雇 Altman / 五部门 AI 拟人化互动新规 / Cohere×Aleph Alpha 合并 / Q1 VC $3000 亿 AI 占 87% — BT3+CN9+EU3+NA5+KOL2+AH4 共 26+ 条
