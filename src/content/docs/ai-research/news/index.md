@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-16](/ai-research/news/2026-04-16/daily/) — ⭐⭐ CoreWeave+Jane Street $7B 算力+股权 / GPT-5.4-Cyber 网安开放认证 / Gemini Flash TTS 70+ 语言 Elo 1211 / OpenAI Agents SDK 沙箱+凭证保险库+MCP / Meta×Broadcom MTIA 2nm 1GW / Apple 威胁下架 Grok / Perplexity $500M 5x 增长 / 英国 £500M 主权 AI 基金 / ASML Q1 €8.8B / NVIDIA Nemotron 3 Super 120B — CN8+EU8+AH10+BT4+NA8+KOL1 共 39 条
+
 - [2026-04-15](/ai-research/news/2026-04-15/daily/) — ⭐ Anthropic 董事会引入 Novartis CEO 强化高监管治理 / Google Chrome Skills 上线把 AI 工作流推向浏览器入口 / OpenAI 四大官方入口本轮无可验证新发布 / HN 与 GitHub Trending 持续转向 agent workflow 与记忆层 — BT3+CN2+EU3+AH6+NA4+KOL1 共 19 条
 
 - [2026-04-14](/ai-research/news/2026-04-14/daily/) — ⭐⭐ Claude Cowork GA + Advisor Tool 级联路由 / AISI Mythos 附条件放行 / Meta Zuckerberg AI 分身 / Gallup 50% 美国人用 AI / PwC 74%价值集中20%公司 / MiniMax M2.7 开源争议 / Stanford HAI Index / GPT-6 Spud 预训练完成 / New Yorker 18月调查 / Gary Marcus 赞 Claude Code — BT4+CN4+EU2+AH7+NA6+KOL3 共 26 条
