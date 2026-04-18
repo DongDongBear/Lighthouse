@@ -125,6 +125,28 @@ description: "[占位]"
 
 **关联行动：**继续追光轮是否披露客户结构、续约率，以及数据采集与评测业务的标准化程度。
 
+## 🇪🇺 欧洲区
+
+> 本轮已逐项检查 Mistral、DeepMind、Hugging Face、Stability AI、Aleph Alpha、Poolside、Synthesia、Wayve、Builder.ai、Helsing、Photoroom、欧洲 AI 融资、EU AI Act、GDPR/AI、UK AISI、欧洲数字主权，以及 Yann LeCun / Thomas Wolf / Clément Delangue / Peter Steinberger / Demis Hassabis / Jeff Dean 最近 24-48 小时动态；但截至北京时间 2026-04-19 03:00 前，未发现同时满足“原始链接可访问 + 明确发布时间在 24 小时内 + 过去 7 天未重复/仅属旧闻跟进 + 达到 A/B 级”的新增条目，因此本区不强行灌水收录。
+
+## 🌐 学术/硬件
+
+### AH-1. ⭐ [B] Sebastian Raschka 新文公开自己的 LLM 架构拆解工作流，强调“论文不够细就去看 config 和 reference implementation”
+
+**概述：**Sebastian Raschka 于 4 月 18 日发布新文《My Workflow for Understanding LLM Architectures》，系统解释他过去几个月如何为开源大模型绘制架构图、拆解模块与写技术长文。文章的核心判断很直接：现在很多工业界 open-weight 模型的技术报告越来越不写细节，因此真正想理解架构，必须从论文一路下钻到 Hugging Face config、`transformers` 参考实现和可运行代码。
+
+**技术/产业意义：**这篇文章值得收，不是因为它发布了新模型，而是因为它把 2026 年开源模型研究的一个现实变化说透了：论文逐渐变成“营销级说明书”，而代码与配置文件才是可核验的事实层。对 Lighthouse 这种每天要判断模型架构、新增模块和工程路线的人来说，这相当于把“怎么读新模型”这件事方法论化了。
+
+**深度分析：**Raschka 给出的工作流至少有三层价值。第一，它承认了 open-weight 时代的信息不对称已经从“拿不到权重”变成“拿到权重也未必拿到完整设计说明”；因此研究者不能只靠 PDF，要顺着 model card、config、模块定义、注意力实现、MLP 变体和 RoPE/位置编码细节一路往下看。第二，他明确强调“working code doesn’t lie”——这句话的分量很重，因为它把模型理解从二手解读拉回一手证据；当论文含糊、采访口径飘、营销帖过度包装时，真正稳定的仍然是代码路径。第三，这种半手工流程虽然慢，但特别适合训练架构直觉：你会更容易看出哪些新模型只是旧配方换皮，哪些才真的在 attention、state space、hybrid block、KV cache 或 tokenizer 设计上做了结构性变化。对开源生态来说，这也解释了为什么 `transformers` 支持速度、社区 reverse engineering 能力、HF Hub 的配置透明度，已经变成模型扩散速度的一部分，而不仅仅是“配套基础设施”。
+
+**评论观察：**
+- 🟢 支持：Raschka 把“如何读新模型”从经验活整理成了可复用流程，对研究者、工程师和内容作者都非常实用，尤其适合现在这种新架构频发但文档质量下降的阶段。
+- 🔴 质疑：这套方法对 open-weight 模型有效，但对 ChatGPT、Claude、Gemini 这类闭源系统依然无能为力；行业最重要的一批 frontier 模型仍处在“只能猜、不能证”的黑箱区。
+
+**信源：**https://magazine.sebastianraschka.com/p/workflow-for-understanding-llms
+
+**关联行动：**把这篇文章列入后续深读候选，并据此补一份“读开源模型先看哪些 config/code 位置”的内部检查清单。
+
 ## 下期追踪问题
 
 1. **DeepSeek 首轮外部融资会不会很快从“传闻”转为正式官宣？** 重点盯融资对象、金额区间、是否绑定华为昇腾或其他国产算力合作条款。
