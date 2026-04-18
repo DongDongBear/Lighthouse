@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-19](/ai-research/news/2026-04-19/daily/) — ⭐ Anthropic 华府关系回暖 / AI App Economy 再起 / 今日三大厂官方无新发布但 12 页已全检 / Scopeon 与 Karpathy-inspired `CLAUDE.md` 把 coding agent 治理层继续推热 / Voicebox 本地语音工作室上冲 —— BT1+CN7+AH1+NA5 共 14 条
+
 - [2026-04-18](/ai-research/news/2026-04-18/daily/) — ⭐ Anthropic 推 Claude Design / Cursor 冲击 500 亿美元估值 / 美国数据中心建设延误暴露物理瓶颈 / Zoom 联手 World 做会议真人验证 / HN 与 GitHub Trending 持续转向 agent 编排、评测与自进化工具 — BT1+EU2+AH8+NA10 共 21 条
 
 - [2026-04-17](/ai-research/news/2026-04-17/daily/) — ⭐⭐ Claude Opus 4.7 发布 / OpenAI 把 Codex 推向“几乎一切” / OpenAI cyber defense ecosystem / Google AI Mode in Chrome / Gemini App 个性化图像 / MaxText 单机 TPU 后训练 / 英国 Sovereign AI Unit 首批 backing / TSMC Q1 EPS NT$22.08 / AWS 上架 Opus 4.7 / Meta 统一 AI agents / Cerebras $8.5 亿循环信贷 / Google-Pentagon classified AI / Moolenaar 推更严对华芯片封锁 — BT6+EU3+AH9+NA5+KOL1 共 24 条
