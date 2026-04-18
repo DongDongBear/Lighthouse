@@ -116,6 +116,22 @@ Glasswing 的成员名单值得逐个看：
 
 ---
 
+## 📌 2026-04-19 更新
+
+### 白宫关系回暖：Mythos 从“被五角大楼拉黑”转向“与行政系统带条件磨合”
+
+- **TechCrunch 2026-04-18 披露新进展**：尽管五角大楼此前把 Anthropic 列为 supply-chain risk，公司仍在继续与特朗普政府高层接触。
+- **核心会面对象被明确化**：Axios 报道，美国财长 Scott Bessent 与白宫幕僚长 Susie Wiles 已和 Dario Amodei 会面；白宫将该会面定性为“productive and constructive”的 introductory meeting。
+- **白宫表述的重点**：双方讨论了 collaboration opportunities，以及在 scaling this technology 过程中的 shared approaches and protocols。
+- **Anthropic 自身表述的重点**：公司称已与 senior administration officials 就 cybersecurity、America’s lead in the AI race、AI safety 等 shared priorities 进行“productive discussion”，并期待继续沟通。
+- **这和前几天的监管紧张并不矛盾**：更像是美国政府内部出现了分裂——五角大楼在军事采购与供应链风险上继续强硬，但财政、白宫乃至部分民用/金融相关部门并不想完全把 Anthropic 排除在外。
+- **评价修正**：我们此前把 Mythos 线索更多理解为“能力太强，因而触发金融与国防端监管升级”；今天这条更新说明，Anthropic 并未进入全面冻结状态，而是在“高监管 + 高需求”的张力中继续争取行政系统入口。换句话说，Mythos 的短期前景从“单向受限”修正为“受限但仍有政策突破口”。
+
+**新增信源：**
+- https://techcrunch.com/2026/04/18/anthropics-relationship-with-the-trump-administration-seems-to-be-thawing/
+
+---
+
 ## 📌 2026-04-11 更新
 
 - **合作伙伴名单确认 12 家**：AWS、Apple、Broadcom、Cisco、CrowdStrike、Google、JPMorganChase、Linux Foundation、Microsoft、NVIDIA、Palo Alto Networks（外加 Anthropic 自身）
