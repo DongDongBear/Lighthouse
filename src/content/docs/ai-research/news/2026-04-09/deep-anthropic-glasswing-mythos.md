@@ -198,3 +198,19 @@ Mythos 的网络安全能力已从 AI 安全技术议题升级为全球金融系
 **下一步关注点：** ① CMORG 会议具体日期（两周内 ≈ 4 月 25 日前后）和结论声明；② BIS/FSB 是否跟进发布多边 AI 安全金融稳定声明；③ FCA 是否出台针对智能体 AI 的具体金融监管指引；④ Mythos 有限发布时间表是否因监管压力调整
 
 **信源：** Bloomberg 2026-04-11 / CNBC 2026-04-10 / Yahoo Finance / TechCrunch 2026-04-12
+
+---
+
+## 📌 2026-04-20 更新
+
+### NSA 已在用 Mythos：Anthropic 从“争取白宫入口”走到“进入安全机构试用”
+
+- **Reuters 4 月 19 日转述 Axios 新进展**：美国国家安全局（NSA）已经在使用 Anthropic 的 Mythos Preview，尽管五角大楼此前仍把 Anthropic 标为 formal supply-chain risk。
+- **使用范围不再只是单点试探**：Reuters 文中明确写到，Mythos Preview 在该部门内“used more widely”，这意味着它不是象征性 demo，而是开始进入更实际的内部试用语境。
+- **制度冲突进一步坐实**：NSA 隶属国防部，而国防部对 Anthropic 的供应链风险定性尚未撤销；一边继续黑名单化，一边实际在用 Mythos，说明美国政府内部对前沿模型的态度已不是简单的一刀切，而是典型的“高风险能力 + 高需求场景”并行推进。
+- **与 4 月 19 日的白宫会面信号形成闭环**：此前我们把线索定义为“Anthropic 仍在争取行政系统入口”；今天新增的硬信息是，入口并不只是口头讨论，至少在 NSA 这样的高敏机构里，Mythos 已经进入真实测试或使用阶段。
+- **评价修正**：这条更新把我们对 Mythos 政务化进展的判断从“受限但仍有政策突破口”进一步修正为“受限但已发生机构级落地试用”。真正悬而未决的问题，不再是“政府会不会碰 Mythos”，而是“试用会不会转成正式采购、明确使用守则或跨机构扩散”。
+
+**新增信源：**
+- https://www.yahoo.com/news/articles/us-security-agency-using-anthropics-181218962.html
+- https://techcrunch.com/2026/04/18/anthropics-relationship-with-the-trump-administration-seems-to-be-thawing/
