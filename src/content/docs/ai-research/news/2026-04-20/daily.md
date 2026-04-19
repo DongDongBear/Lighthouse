@@ -149,6 +149,22 @@ description: "[占位]"
 
 **关联行动：**明天继续追中国云厂、服务器厂和手机链条是否出现新的提价、备货或扩产信号，验证内存压力是否向终端传导。
 
+## 🇪🇺 欧洲区
+
+> 本轮已逐项实际检查 Mistral AI、DeepMind、Hugging Face、Stability AI、Aleph Alpha、Poolside AI、Synthesia、Wayve、Builder.ai、Helsing、Photoroom，以及欧洲 AI 融资线索；同时复核 @ylecun、@Thom_Wolf、@ClementDelangue、@steipete、@demishassabis、@jeffdean 近 24-48 小时公开动态，并检查 EU AI Act、GDPR/AI、UK AI Safety Institute、Gaia-X / 欧洲 AI 主权、European AI funding 等政策入口。严格按“24 小时铁律 + 明确发布日期 + 原始链接可访问 + A/B 级过滤”执行后，今日欧洲区未发现可新增写入的合规 A/B 级条目。
+>
+> 主要原因有三类：1）官方源最近更新多停留在 04-17 或更早，例如 DeepMind 官方博客与 Hugging Face 博客；2）个别站点虽有可疑增量，但缺乏可核验的明确发布时间，或官方页被安全校验/403 挡住，无法在本轮条件下完成正文核验，例如 Helsing、部分 Builder.ai/Intel/TSMC 类受限页面；3）KOL 侧虽有 Yann LeCun 反驳 Dario Amodei 就业判断的第三方报道，但本质更接近观点型舆论波动，评级仅 C，故不纳入日报。
+>
+> 结论：欧洲区今天完成了强制搜索与信源核验，但从严筛选后新增 0 条，宁可空缺也不混入旧闻或弱信号。
+
+## 🌐 学术/硬件
+
+> 本轮已覆盖 arXiv 七个类别（cs.AI / cs.CL / cs.LG / cs.CV / cs.MA / cs.SE / cs.RO）、Hugging Face Papers、Papers With Code、Reddit 的 r/MachineLearning / r/LocalLLaMA / r/artificial，以及 Sebastian Raschka、The Batch、Import AI、The Gradient、Lilian Weng、AI Snake Oil、NVIDIA、AMD、Intel、TSMC 与 AI data center / compute / power 基础设施线索。
+>
+> 严格按 24 小时窗口核对后，今日学术/硬件区同样没有可正式新增写入的 A/B 级条目。核心原因是：arXiv 七类最新提交普遍停在 04-16；Hugging Face Papers 与 Papers With Code 当前可见榜单回落到 04-17；Reddit 原始源在本环境被 403/Blocked 挡住，而可访问第三方索引返回的是 2025 年旧数据；Raschka、The Batch、Import AI、The Gradient、Lilian Weng、AI Snake Oil 最近一期均早于 24 小时；NVIDIA 官方 newsroom 最新 AI 相关内容也早于窗口。
+>
+> 其中有几条超窗但值得继续跟踪的线索未纳入正式条目：HY-World 2.0、DR^3-Eval、RAD-2 等论文在 04-15 至 04-17 社区热度较高，但全部超出本轮铁律；Raschka 04-18 的《My Workflow for Understanding LLM Architectures》有方法论价值，但同样不满足 24 小时要求。结论依旧是新增 0 条，从严不收。
+
 ## 下期追踪问题
 
 1. **高德 ABot 会不会在 24-72 小时内补出更硬的技术材料？** 重点盯 ABot-World / ABot-Claw 是否披露论文、benchmark 细项、失败案例或更多开放环境视频。
