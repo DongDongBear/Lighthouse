@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-21](/ai-research/news/2026-04-21/daily/) — ⭐ Siemens Eigen Engineering Agent 把工业 AI 推向闭环执行 / Adobe 把 agentic AI 打进企业营销主战场 / 今日三大厂官方 12 页全检无 24h 新发 / Mythos 进入银行监管视野 / GitHub 与 HN 继续押注 coding 与 agent 工作流 —— BT1+CN8+EU7+AH3+NA3+KOL3 共 25 条
+
 - [2026-04-20](/ai-research/news/2026-04-20/daily/) — ⭐ Anthropic Mythos 进入美国安全机构试用 / Google 传与 Marvell 做推理芯片 / OpenAI 官方 4 入口被 challenge 挡住但 12 页已全检 / 德国要求工业 AI 监管分层 / Palantir 文化宣言暴露 defense AI 的组织政治化 —— BT1+CN8+NA4 共 13 条
 
 - [2026-04-19](/ai-research/news/2026-04-19/daily/) — ⭐ Anthropic 华府关系回暖 / AI App Economy 再起 / 今日三大厂官方无新发布但 12 页已全检 / Scopeon 与 Karpathy-inspired `CLAUDE.md` 把 coding agent 治理层继续推热 / Voicebox 本地语音工作室上冲 —— BT1+CN7+AH1+NA5 共 14 条
