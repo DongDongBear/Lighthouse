@@ -396,3 +396,35 @@ Codex 本次更新的走向透露了 OpenAI 对"AI 劳动力"的长远战略：
 ---
 
 *本文基于 OpenAI 官方博客《Codex for (almost) everything》（http://openai.com/index/codex-for-almost-everything/）的公开内容撰写，所有能力描述与可用范围均以该页面为准。文章未披露的指标按原文已做标注。*
+
+---
+
+## 📌 2026-04-22 更新
+
+### OpenAI 把 Codex 主线从“更强的开发者 Agent”继续推进到“企业部署体系”
+
+4 月 21 日，OpenAI 又发布了《Scaling Codex to enterprises worldwide》。这不是另一篇重复的 Codex 宣传稿，而是对本文主线的直接续集：4 月 17 日那篇回答的是“Codex 能做什么”，4 月 21 日这篇回答的是“OpenAI 准备怎样把它卖进大企业并规模化落地”。
+
+新增最硬的三组信息是：
+
+- **周活开发者从 300 万升到 400 万+**，而且只用了两周；
+- **OpenAI 推出 Codex Labs**，由官方专家直接进企业做 workshop 和落地设计；
+- **首批 7 家全球咨询/系统集成伙伴上线**：Accenture、Capgemini、CGI、Cognizant、Infosys、PwC、TCS。
+
+### 为什么这组新增很重要？
+
+这意味着 Codex 的竞争焦点开始从“个人开发者觉得好不好用”转向“企业能不能把它部署进真实工作流”。OpenAI 在新文里明确写到，Codex 已经被企业用于：
+
+- 测试覆盖
+- 代码审查
+- 跨仓库理解
+- 事件响应
+- 更广义的 briefs、plans、checklists、drafts、follow-ups
+
+也就是说，Codex 的商业叙事已经不再局限于 coding assistant，而是在往更广义的组织工作代理扩张。
+
+### 评价修正
+
+本文原本把 04-17 更新定义为“编程 Agent 推向整台计算机”。现在看，这个判断还可以再往前修正一步：**OpenAI 不只是在扩能力边界，也在同步搭建企业交付边界。**
+
+如果说 04-17 代表 Codex 的产品能力跨越，那么 04-21 代表 Codex 开始进入典型企业软件的放量阶段——用户规模、专家服务、咨询伙伴、组织级部署方法论，这些东西一旦补齐，Codex 就更像一个可以进入 CIO 预算表的 agent 平台，而不只是开发者圈的热门工具。
