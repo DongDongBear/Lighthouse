@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-22](/ai-research/news/2026-04-22/daily/) — ⭐ Gemini Deep Research Max 把研究 agent 推向 MCP + 企业数据 / Anthropic×Amazon 锁定 10 年 5GW 算力 / OpenAI Codex 周活升至 400 万并企业化 / GPT Image 2 API 上线 / Meta 与 Microsoft 同日公开生产级 AI 系统方法论 —— BT5+NA2+KOL1 共 33 条
+
 - [2026-04-21](/ai-research/news/2026-04-21/daily/) — ⭐ Siemens Eigen Engineering Agent 把工业 AI 推向闭环执行 / Adobe 把 agentic AI 打进企业营销主战场 / 今日三大厂官方 12 页全检无 24h 新发 / Mythos 进入银行监管视野 / GitHub 与 HN 继续押注 coding 与 agent 工作流 —— BT1+CN8+EU7+AH3+NA3+KOL3 共 25 条
 
 - [2026-04-20](/ai-research/news/2026-04-20/daily/) — ⭐ Anthropic Mythos 进入美国安全机构试用 / Google 传与 Marvell 做推理芯片 / OpenAI 官方 4 入口被 challenge 挡住但 12 页已全检 / 德国要求工业 AI 监管分层 / Palantir 文化宣言暴露 defense AI 的组织政治化 —— BT1+CN8+NA4 共 13 条

@@ -1,6 +1,6 @@
 ---
-title: "2026-04-22 AI 日报：[占位，最后由北美采集轮填写]"
-description: "[占位]"
+title: "2026-04-22 AI 日报：Gemini Deep Research Max 把研究 Agent 推向 MCP + 企业数据"
+description: "Gemini Deep Research Max、Anthropic-Amazon 5GW 算力、OpenAI Codex 企业化与 GPT Image 2 API、Meta/Microsoft 工程新信号"
 ---
 
 # 2026-04-22 AI 日报
@@ -10,6 +10,91 @@ description: "[占位]"
 1. **Mythos 进入银行监管语言之后，会不会在未来 24-72 小时内出现更明确的正式采购、银行试点或官方风险指引？** 今日中国区实际检索量子位、36Kr、虎嗅及头部公司官方入口后，未见中国监管部门、金融机构或本土厂商披露与 Mythos 相关的新增采购、试点或规则文本，暂无中国侧可验证新进展。
 2. **Google-Marvell + Morgan Stanley + 电力挤压这三条线，会不会很快汇合成“AI 基建从 GPU 单点扩张到 CPU / ASIC / 电力”的新定价框架？** 有新增，而且比昨天更硬。36Kr 今日《AI Infra产业链卡在哪里了？》把瓶颈进一步拆到 HBM/DRAM、ATE 测试设备、ABF 载板、EUV 产能与电力四堵墙；欧洲/全球侧同一时间又出现三条更可执行的信号：Bull 拿下瑞典 Mimer AI Factory 五年 3000 万欧元合同，说明“主权算力”已落到具体设备与系统集成采购；Denham Sustainable Infrastructure 与 First American Nuclear 直接把核能/现场供电方案对准 AI 和 hyperscale data center，说明电力正在从背景约束前移为核心产品；Reuters 对 Intel 财报前瞻则把市场焦点放到 AI 服务器芯片供给与 18A 良率，表明 CPU / 制造节点也在重新进入 AI 基建定价叙事。现在这条追踪线已从“媒体判断”进到“合同 + 能源方案 + 供应链财报验证”的实操阶段。
 3. **Adobe 的 CX Enterprise 与 Siemens 的 Eigen Engineering Agent，会不会共同证明 2026 年真正的 agent 拐点在“闭环工作流执行”而不是聊天助手？** 有新增，而且中国区今天给出了更贴近消费端和产业端的呼应：豆包与千问开始争夺 Agent 的物理入口，小米 miclaw 扩到 PC/Mac/有屏音箱并强调 reasoning-execution loop，美团把“小团健康管家 + 健康卡”做成“问诊—购药—履约—复购提醒”闭环，说明国内也在把 AI 从“会聊”推进到“会办事”。
+
+## ⭐ 三大厂动态
+
+> 本轮已实际访问并核对 Anthropic / OpenAI / Google 三大厂 12 个官方入口。OpenAI 的 `/blog`、`/index`、`/research`、`/docs/changelog` 在直接请求下命中 403 / Cloudflare，已按 2026-04-11 新增流程用 `agent-browser` 真实浏览器重试，再用 `r.jina.ai` 文本镜像补齐正文读取；Anthropic 与 Google 系列页面则通过官网正文、站点 sitemap 与官方 X 交叉核验。按三大厂过去 14 天去重后，本轮保留 5 条 A/B 级官方增量；其余页面未见新的 24 小时内重大官方发布。
+
+### BT-1. [A] **后续**：04-16 已报道 AWS 上架 Claude Opus 4.7，今日新增的是 Anthropic 与 Amazon 把合作直接推到“10 年 5GW 算力合同”
+
+**概述：** Anthropic 于北京时间 04-21 04:50 左右发布新公告，宣布与 Amazon 签署更深一层的长期协议：未来十年在 AWS 技术上投入超过 1000 亿美元，锁定最高 5GW 的新增训练与推理容量；其中新的 Trainium2 产能将在今年上半年上线，到 2026 年底预计将有接近 1GW 的 Trainium2 + Trainium3 容量到位。官方还披露，当前已有超过 10 万客户通过 Bedrock 使用 Claude，Anthropic 已在 Rainier 集群上使用超过 100 万颗 Trainium2 芯片训练与服务 Claude。
+
+**技术/产业意义：** 这不再是“Claude 又上了一个云”的层面，而是 Anthropic 正在把模型竞争转成基础设施锁仓。5GW 这种量级说明 frontier model 竞争已经从模型 API 和 benchmark 外溢到电力、芯片路线与云厂商长期资本开支。
+
+**深度分析：** 这条更新相较 04-16 的真正新增有三层。第一，规模级别被彻底拉开：不是某个模型在 Bedrock 可用，而是 Anthropic 直接把 Trainium2 到 Trainium4 的未来路线都提前纳入采购选择权。第二，地域上明确新增“亚洲与欧洲 inference 扩容”，意味着 Anthropic 正把国际推理供给看成和训练同等重要的瓶颈。第三，公告特别强调 Claude 仍是唯一同时跑在 AWS、Google Cloud、Microsoft Azure 三大云上的 frontier model，这其实是在给企业 CIO 释放一个强信号：Claude 不只是模型，更是跨云部署与合规迁移的战略资产。
+
+**评论观察：**
+- 🟢 支持：把 5GW、Trainium 路线图、跨区域推理扩容与 10 万 Bedrock 客户一起讲清楚，说明 Anthropic 已经从“模型公司”进入“基础设施级客户”阶段。
+- 🔴 质疑：对 Anthropic 而言，这种深度绑定 AWS custom silicon 的路线也会带来更高的供给和议价集中度，未来若模型路线或云竞争格局变化，灵活性未必完全免费。
+
+**信源：**https://www.anthropic.com/news/anthropic-amazon-compute
+
+**关联行动：**继续追 Anthropic 是否很快披露更细的 Trainium3 / Trainium4 性能、Bedrock 企业客户案例，以及这 5GW 合同会不会反过来影响 Claude 的区域定价与服务 SLA。
+
+### BT-2. [A] OpenAI 把 Codex 从“热门 coding agent”推向企业服务体系：4 百万周活开发者 + Codex Labs + 七大咨询伙伴同时落地
+
+**概述：** OpenAI 于 04-21 发布《Scaling Codex to enterprises worldwide》，披露 Codex 周活开发者在两周内从 300 万增至 400 万，并开始明确把 Codex 从开发者工具推向企业工作流平台。官方点名 Virgin Atlantic、Ramp、Notion、Cisco、Rakuten 等客户已把 Codex 用于测试覆盖、代码审查、跨仓库理解、事件响应等流程，同时宣布推出 Codex Labs，并联手 Accenture、Capgemini、CGI、Cognizant、Infosys、PwC、TCS 七家全球咨询与交付伙伴帮助企业部署。
+
+**技术/产业意义：** 这条的关键不是用户数字本身，而是 OpenAI 开始把 agent 商业化从“模型卖给开发者”升级成“专家服务 + 渠道伙伴 + 企业流程改造”。这说明 2026 年 coding agent 的战场正在从个人提效转向组织级改造。
+
+**深度分析：** 这篇文章新增了三个比“4 百万周活”更重要的信号。第一，Codex 的用例已经越过 coding 本身，官方明确写入 browser-based work、image generation、memory、ongoing work across tools and apps，这意味着 OpenAI 正把 Codex 包装成通用工作代理而不是单点编程助手。第二，Codex Labs 的设立很像“agent 版 solution architecture + enablement 团队”，说明 OpenAI 意识到真正难的不是模型能力，而是企业如何把 agent 接进现有流程。第三，七大咨询伙伴入场让 Codex 具备了全球大客户扩张的传统软件渠道能力，这比单纯在 Hacker News 爆火更危险——因为它意味着 agent 开始进入 CIO 预算表。
+
+**评论观察：**
+- 🟢 支持：从周活、案例、伙伴到咨询落地机制一条龙齐了，Codex 明显正在复制 SaaS 企业化的成熟打法。
+- 🔴 质疑：当 OpenAI 把 Codex 推向“所有知识工作”时，权限边界、审计、回滚和组织治理会立刻成为真实采购阻力，不是多签几家咨询公司就能自动解决。
+
+**信源：**https://openai.com/index/scaling-codex-to-enterprises-worldwide/
+
+**关联行动：**继续追 Codex Labs 的服务边界、企业客户是否披露量化 ROI，以及 OpenAI 会不会进一步把 Codex 与 ChatGPT Enterprise、Agents SDK、computer use 统一成一套企业代理平台。
+
+### BT-3. [A] OpenAI API changelog 上线 GPT Image 2，图像能力开始被并入统一模型供应栈而不是独立玩具接口
+
+**概述：** OpenAI 在北京时间 04-22 02:58 更新 API changelog，宣布发布 `gpt-image-2`，同时开放 `v1/images/generations`、`v1/images/edits` 与 `v1/batch` 接口。官方文档强调该模型支持灵活图片尺寸、高保真图像输入、图像生成与编辑，并支持 Batch API 的 50% 折扣路径。
+
+**技术/产业意义：** 这条值得放进三大厂，不是因为“OpenAI 又发了一个画图模型”，而是因为图像生成终于被更完整地塞进标准 API 能力矩阵：批处理、统一计费、输入图像编辑、高保真视觉输入，这些都更像生产接口而不是演示按钮。
+
+**深度分析：** 从 changelog 和模型文档看，GPT Image 2 的真正信号有三点。第一，它被定位为 fast, high-quality generation and editing，而不是纯创意 demo，这意味着 OpenAI 想把它卖给批量生产流程。第二，直接支持 Batch API，把大规模营销物料、商品素材和内容生成工作流的成本模型显式写进产品设计。第三，OpenAI 继续把多模态能力塞回统一 API 栈，而不是拆成割裂的专用产品，这让开发者更容易把图像生成嵌进 agent pipeline、内容系统或电商后台中。
+
+**评论观察：**
+- 🟢 支持：把图像模型放进标准化 API、编辑接口和 batch 计费一起发布，明显更接近企业生产需求。
+- 🔴 质疑：OpenAI 还没有在这次 changelog 里给出足够细的可控性、品牌安全和版权工作流说明，真正进大规模商用还要看后续案例与政策边界。
+
+**信源：**https://platform.openai.com/docs/changelog
+
+**关联行动：**继续追 GPT Image 2 的价格、延迟、企业案例，以及它是否会很快和 ChatGPT、Codex、Agents SDK 形成统一多模态工作流。
+
+### BT-4. [A] Google DeepMind 发布 Deep Research / Deep Research Max，把研究 agent 正式推进到 MCP、原生可视化与企业私有数据时代
+
+**概述：** Google 于 04-21 23:30 发布《Introducing Deep Research and Deep Research Max》。新版本基于 Gemini 3.1 Pro，明确分成两个层级：Deep Research 主打更低延迟与更高效率，适合交互式研究体验；Deep Research Max 主打更高质量、更长 test-time compute 与更完整综合，适合异步后台任务。官方还一次性补上三项关键能力：MCP 支持、原生生成 presentation-ready visualizations、以及可安全访问 web 之外的 custom data / professional data streams。
+
+**技术/产业意义：** 这条是今天最大的官方产品信号之一。原因不只是“Google 也做 deep research”，而是它第一次把研究 agent 清晰产品化成企业可接入的工作流基础件：既能爬网页，也能连内部文档和第三方专业数据库，还能把结果直接做成可交付报告和图表。
+
+**深度分析：** 这次发布有四个层面的新增。第一，Google 不再把 Deep Research 当成单一 consumer feature，而是明确写入 finance、life sciences、market research 等行业工作流。第二，MCP 支持使它从“会搜网页”升级为“能接企业系统”的 agent，这和 Lighthouse 一直追踪的 Agent 价值拐点完全一致。第三，Max 版本强调 extended test-time compute，用更多时间进行 iteratively reason, search and refine，这等于把“慢一点但更完整”的后台研究模式正式做成了产品 SKU。第四，官方还点名与 S&P Global Ratings、PitchBook 的合作设计，说明 Google 正在先占专业数据供应商生态，而不是只卷模型能力本身。
+
+**评论观察：**
+- 🟢 支持：Google 终于把 research agent 从 demo 级体验推进到“企业数据连接器 + 异步后台研究 + 原生图表交付”的产品层。
+- 🔴 质疑：MCP 与专业数据接入能否真正稳定落地、权限审计是否够细、不同数据源的引用可信度如何处理，都决定这东西能不能从发布会概念变成企业日常工具。
+
+**信源：**https://blog.google/innovation-and-ai/models-and-research/gemini-models/next-generation-gemini-deep-research/
+
+**关联行动：**继续追 Deep Research Max 的 API 定价、第三方 MCP 生态扩展速度，以及企业客户是否披露在投研、医药、咨询中的真实提效数据。
+
+### BT-5. [B] Google Developers Blog 拆解“如何把脆弱 agent 重构成生产系统”，ADK 开始从框架宣传走向工程方法论输出
+
+**概述：** Google Developers Blog 于 04-21 发布《Production-Ready AI Agents: 5 Lessons from Refactoring a Monolith》，以一个名为 Titanium 的销售研究 agent 为例，复盘如何把一个单体 Python 脚本重构成可生产部署的 agent 系统。官方核心做法是用 Google Agent Development Kit（ADK）把任务拆成 `SequentialAgent` 管线，并强调 rate limit、防无限循环、失败恢复、可观测性和可扩展知识源等生产问题。
+
+**技术/产业意义：** 这篇虽然不是新模型，但依然值得收，因为它说明 Google 正把 agent 竞争从“框架功能清单”推进到“如何把 agent 从 demo 变成 production system”的工程教育层。
+
+**深度分析：** 文章最值钱的不是口号，而是它直指今天 agent 落地最疼的几个点：单体脚本一旦某个子步骤 hallucination 或 timeout 就会整体沉没；硬编码数据源导致系统无法扩展；没有 observability 就无法知道 agent 为什么失效。Google 选择用一次公开重构案例，把子代理编排、分层职责、失败隔离和生产运维一次讲透，本质上是在用内容教育去推动 ADK 生态 adoption。这也说明 2026 年 agent 框架的胜负，不只是 API 设计，而是谁能提供更接近真实工程团队的最佳实践。
+
+**评论观察：**
+- 🟢 支持：把“如何修一个坏掉的 agent 架构”公开讲清楚，比再发一篇泛泛产品介绍更有实战价值。
+- 🔴 质疑：案例教学容易显得顺滑，真实企业系统的权限、数据脏度、长链路异常与组织流程远比示例复杂。
+
+**信源：**https://developers.googleblog.com/production-ready-ai-agents-5-lessons-from-refactoring-a-monolith/
+
+**关联行动：**继续追 Google 是否会把 AI Agent Clinic 做成持续栏目，并观察 ADK 社区是否开始出现更多生产级模式与第三方模板。
+
 
 ## 🇨🇳 中国区
 
@@ -423,8 +508,64 @@ description: "[占位]"
 
 **关联行动：**继续追更多能源开发商是否公开把 AI / hyperscale data center 作为首要负载场景，以及哪些项目能最快拿到实际并网或供电合同。
 
+## 🇺🇸 北美区
+
+> 本轮已按要求对 Meta / Microsoft / Apple / xAI / AWS / Cohere / AI21 / Perplexity / Character.AI / Midjourney / Runway / Scale AI / Databricks / Together AI / Groq / Cerebras / CoreWeave / Anyscale / Weights & Biases / Replicate / Modal 等关键词执行近 24-48 小时检索，同时补查 HN 首页与 newest、GitHub Trending 日榜与周榜，以及 Reuters / CNBC / Bloomberg / TechCrunch / The Verge / Ars / VentureBeat / Semafor 等英文源。严格执行过去 7 天去重后，今日北美区保留 2 条更硬的 A/B 级增量；其余结果要么缺少足够硬的新信息，要么更像二次评论或旧闻翻炒，不硬凑条目。
+
+### NA-1. [B] Meta 把 Facebook Groups Search 重构成更像“社区知识检索系统”，向量检索与 LLM 自动评测开始进入超大规模消费产品主流程
+
+**概述：** Meta Engineering 于 04-22 00:00 发布技术文，披露 Facebook Groups Search 已被重构为更现代的语义检索系统。官方公开的一个关键细节是：其 Search Semantic Retriever 使用 12 层、2 亿参数模型把自然语言问题编码成向量，再通过 Faiss 做 ANN 搜索，并把 Llama 3 多模态能力接入自动化评测流程，用于在 build verification test 中大规模验证搜索质量。
+
+**技术/产业意义：** 这条重要，因为它展示了消费级平台如何把“LLM / embedding / vector search / automated eval”真正塞进高频产品流量，而不是只放在新实验室产品里。对于今天所有做 knowledge assistant、forum search、enterprise search 的团队来说，这是一条很有参考价值的系统级样板。
+
+**深度分析：** Meta 这篇文最值得看的不是“Groups Search 变强了”这种表面结论，而是它披露了三件事：第一，超大规模社区检索已经不再能靠 keyword matching 单打独斗，必须让 dense retrieval 直接进入主链路；第二，向量空间相似度验证很难靠人工全量标注，Meta 因而把 Llama 3 拉入自动评测闭环，这说明 frontier model 正在反过来成为搜索系统开发工具；第三，群组搜索本质上是对非结构化社区知识的提纯，这和企业知识库、论坛问答、客户支持知识检索的底层问题高度相似。Meta 把这套架构公开出来，等于给外界提供了一套可借鉴的“知识社区 agent 化”范式。
+
+**评论观察：**
+- 🟢 支持：2 亿参数语义检索器 + Llama 3 自动评测，说明 Meta 在把生成式 AI 实打实压进成熟产品基础设施。
+- 🔴 质疑：社区内容噪音极高，语义检索与 LLM 评测能否长期抑制错误召回、幻觉摘要和内容偏见，还需要更多真实指标支撑。
+
+**信源：**https://engineering.fb.com/2026/04/21/ml-applications/modernizing-the-facebook-groups-search-to-unlock-the-power-of-community-knowledge/
+
+**关联行动：**继续追 Meta 是否进一步披露 Groups Search 的质量提升、延迟成本和 Llama 3 自动评测在真实生产中的稳定性指标。
+
+### NA-2. [B] Microsoft 把“Frontier Transformation”正式定义成 partner-led 市场：90% Fortune 500 用 Copilot、1.3B agents 预期把治理层推到最前面
+
+**概述：** Microsoft 于 04-22 01:00 发布《Accelerating Frontier Transformation with Microsoft partners》，把企业 AI 下一阶段直接定义为“从 targeted pilots 走向可重复、可治理、嵌入业务流的 capability”。文中给出两个关键数字：超过 90% 的 Fortune 500 已在使用 Microsoft 365 Copilot；IDC 预计到 2028 年将有 13 亿个 agents 在流通。微软同时把 identity、data protection、compliance、monitoring、change management 明确列为 agent-led process 扩张前提。
+
+**技术/产业意义：** 这条真正值得记的点，不是微软又说了一遍“伙伴很重要”，而是它在向市场明牌：企业 AI 的主战场已经从模型采购转成治理、交付和组织改造。也就是说，真正吃到钱的不只是模型厂，还有能把 agent 接进流程、身份体系和合规框架的实施生态。
+
+**深度分析：** 微软这篇文的含义有三层。第一，它把“Frontier Transformation”定义得非常企业软件：智能必须和 trust 同时成立，AI 不是外挂插件，而是可观测、可管理的生产系统。第二，13 亿 agents 的预测与 90% Fortune 500 用 Copilot 并列出现，说明微软正尝试把 Copilot/agent 从点状功能提升到操作系统级治理议题。第三，这篇文章几乎处处都在强调 partners、CSP、change management，本质上是在告诉市场：2026 年大模型采购已经不够，下一波预算属于能把 agent 纳入 IT 治理的人。
+
+**评论观察：**
+- 🟢 支持：微软很清楚企业不会为“会聊天的模型”长期买单，真正的预算入口是治理、身份、监控和工作流改造。
+- 🔴 质疑：13 亿 agents 这种预测值很容易被营销化，真正难的不是 agent 数量，而是有多少 agent 真在稳定地产生可审计价值。
+
+**信源：**https://blogs.microsoft.com/blog/2026/04/21/accelerating-frontier-transformation-with-microsoft-partners/
+
+**关联行动：**继续追微软是否在后续 Build / Copilot 相关更新里把治理、审计和 agent management 产品化，而不是只停留在 partner 口号层。
+
+## 📊 KOL 观点精选
+
+> 本轮已对 Tier 1 / Tier 2 / Tier 3 以及 8 个官方账号逐一执行公开页检索；X 原帖抓取以 `r.jina.ai/http://https://x.com/<handle>` 为主，未登录也能读取公开时间戳与近帖文本。真正有信息密度、且在 24 小时内的新观点不多，今日保留 1 条最值得写的技术判断。
+
+### KOL-1. [B] Karpathy 把 2026 年 agent 时代的人才判断压缩成一句话：Agency > Intelligence
+
+**概述：** Karpathy 在 04-22 凌晨更新公开 X 页面时写道，自己过去几十年都本能地高估了 intelligence、低估了 agency；在今天这个智能越来越便宜的环境里，agency 更稀缺、也更有力量。这条不是产品发布，但它精准踩中了当前 AI 工程的结构变化：当模型能力继续商品化，真正稀缺的会变成谁能把目标拆解、触发行动、承受不确定性并把事情做完。
+
+**技术/产业意义：** 对动动关心的 coding agent 和企业 agent 来说，这条判断很值钱，因为它解释了为什么 2026 年大家突然都在卷 memory、tool use、browser、sub-agent orchestration 和 workflow closure——行业竞争焦点正在从“模型聪不聪明”转向“系统有没有行动力”。
+
+**深度分析：** Karpathy 这句话之所以重要，是因为它不是鸡汤，而是和最近一周三大厂动作高度共振：OpenAI 在把 Codex 从代码补全推向持续工作代理；Google 在把 Deep Research 做成 MCP + 企业数据连接的异步研究系统；Anthropic 则在长运行 agent、托管执行与算力锁仓上持续加码。把这些动作放一起看，Karpathy 的意思其实很直接：未来模型 intelligence 会越来越像云资源，真正的溢价来自 system agency——任务编排、工具调用、状态延续、权限边界与结果交付。
+
+**评论观察：**
+- 🟢 支持：这句判断很准确地点出了 2026 年 agent 竞争的核心变量，不再是单点智力，而是完整执行力。
+- 🔴 质疑：把 agency 提到比 intelligence 更高的位置是对的，但若底层模型可靠性不够，所谓 agency 也可能只是更快地把错误自动化。
+
+**信源：**https://x.com/karpathy
+
+**关联行动：**继续追 Karpathy 是否把这条判断延展成更系统的方法论，尤其关注他对 agent 工程、教育产品与编码工作流的下一步公开表述。
+
 ## 下期追踪问题
 
-1. **Kimi K2.6 的 300 Agent / 4000 步协作能力，会不会在未来 24-72 小时内出现第三方复测、真实仓库任务结果或更细 API 使用数据？** 重点盯 moonshot 官方、开发者实测、SWE-bench/agent benchmark 社区讨论。
-2. **小米 miclaw 的多终端封测，会不会很快披露更完整的系统工具清单、公开测试范围或人车家跨端成功率？** 重点盯小米社区、HyperOS 团队和后续体验报告。
-3. **豆包的系统级 Agent 路线与千问的可穿戴入口路线，谁会先把“AI 办事”做成稳定高频习惯？** 重点盯字节是否重启眼镜/开放 SDK，阿里是否披露眼镜、指环、耳机矩阵的真实交互频次和留存。
+1. **Anthropic 与 Amazon 的 5GW 长约，会不会在未来 24-72 小时内披露更细的 Trainium3 / Trainium4 性能、定价或区域部署信息？** 重点盯 Anthropic / AWS 官方博客、Bedrock 更新和企业客户口径。
+2. **OpenAI 把 Codex 推入企业渠道之后，会不会很快出现更具体的 ROI、权限治理或“Codex + Agents SDK + computer use”统一产品包？** 重点盯 OpenAI 官方博客、开发者文档、咨询伙伴案例与企业客户采访。
+3. **Google Deep Research Max 的 MCP 与专业数据接入，会不会在接下来几天迅速出现更多金融、咨询、医药场景的第三方连接器和 benchmark？** 重点盯 Google DeepMind、Google Developers、PitchBook / S&P Global 相关合作更新与开发者实测。
