@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-24](/ai-research/news/2026-04-24/daily/) — ⭐ OpenAI 用 GPT-5.5 正面押注 agent 执行 / 腾讯混元 Hy3 preview 开源 / Anthropic 复盘 Claude Code 质量事故 / Meta 传 10% 裁员保 AI 投入 / GitHub 把 agent session 塞进 issue 与 project —— BT2+CN8+EU8+AH2+NA5+KOL4 共 29 条
+
 - [2026-04-23](/ai-research/news/2026-04-23/daily/) — ⭐ OpenAI 把 ChatGPT workspace agents 推向组织级协作 / Privacy Filter 与 WebSockets 补齐企业 agent 底座 / Anthropic 把 Economic Index 升级成月度调查 / Google Agents CLI 直连生产栈 / AWS Bedrock 记忆层进入图谱+记忆+人审阶段 —— BT4+CN9+EU5+AH10+NA4+KOL3 共 35 条
 
 - [2026-04-22](/ai-research/news/2026-04-22/daily/) — ⭐ Gemini Deep Research Max 把研究 agent 推向 MCP + 企业数据 / Anthropic×Amazon 锁定 10 年 5GW 算力 / OpenAI Codex 周活升至 400 万并企业化 / GPT Image 2 API 上线 / Meta 与 Microsoft 同日公开生产级 AI 系统方法论 —— BT5+NA2+KOL1 共 33 条
