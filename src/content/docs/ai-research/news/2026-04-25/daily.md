@@ -1,17 +1,85 @@
 ---
-title: "2026-04-25 AI 日报：[占位，最后由北美采集轮填写]"
-description: "[占位]"
+title: "2026-04-25 AI 日报：Anthropic 联手 NEC 扩日本 AI 工程师网络 / Project Deal 测试 Claude 代理交易 / Meta-AWS 押注 agentic AI CPU 底座"
+description: "Anthropic 在日本与 agent marketplace 两条线同时推进，Google Gemini Drop 补四月更新，Meta 与 AWS 把 agentic AI 基础设施叙事推向 CPU。"
 ---
 
 # 2026-04-25 AI 日报
 
 ## 上期追踪问题回应
 
-1. **OpenAI 会不会在未来 24-72 小时内补出 GPT-5.5 的完整官方技术页、定价、benchmark 或 API/Changelog 说明，证明它不只是 X 上的“agent 宣言”？** 中国区本轮实际检查了 DeepSeek、Qwen、字节/豆包、智谱、Kimi、腾讯混元、百度、华为昇腾及 36Kr / 量子位 / 机器之心等国内信源，未看到中国厂商针对 GPT-5.5 再给出新的官方对位产品包或定价回应。今天中国侧真正的新硬信息集中在 DeepSeek-V4 发布与云侧首批适配。结论：**中国侧对 GPT-5.5 的直接回应仍未成形。**
+1. **OpenAI 会不会在未来 24-72 小时内补出 GPT-5.5 的完整官方技术页、定价、benchmark 或 API/Changelog 说明，证明它不只是 X 上的“agent 宣言”？** 中国区本轮实际检查了 DeepSeek、Qwen、字节/豆包、智谱、Kimi、腾讯混元、百度、华为昇腾及 36Kr / 量子位 / 机器之心等国内信源，未看到中国厂商针对 GPT-5.5 再给出新的官方对位产品包或定价回应。今天中国侧真正的新硬信息集中在 DeepSeek-V4 发布与云侧首批适配。北美区今日则出现了明确新进展：OpenAI 通过 @OpenAI 与官方产品页更新，确认 **GPT-5.5 与 GPT-5.5 Pro 已进入 API**，并同步更新 system card 补充额外 safeguards。这说明它已经从“社媒宣言”迈进了可部署产品阶段；但由于 OpenAI 四个官方入口本轮仍被 Cloudflare challenge 挡住，暂未拿到更完整的 changelog、定价和 benchmark 补页。结论：**OpenAI 已补出 API 可用性与安全说明，但完整技术页/定价/benchmark 仍待继续追。**
 
 2. **Anthropic 这次 Claude Code 质量事故复盘，后续会不会演化成更系统的 agent 可靠性治理框架、公开 eval 改造或长会话监控指标？** 中国区今天没有出现直接回应 Anthropic 复盘的官方博文，但阿里 Qwen Code v0.15.2 持续修 CLI / MCP / session 恢复细节，JiuwenClaw 继续把 Team Skills 推成多 Agent 协作标准化能力包，说明国内 Agent 工具链也在往“可靠性工程 + 协作编排”方向收敛。结论：**中国厂商有侧向呼应，但没有对应 Anthropic 那种公开治理框架。**
 
 3. **GitHub 把 agent session 默认塞进 issue/project 后，下一步会不会继续补审批、审计、失败恢复和团队责任边界能力？** 中国区今日最接近的增量不是 issue/project 体系，而是火山引擎把汽车 AI 方案升级为单一“大脑”调度整车，以及 JiuwenClaw 把 Team Skills 做成多 Agent 协作复用层。它们都指向“Agent 不再是聊天插件，而是工作流执行器”，但审批/审计/责任边界仍未看到成熟公开方案。结论：**中国区有执行层收敛，没有治理层定式。**
+
+## ⭐ 三大厂动态
+
+> 本轮实际逐页检查了 Anthropic / OpenAI / Google 的 12 个官方入口，并与 `ai-news-seen.json` 做了对比。Anthropic 4 页全部可读；Google 4 页全部复查；OpenAI 的 `/blog`、`/index`、`/research`、`/docs/changelog` 依旧被 Cloudflare challenge 挡住，已按降级规则补做浏览器与 sitemap / 可访问官方页交叉核对。结论：**今日三大厂确认有 4 条 24 小时内官方增量，其中 Anthropic 3 条、Google 1 条；OpenAI 4 页已全检但未拿到可写入 BT 区的 24h 官方新文。**
+
+### BT-1. ⭐ [A] Anthropic 联手 NEC，在日本一次性把 Claude 推进 3 万名工程师工作流
+
+**概述：** Anthropic 于 04-24 发布官方公告，确认 NEC 将把 Claude 提供给全球约 **30,000 名 NEC Group 员工**，并使 NEC 成为 Anthropic 首个日本本土全球合作伙伴。双方还将从金融、制造、地方政府等高监管行业切入，联合开发更安全、行业定制化的 AI 产品。
+
+**技术/产业意义：** 这条是 A 级，因为它不是泛泛“签战略合作”，而是把 Claude 真正推进到大型日本企业的工程组织与行业解决方案层。Anthropic 过去的优势更多体现为模型能力与美国企业渗透，如今它开始把这套能力翻译成日本市场的渠道、交付与行业模板，意味着 Claude 的国际化商业化正在从“能卖给谁”升级到“谁能替它规模化落地”。
+
+**深度分析：** 这笔合作最值得看的有三层。第一，NEC 不是单纯客户，而是日本大型 SI / 政企解决方案玩家；Anthropic 借 NEC 入场，本质上是在借本地集成能力撬日本的高门槛企业与公共部门。第二，公告明确点名 finance、manufacturing、local government，这些场景都要求更强的安全、可靠性、合规和本地化，不是只靠一个通用聊天入口就能吃下。第三，这也说明 Anthropic 正在把“模型公司”角色往“区域产业 AI 平台供应商”外延。如果 NEC 真把 Claude 做成行业方案层，日本市场会成为观察 Anthropic 国际复制能力的关键样板间。
+
+**评论观察：**
+- 🟢 支持：这类把模型直接推入 3 万人级工程组织的合作，比单纯讲 benchmark 更接近真实收入与护城河。
+- 🔴 质疑：合作公告先讲的是渠道与场景愿景，真正决定含金量的还是后续是否披露可复用产品、付费客户与部署规模。
+
+**信源：** https://www.anthropic.com/news/anthropic-nec
+
+**关联行动：** 继续追 NEC 与 Anthropic 是否在未来 24-72 小时披露首批日本行业产品、客户名单、交付形态与更具体的本地合规方案。
+
+### BT-2. ⭐ [A] Anthropic 的 Project Deal 把 Claude 推到“代理替人谈价”的下一阶段，agent marketplace 开始从概念变成实验事实
+
+**概述：** Anthropic 在 04-24 发布官方实验页面 `Project Deal`，公开让 Claude 代理员工在办公室内部分类市场中 **买卖、议价与撮合交易**。官方给出的关键数字是：一周内代理完成 **186 笔交易**，总成交额超过 **4,000 美元**，并明确写出“更强的 agent 模型在协商中确实会形成优势”。
+
+**技术/产业意义：** 这是 A 级，因为它把 agent 叙事从“会用工具、会写代码、会做 research”推进到“会代表人进行经济交换”。一旦 AI 代理开始进入价格协商、交易撮合与规则博弈，行业关心的就不只是任务完成率，而是公平性、信息披露、代理权限边界与市场设计。
+
+**深度分析：** Project Deal 的价值不在于办公室跳蚤市场本身，而在于 Anthropic 主动把 agent 商业行为拆给行业看。第一，这说明 Claude 已经被当成“可持续代理行为主体”来研究，而不是一次性工具调用器。第二，Anthropic 没有把结果包装成单向胜利，而是明确承认 agent quality 会带来谈判不对称，这等于把未来的 agent economy 争议——信息优势、操纵、披露义务——提前摆上桌面。第三，这也让 Anthropic 与 OpenAI、Google 的竞争多了一条新赛道：谁不只是把 agent 做成生产力工具，而是把它推入可量化、可结算、可治理的交易环境。
+
+**评论观察：**
+- 🟢 支持：主动暴露 agent 在真实交易中的行为细节，比抽象谈“AI 会改变工作”更有研究价值。
+- 🔴 质疑：办公室实验离真实开放市场仍差得很远，能否外推到更复杂、更高风险的商业环境还需要更多约束和验证。
+
+**信源：** https://www.anthropic.com/features/project-deal
+
+**关联行动：** 继续盯 Anthropic 是否补充更正式的研究报告、 fairness / disclosure 机制，以及更复杂市场条件下的 agent 行为数据。
+
+### BT-3. [A] Anthropic 更新 election safeguards：Claude 进入 2026 选举周期的治理姿态更主动、更制度化
+
+**概述：** Anthropic 于 04-24 发布官方更新，披露其在 2026 年美国中期选举及全球多国选举周期中的防护思路，包括如何减少政治偏见、提高投票信息准确性、以及在高风险政治内容上保持更平衡与可审计的输出策略。
+
+**技术/产业意义：** 这条按 Lighthouse 规则属于 A 级，因为它是三大厂官方治理更新。更重要的是，2026 年模型厂商的竞争已经不只看“谁更强”，还看谁能在政治、公共信息和社会信任场景里给出更完整的制度设计。选举防护并不性感，但它是真正决定大型模型能否持续进入公共信息基础设施的门槛。
+
+**深度分析：** Anthropic 这篇更新的信号有两层。第一，它在把“constitutional / balanced responses”从价值观口号下沉到具体选举周期运营规则，意味着模型治理开始像成熟互联网平台那样走向季节性、区域化和专题化管理。第二，它也说明 Anthropic 很清楚自己正在被放到更高的公共可信度标准下审视——尤其在美国大选周期临近、各国对 AI 政治信息愈发敏感的背景下，谁先建立更可解释的治理机制，谁就更容易获得政企客户与监管侧信任。
+
+**评论观察：**
+- 🟢 支持：在公共信息风险场景里，提前公开治理框架总比等出事后补锅强。
+- 🔴 质疑：真正难的是实战中的一致执行；制度写得好看，不代表复杂语境下就不会出现偏差与争议。
+
+**信源：** https://www.anthropic.com/news/election-safeguards-update
+
+**关联行动：** 继续跟踪 Anthropic 是否披露更细的选举评测方法、第三方审计或误判/纠错机制。
+
+### BT-4. [A] Google 四月 Gemini Drop 集中补功能：Gemini app 继续把“月度滚动更新”做成消费层 AI 运营节奏
+
+**概述：** Google 于 04-24 发布 `Gemini Drops: New updates to the Gemini app, April 2026`，用月度汇总方式集中整理 Gemini app 四月新增能力。这类页面不像单次发布会那样爆炸，但它清楚展示了 Google 正把 Gemini 当成持续交付的消费级平台，而不是偶发式大版本产品。
+
+**技术/产业意义：** 这条也是 A 级，因为它属于 Google 官方 AI 博客的 24h 新文。更重要的是，Google 正在强化一种和 OpenAI、Anthropic 略有不同的节奏：不是每次都靠单一重磅模型抢注意力，而是通过“Drop”机制持续把功能上新、产品细节与用户体验改进打包成稳定运营节拍。
+
+**深度分析：** 这种发布方式对 Google 很关键。第一，它让 Gemini app 的更新从“新闻事件”变成“产品流水线”，更适合 Google 这种拥有海量入口和多端分发能力的公司。第二，月度 Drop 也意味着 Google 在努力把 AI 能力的市场教育做成用户习惯——不是等一个超级模型大版本，而是让用户默认 Gemini 每个月都会变得更能用。第三，这对竞争格局的意义在于：如果 Google 能稳定把 AI 更新和 Android / Workspace / Search 等终端分发协同起来，它的消费层防守会比单纯拼模型参数更有韧性。
+
+**评论观察：**
+- 🟢 支持：月度 Drop 这种机制比偶发发布会更贴近真实产品运营，也更利于培养用户留存。
+- 🔴 质疑：汇总页本身偏产品运营口径，真正的含金量还得看这些更新能否显著改变 Gemini 的使用频率与口碑。
+
+**信源：** https://blog.google/innovation-and-ai/products/gemini-app/gemini-drop-april-2026/
+
+**关联行动：** 继续追 Google 是否在未来几天为 Gemini Drop 中的关键功能补更细的单项说明、地域开放节奏与商业化入口。
 
 ## 🇨🇳 中国区
 
@@ -393,8 +461,92 @@ description: "[占位]"
 
 **关联行动：** 继续观察 benchmark 是否加入 ambiguity-aware setting，以及产品是否提供更强的需求确认环节。
 
+## 🇺🇸 北美区
+
+> 本轮额外完成了 Meta、Microsoft、Apple、xAI、Amazon/AWS 与 15+ 家北美公司 / 融资 / 并购 / 媒体 / 政策入口检查，并复查 HN 首页 + newest、GitHub Trending 日榜 + 周榜。严格按 24 小时铁律、A/B 级过滤和过去 7 天去重后，北美区本轮保留 3 条硬信息；其余 Microsoft/Apple 等候选多为 Big Three 分发延伸、旧闻复刷或材料强度不够，被主动丢弃。
+
+### NA-1. ⭐ [A] Meta 与 AWS 把 agentic AI 的基础设施叙事从 GPU 拉回 CPU：数千万 Graviton cores 成为“持续在线代理”的底座样板
+
+**概述：** Meta 与 AWS 在 04-24 同步放出官方材料，确认 Meta 正在部署 **数千万 AWS Graviton CPU cores** 来支撑 agentic AI workloads。Amazon 的官方解释也很直接：agentic AI 与传统训练型 AI 不同，它需要长时间持续运行、频繁协调、低延迟通信，因此 CPU 在“始终在线的推理与编排层”重新变得关键。
+
+**技术/产业意义：** 这是 A 级，因为它动的是行业叙事。过去一年 AI 基础设施几乎被 GPU 统治，但 Meta + AWS 现在公开强调 CPU 对 agentic AI 的关键性，等于告诉市场：下一阶段不是只有“谁有更多 accelerator”，而是“谁能把 agent 的常驻推理、调度、记忆、编排和服务链以更低成本跑起来”。
+
+**深度分析：** 这件事的重要性在于它把 agent 时代的系统瓶颈重新命名了。第一，训练大模型和让大量代理持续在线服务，本来就是两种完全不同的计算形态；前者追求极限并行吞吐，后者更看重持续运行成本、核心间通信、调度灵活性和整体 TCO。第二，Meta 选择公开站台 AWS Graviton，也意味着 hyperscaler 级公司开始愿意把 CPU 重新放回 AI 基础设施主叙事，而不是只讲 GPU。第三，这会给 Intel、AMD、AWS 自研芯片以及未来更多 NPU / CPU 协同架构带来新机会：agent 经济如果真起来，算力蛋糕不会只属于训练卡。
+
+**评论观察：**
+- 🟢 支持：这条对行业最大的价值，是把“agentic AI 的生产成本结构”说清楚了。
+- 🔴 质疑：官方叙事强调 CPU 价值没问题，但真实生产环境里 CPU、GPU、专用加速器如何分工，仍要看更细的 workload 数据与成本曲线。
+
+**信源：** https://about.fb.com/news/2026/04/meta-partners-with-aws-on-graviton-chips-to-power-agentic-ai/
+
+**关联行动：** 继续跟 Meta / AWS / Intel / AMD / Google Cloud 的后续披露，看谁会进一步公开 agentic AI 的 CPU/GPU/NPU 配比、成本收益和真实部署案例。
+
+### NA-2. [B] xAI 起诉科罗拉多 AI 歧视法案，连美国司法部都下场支持：AI 治理争论开始更直接撞上联邦-州权力边界
+
+**概述：** 04-24 最新法律跟进显示，美国司法部支持 xAI 试图阻止科罗拉多 AI 歧视法的诉求。和普通企业游说不同，这次看点在于：AI 公司、州级监管、联邦司法立场同时进场，争论点不再只是某条规则是否合理，而是**谁有权定义 AI 合规边界**。
+
+**技术/产业意义：** 这条是 B 级，但很值得收。过去大家谈 AI 监管时，更多聚焦欧盟法案或联邦口号；如今美国州法开始真正落地，企业马上用诉讼和联邦支持去反制，这预示美国 AI 监管将更像互联网平台时代——长期处于“地方立法先跑、企业起诉阻击、联邦慢慢统一”的拉锯格局。
+
+**深度分析：** xAI 这个案子的真正信号不在 Musk 本人，而在制度层。第一，州级 AI 法如果开始触碰招聘、信贷、公共服务等高风险歧视问题，模型公司就不会只把它当政策新闻，而会把它视为产品设计和商业模式约束。第二，司法部介入说明 AI 监管已进入更高政治能见度阶段，未来大型模型公司在美国扩张时，不得不同时管理技术风险、法律解释与州际合规差异。第三，对 xAI 来说，这也暴露了其现实处境：Grok 想继续扩进更多使用场景，就不能只靠“更少约束”的品牌姿态，必须正面应对越来越具体的合规制度。
+
+**评论观察：**
+- 🟢 支持：这类诉讼比抽象政策评论更有价值，因为它直接决定美国 AI 产品接下来会被怎样监管。
+- 🔴 质疑：目前公开信息更多集中在程序对抗与立场表态，法案最终被怎样修改或解释，仍要等后续法院与政策文本走向。
+
+**信源：** https://news.google.com/rss/articles/CBMiqgFBVV95cUxOcjdyTjJ6ZHptLTJ0enRYd3JGaE9CZXhDaGxiS09WdGI1am9PaTMtX3FUbV9nejdmOHJCSGM1eU05WnRxVG9jRFAxMkRhckpxaHdYdmRvMDdwWnl4R21KUmFYY0VEV3FMX1lOcGpZNHRSLXl1X2JDZHRjem50clVhUlFjMXQ3dXVtdF9jdFRhN1N5S2VUdDhna2xwdXhJR2J0cmNaejQtbFI3QQ?oc=5
+
+**关联行动：** 继续追法院文件、科罗拉多法案后续修订和其他州是否跟进类似 AI 歧视监管框架。
+
+### NA-3. [B] Intel 重新被 AI 需求带动，不是因为它突然赢回训练卡，而是 CPU 侧需求开始吃到 agent 与推理外溢红利
+
+**概述：** 04-24 的市场与产业跟进显示，AI 相关需求正开始抬升 Intel 及更广泛芯片板块的预期。最关键的不是股价日内波动，而是市场叙事发生了变化：AI 基础设施的收益不再被理解成“只有 GPU 龙头吃肉”，而是 CPU 与更传统的服务器栈也开始分享 AI 持续部署的需求外溢。
+
+**技术/产业意义：** 这是 B 级，因为它反映了一个正在形成的二阶趋势：当 AI 从训练与 demo 转向企业生产部署，CPU、内存、网络、存储、调度等传统系统组件都会重新涨价，Intel 这类原本被认为在生成式 AI 中失位的公司，也可能从 agent / inference 的长期化中得到修复空间。
+
+**深度分析：** Intel 这条线值得看，不是因为它重新变成 AI 核心创新者，而是因为它能当成行业温度计。第一，如果 CPU 需求因 AI 工作负载而改善，说明市场已经开始把“AI 在真实系统里常驻运行”当作默认前提。第二，这会让 AI 基础设施投资判断更复杂：企业不只是买 GPU，还要重估整套服务器和数据中心架构。第三，对 Intel 与 AMD 来说，这可能是比追赶 frontier GPU 更现实的机会——先吃住 agentic AI 带来的 CPU 与通用算力需求回流。
+
+**评论观察：**
+- 🟢 支持：这类二阶硬件信号往往比单一新品发布更能解释行业预算到底往哪流。
+- 🔴 质疑：市场叙事转暖不等于基本面已经彻底反转，Intel 真正能否持续受益，还要看后续订单、产品竞争力和盈利兑现。
+
+**信源：** https://news.google.com/rss/articles/CBMirwFBVV95cUxPSTljTXlld2NZUEpMNUZ6RFlXS2VVNFJWcTd6UGQ5M3d5RkJJU1U3WEJnOXhnbVI5UmRIT09mdnNmQXk4QW9tcVVESzJyaU1KM3BQSndIdWowN19fSHdlY2ZWN1kxTTNId1VWTDZKRzlpUHB1MGNFbml0dWNqajNIVUg0Yl9nbG00RnNXbi1DeTBFU2dCOFZ2U0VZcHRWR3lDZkVVZE1FVWhqZEw0WXVV?oc=5
+
+**关联行动：** 继续看 Intel、AMD、AWS、Meta 以及服务器产业链是否披露更明确的 AI CPU 订单与 agent 推理工作负载结构。
+
+## 📊 KOL 观点精选
+
+> 今日个人 KOL 层整体偏静，Tier 1/2/3 与 8 个官方账号已全量复查；真正穿过 24 小时、重复过滤和原始链接验证门槛的，最后只剩 2 条官方账号信号。换句话说，**今天值得写进日报的“观点”主要来自官方账号把产品与研究进展说得更硬，而不是个人 CEO 再放烟雾弹。**
+
+### KOL-1. [B][官方账号] @OpenAI 把 GPT-5.5 从“昨天在 X 上宣布”推进到“今天能进 API”，并补上 safeguards 叙事
+
+**概述：** @OpenAI 在 04-24/04-25 窗口明确更新：**GPT-5.5 与 GPT-5.5 Pro 已在 API 中可用**，并同步提到 system card 已加入额外 safeguards 说明。对外信号从“新模型宣言”切换为“可部署、可控、能进生产”的产品姿态。
+
+**核心观点（原文摘录）：**
+- “Update: GPT-5.5 and GPT-5.5 Pro are now available in the API.”
+- “The system card has also been updated to describe the additional safeguards that apply.”
+
+**背景上下文：** 04-24 Lighthouse 已记录 GPT-5.5 的初始发布和 agent 叙事；今天的新信息不是再喊一次模型更强，而是补上开发者真正关心的部署入口与安全框架。
+
+**独立解读：** OpenAI 今天做的不是再抢一轮注意力，而是在把 GPT-5.5 的商业化与风险控制补成闭环。真正能推动企业试用的，从来不是 CEO 发言，而是“API 能不能调、system card 有没有更新、guardrails 说没说清楚”。
+
+**信源：** https://x.com/OpenAI/status/2047743592278745425
+
+### KOL-2. [B][官方账号] @AnthropicAI 用 Project Deal 公开承认：更强 agent 会在谈判中获得优势，agent economy 的治理问题已经不是纸上谈兵
+
+**概述：** @AnthropicAI 在推广 Project Deal 时，没有把 Claude 代理市场实验包装成轻松 demo，而是直接把关键难点摊开：**agent 真的能替人买卖与议价，而且不同 agent 质量会带来协商能力差异。**
+
+**核心观点（原文摘录）：**
+- “We tasked Claude with buying, selling and negotiating on our colleagues’ behalf.”
+- “We found that agent quality does make a difference.”
+
+**背景上下文：** 这条和 BT-2 对应同一官方实验，但账号层的表达更像 Anthropic 想主动定义行业讨论方向：不是“Claude 会不会交易”，而是“当 agent 真开始交易时，规则要怎么定”。
+
+**独立解读：** 这类表述比普通产品广告更重要，因为它等于 frontier lab 自己承认：未来 agent 之间的市场博弈会带来新的不平等与治理难题。谁先公开讨论这个问题，谁就更可能主导下一轮 agent 政策与商业规则设计。
+
+**信源：** https://x.com/AnthropicAI/status/2047728360818696302
+
 ## 下期追踪问题
 
-1. **DeepSeek-V4 在未来 24-72 小时内会不会补出更完整的官方技术报告、benchmark、API 定价和更多国产算力适配细节，尤其是 V4-Pro / V4-Flash 的正式能力边界？** 重点盯 DeepSeek 官方文档、Hugging Face、华为云、阿里云、火山引擎、PPIO 等平台页面。
-2. **火山引擎的 Agentic AI 汽车方案会不会很快披露首批车企、量产时间表、接口能力和与手机豆包的协同细节，从“会场概念”进入真实车型落地？** 重点盯火山引擎、豆包、车展官方口径与主流车企公告。
-3. **国家电网 68 亿元具身机器人规划会不会在接下来几天出现正式招标、供应商确认或技术规范文件，验证这是不是机器人行业真正的批量采购拐点？** 重点盯国家电网、招投标平台、机器人厂商公告与产业媒体跟进。
+1. **OpenAI 会不会在未来 24-72 小时内补出 GPT-5.5 更完整的 changelog、定价、benchmark 和 system card 细节，尤其是把今天的 API 可用性更新扩展成更完整的开发者文档？** 重点盯 OpenAI 官方 index / docs / changelog、@OpenAI 以及第三方开发者验证。
+2. **Anthropic 与 NEC 的合作会不会很快披露首批日本金融 / 制造 / 地方政府产品、客户样板和部署规模；Project Deal 又会不会继续补公平性、披露义务与 agent 市场规则设计？** 重点盯 Anthropic、NEC、日本企业 IT 媒体与后续研究页。
+3. **Meta + AWS 把 agentic AI 计算重新拉回 CPU 后，其他北美云厂商与芯片公司会不会跟进公开 agent 工作负载的 CPU / GPU / NPU 配比和真实成本曲线？** 重点盯 AWS、Meta、Intel、AMD、Google Cloud、Microsoft Azure 与服务器产业链。
