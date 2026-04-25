@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-26](/ai-research/news/2026-04-26/daily/) — ⭐ 美国司法部加入 xAI 挑战科罗拉多 AI 法 / 三大厂官方 12 页全检无 24h 新发 / NVIDIA 用 Blackwell 平台化 DeepSeek V4 / WUPHF 与 Paperclip 把多 agent 办公层推热 / ErrataBench 把办公校对做成 agent benchmark —— BT1+CN8+EU2+AH10+NA4+KOL1 共 26 条
+
 - [2026-04-25](/ai-research/news/2026-04-25/daily/) — ⭐ Anthropic 联手 NEC 扩日本 AI 工程师网络 / Project Deal 测试 Claude 代理交易 / Meta-AWS 押注 agentic AI CPU 底座 / Google Gemini Drop 四月更新 / OpenAI 把 GPT-5.5 推进 API —— BT4+CN8+EU5+AH10+NA3+KOL2 共 32 条
 
 - [2026-04-24](/ai-research/news/2026-04-24/daily/) — ⭐ OpenAI 用 GPT-5.5 正面押注 agent 执行 / 腾讯混元 Hy3 preview 开源 / Anthropic 复盘 Claude Code 质量事故 / Meta 传 10% 裁员保 AI 投入 / GitHub 把 agent session 塞进 issue 与 project —— BT2+CN8+EU8+AH2+NA5+KOL4 共 29 条
