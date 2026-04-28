@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-04-29](/ai-research/news/2026-04-29/daily/) — ⭐ AWS Bedrock 上架 OpenAI 最新模型与 Codex / Anthropic 澳新落地 / 美国 AI 聊天机器人反诈立法启动 / Google 签下五角大楼保密 AI 合同 / Satya 把 Agent Mode 推进到 Outlook —— BT1+CN9+EU4+AH7+NA5+KOL4 共 30 条
+
 - [2026-04-26](/ai-research/news/2026-04-26/daily/) — ⭐ 美国司法部加入 xAI 挑战科罗拉多 AI 法 / 三大厂官方 12 页全检无 24h 新发 / NVIDIA 用 Blackwell 平台化 DeepSeek V4 / WUPHF 与 Paperclip 把多 agent 办公层推热 / ErrataBench 把办公校对做成 agent benchmark —— BT1+CN8+EU2+AH10+NA4+KOL1 共 26 条
 
 - [2026-04-25](/ai-research/news/2026-04-25/daily/) — ⭐ Anthropic 联手 NEC 扩日本 AI 工程师网络 / Project Deal 测试 Claude 代理交易 / Meta-AWS 押注 agentic AI CPU 底座 / Google Gemini Drop 四月更新 / OpenAI 把 GPT-5.5 推进 API —— BT4+CN8+EU5+AH10+NA3+KOL2 共 32 条
