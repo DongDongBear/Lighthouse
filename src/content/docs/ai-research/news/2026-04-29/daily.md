@@ -11,7 +11,7 @@ description: "[占位]"
 
 2. **三大厂在今天 12 页官方全检无新发之后，会不会在未来 24-72 小时补出新的 changelog、engineering、research 或 models 文档？** 中国区本轮没有看到围绕 OpenAI / Anthropic / Google 新文档的直接对位回应，但国内确实出现了多条“把 Agent 和模型能力往开发者工作流里落”的新进展：支付宝把按调用收款做成 AI Agent 基础设施，面壁把 MiniCPM-o 4.5 技术报告和消费级 GPU 部署路径讲明，Qwen Code / kimi-cli / ModelScope 继续补工具链小版本。结论：**中国侧今天的动作重点不在跟三大厂打文档战，而在补生态执行层。**
 
-3. **HN/GitHub 这波“agent 办公层 / company OS / benchmark 层”热度，能不能在接下来几天长成更硬的验证信号？** 中国区今天给出的最直接回应不是新 benchmark，而是更接近真实生产的三条基础设施信号：AI Agent 收款链路、终端 coding agent 工具链小版本迭代、以及国产模型在国产芯片上的 Day Zero 适配。结论：**国内今天没有补出像 ErrataBench 那样的新基准，但“agent 办公层”正在向支付、CLI 和芯片适配这些更硬的落地层推进。**
+3. **HN/GitHub 这波“agent 办公层 / company OS / benchmark 层”热度，能不能在接下来几天长成更硬的验证信号？** 中国区今天给出的最直接回应不是新 benchmark，而是更接近真实生产的三条基础设施信号：AI Agent 收款链路、终端 coding agent 工具链小版本迭代、以及国产模型在国产芯片上的 Day Zero 适配。结论：**国内今天没有补出像 ErrataBench 那样的新基准，但“agent 办公层”正在向支付、CLI 和芯片适配这些更硬的落地层推进。** 今日新进展：**欧洲/学术侧已经补出更硬验证信号**——Poolside 同步发布 Laguna 模型族、终端 agent「pool」和云端开发环境「Shimmer」，Hugging Face 当天把 Laguna 接入 Transformers；同时 ClawMark、OneManCompany 等新论文把 coworker agent 的 living-world benchmark 与组织层编排框架推到了可复现实验层。
 
 ## 🇨🇳 中国区
 
@@ -160,6 +160,190 @@ description: "[占位]"
 **信源：** https://github.com/modelscope/modelscope/releases/tag/v1.36.3
 
 **关联行动：** 继续追 ModelScope 后续是否把 agent、训练和部署入口进一步做成一体化工作台。
+
+## 🇪🇺 欧洲区
+
+> 本轮实际访问并复查了 Mistral、DeepMind、Hugging Face、Stability AI、Aleph Alpha、Poolside、Synthesia、Wayve、Builder.ai、Helsing、Photoroom、欧洲 AI 融资/主权/监管入口，以及 @ylecun、@Thom_Wolf、@ClementDelangue、@steipete、@demishassabis、@jeffdean 的多路公开信源。严格执行 24 小时铁律、过去 7 天去重和 A/B 级过滤后，欧洲区最终只保留 4 条：公司 2 条、政策/资金 2 条；KOL 双检索未发现足够硬、且发布时间明确落在窗口内的 A/B 级新信号，因此不硬凑推文条目。整体看，欧洲今天最硬的新东西不是“又一篇研究宣传”，而是 agentic coding 的模型/工具开始真正落地，以及英国和欧盟的安全/资金叙事继续往“主权执行层”靠拢。
+
+### EU-1. ⭐ [A] Poolside 正式把 Laguna 模型族与两款 agentic coding 产品推向公开市场
+
+**概述：** Poolside 官方博客在 2026-04-28 发布《Introducing Laguna XS.2 and Laguna M.1》。公司首次公开对外发布自家模型：225B 总参数、23B 激活的 Laguna M.1，以及 33B 总参数、3B 激活、Apache 2.0 开源权重的 Laguna XS.2；同时把终端 coding agent「pool」和云端开发环境「Shimmer」一起放进 preview。
+
+**技术或产业意义：** 这条是今天欧洲公司里最值得打星的硬信号之一。它不是“放个 demo”级别，而是模型、终端 agent、云端工作台三件套同时出场，说明 Poolside 想争的不是单点 benchmark，而是开发者工作流入口。它也直接回应了 Lighthouse 的开放追踪问题：agent 办公层 / company OS 的热度，今天在欧洲第一次更像产品化堆栈，而不是概念。
+
+**深度分析：** Poolside 这次最重要的不是单看 225B/33B 两个数字，而是它把 agentic coding 路线拆成了可分层落地的产品组合：大模型负责长链路推理，小模型负责单卡可跑和开放生态，终端 agent 负责真实开发任务入口，Shimmer 负责把 web app / API / CLI 的迭代环境包起来。欧洲公司过去常被质疑“有研究、少分发”；Poolside 今天给出的动作更接近北美 coding agent 公司常见的商业化打法。另一个值得注意的点是 XS.2 直接开权重，意味着它押注的不只是 API 收费，而是希望通过开放生态迅速获得反馈、适配和社区扩散。
+
+**评论观察：**
+- 🟢 支持：模型 + CLI agent + cloud dev preview 同时推出，说明 Poolside 开始从“融资叙事”切到“真实产品栈”。
+- 🔴 质疑：官方文案里性能比较很多，但外部基准、稳定性和真实团队日用表现还需要第三方验证。
+
+**信源：** https://poolside.ai/blog/introducing-laguna-xs2-m1
+
+**关联行动：** 继续追 24-72 小时内是否出现第三方 benchmark、真实开发者 repo 反馈，以及 pool / Shimmer 的更细权限、审计和协作文档。
+
+### EU-2. [B] Hugging Face Transformers v5.7.0 当天接入 Laguna，欧洲开源栈对 Poolside 的响应速度明显变快
+
+**概述：** Hugging Face 官方 GitHub release 显示，`transformers` v5.7.0 于 2026-04-28 18:32:50Z 发布；本次 release 的首个“New Model additions”就是 Poolside 的 Laguna，并已给出 `Laguna XS.2` 文档入口。也就是说，Poolside 上午把模型放出来后，Hugging Face 当天就把主流开源推理/训练接口层接上了。
+
+**技术或产业意义：** 这条单看像是工具链小版本，但放在行业语境里是硬信号：欧洲模型如果想冲出“发布即沉底”的困局，最关键的不是新闻稿，而是能不能在 Hugging Face 这种默认开发者入口里迅速被标准化消费。Laguna 当天进入 Transformers，说明欧洲模型发布与开源基础设施接轨速度正在提升。
+
+**深度分析：** 过去很多新模型首发时，真正拖 adoption 后腿的不是能力，而是生态延迟：没有标准 tokenizer、没有统一推理接口、没有现成文档，开发者需要额外踩坑。Transformers v5.7.0 直接把 Laguna 放进正式 release，等于帮 Poolside 把“试试看”门槛往下砍了一截。这也让今天的 Poolside 事件不再只是单家公司新闻，而变成“欧洲模型首发 → 欧洲/全球默认开源入口快速接棒”的链式动作。对 Lighthouse 的追踪问题来说，这种速度比空喊 company OS 更接近硬验证信号，因为它会直接反映到 repo 复用、推理适配和真实调用量上。
+
+**评论观察：**
+- 🟢 支持：发布日即进 Transformers，说明 Hugging Face 继续在做开源生态的“默认吸纳层”。
+- 🔴 质疑：被接入不等于被采用，后续还得看下载量、issue 活跃度和第三方部署反馈。
+
+**信源：** https://github.com/huggingface/transformers/releases/tag/v5.7.0
+
+**关联行动：** 继续追 Laguna 文档、示例代码、OpenRouter/API 实测和 Hugging Face 社区讨论，判断这是不是“发布日热度”还是会继续转成生态使用量。
+
+### EU-3. [B] 更新：英国把 AISI 从单点评测往“中等强国协作 + 7 月最佳实践”推进
+
+**概述：** 2026-04-09 起日报已持续跟踪 Anthropic Mythos / 欧洲安全评测线；Reuters 于 2026-04-28 15:27 UTC 报道，英国科技大臣 Liz Kendall 表示，英国将与法国、德国、加拿大等“middle powers”合作推进 AI 安全，并将在 7 月下一次 AI Security Institutes 会议上发布模型评测 best practice。报道还点名：英国 AISI 本月对 Anthropic Claude Mythos 的评估，正是吸引多国合作兴趣的触发点之一。
+
+**技术或产业意义：** 这条满足“已报道事件的实质性新进展”。前几轮大家看到的是 AISI 单独评测 Mythos；今天新增的是英国开始把这套评测能力外溢成多国协作框架，而且给出了下一时间点——7 月 best practice。它直接回应了 Lighthouse 的开放追踪问题之一：欧洲/英国这边确实在把前沿模型安全从一次性新闻，推进成更制度化的执行层。
+
+**深度分析：** 英国这里走的不是欧盟那种先大法案、后细则的传统路线，而是试图把 AISI 做成“评测方法学 + 外交节点”的组合资产。与法国、德国、加拿大等中等强国结盟，既是现实算力格局下对美中双极结构的回应，也是给英国自己找一个“规则制定者”而非“算力追赶者”的位置。更关键的是，AISI 把 Mythos 评测经验往 July best practice 推，这说明接下来真正值得盯的不是抽象安全口号，而是模型红队流程、报告模板、复现口径和跨国共享机制会不会具体落地。
+
+**评论观察：**
+- 🟢 支持：比起空谈主权，英国今天给出的是更可执行的安全协作节奏表。
+- 🔴 质疑：如果没有更多头部模型厂继续开放评测接口，AISI 的国际影响力仍可能停留在“有方法、但样本有限”。
+
+**信源：** https://www.yahoo.com/news/articles/uk-other-middle-powers-ai-152750926.html
+
+**关联行动：** 继续追 7 月 AISI 会议前是否有正式 best-practice 草案、更多模型厂签约评测，以及欧盟机构会不会跟进采用英国方法论。
+
+### EU-4. [B] 更新：欧洲 AI 资金叙事继续右移，新增信号不是公共拨款变大，而是私人资本更深地塑形政策
+
+**概述：** 2026-04-13 已报道欧委会 AI Continent Action Plan 一周年进展与约 €10 亿 AI 采用资金；TechPolicy.Press 于 2026-04-28 09:07Z 发布分析文，指出欧盟最新的“欧洲 AI 投资” headline 很大程度上仍是对既有 Horizon Europe / Digital Europe 预算的重包装，而真正快速抬升的是私人资本：文中援引数据称，欧洲 AI private capital 从 2024 年略高于 100 亿美元升至 2025 年约 175 亿美元，并强调 EU AI Champions Initiative 等私营资金联盟正在更深地影响欧盟 AI 产业政策方向。
+
+**技术或产业意义：** 这条属于“已报道事项的后续解释层新进展”。它不是新的公共资金落地公告，但它补上了一个很重要的判断：欧洲今天喊得最响的 AI 主权/资金故事，越来越依赖私人资本来加速，而不是单靠布鲁塞尔新增预算。对追踪欧洲 AI funding 的人来说，这比再看一次 headline number 更有信息增量。
+
+**深度分析：** 如果这篇分析判断成立，欧洲 AI 产业政策正在发生一个微妙变化：公共资金继续提供政治合法性和基础设施方向感，但真正决定节奏的，可能是能否把跨国基金、产业资本和“主权 AI 冠军联盟”组织起来。这会带来两层后果。第一，欧洲对“AI sovereignty”的定义可能越来越像“让私营资本为主权目标服务”，而不是典型国家产业政策。第二，政策自主性会受到资本条件约束——谁愿意出钱、钱附带什么条件、钱流向模型/算力/应用哪一层，都会反过来塑形政策优先级。对 Lighthouse 的追踪问题来说，这说明欧洲的 company OS / infra / sovereign AI 热度，下一步要看的是资本是否真的把这些口号变成项目和采购，而不只是峰会口号。
+
+**评论观察：**
+- 🟢 支持：这篇文章把“欧洲 AI 资金”从 headline 叙事拆回到预算结构与资本来源，信息密度高。
+- 🔴 质疑：它本质上仍是分析文章，不是新的官方拨款决定；后续仍需更多正式项目和采购来验证判断。
+
+**信源：** https://www.techpolicy.press/private-investors-are-steering-europes-ai-race/
+
+**关联行动：** 继续追欧委会、EIF/EIB、AI Champions Initiative 与 AI Gigafactory 相关项目是否在未来几天补出更具体的资金分配、站点名单或企业落地案例。
+
+## 🌐 学术/硬件
+
+> 本轮学术/硬件实际覆盖了 arXiv 7 个分类、Hugging Face Papers、Papers With Code、Reddit 3 个板块、Raschka blog 与 magazine、The Batch、Import AI、The Gradient、Lilian Weng、AI Snake Oil，以及 NVIDIA/AMD/Intel/TSMC 和数据中心基础设施源。按北京时间 2026-04-29 的 24 小时铁律、过去 7 天事件去重和论文 14 天 arXiv ID 去重后，最终保留 7 条可直接写入 daily.md 的 A/B 级条目：5 条论文/benchmark/agent 系统信号，2 条平台/硬件信号。其余来源本轮多为无 24 小时新增、仅周刊/旧文、活动预告、或被 Reddit/TSMC 风控拦截后无可采新信息。
+
+### AH-1. ⭐ [A] World-R1 用强化学习把 3D 约束塞回文生视频，成了 HF 当日 #1 论文
+
+**概述：** 4 月 28 日提交到 Hugging Face Papers 的 `World-R1: Reinforcing 3D Constraints for Text-to-Video Generation` 同时出现在 arXiv 最新 cs.CV 流水和 Papers With Code 趋势页。论文核心做法不是重写视频生成架构，而是用 Flow-GRPO 配合预训练 3D foundation model 与 VLM 反馈，在不改底座结构的情况下把几何一致性作为强化学习目标压进去，重点解决视频世界模型常见的空间错位、视角漂移和物体关系不稳定问题。
+
+**技术或产业意义：** 这条是 A 级，因为它命中的不是单一 benchmark，而是视频生成从“会动”转向“像一个自洽世界”的关键瓶颈。若 3D 一致性能用后训练而不是重架构换来，现有大批视频底模都可能沿这条路线补上 world simulation 能力，工程代价远低于整套重训。
+
+**深度分析：** 这篇论文真正有意思的地方在于，它把“世界一致性”从 architecture problem 部分改写成 reward design problem。过去很多视频世界模型论文会倾向于新增 3D 模块、显式几何分支或昂贵先验，代价是复杂度和扩展性一起上升。World-R1 反过来用强化学习与外部 3D/视觉判别器做后验约束，意味着只要底模有足够生成能力，后训练层就能持续迭代几何质量。HF 页面把它推到当日 #1，PWC 也同步收录，说明社区已经把“几何一致性”视作下一阶段视频模型的主战场，而不只是画面美观度竞赛。
+
+**评论观察：**
+- 🟢 支持：不改底层架构而显著提升 3D consistency，给现有视频模型提供了更现实的升级路径。
+- 🔴 质疑：论文摘要强调“保留原始视觉质量”，但真实生产里 RL 后训练是否会牺牲多样性、稳定性和长视频时长表现，还要等更多公开评测。
+
+**信源：** https://arxiv.org/abs/2604.24764 ｜ https://huggingface.co/papers/2604.24764 ｜ https://paperswithcode.com/latest
+
+**关联行动：** 继续追 World-R1 的项目页、开源权重与第三方复现，重点看几何一致性是否能外溢到长时视频、交互式世界模拟和可控镜头运动。
+
+### AH-2. [A] Tuna-2 直接拿像素嵌入统一理解与生成，挑战“多模态一定要靠预训练视觉编码器”这条共识
+
+**概述：** `Tuna-2: Pixel Embeddings Beat Vision Encoders for Multimodal Understanding and Generation` 于 4 月 28 日被提交到 Hugging Face Papers，并在 arXiv 最新 cs.CV 流水中出现。论文主张统一多模态模型没有必要依赖预训练视觉编码器、VAE 或单独 representation encoder，而是可以直接从 pixel embeddings 端到端完成视觉理解与生成，并在多模态 benchmark 上拿到 SOTA 级表现。
+
+**技术或产业意义：** 这条是 A 级，因为它打的是当前多模态架构的一个默认前提：视觉侧必须先做模块化压缩，再和语言模型对接。若 Tuna-2 的结论可复现，未来不少模型会重新考虑“编码器 + 生成器”双轨设计是否只是历史包袱。
+
+**深度分析：** Tuna-2 的价值不只在“去掉一个模块”，而在把视觉理解和视觉生成重新绑定回同一种表示空间。过去很多统一模型实际并不统一：理解走 encoder 特征，生成走 latent/token 特征，两套表征天然有对齐损失。Tuna-2 试图用更原生的像素空间学习消除这种结构性错位。摘要里还特别提到，虽然 encoder 版本在早期预训练收敛更快，但规模上去后，encoder-free 设计在细粒度视觉理解上更强。这意味着多模态架构可能正在经历一次与早期语言模型类似的“先靠工程脚手架，再回归更简洁统一范式”的切换。
+
+**评论观察：**
+- 🟢 支持：如果端到端 pixel-space 方案真能兼顾理解与生成，它会大幅简化多模态模型栈并减少对齐成本。
+- 🔴 质疑：去掉视觉编码器后，训练成本、样本效率和部署可控性是否会恶化，论文之外还缺少大规模工业验证。
+
+**信源：** https://arxiv.org/abs/2604.24763 ｜ https://huggingface.co/papers/2604.24763
+
+**关联行动：** 继续追 Tuna-2 是否放出代码/模型卡，以及社区会不会快速拿它与现有 encoder-heavy 路线做更系统的消融对比。
+
+### AH-3. [B] DataPRM 把“过程奖励模型”从做题监督推进到数据分析 Agent，开始专门抓 silent errors
+
+**概述：** Ant Group 相关论文 `Rewarding the Scientific Process: Process-Level Reward Modeling for Agentic Data Analysis` 于 4 月 28 日进入 Hugging Face Papers，并来自 arXiv cs.MA 最新队列。论文指出通用 PRM 在动态数据分析任务里会系统性失效：既抓不住不会触发解释器异常的 silent errors，也会误伤必要的 trial-and-error 探索。为此作者提出 DataPRM，让 reward model 能主动与环境交互探测中间执行状态，并用 reflection-aware ternary reward 区分可修正错误与不可恢复错误。
+
+**技术或产业意义：** 这条保留为 B 级，因为它虽然不是大模型主线 headline，但直接命中了 agent 从 demo 走向分析型生产任务时最容易翻车的环节：不是模型不会说，而是会“安静地做错”。如果 reward/modeling 层开始显式处理 silent errors，数据分析 agent 的可靠性评估会进入新阶段。
+
+**深度分析：** 过去很多 process reward 研究默认任务空间相对静态，正确步骤和错误步骤边界清晰；但真实数据分析不是这样，探索、回看、修正和临时试错本来就是流程的一部分。DataPRM 的有趣之处在于它不是简单给中间步骤打分，而是让 verifier 更像一个会动手检查现场的审计者。这与近几周业内越来越强调的 agent reliability、开放世界评测和 execution-time verification 形成呼应：下一代 agent 评估重点可能不再是“会不会列步骤”，而是“能不能识别自己在环境里悄悄犯下的错”。
+
+**评论观察：**
+- 🟢 支持：把 silent error 当一等问题处理，比继续堆通用 PRM 更贴近真实 agent 落地需求。
+- 🔴 质疑：8K 训练实例在复杂企业分析流里仍偏小，环境交互式 verifier 的泛化成本和推理开销也要继续观察。
+
+**信源：** https://arxiv.org/abs/2604.24198 ｜ https://huggingface.co/papers/2604.24198
+
+**关联行动：** 继续追 DataPRM 是否开源数据与评测脚本，并观察是否有 benchmark 开始把 silent-error detection 单列成核心指标。
+
+### AH-4. ⭐ [A] NVIDIA 发布 Nemotron 3 Nano Omni，把视觉/音频/文本感知并成一个开源多模态代理底座
+
+**概述：** NVIDIA Newsroom 与官方博客在 4 月 28 日同时挂出 `NVIDIA Launches Nemotron 3 Nano Omni Model, Unifying Vision, Audio and Language for up to 9x More Efficient AI Agents`。官方表述称，该模型把视频、音频、图像、文本、文档、图表和图形界面输入统一到一个 open omni-modal reasoning model 中，面向 computer use、document intelligence、audio-video reasoning 等 agentic workflow，宣称在多项文档/视频/音频理解榜单上领先，并将多模态 agent 效率推高至同类开源模型的最高水平之一。
+
+**技术或产业意义：** 这是 A 级硬件/平台条目，因为它不是单纯发一个模型，而是在给“多代理系统里的感知子代理”提供 NVIDIA 官方标准件。对算力平台厂商来说，谁能把 perception + reasoning + deployment flexibility 打包成默认底座，谁就更容易把上层 agent 工作流锁进自己的推理生态。
+
+**深度分析：** 过去多模态 agent 常见做法是视觉、语音、OCR、文档理解各挂一个模型，再用 orchestration 去拼；性能问题不只来自单模型推理，还来自跨模型传参、上下文丢失与延迟堆叠。Nemotron 3 Nano Omni 的核心叙事是把这些感知入口先收束成一个“眼睛和耳朵”模块，再交给上层 reasoning/acting agent。官方还特别强调 open model、生产部署灵活性和低成本，这说明 NVIDIA 不只是想卖 GPU，而是在把自己往 agent 系统参考架构提供者的位置推。若企业采用这类官方多模态 perception backbone，后续优化路径很可能顺手继续绑定 NVIDIA 的软件栈与推理工具链。
+
+**评论观察：**
+- 🟢 支持：把多模态 perception 收敛成单模型，能直接减少 agent pipeline 的上下文割裂与工程摩擦。
+- 🔴 质疑：官方“最多 9x 更高效率”和“六榜领先”仍需更多第三方基准拆解，尤其要看实际延迟、显存占用和复杂界面任务稳定性。
+
+**信源：** https://nvidianews.nvidia.com/news?o=0 ｜ https://blogs.nvidia.com/blog/nemotron-3-nano-omni-multimodal-ai-agents/
+
+**关联行动：** 继续追 NVIDIA 是否放出更完整的模型卡、评测表和部署样例，重点看它会不会快速接入企业 agent、RAG 文档流和 computer-use 框架。
+
+### AH-5. ⭐ [A] OneManCompany 把多智能体从“技能堆叠”推进到“组织层”，拿下 Hugging Face 当日 #2 论文
+
+**概述：** `From Skills to Talent: Organising Heterogeneous Agents as a Real-World Company` 于 2026-04-28 进入 Hugging Face Papers 日榜并升至 #2。论文提出 OneManCompany（OMC）框架，把模型、工具、运行配置打包成可移植的 `Talents`，再通过 `Talent Market` 做按需招募，并用 Explore-Execute-Review（E²R）树搜索统一规划、执行与复盘。摘要声称其在 PRDBench 上达到 84.67% 成功率，较 SOTA 高 15.48 个百分点。
+
+**技术或产业意义：** 这条值得打星，不是因为“又一个 multi-agent 框架”，而是它直接瞄准当前 agent 系统最缺的一层：组织编排层。行业里大量 agent 仍是固定角色、固定工作流、固定协作图；OMC 试图把“谁来干、何时招、怎么复盘”抽成独立层，这比单纯加工具或加 context 更接近企业真实协作结构。
+
+**深度分析：** 这篇论文最有信息增量的地方，是把多智能体问题从 capability orchestration 改写成 organisational design。过去常见框架默认团队结构先验存在：写死 planner、coder、reviewer，再让它们配合。OMC 则把 agent identity、工具权限、模型后端和职责边界一起封装成 role-like 的 Talents，再通过 Talent Market 动态补位，等于把系统升级路线从“调提示词”抬到“重组组织图”。如果这套思路成立，下一代 agent 平台的竞争焦点就不只是单个 agent 强不强，而是谁能更低摩擦地完成动态招聘、跨后端编排、责任追踪与闭环复盘。对 Lighthouse 关注的 company OS / agent workspace 方向来说，这是今天最硬的学术呼应之一。
+
+**评论观察：**
+- 🟢 支持：把多智能体瓶颈定义为“缺组织层”而不是“缺更多技能”，命中了当前真实落地痛点。
+- 🔴 质疑：PRDBench 提升很亮眼，但 OMC 在更高成本、强权限约束、真实企业审计环境里的稳定性仍待验证。
+
+**信源：** https://huggingface.co/papers/2604.22446 ｜ https://arxiv.org/abs/2604.22446
+
+**关联行动：** 继续追 OMC 项目页、代码样例与外部复现，重点看其动态招募和 E²R 层能否迁移到真实 coding / office agent 场景。
+
+### AH-6. ⭐ [A] ClawMark 首次把“多天、多模态、环境会自己变化”的 coworker agent 评测做成可复现实验台
+
+**概述：** `ClawMark: A Living-World Benchmark for Multi-Turn, Multi-Day, Multimodal Coworker Agents` 于 2026-04-28 进入 Hugging Face Papers 日榜。论文构建了一个面向 persistent coworker agent 的 living-world benchmark：包含 100 个任务、13 类职业场景、5 个会持续变动状态的沙箱服务（文件、邮件、日历、知识库、表格），并用 1537 个 deterministic Python checkers 按执行后环境状态评分，不依赖 LLM-as-judge。论文报告最强系统加权分 75.8，但最优严格任务成功率仅 20.0%。
+
+**技术或产业意义：** 这条是 A 级，因为它命中的不是又一个 static benchmark，而是 agent 真正进入办公协作后的核心难题：环境不是静止的，用户也不是一次性给完上下文。很多 agent 今天在单轮任务里看着能做事，一旦跨天、跨模态、跨系统，性能就塌。ClawMark 把这个问题正式 benchmark 化，等于给“coworker agent”赛道补上了一块行业仍很缺的地基。
+
+**深度分析：** ClawMark 的高价值在于三点。第一，它把 exogenous update 放进评测主轴：邮件会进来、日历会改、知识库会更新，这比传统 benchmark 更像现实工作流。第二，它坚持用规则式 verifier 看最终环境状态，减少 LLM 裁判自带噪声。第三，它给出一个很残酷但有用的现实信号：前沿 agent 可以做出不少 partial progress，但距离端到端可靠完成完整工作流还有明显差距。对产业端来说，这意味着“agent 已经会干活”这个叙事需要更细拆成：会不会适应变化、会不会记住前情、会不会跨系统收尾。对 Lighthouse 跟踪 agent reliability / office OS 来说，这是一条非常硬的基准更新。
+
+**评论观察：**
+- 🟢 支持：多天任务 + 状态变化 + rule-based verifier 的组合，明显比单回合静态基准更接近真实办公环境。
+- 🔴 质疑：100 个任务的广度仍有限，且严格成功率偏低也说明 benchmark 本身难度设计可能还需更多层级拆分。
+
+**信源：** https://huggingface.co/papers/2604.23781 ｜ https://arxiv.org/abs/2604.23781
+
+**关联行动：** 继续追其 benchmark/eval harness 是否快速被主流 agent 框架接入，以及是否出现第三方复评与 leaderboard 扩展。
+
+### AH-7. [B] ReVSI 重建 VLM 3D 推理评测，指出大量“空间智能进步”可能建立在失真基准上
+
+**概述：** `ReVSI: Rebuilding Visual Spatial Intelligence Evaluation for Accurate Assessment of VLM 3D Reasoning` 于 2026-04-28 进入 Hugging Face Papers 日榜并升至 #3。论文认为现有 VLM 空间推理评测存在系统性失真：很多 QA 对直接沿用点云/3D 标注，在视频条件下会因重建伪影、缺失可见物体、几何标签错误而变成错误题；同时，不少评测默认模型能看完整场景，但现实输入常只有 16/32/64 帧。作者因此在 5 个数据集、381 个场景上重标注并重建 QA，对不同 frame budget 和 visibility 元数据做可控评测。
+
+**技术或产业意义：** 这条是 B 级，但信息密度很高。过去半年 VLM 一直在冲“3D spatial intelligence”，可如果量尺本身歪了，很多模型提升都可能被高估。ReVSI 的价值不只是新 benchmark，而是提醒行业：空间智能不是多跑几个视频 QA 数据集就能证明，必须让题目真正对齐模型看到的输入。
+
+**深度分析：** ReVSI 打掉的是一个很容易被忽略的评测偷懒：把为传统 3D perception 设计的标注直接挪给视频式 VLM，然后假装 ground truth 天然成立。可一旦模型实际只看稀疏帧，很多问题根本不可回答；若标注本身漏了视频里可见物体，模型答对也会被判错。这会让社区对 VLM 的 3D reasoning 形成虚假排序。ReVSI 通过重标注、人工校验、frame budget 控制和 visibility 元数据，把“能不能答”与“答得对不对”重新分开，因而更适合用来诊断真实失效模式。对做 embodied、video agent、robot perception 的团队，这比单纯多一个榜单更重要，因为它决定了后续模型改进方向会不会被错误信号带偏。
+
+**评论观察：**
+- 🟢 支持：先修量尺再比成绩，能显著提升 VLM 空间推理结论的可信度。
+- 🔴 质疑：新 benchmark 的采用还需要社区迁移成本，短期内老基准和新基准可能会并存，造成结果口径分裂。
+
+**信源：** https://huggingface.co/papers/2604.24300 ｜ https://arxiv.org/abs/2604.24300 ｜ https://3dlg-hcvc.github.io/revsi/
+
+**关联行动：** 继续追 ReVSI 是否快速被主流 VLM/robotics 论文引用，以及是否带动更多“输入可回答性”导向的 benchmark 重建。
 
 ## 下期追踪问题
 
