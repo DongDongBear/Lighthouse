@@ -1,6 +1,6 @@
 ---
-title: "2026-04-30 AI 日报：[占位，最后由北美采集轮填写]"
-description: "[占位]"
+title: "2026-04-30 AI 日报：OpenAI把AI网安推向行动方案，Google让Gemini直接生成文件"
+description: "三大厂3条｜北美区5条｜KOL 2条。OpenAI 发《Cybersecurity in the Intelligence Age》、Google 让 Gemini 直接生成可下载文件、Anthropic 官方四页无合格新发；Databricks 联手 Stripe Projects 打通 agent 申请数据库，HN 与 GitHub Trending 继续转向 agent 基础设施与开发环境。"
 ---
 
 # 2026-04-30 AI 日报
@@ -12,6 +12,59 @@ description: "[占位]"
 2. **OpenAI 这轮“Codex escape velocity + 重置 rate limits”会不会在 24-72 小时内兑现成真正的新 ship？** 中国区今天没有看到直接对位 Codex 的官方新 ship，但能确认一批“执行层”动作正在变硬：百度 GenFlow 4.0 把 Agent 工作流和 Office 场景继续往前推，银河通用把跨本体动作模型 LDA-1B 开源并打进 RSS，智元和斑陌易行则把具身交付与无人配送往真实订单/产品规格层落。结论：**中国厂商今天给出的回应不是“再发一个 coding agent headline”，而是把 Agent / 机器人 / 端侧模型推向可执行、可量产、可交付。**
 
 3. **美国 AI 应用层监管与国防采购会不会继续加速？** 中国区今天没有看到可确认落在 24 小时窗口内的国家级 AI 新政策或军采文件；但能确认一条值得并行追踪的基础设施信号：福建发布“算电联合体”，把算电协同从概念推进到联合体组织层，首批成员已包含国产 AI 芯片与系统厂商。结论：**中国侧今天没有给出“监管/军采”级新公告，但在算力基础设施协同层继续加码。**
+
+## ⭐ 三大厂动态
+
+> 本轮按铁律逐页检查了 Anthropic `/news /engineering /research /docs models`、OpenAI `/blog /index /research /docs changelog`、Google/DeepMind `/blog.google/technology/ai /deepmind blog /developers.googleblog /ai.google research` 共 12 个官方入口；对 OpenAI 额外用了 RSS / sitemap 兜底，对 Google Blog 读取了正文，对 Anthropic 和 DeepMind 做了时间窗复核。严格按北京时间 `2026-04-29 04:30` 到 `2026-04-30 04:30` 的 24 小时窗口执行，最终只确认 2 条满足显式时间戳要求的官方新增，Anthropic 本轮官方 4 页无合格新发。
+
+### BT-1. ⭐ [A] OpenAI 发《Cybersecurity in the Intelligence Age》：开始把“模型安全”升级成五段式 AI 网络防御行动方案
+
+**概述：** OpenAI 官方 RSS 显示，`Cybersecurity in the Intelligence Age` 于 `Wed, 29 Apr 2026 04:00:00 GMT` 发布，即北京时间 `2026-04-29 12:00`，落地链接为 `https://openai.com/index/cybersecurity-in-the-intelligence-age`。由于 `openai.com` 正文在当前环境触发 Cloudflare 挡板，本轮无法直读整页正文，但官方 RSS 摘要已明确给出核心方向：OpenAI 正在提出一套面向“Intelligence Age”的五部分网络安全行动计划，重点是把 AI 驱动的网络防御能力更广泛地下放到关键系统与防守方手里。
+
+**技术/产业意义：** 这条值得收，不是因为 OpenAI 又写了一篇安全博客，而是它把叙事重心从“我们模型更安全”推进到“整个数字基础设施怎样用 AI 做防守”。当 OpenAI 开始把 cyber defense 写成行动框架，它实际上是在争夺 AI 时代安全基建话语权，而不只是产品 PR。
+
+**深度分析：** 过去一年 OpenAI 的安全相关动作多是围绕模型使用边界、红队与风险披露；这次标题直接落在 `Cybersecurity in the Intelligence Age`，说明其目标已经从“限制 AI 带来的风险”转向“用 AI 重构防御体系”。这和 04-17 已报道的 `Accelerating the cyber defense ecosystem` 一脉相承，但焦点更偏政策/系统层：谁来掌握 AI 防御工具、如何把能力从顶级实验室扩散到更广泛的防守者、怎样保护关键基础设施不被攻击者先占优势。对政府、云厂商与安全厂商来说，这类文章的真正价值，不在口号，而在它往往预示后续的合作、认证或行业倡议。
+
+**评论观察：**
+- 🟢 支持：把 AI 用于网络防御而不只用于自动化攻击，是当前最值得押注的现实落地方向之一。
+- 🔴 质疑：当前可见的仍主要是官方摘要；OpenAI 若不尽快补出更细的项目、合作与执行机制，这套“五段式计划”容易停留在原则层。
+
+**信源：** https://openai.com/blog/rss.xml
+
+**关联行动：** 继续追 OpenAI 是否很快补出正文可访问镜像、合作伙伴名单、政府/关键基础设施试点与更细的 cyber defense 执行框架。 ⭐ 待深度解读
+
+### BT-2. [A] Google 把 Gemini 从“会聊”推进到“会直接交付文件”：Docs/Sheets/Slides/PDF/Office 一把打通
+
+**概述：** Google 官方 AI Blog 文章 `You can now easily generate files in Gemini.` 的 `datePublished` 为 `2026-04-29T16:00:00+00:00`，即北京时间 `2026-04-30 00:00`，`dateModified` 为 `2026-04-29T16:17:06+00:00`。正文明确写出：Gemini 现在可在对话内直接生成并导出 Google Docs、Sheets、Slides，以及 `PDF / DOCX / XLSX / CSV / TXT / RTF / LaTeX / Markdown` 等文件，用户无需离开 Gemini app 就能把 brainstorming 结果落成可下载、可分享文档。
+
+**技术/产业意义：** 这条自动 A 级，因为它是 Google 官方 AI 产品更新，而且方向非常对：大模型竞争正在从“谁回答得像人”转向“谁能更快交付真实工作产物”。直接产出结构化文件，比再加一个聊天技巧更接近办公室与个人生产力的真实主战场。
+
+**深度分析：** 这不是简单的“多支持几个导出格式”。Google 真正想拿的是工作流闭环：用户在 Gemini 里提需求，模型不只返回文本，而是直接给你一个可继续编辑、可进 Drive、可进 Office 套件的文件对象。这样一来，Gemini 和 Docs/Sheets/Slides 的关系就从“模型外挂”变成“原生文件生成器”。和 OpenAI、Anthropic 当下更强调 agent、coding、研究协作不同，Google 这步明显更偏大众知识工作流与办公入口争夺。谁先把“对话 → 文件 → 协作”链条压短，谁就更容易把聊天流量变成留存与办公粘性。
+
+**评论观察：**
+- 🟢 支持：把结果直接做成文件，比让用户复制粘贴再格式化，产品价值高得多。
+- 🔴 质疑：真正的胜负手将取决于复杂表格、长文档排版、多轮修改与权限协作是否稳定，而不是单次导出能不能成功。
+
+**信源：** https://blog.google/innovation-and-ai/products/gemini-app/generate-files-in-gemini/
+
+**关联行动：** 继续追 Google 是否把该能力进一步接进 Workspace 权限体系、模板库、企业审计与更复杂的 agent 式文档工作流。
+
+### BT-3. [B] Anthropic 官方 4 页本轮无合格新发：最近一篇《Claude for Creative Work》只差 68 分钟踩线失败
+
+**概述：** 本轮复查 Anthropic 官方 `news / engineering / research / docs models` 四个核心入口，没有找到任何一条带显式发布时间、且落在北京时间 `2026-04-29 04:30` 之后的新增。最接近的一条是 `Claude for Creative Work`，官方时间为 `2026-04-28T19:22:00Z`，折算北京时间 `2026-04-29 03:22`，比今天窗口早 `68` 分钟，因此严格不收。
+
+**技术/产业意义：** 三大厂“无新发”也必须写，因为 Anthropic 近两周一直是最容易把旧闻误当头条的高危源头。把踩线失败的时间差写清楚，比含糊说“今天没更新”更重要——这能避免下一轮再把 03:22 的旧文硬塞进 04-30 日报。
+
+**深度分析：** 04-09 Mythos/Glasswing 教训后，Anthropic 相关条目最怕的不是漏一篇小文，而是把一篇时间不合格的旧文重新包装成“今日动态”。这次四页全检、并把 `Claude for Creative Work` 精确卡在 `03:22 CST`，本质上是在给后续轮次做时间锚点：这篇不是今天新闻；如果后面它引发媒体跟进，只能按“旧文外溢”处理，不能倒灌成官方新发。
+
+**评论观察：**
+- 🟢 支持：把“差 68 分钟”这种边界情况写出来，能显著减少次日误收旧闻的概率。
+- 🔴 质疑：Anthropic docs 模型页没有暴露明确更新时间，意味着模型/定价级细微变更仍要继续盯更多侧信源。
+
+**信源：** https://www.anthropic.com/news
+
+**关联行动：** 继续追 Anthropic 是否在下一窗口补发 creative-work 相关工程文、案例页或 docs 更新；同时维持对 models overview / changelog 侧入口的高频复查。
+
 
 ## 🇨🇳 中国区
 
@@ -345,8 +398,128 @@ description: "[占位]"
 
 **关联行动：** 继续追 NVIDIA 是否很快补出更多客户案例、B300/NVL72 真实部署拓扑和与合作伙伴的 validated stack 细节。
 
+## 🇺🇸 北美区
+
+> 本轮追加检查了 Databricks、Meta、Microsoft、Apple、AWS、CoreWeave、Groq、Cerebras 等官方或半官方入口，并补抓 HN 首页 / newest 与 GitHub Trending 日榜 / 周榜。严格按 24 小时窗口与 A/B 过滤后，北美区最终保留 5 条：其中 2 条企业/平台硬信号，3 条社区与开源风向条目。Meta / Microsoft / Apple / AWS / xAI / Perplexity / CoreWeave / Groq / Cerebras 本轮未确认到足够硬、且带明确时间戳的官方 24h 新发，因此没有拿二级市场噪音硬凑。
+
+### NA-1. [B] Databricks 成 Stripe Projects 首发合作方：AI coding agents 开始直接申请数据库、付费并拉起后端
+
+**概述：** Databricks Blog 文章 `Databricks and Stripe Projects: Infrastructure Built for Agents` 的 `datePublished` 为 `2026-04-29T15:20:00+0000`。官方摘要明确写出：Databricks 是 `Stripe Projects` 的 launch partner，这个“agent-first CLI”允许 AI coding agents 在无人参与的情况下发现、配置并支付 `Neon Postgres` 数据库资源；Databricks 进一步把它与 `Lakebase` 的 serverless 架构联动，主打“agent 能在几秒内拉起 production-ready Postgres”。
+
+**技术/产业意义：** 这条非常值得盯，因为它把 agent 从“会写代码”推进到“会申请基础设施并完成支付动作”。一旦数据库、计费、权限和后端资源分配都能被 agent 直接调起，所谓 AI coding agent 才真正接近“能交付完整应用”，而不是只会吐代码片段。
+
+**深度分析：** 过去 coding agent 最大的断点之一，是代码写完后仍需要人类去开数据库、配密钥、绑定支付和做资源初始化。Stripe Projects + Neon + Databricks 这一套组合，实际上是在替 agent 打通“从生成代码到可运行服务”的最后几步。这里真正危险也真正有价值的地方，在于基础设施 provisioning 开始被 agent 化：如果权限、费用上限和审计机制做对，它会极大缩短产品原型到部署的路径；如果做错，则会把资源滥用、成本失控和误配置风险一起放大。
+
+**评论观察：**
+- 🟢 支持：agent 直接拉起数据库和结算，是 AI 开发栈从 demo 走向自动交付的重要门槛。
+- 🔴 质疑：真正落地时最难的不是开库，而是权限边界、预算控制、审计日志与回滚治理。
+
+**信源：** https://www.databricks.com/blog/databricks-and-stripe-projects-infrastructure-built-agents
+
+**关联行动：** 继续追 Stripe Projects 是否很快扩展到队列、对象存储、密钥管理等更多 infra primitive，以及企业侧如何做人审/审批闭环。
+
+### NA-2. [B] Databricks 再打“数据底座先行”牌：Trinity Industries 用统一数据层把 ETA 精度打到行业基准之上 50%
+
+**概述：** Databricks Blog 文章 `Companies Winning with AI Built the Data Layer First` 的 `datePublished` 为 `2026-04-29T19:00:00+0000`。官方摘要给出三组硬数字：`Trinity Industries` 将 on-time material delivery 提升 `15%`，其 ETA 模型准确度达到“比行业 benchmark 高 `50%`”，同时 Databricks 把结论落在一个很明确的判断上——真正能在 agentic AI 时代赢的公司，往往先把统一、治理良好、可访问的数据层打好。
+
+**技术/产业意义：** 这条值 B，因为它不是泛泛而谈“AI 转型”，而是再次提醒行业：agentic AI 的瓶颈并不先在模型，而在数据和系统组织。很多企业今天急着加 agent，但数据层仍是碎片化 dashboard 与孤岛系统，结果只能得到昂贵的伪智能。
+
+**深度分析：** Databricks 这篇文章本质上是在给 2026 年的企业 AI 竞争重新排序：不是先问“你用了哪个 frontier model”，而是先问“你的核心业务数据是否已经统一、可治理、可实时调用”。Trinity 这种传统铁路/工业公司能拿出 15% 交付改善和 50% ETA 精度提升，说明 agentic AI 真正进入生产不是从酷炫对话开始，而是从把旧系统和数据脉络重新打通开始。对企业客户来说，这类案例比又一个 benchmark 更值钱，因为它说明 AI 投入能否变成实打实 KPI，取决于底层数据工程是否先完成。
+
+**评论观察：**
+- 🟢 支持：把 agentic AI 的胜负手重新拉回数据治理和系统架构，是更成熟的企业视角。
+- 🔴 质疑：Databricks 当然会强调“数据层第一”，但不同企业的数据重构成本与 ROI 回收周期差异会非常大。
+
+**信源：** https://www.databricks.com/blog/companies-winning-ai-built-data-layer-first
+
+**关联行动：** 继续追更多能给出明确经营指标的 agentic AI 落地案例，尤其是制造、物流、金融等高约束行业。
+
+### NA-3. [B] HN 今日最热 AI 讨论不是新模型，而是 Claude Code 账单事故：`HERMES.md` 额外扣费 issue 冲到 392 分
+
+**概述：** Hacker News 首页本轮抓取到 AI 相关最高热度条目为 `HERMES.md: Anthropic bug causes $200 extra charge, refuses refund`，对应讨论串 `https://news.ycombinator.com/item?id=47952722`，抓取时热度约为 `392 points / 136 comments`；外链直指 GitHub issue `https://github.com/anthropics/claude-code/issues/53262`。
+
+**技术/产业意义：** 这条值得收，不因为它是 drama，而是它暴露了 agent/coding 产品进入真实生产后，计费可信度本身已经成了核心产品能力。只要用户开始把 agent 接入长期项目、批量任务和团队预算，任何一次异常账单都会迅速从客服问题升级成品牌与信任问题。
+
+**深度分析：** HN 把这条推上首页高位，说明开发者社区最敏感的点已经不是“Claude Code 能不能写代码”，而是“我敢不敢把更多工作托付给它，并承担不可预期的成本结果”。这背后其实是整个 agent 产品共同的治理命题：调用链更长、工具更多、后台动作更复杂后，透明计费、异常回滚、工单处理和用户申诉机制会和模型能力一样重要。对所有做 agent/coding 产品的厂商，这都是非常现实的警报。
+
+**评论观察：**
+- 🟢 支持：开发者把计费异常顶上 HN，说明市场正在逼 agent 产品从“能用”走向“可信”。
+- 🔴 质疑：单个 issue 未必代表系统性故障，但如果官方处理不透明，它会迅速放大为平台信任事件。
+
+**信源：** https://news.ycombinator.com/item?id=47952722
+
+**关联行动：** 继续追 Anthropic/GitHub issue 后续回复、复现条件与是否出现更多同类账单异常案例。
+
+### NA-4. [B] GitHub Trending 日榜第一是 Warp：agentic development environment 开始从编辑器外溢到整条终端栈
+
+**概述：** GitHub Trending 日榜本轮抓到 `warpdotdev/warp` 位居高位，仓库描述直接写成 `Warp is an agentic development environment, born out of the terminal.`；抓取时仓库总星数约 `42,723`，当日新增约 `11,955 stars`。
+
+**技术/产业意义：** 这条值得保留，因为它说明“agentic development environment” 这件事已经不再只是 Claude Code/Codex 这类单点工具之争，而是开始向终端本身、shell 工作流和开发环境外壳层扩散。谁占住终端入口，谁就有机会控制 agent 的默认工作台。
+
+**深度分析：** 终端是开发者最高频、最低层的工作界面之一。如果 Warp 这种产品把 agent、命令历史、任务执行与环境感知继续往 terminal shell 深处整合，它争夺的就不是一个 feature，而是整个开发工作流的主控台。和 IDE 内置 agent 相比，terminal-native agent 的想象空间更大：它天然贴近 git、包管理、测试、部署和远程机器。GitHub Trending 的爆发式增星，本质上反映出开发者正在把“agent 放在哪个容器里”当成下一阶段竞赛。
+
+**评论观察：**
+- 🟢 支持：terminal-native agent 更容易接住真实开发流程，而不只是在编辑器里聊天。
+- 🔴 质疑：Trending 热度不等于长期黏性，终端层 agent 最终还得看稳定性、隐私与实际执行体验。
+
+**信源：** https://github.com/trending
+
+**关联行动：** 继续追 Warp 后续是否补出更明确的 agent 执行边界、权限模型和企业版治理能力。
+
+### NA-5. [B] GitHub 周榜冲出 `ml-intern`：开源社区开始把“会读论文、会训练、会 ship 模型”的 ML 工程 agent 做成产品原型
+
+**概述：** GitHub Trending 周榜本轮抓到 `huggingface/ml-intern`，仓库描述为 `an open-source ML engineer that reads papers, trains models, and ships ML models`；抓取时总星数约 `7,417`，本周新增约 `6,441 stars`。
+
+**技术/产业意义：** 这条值 B，因为它说明 open-source agent 叙事正在从 coding assistant 继续外扩到完整 MLOps/研究工程链条：不只是写代码，而是读 paper、训练模型、再把模型交付出去。对开源生态来说，这是“AI 工程师”产品形态继续细分的明确信号。
+
+**深度分析：** 如果说过去半年最热的是 coding agent，那么 `ml-intern` 这类项目代表的是下一层：针对机器学习工程师的垂直 agent。它的价值不在于一句 slogan，而在于它把模型训练、实验迭代、paper 研读和交付打包成单一角色定位。开源社区一旦开始用这种方式描述产品，说明市场已经不满足于“万能聊天助手”，而更偏好“有工种、有上下文、有工具链边界”的角色型 agent。
+
+**评论观察：**
+- 🟢 支持：角色明确的 ML engineer agent，比空泛的“全能 AI”更容易形成真实工作流吸附力。
+- 🔴 质疑：GitHub 周榜增长很快，但要变成可靠的生产级 ML 助手，还得跨过实验可重复性、资源成本与安全权限多道坎。
+
+**信源：** https://github.com/trending?since=weekly
+
+**关联行动：** 继续追 `ml-intern` 是否快速接入更多训练/评测后端，并出现真实团队试用与对比基准。
+
+## 📊 KOL 观点精选
+
+> 本轮补扫了可直接访问的 KOL / newsletter / blog feed。Tier 1 CEO 们在公开可抓取源里没有发现足够硬、且能拿到明确时间戳的新 24h 长文信号；最终仅保留 2 条信息密度足够高、且正文可访问的技术/观点型更新。
+
+### K-1. [B] Simon Willison 把自己的 LLM 工具栈重构到“message + typed parts”：多模态/工具调用时代的 CLI 抽象正在换底层
+
+**概述：** Simon Willison Atom feed 显示，文章 `LLM 0.32a0 is a major backwards-compatible refactor` 发布于 `2026-04-29T19:01:47+00:00`。正文写得很直接：他刚发布 `LLM 0.32a0` alpha，把过去“prompt → text response”的抽象改造成“输入是 message sequence，输出是由不同 typed parts 组成的流”，以适配当下模型的多模态输入、结构化输出、tool calls 与 reasoning。
+
+**技术/产业意义：** 这条值 B，因为 Simon 往往不是喊口号，而是把开发者生态里真正开始卡住的抽象层问题先写出来。只要像他这样的工具作者开始重构底层接口，就说明“文本问答模型”那套旧范式已经装不下 2026 年的模型能力形态了。
+
+**深度分析：** `message sequence + typed streaming parts` 这个变化很关键：它等于承认今天的 frontier models 不再只是返回一段文本，而是可能同时返回 reasoning、tool calls、图像、结构化片段与多轮状态。谁的框架先把这些一等公民化，谁就更容易成为下一阶段 agent / multimodal 开发栈的默认接口。Simon 这类底层工具作者的动作，常常比大厂发布会更能说明生态下一步的真实方向。
+
+**评论观察：**
+- 🟢 支持：从 prompt/response 升级到 message/parts，是非常顺势且必要的底层抽象重构。
+- 🔴 质疑：抽象层越丰富，兼容多供应商模型时的复杂度和调试难度也会同步上升。
+
+**信源：** https://simonwillison.net/2026/Apr/29/llm/
+
+**关联行动：** 继续追 LLM 0.32 正式版是否把更多 provider / multimodal / tool APIs 统一到同一套可组合接口里。
+
+### K-2. [B] Gary Marcus 再踩 OpenAI 非营利转营利旧账：把 Musk 诉讼重新框进“公共承诺失配”而不是个人恩怨
+
+**概述：** Gary Marcus Substack feed 显示，文章 `Three thoughts on the Musk-OpenAI lawsuit` 发布于 `Wed, 29 Apr 2026 17:18:49 GMT`。正文核心观点很明确：他表示自己并不信任 Musk 或 OpenAI 任一方，但仍认为 Musk 抓到了一个实质点——OpenAI 曾反复以“为了 humanity 而非股东”的非营利承诺获取声誉、资源和合法性，如今转向营利结构，应被更严肃地追问其一致性与公共责任。
+
+**技术/产业意义：** 这条值得保留，因为 Gary 的价值一直不在“他又唱反调”，而在于他会持续把行业最想快速翻页的问题重新拎回台面。OpenAI 的组织结构、公益叙事与资本化路径，本来就是 2026 年最关键的治理议题之一。
+
+**深度分析：** Gary 这里最有分量的一点，是他刻意把案件焦点从 Musk 本人剥离出来，转回到 OpenAI 历史承诺与现实公司治理之间的冲突。这对整个 frontier AI 行业都有示范意义：当实验室一边用“为人类服务”的叙事争取社会授权，一边快速资本化并扩大商业控制，外界迟早会要求它解释其中的制度一致性。无论你是否站队 Musk，这类批评都在推动行业正视“公益叙事是否只是融资工具”这个尴尬问题。
+
+**评论观察：**
+- 🟢 支持：把案件从八卦叙事拉回组织承诺与公共治理，本身就是有价值的纠偏。
+- 🔴 质疑：Gary 的批评在原则上成立，但诉讼能否真的把 OpenAI 拉回更强公共约束，仍高度不确定。
+
+**信源：** https://garymarcus.substack.com/p/three-thoughts-on-the-musk-openai
+
+**关联行动：** 继续追 Musk-OpenAI 案件后续披露，尤其是否出现更多能证明组织承诺与资本安排错位的材料。
+
 ## 下期追踪问题
 
-1. **腾讯 `Hy-MT1.5-1.8B-1.25bit` 会不会在 24-72 小时内补出正式技术报告、量化细节、手机 SoC 适配矩阵与第三方 benchmark？** 重点盯腾讯混元官方、Hugging Face、GitHub 与端侧开发者社区。
-2. **智元超万台订单、斑陌易行 T6、大咖 T1000 这三条具身/机器人线，会不会很快补出首批客户、量产节奏、真实交付数字或场景案例？** 重点盯钛媒体、量子位、公司官网和投融资/招标线索。
-3. **商汤 `SenseNova-U1` 与银河通用 `LDA-1B` 会不会在接下来几天放出更完整的论文、benchmark、开源仓库活跃度和复现结果？** 重点盯官方项目页、arXiv、GitHub issue 与 Hugging Face/ModelScope 社区反馈。
+1. **OpenAI 这篇《Cybersecurity in the Intelligence Age》会不会很快补出可直读正文、合作伙伴名单或更具体的 AI 防御落地方案？** 重点盯 OpenAI 官方主站、RSS、政策/安全相关二级页面与后续媒体跟进。
+2. **Google 把 Gemini 直接变成文件生成器后，下一步会不会继续放出更复杂的 Workspace 权限、模板、审计与企业协作能力？** 重点盯 Gemini app、Workspace、Google Blog 与开发者文档更新。
+3. **Stripe Projects / Databricks / Neon 这条 agent 自动申请基础设施的链路，会不会在 24-72 小时内扩展到队列、存储、密钥管理或更明确的人审/预算控制机制？** 重点盯 Databricks、Stripe、Neon 官方博客与开发者文档。
