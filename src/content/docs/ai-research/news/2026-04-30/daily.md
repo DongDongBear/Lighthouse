@@ -177,6 +177,174 @@ description: "[占位]"
 
 **关联行动：** 继续追骐骥 T1000 是否公布首批客户、交付计划和核心部件成本区间。
 
+## 🇪🇺 欧洲区
+
+> 本轮实际复查了 Mistral、DeepMind、Hugging Face、Stability AI、Aleph Alpha、Poolside、Synthesia、Wayve、Builder.ai、Helsing、Photoroom 的官方入口与公开新闻源；按要求补查了 @ylecun、@Thom_Wolf、@ClementDelangue、@steipete、@demishassabis、@jeffdean 的公开动态，以及 EU AI Act / GDPR-AI / UK AI policy / AI sovereignty / European AI funding 五条政策资金线。严格执行北京时间 24 小时铁律、过去 7 天去重与 A/B 级过滤后，欧洲区最终保留 5 条硬增量。KOL 双路径检索没有捞到带明确时间戳、且足够 A/B 级的新信号，因此不硬凑推文条目。
+
+### EU-1. ⭐ [A] Mistral coding agent 线后续：Medium 3.5 + Vibe Remote Agents 把“欧洲主权 coding stack”往云端执行层推进
+
+**概述：** 04-29 已报道 Mistral 把 `Workflows` 推向企业编排层；今天官方又进一步发布 `Mistral Medium 3.5` 与 `Vibe Remote Agents`，并把 Le Chat 加上 `Work mode`。官方给出的关键信息包括：这是一个 `128B` dense merged 模型、支持 `256k` 上下文、可调 reasoning effort，且在 `SWE-Bench Verified` 上达到 `77.6%`，同时声称可在 4 块 GPU 上自托管。
+
+**技术/产业意义：** 这不是“又发一个模型参数表”，而是 Mistral 把欧洲 AI 的卖点从 API 能力，推进到真正可执行的 coding agent runtime。昨天的 Workflows 更像控制面；今天的 Remote Agents 则开始触碰执行面、持续会话和云端 agent 运行时，这对开发者工作流的竞争意义更大。
+
+**深度分析：** 这条最值得盯的不是 benchmark，而是产品形态变化。Mistral 正在尝试把模型、CLI、Le Chat 和远程执行环境捆成一套闭环：用户既可以在聊天里发起任务，也可以在工程环境里异步跑 agent，再把结果回流到同一体系。这样一来，Mistral 就不再只是“欧洲版模型公司”，而是开始往纵向一体化 agent 平台走。更关键的是，官方特地强调四卡可自托管，这直接服务于欧洲企业最在意的“主权部署”叙事：不是只有美国 hyperscaler 才能跑高质量 coding agent，欧洲企业也可以在私有环境内部署并保留代码与审计边界。
+
+**评论观察：**
+- 🟢 支持：Remote agent + sovereign deployment 的组合，比单纯刷模型榜更接近真实企业采纳门槛。
+- 🔴 质疑：真正决定成败的不是首日分数，而是权限控制、审计、长任务稳定性和团队协作能力是否成熟。
+
+**信源：** https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5
+
+**关联行动：** 继续追 Mistral 是否补出定价、企业控制台能力、审计/权限边界，以及真实团队级使用案例。
+
+### EU-2. [B] Hugging Face 把 DeepInfra 接入官方 Inference Providers，Hub 正从模型仓库继续长成推理分发市场
+
+**概述：** Hugging Face 于 04-29 发布官方博客，宣布 `DeepInfra` 成为新的 `Inference Provider`；与之对应，`huggingface_hub v1.12.2` release 也明确写入了对 DeepInfra 的支持。这意味着开发者现在可以在 Hub 页面、JavaScript/Python SDK 和统一 provider 抽象层里直接调用 DeepInfra 的推理能力。
+
+**技术/产业意义：** 这条看起来不炸裂，但对欧洲开源生态很关键。Hugging Face 的真正护城河，本来就不只是模型托管，而是“发现模型—试模型—买推理—接入产品”的一站式控制面。每多接一个 provider，它就离“AI 基础设施分发层”更近一步。
+
+**深度分析：** 过去很多人把 Hugging Face 当成开源社区或模型 GitHub，但它正在慢慢变成 inference brokerage layer：模型仍由社区供给，算力由外部 provider 供给，而开发者的入口和关系沉淀发生在 HF。DeepInfra 接入后，HF 进一步强化了自己的多云、多 provider 抽象能力——未来如果它再把路由、计费、治理、企业权限和优化建议统一起来，平台价值会明显高于单一模型托管站。这对欧洲来说也重要：即便前沿基础模型不一定都出自欧洲，欧洲仍能在工具层、分发层和开发者关系层占据关键节点。
+
+**评论观察：**
+- 🟢 支持：HF 在“谁拥有开发者入口”这件事上，走的是比单纯模型发布更稳的长坡厚雪路线。
+- 🔴 质疑：provider 越多，抽象层的治理、SLA 和成本透明度就越关键，否则多供应商体验会变成复杂度负担。
+
+**信源：** https://huggingface.co/blog/inference-providers-deepinfra
+
+**关联行动：** 继续追 Hugging Face 是否继续加速 provider 扩容，并推出统一路由、计费与企业治理能力。
+
+### EU-3. [B] EU AI Act 改革谈判卡壳：企业原本期待的高风险系统延期，短期内未必能落地
+
+**概述：** IAPP 于 04-29 报道，围绕 Digital Omnibus on AI 的一轮长时间谈判未能形成共同立场，导致 `Annex III` 高风险系统是否延期这一关键问题继续悬而未决。若后续 trilogue 继续拖延，许多企业仍需按原计划准备 `2026-08-02` 的合规时点。
+
+**技术/产业意义：** 这条不是抽象政策评论，而是直接影响产品节奏和法务预算的执行层更新。对欧洲 AI 公司和部署方来说，最贵的从来不是“有规则”，而是“规则可能改、但今天你还得按最严版本做准备”。
+
+**深度分析：** 谈判卡住说明欧盟讨论已经不再停留在“要不要管 AI”的宏观口号，而是进入真正麻烦的合规架构层：哪些系统算 Annex III，高风险义务如何与行业现有法规衔接，双重监管负担能否减轻。对企业来说，不确定性本身就是成本中心——产品、法务、销售和采购都得预留更保守的资源配置。换句话说，这条新闻的重要性不在于“欧盟又慢了”，而在于它告诉市场：至少在接下来一段时间里，欧洲 AI 公司仍要按偏严格的假设准备交付、文档和上线节奏。
+
+**评论观察：**
+- 🟢 支持：对合规敏感行业来说，越早暴露执行不确定性，越有利于现实规划，而不是继续幻想轻松延期。
+- 🔴 质疑：如果欧盟迟迟不给明确路径，最大受伤者可能反而是资源更弱的中小 AI 公司，而不是大厂。
+
+**信源：** https://iapp.org/news/a/eu-ai-act-reform-talks-stall-as-key-compliance-deadline-looms
+
+**关联行动：** 继续追下一轮 trilogue 时间点，以及是否出现新的折中文本或高风险系统范围调整。
+
+### EU-4. [B] BMW i Ventures 新募 3 亿美元基金，明确押注 physical AI 与工业 agent software
+
+**概述：** Global Venturing 于 04-29 报道，BMW 旗下风险投资机构 `BMW i Ventures` 推出 `Fund III`，新增 `3 亿美元` 资金，并明确将 AI 作为重点方向，尤其包括 `physical AI`、机器人/自主机器相关能力，以及用于工业工作流自动化的 `agentic AI software`。
+
+**技术/产业意义：** 这条的含金量在于资金流向的口径变了。它不是泛泛讲“创新投资”，而是清楚点名 physical AI 和 industrial agents，说明欧洲工业资本正在把 AI 预算从办公 Copilot 逐步挪向制造、机器人和现实工作流自动化。
+
+**深度分析：** 欧洲在前沿大模型竞赛里不一定最强，但在工业场景、制造业流程和具身部署上有天然纵深。BMW 这种产业资本如果把钱真正投向 physical AI，就意味着欧洲可能形成一条不同于硅谷消费型 AI 的路径：不一定先卷最强基础模型，而是围绕车厂、工厂、机器人、供应链场景，把 AI 直接嵌进“能提升产能和良率”的系统里。这种资本方向对欧洲创业生态的启发是明确的——与其在通用聊天市场和美国大厂正面硬撞，不如去吃工业执行层和 embodied/agent software 结合的长尾高价值市场。
+
+**评论观察：**
+- 🟢 支持：physical AI + industrial software 是欧洲最可能把 AI 变成真实订单的赛道之一。
+- 🔴 质疑：企业 CVC 口径容易讲得很大，真正是否持续出手、是否押欧洲本土团队，还要看后续 deal flow。
+
+**信源：** https://www.globalventuring.com/corporate/bmws-venture-arm-supercharges-ai-strategy-with-new-300m-fund/
+
+**关联行动：** 继续追 BMW Fund III 的首批 AI 投资名单，尤其是机器人、工业 agent、制造软件方向的项目。
+
+### EU-5. [B] 英国创新 LTAF 已投超 1 亿英镑，Synthesia 被点名为核心持仓之一
+
+**概述：** Pensions Age 于 04-29 报道，Schroders Capital 代表 UK Innovation LTAF 已向 19 个创新项目投入超过 `£100m`，覆盖 AI 与生物科技；文中明确点名了 `Synthesia` 和 `ElevenLabs`。该基金定位是为英国机构资金，尤其是 DC 养老金与本地政府养老金，打开更系统化的 venture 暴露。
+
+**技术/产业意义：** 这条不是单一 startup 融资，而是更上游的“长期资本开始成体系地配英国 AI 资产”。当养老金和长期机构资金愿意通过新结构吃进 AI 创新暴露，说明市场已经不再把这类公司只当短期热钱故事，而是开始当作可以进入制度化资本配置的成长资产。
+
+**深度分析：** 对欧洲 AI 生态来说，最缺的不只是 headline 轮融资，而是长期资本渠道。LTAF 这类结构如果真能跑通，会给英国 AI 公司带来比单次 VC 轮更稳定的后续资金来源，尤其有利于 Synthesia 这类已进入企业化、全球化扩张阶段的公司。更重要的是，它把 AI 投资逻辑从“少数明星基金的冒险押注”，逐步变成“机构资本也能参与的标准化资产类别”。这对欧洲 AI 资本市场成熟度是一个更深层的正面信号。
+
+**评论观察：**
+- 🟢 支持：养老金与长期机构资金开始系统配置 AI，是英国创新资本结构走向成熟的重要一步。
+- 🔴 质疑：基金持仓被点名不等于新增单笔融资；真正影响要看后续资本部署速度与持仓扩张规模。
+
+**信源：** https://www.pensionsage.com/pa/Schroders-Capital-commits-100m-to-UK-innovations-via-new-LTAF.php
+
+**关联行动：** 继续追 UK Innovation LTAF 后续新增 AI 持仓，尤其是否覆盖更多英国本土模型、工具或应用公司。
+
+## 🌐 学术/硬件
+
+> 本轮实际访问了 arXiv `cs.AI / cs.CL / cs.LG / cs.CV / cs.MA / cs.SE / cs.RO` 近期列表与候选论文摘要页，抓取了 Hugging Face Papers 04-29 热门页，补查了 Papers With Code 最新页；Reddit 的 `r/MachineLearning / r/LocalLLaMA / r/artificial` 在当前环境下返回 403/登录墙，因此只记录为“已查受阻，不作为入选依据”。Raschka blog / magazine、The Batch、Import AI、The Gradient、Lilian Weng、AI Snake Oil 也已逐一检查，本窗口内没有新的 A/B 级硬增量。硬件侧复查了 NVIDIA、AMD、Intel、TSMC 及 AI data center 公开入口，最终仅保留 1 条满足窗口和信息密度要求的新增条目。
+
+### AH-1. ⭐ [A] Recursive Multi-Agent Systems：多智能体不再只靠文字接力，开始把“递归缩放”推进到系统级 latent 协作
+
+**概述：** 论文 `Recursive Multi-Agent Systems` 在 Hugging Face Papers 04-29 热门页进入当日讨论池，并且对应 arXiv `2604.25917` 未命中过去 14 天 Lighthouse 记录。论文提出 `RecursiveMAS` 框架，把递归推理从单模型扩展到整个 multi-agent system，并用 `RecursiveLink` 让异构 agent 之间传递 latent state / latent thoughts。作者报告在 9 个 benchmark 上平均准确率提升 `8.3%`，端到端推理速度提升 `1.2x–2.4x`，token 消耗降低 `34.6%–75.6%`。
+
+**技术/产业意义：** 这条之所以该打星，是因为它击中了 agent 系统当前最痛的三个点：成本、延迟、上下文爆炸。很多多智能体系统今天只是“让多个 LLM 轮流说话”，而这篇工作开始把协作层下沉到 latent 级别，试图减少重复文本交换的巨大浪费。
+
+**深度分析：** 如果这套路线成立，它意味着 multi-agent scaling 不一定只能靠更多 token、更长上下文和更多串行轮次，而可以靠更高效的中间表示共享来做“系统级推理”。这对现实 agent 产品尤其重要：企业不需要一个论文里最优雅的多智能体，而需要一个既能分工、又不会把 token 账单和延迟打爆的系统。从 Lighthouse 视角看，这也是 agent 研究正在从 prompt 编排，往真正“系统 architecture”迁移的信号。
+
+**评论观察：**
+- 🟢 支持：把多智能体协作从文本层压到 latent 层，是非常值得跟踪的成本/效率路线。
+- 🔴 质疑：论文报告很亮眼，但 heterogeneous agents 的训练稳定性和现实部署复杂度还需要更多外部复现。
+
+**信源：** https://arxiv.org/abs/2604.25917
+
+**关联行动：** 值得继续追代码放出、复现实验和是否很快被 benchmark-heavy agent 团队采纳。 ⭐ 待深度解读
+
+### AH-2. ⭐ [A] AutoResearchBench：当前最强 agent 做“文献深研”依旧很菜，自动科研检索远没到能交付的程度
+
+**概述：** `AutoResearchBench` 在 Hugging Face Papers 04-29 热门页进入高关注池，对应 arXiv `2604.25256` 未命中过去 14 天 Lighthouse 记录。论文专门测 AI agents 在复杂科研文献发现任务中的表现，把任务拆成 `Deep Research` 与 `Wide Research` 两类；作者给出的关键结果是，强模型在 Deep Research 上只有 `9.39%` 准确率，在 Wide Research 上只有 `9.31%` IoU。
+
+**技术/产业意义：** 这条非常关键，因为它直接戳破了当下很多“deep research agent”营销里的性能幻觉。会搜网页、会点链接，不等于会在开放条件下稳定地发现正确论文、建立覆盖完整的文献集合。
+
+**深度分析：** 今天很多研究型 agent demo 之所以看起来强，是因为任务目标、搜索空间和评价标准都被隐含缩窄了。AutoResearchBench 故意把任务设计成研究者真实会遇到的开放式检索：不只是找到一篇 paper，而是找对、找全、按约束找。结果却非常刺眼——最强系统依旧离可依赖的自动文献助理差得很远。这类 benchmark 的价值不是再发一个分数榜，而是给行业重新划线：真正要做科研 agent，检索策略、证据管理、终止条件和错误恢复都还是大坑。
+
+**评论观察：**
+- 🟢 支持：用难而真实的研究任务检验 agent，远比在玩具网页任务上自我陶醉更有价值。
+- 🔴 质疑：benchmark 再重要，也只是测量尺；后续还要看是否能带动更有效的系统改进而不只是“大家再刷榜”。
+
+**信源：** https://arxiv.org/abs/2604.25256
+
+**关联行动：** 值得把这篇列入后续深读池，专门看它如何定义 sufficiency、coverage 与检索失败模式。 ⭐ 待深度解读
+
+### AH-3. [B] Programming with Data：把领域适配当软件工程做，可能比继续盲堆 corpus 更靠谱
+
+**概述：** `Programming with Data: Test-Driven Data Engineering for Self-Improving LLMs from Raw Corpora` 在 Hugging Face Papers 04-29 热门页保持高关注，对应 arXiv `2604.24819` 未命中过去 14 天 Lighthouse 记录。论文把训练数据视作“源代码”、把训练视作“编译”、把 benchmark 视作“单元测试”，并在 16 个学科场景中演示了 failure-driven data repair 的思路。
+
+**技术/产业意义：** 这条虽然不如 agent benchmark 吸睛，但对行业非常实用。很多企业做领域模型适配时，仍在靠“多喂点文档”碰运气；这篇工作试图把数据迭代做成可诊断、可修补、可回归测试的工程流程。
+
+**深度分析：** 它最有价值的地方，是把“模型为什么不会”拆回到“数据里缺了什么概念、哪条推理链断了”。这比抽象谈 data quality 更落地：你不只是知道模型错了，而是知道应该补哪类证据、哪种结构化知识、哪段 reasoning support。对企业定制模型和高可靠领域问答来说，这比再卷一次通用参数规模更能直接提升交付效率。
+
+**评论观察：**
+- 🟢 支持：把数据工程做成 test-driven loop，是让领域适配更可控的正确方向。
+- 🔴 质疑：方法论很漂亮，但真实成本取决于结构化知识抽取和人工修补闭环是否足够经济。
+
+**信源：** https://arxiv.org/abs/2604.24819
+
+**关联行动：** 继续追这套框架是否公开工具链，尤其是 concept-level failure 定位与数据补丁流程。
+
+### AH-4. [B] Toward Scalable Terminal Task Synthesis via Skill Graphs：CLI agent 的下一个瓶颈，可能根本不是模型而是高质量任务数据
+
+**概述：** 论文 `Toward Scalable Terminal Task Synthesis via Skill Graphs` 进入 Hugging Face Papers 04-29 热门池，对应 arXiv `2604.25727` 未命中过去 14 天 Lighthouse 记录。论文核心问题不是再造一个 benchmark，而是如何用 `skill graphs` 合成更大规模、结构更真实的 terminal task 训练数据，缓解命令行 agent trajectory 稀缺的问题。
+
+**技术/产业意义：** 这条值 B，因为 terminal/工具型 agent 现在已经明显撞上数据天花板。模型会调用工具，不代表它看过足够多真实、可执行、跨技能组合的命令行任务轨迹；没有数据，很多 CLI agent 的能力上限很难再抬。
+
+**深度分析：** 真正难的不是让 agent 在一个 demo 里会跑几条命令，而是让它在多技能组合、错误恢复、环境差异和长链路操作中保持鲁棒。Skill graph 这类思路的价值，在于它能把任务空间从“人手写少量 benchmark”扩展成“可组合、可扩张的数据生成系统”。如果做得好，它对 agent 训练的意义可能不亚于新的 benchmark：前者解决“学什么”，后者只是在测“学得怎样”。
+
+**评论观察：**
+- 🟢 支持：把数据生成系统化，是 CLI agent 从玩具走向稳定产品的必要条件。
+- 🔴 质疑：合成任务再多，也可能和真实生产环境存在分布偏差；最终还是要看对真实 terminal workflow 的迁移效果。
+
+**信源：** https://arxiv.org/abs/2604.25727
+
+**关联行动：** 继续追作者是否公开 skill graph 构建细节、任务执行环境和真实任务迁移评测。
+
+### AH-5. [B] NVIDIA 发企业级 AI Factory 参考架构：Blackwell 时代卖的不只是 GPU，而是一整套可落地的数据中心配方
+
+**概述：** NVIDIA Developer Blog 于 04-29 16:41 UTC 发布文章，系统阐述 `NVIDIA Enterprise Reference Architectures` 与 `Enterprise AI Factory` validated design，面向企业本地部署 agentic AI。文中给出了三类配置：`RTX PRO AI Factory`、`HGX AI Factory`、`NVL72 AI Factory`，并明确强调从 GPU 数量、内存、存储、网络到可观测性、编排与监控的一体化部署指导；其中 HGX 方案写明基于 `HGX B300`，单卡最高 `270GB HBM3`、单节点总 GPU 内存最高 `2.1TB`。
+
+**技术/产业意义：** 这条值得留，因为它揭示了 NVIDIA 现在的真正战略：不再只是卖芯片，而是卖“企业怎样把 AI 工厂搭起来”的标准答案。对 AI 基础设施竞争来说，这比单独发一块新卡更可怕——因为它把硬件、网络、软件栈和部署经验打包成了平台优势。
+
+**深度分析：** 过去很多企业买了 GPU 也未必能把 AI 系统稳定跑起来，瓶颈往往出在网络、存储、调度、可观测性和跨团队运维。NVIDIA 现在把这些复杂性产品化成参考架构，本质上是在把咨询能力、最佳实践和生态控制权一起出售。尤其在 agentic AI 进入生产环境后，企业最怕的不是 demo 跑不通，而是 pilot 到 production 之间不可预测的性能和稳定性。NVIDIA 正试图用 reference architecture 直接填掉这道鸿沟，从而把 Blackwell 时代的竞争从“谁卡更强”升级成“谁能最快把整厂交付出来”。
+
+**评论观察：**
+- 🟢 支持：企业要上 agentic AI，买一堆 GPU 远远不够，reference architecture 的价值非常现实。
+- 🔴 质疑：这也会进一步强化 NVIDIA 的全栈锁定；企业一旦深度按其蓝图建设，后续切换成本会越来越高。
+
+**信源：** https://developer.nvidia.com/blog/powering-ai-factories-with-nvidia-enterprise-reference-architectures/
+
+**关联行动：** 继续追 NVIDIA 是否很快补出更多客户案例、B300/NVL72 真实部署拓扑和与合作伙伴的 validated stack 细节。
+
 ## 下期追踪问题
 
 1. **腾讯 `Hy-MT1.5-1.8B-1.25bit` 会不会在 24-72 小时内补出正式技术报告、量化细节、手机 SoC 适配矩阵与第三方 benchmark？** 重点盯腾讯混元官方、Hugging Face、GitHub 与端侧开发者社区。
