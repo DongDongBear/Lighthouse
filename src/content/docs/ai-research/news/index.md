@@ -4,6 +4,8 @@ title: 每日 AI 新闻
 
 每日 AI 新闻简报与深度解读，按日期归档。
 
+- [2026-05-01](/ai-research/news/2026-05-01/daily/) — ⭐ OpenAI 上线 Advanced Account Security / xAI 当庭承认用 OpenAI 模型训练 Grok / Google 推 Gemini Embedding 2 官方实战 / CoreWeave 扩展 SUNK 自助与跨云能力 —— BT3+CN9+EU5+AH7+NA3+KOL4 共 31 条
+
 - [2026-04-30](/ai-research/news/2026-04-30/daily/) — ⭐ OpenAI 把 AI 网安叙事推向五段式行动方案 / Google 让 Gemini 直接生成 Docs、Sheets、Slides、PDF 与 Office 文件 / Databricks × Stripe Projects 把 agent 推向数据库申请与支付闭环 / Anthropic 官方 12 页北美轮全检无合格新发 / HN 与 GitHub Trending 持续转向 agent 基础设施与终端工作台 —— BT3+CN10+EU5+AH5+NA5+KOL2 共 30 条
 
 - [2026-04-29](/ai-research/news/2026-04-29/daily/) — ⭐ AWS Bedrock 上架 OpenAI 最新模型与 Codex / Anthropic 澳新落地 / 美国 AI 聊天机器人反诈立法启动 / Google 签下五角大楼保密 AI 合同 / Satya 把 Agent Mode 推进到 Outlook —— BT1+CN9+EU4+AH7+NA5+KOL4 共 30 条

@@ -1,17 +1,69 @@
 ---
-title: "2026-05-01 AI 日报：[占位，最后由北美采集轮填写]"
-description: "[占位]"
+title: "2026-05-01 AI 日报：OpenAI 上线 Advanced Account Security，xAI 当庭承认用 OpenAI 模型训练 Grok"
+description: "三大厂3条｜北美区3条｜KOL 4条。OpenAI 上线 Advanced Account Security；Google 开发者博客推进 Gemini Embedding 2 多模态向量底座；xAI 当庭承认用 OpenAI 模型训练 Grok；CoreWeave 扩展 SUNK 自助与跨云部署能力。"
 ---
 
 # 2026-05-01 AI 日报
 
 ## 上期追踪问题回应
 
-1. **OpenAI 这篇《Cybersecurity in the Intelligence Age》会不会很快补出可直读正文、合作伙伴名单或更具体的 AI 防御落地方案？** 中国区本轮没有查到能直接回应 OpenAI cyber 方案的新本土合作或政策配套，但国内 24 小时窗口里的动作明显继续朝“把模型变成可执行系统”收束：DeepSeek 开始灰测识图并公开多模态推理技术范式，阿里把 QoderWake 往“数字员工”方向推，小红书则把 AI 提升到一级部门，说明中国厂商今天的重点不是重复安全口号，而是继续把 AI 能力压进产品、组织和工作流入口。
+1. **OpenAI 这篇《Cybersecurity in the Intelligence Age》会不会很快补出可直读正文、合作伙伴名单或更具体的 AI 防御落地方案？** 中国区本轮没有查到能直接回应 OpenAI cyber 方案的新本土合作或政策配套，但国内 24 小时窗口里的动作明显继续朝“把模型变成可执行系统”收束：DeepSeek 开始灰测识图并公开多模态推理技术范式，阿里把 QoderWake 往“数字员工”方向推，小红书则把 AI 提升到一级部门，说明中国厂商今天的重点不是重复安全口号，而是继续把 AI 能力压进产品、组织和工作流入口。**北美区补充了两个更直接的后续：Sam Altman 于 04-30 明确表示 `GPT-5.5-Cyber` 将在几天内向关键网络防守方 rollout；OpenAI 官方账号随后在 05-01 凌晨上线 `Advanced Account Security`，把账号层防护也纳入“Intelligence Age”安全叙事。**
 
-2. **Google 把 Gemini 直接变成文件生成器后，下一步会不会继续放出更复杂的 Workspace 权限、模板、审计与企业协作能力？** 中国区今天没有看到与 Google Workspace 一一对应的企业协作权限/审计新公告，但可以确认两条同方向信号：快手推出桌面智能体 KroWork，强调把自然语言直接变成本地应用与自动化流程；阿里发布 QoderWake 和移动端 Agent 产品，把“岗位级数字员工”推进到邀测阶段。国内今天的回应更偏“把 Agent 放进具体岗位与桌面工作台”，而不是先铺一层统一办公套件叙事。
+2. **Google 把 Gemini 直接变成文件生成器后，下一步会不会继续放出更复杂的 Workspace 权限、模板、审计与企业协作能力？** 中国区今天没有看到与 Google Workspace 一一对应的企业协作权限/审计新公告，但可以确认两条同方向信号：快手推出桌面智能体 KroWork，强调把自然语言直接变成本地应用与自动化流程；阿里发布 QoderWake 和移动端 Agent 产品，把“岗位级数字员工”推进到邀测阶段。国内今天的回应更偏“把 Agent 放进具体岗位与桌面工作台”，而不是先铺一层统一办公套件叙事。**北美区补充到的最直接 builder-side 进展，是 Google Developers Blog 在 04-30 推出 `Gemini Embedding 2` 的 agentic multimodal RAG 官方教程：它还不是你昨天追问的 Workspace 权限/审计，但说明 Google 正在同步补强“文件生成之后，模型如何理解文档/图像/音频并回到检索与执行链路”这一层基础设施。**
 
-3. **Stripe Projects / Databricks / Neon 这条 agent 自动申请基础设施的链路，会不会在 24-72 小时内扩展到队列、存储、密钥管理或更明确的人审/预算控制机制？** 中国区未见同等级的云上基础设施自动申请新公告，但开源工具层信号在增强：Qwen 在 Hugging Face 上放出面向 Qwen3/3.5 的 Qwen-Scope 稀疏自编码器解释模块，智源社区则转发 Avenir-Web 这类 training-free 网页智能体框架。结论是，国内 24 小时内没看到“云资源自动申请”新 ship，但看到了 agent 可解释性、网页执行框架和多模态感知链路继续变厚。
+3. **Stripe Projects / Databricks / Neon 这条 agent 自动申请基础设施的链路，会不会在 24-72 小时内扩展到队列、存储、密钥管理或更明确的人审/预算控制机制？** 中国区未见同等级的云上基础设施自动申请新公告，但开源工具层信号在增强：Qwen 在 Hugging Face 上放出面向 Qwen3/3.5 的 Qwen-Scope 稀疏自编码器解释模块，智源社区则转发 Avenir-Web 这类 training-free 网页智能体框架。结论是，国内 24 小时内没看到“云资源自动申请”新 ship，但看到了 agent 可解释性、网页执行框架和多模态感知链路继续变厚。**北美区今天也没有抓到 Databricks/Stripe/Neon 这条链路向队列、密钥管理或预算审批继续外扩的硬更新；更接近同方向的，是 CoreWeave 把 `SUNK` 扩到自助化与跨云一致部署，重点仍放在“更快把 AI 集群拉起来”，而不是更细的人审与成本治理。**
+
+## ⭐ 三大厂动态
+
+> 本轮实际复查了 Anthropic `/news /engineering /research /docs models`、OpenAI `/blog /index /research /docs changelog`、Google / DeepMind `/blog.google/technology/ai /deepmind blog /developers.googleblog /ai.google research` 共 12 个官方入口；OpenAI 4 个入口继续被 Cloudflare challenge 挡住，因此按 `lh-03-collect-na` 技能要求改走 RSS / sitemap / developers 文档兜底；Anthropic 与 Google 页面均做了日期复核。严格按北京时间 `2026-04-30 04:30` 到 `2026-05-01 04:30` 的 24 小时窗口执行，最终确认 2 条可入库官方新增，另明确记 1 条“全检无合格新发”说明，避免三大厂旧闻倒灌。
+
+### BT-1. ⭐ [A] OpenAI 上线 Advanced Account Security：把“Intelligence Age 安全”从模型边界推进到账户接管与恢复链路
+
+**概述：** OpenAI 官方 RSS 显示，`Introducing Advanced Account Security` 发布于 `Thu, 30 Apr 2026 00:00:00 GMT`，折算北京时间为 `2026-04-30 08:00`，落地链接为 `https://openai.com/index/advanced-account-security`。由于 `openai.com` 正文在当前环境仍触发 Cloudflare challenge，本轮无法直读全文，但官方 RSS 摘要与 OpenAI 官方账号同日说明已经给出核心信息：这是一套面向高风险用户的增强账户防护方案，重点包括 `phishing-resistant login`、更强的账号恢复流程，以及进一步降低账户接管风险的保护措施。
+
+**技术/产业意义：** 这条自动 A 级。它说明 OpenAI 今天最优先补的不是再发一个模型 headline，而是补“谁能安全地持续使用这些模型”的身份与恢复层。随着 ChatGPT、Codex、企业代理和长期工作区都越来越像生产系统，账号安全已经不再是边角功能，而是整条 agent/workflow 栈的根基。
+
+**深度分析：** 从节奏看，这条和 04-30 的 `Cybersecurity in the Intelligence Age` 形成前后呼应：昨天 OpenAI 把网络防御话语上提到国家级/基础设施级叙事，今天则把最直接的一层——用户与管理员账户的接入安全——先补起来。真正值得注意的是“phishing-resistant login”这几个字：这意味着 OpenAI 已经默认自己面对的不是普通密码重置问题，而是模型接入权限、企业数据、代理执行入口都可能被高价值目标攻击者盯上的现实。对整个行业来说，这也是一个风向：下一轮 AI 产品竞争，不只是能力、价格和上下文窗口，账号恢复、硬件密钥、多因子、管理员策略和高风险用户保护会越来越像标配，而不是附赠选项。
+
+**评论观察：**
+- 🟢 支持：把账户安全前置，说明 OpenAI 正把 agent 产品当成生产级系统而非玩具。
+- 🔴 质疑：若后续没有更细的企业策略控制、管理员审计和强制硬件密钥选项，这仍更像面向高风险个人的第一步。
+
+**信源：** https://openai.com/blog/rss.xml
+
+**关联行动：** 继续追 OpenAI 是否很快补出正文可访问页、企业管理员开关、支持的无钓鱼登录机制以及与 ChatGPT Enterprise / Codex 的权限联动。 ⭐ 待深度解读
+
+### BT-2. [A] Google Developers Blog 推出 Gemini Embedding 2 官方实战：多模态向量底座开始为 agentic RAG 统一文本、图像、音频与文档
+
+**概述：** Google Developers Blog 首页在 `APRIL 30, 2026` 将 `Building with Gemini Embedding 2: Agentic multimodal RAG and beyond` 置于最新位；同日 RSS 首条也变为该文。正文与 meta 描述写得很直接：`Gemini Embedding 2` 已进入 `general availability`，可把 `text / images / video / audio / documents` 映射到同一语义空间，支持在单次请求中处理 `interleaved multimodal inputs`，目标场景包括 `agentic RAG`、视觉搜索、内容审核与复杂分类，同时强调 `100+` 语言、任务前缀与 `Matryoshka dimensionality reduction`。
+
+**技术/产业意义：** 这条值得收，因为它不是单纯再发一个 embedding SKU，而是在告诉开发者：Google 正试图把多模态检索、文档理解和 agent 执行链的“向量底座”统一起来。对 builder 来说，这比聊天层再加一个小功能更关键——它决定模型能否在真实工作流里把网页、图片、音频、文档和文本放进同一检索/规划空间。
+
+**深度分析：** 今天最值得看的不是 `GA` 两个字，而是产品定义。Gemini Embedding 2 的目标，不是把某个文本向量模型再做大，而是让开发者把跨模态输入直接组织成一个检索-理解-执行系统。`interleaved multimodal inputs` 配合 `Matryoshka` 降维，实际上是在给两类人铺路：一类是做企业知识库、文档助手、浏览器 agent 的团队，他们最怕“文档一套、图片一套、音频再一套”；另一类是做视觉搜索、内容审核和跨语言匹配的团队，他们最怕精度和成本只能二选一。Google 如果把这一层先卡住，后面的 Gemini app、Workspace、AI Studio、Vertex AI 就更容易共享同一个多模态记忆与检索底座。
+
+**评论观察：**
+- 🟢 支持：把 embedding 能力直接对准 agentic multimodal RAG，说明 Google 盯的是下一阶段系统层入口。
+- 🔴 质疑：开发者博客当前只给出发布日期到“天”而不是精确时刻，且还没同步看到更细的 benchmark、价格与企业案例，后续仍需继续核实。
+
+**信源：** https://developers.googleblog.com/building-with-gemini-embedding-2/
+
+**关联行动：** 继续追 Gemini Embedding 2 的基准、价格、Vertex/AI Studio 集成细节，以及它是否很快进入更完整的 Workspace / enterprise retrieval 方案。 
+
+### BT-3. [B] Anthropic 官方 4 页本轮无合格新发：最新 Science 文章只差 4 分钟踩线失败
+
+**概述：** 本轮复查 Anthropic 官方 `news / engineering / research / docs models` 四个入口，没有找到任何一条带明确发布时间、且落在北京时间 `2026-04-30 04:30` 之后的新增。离窗口最近的是 Science 页面 `Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench`；页面源码暴露的时间为 `2026-04-29T20:26:00Z`，折算北京时间 `2026-04-30 04:26`，比本轮窗口早 `4` 分钟，严格不收。
+
+**技术/产业意义：** 这条必须写，因为 Anthropic 是最容易因“只差几分钟”把旧闻误当新发的高危源。把 `04:26 CST` 这种边界时间钉死，比含糊说“今天没更新”更重要——这能直接降低下一轮再把同一篇旧文包装成头条的风险。
+
+**深度分析：** 这也是 04-09 Mythos/Glasswing 教训的延伸：三大厂条目里，真正危险的从来不是“今天一条都没有”，而是“差一点点于是心软收了”。Anthropic 本轮最硬的工作，不是多写一句空话，而是把最接近的新文精确卡在 `04:26`，从时间栅栏上直接剔除。这样后面若有更多媒体或官方账号继续转发，只能按“旧文外溢”或 KOL 扩散处理，不能重新灌进 BT 新条目。
+
+**评论观察：**
+- 🟢 支持：边界时间写死，能显著减少次日误收旧闻的概率。
+- 🔴 质疑：Anthropic docs 模型页仍未暴露清晰 per-item 更新时间，模型卡/定价微调类变化后续仍需额外侧信源盯防。
+
+**信源：** https://www.anthropic.com/research
+
+**关联行动：** 继续追 Anthropic 是否在下一窗口补出 BioMysteryBench 相关工程文、企业案例或模型/安全侧后续。 
 
 ## 🇨🇳 中国区
 
@@ -361,10 +413,104 @@ description: "[占位]"
 
 **关联行动：** 继续跟踪其开源实现与 ACL 2026 Findings 后续讨论，看 failure-aware agent 设计是否成为开放模型标配。
 
+## 🇺🇸 北美区
+
+> 本轮补查了 Meta / Microsoft / Apple / xAI / Amazon 以及一批北美 AI 公司线索，同时实际访问了 Hacker News 首页与 newest、GitHub Trending 日榜与周榜，以及 The Verge / TechCrunch / Reuters / Bloomberg / The Information 等英文源。严格按北京时间 `2026-04-30 04:30` 到 `2026-05-01 04:30` 的 24 小时窗口、过去 7 天去重与 A/B 级过滤后，最终保留 3 条可独立成立的北美增量。需要说明：HN 与 GitHub Trending 今天仍有大量 agent / terminal / infra 信号，但因缺少明确发布时间或实质新信息，大多只作为风向参考，不硬凑入库。
+
+### NA-1. [B] CoreWeave 扩展 SUNK 自助化与 Anywhere：AI 云竞争开始从“给你 GPU”转向“让集群更快上线、跨云更一致”
+
+**概述：** CoreWeave 官方公告 `CoreWeave Expands SUNK with Self-Service & Anywhere to Accelerate AI Workloads` 页面标注 `April 30, 2026`。页面摘要写明，CoreWeave 正把 `SUNK` 扩展到 `self-service` 与 `SUNK Anywhere` 两条能力：前者强调让用户更快地自助拉起集群与环境，后者则强调在不同基础设施/云环境里保持更一致的训练与运行体验。官方描述把目标说得很直接——缩短 AI 工作负载从准备到上线的时间。
+
+**技术/产业意义：** 这条值 B，因为 AI 云竞争正在从“卡够不够多”转向“把 GPU 真变成可生产的系统有多快”。谁能把环境编排、网络、镜像、训练运行时与多集群一致性交付好，谁就更可能拿下真正的大客户，而不是只卖一次性算力。
+
+**深度分析：** `self-service + Anywhere` 组合本质上是在回答两类客户痛点：第一，训练团队不想每次开新项目都重走一遍环境搭建和集群申请；第二，企业不愿被单一云/单一部署位置死锁。CoreWeave 如果能把 SUNK 做成“像数据平台一样可自助调用、像运行时一样跨环境可迁移”的层，它争的就不是单节点性能，而是 AI 工程团队的默认操作面。对今天的 AI infra 市场来说，这非常现实：算力贵不代表黏性高，真正的黏性来自 workflow 与 control plane。
+
+**评论观察：**
+- 🟢 支持：从供给 GPU 走向交付可复用 runtime/control plane，是 AI 云更成熟的方向。
+- 🔴 质疑：官方页讲的是能力愿景，实际企业 adoption 仍要看跨云一致性、迁移成本和故障可观测性是否站得住。
+
+**信源：** https://wf.coreweave.com/news/coreweave-sunk-expands-capabilities-to-bring-ai-workloads-online-faster-anywhere
+
+**关联行动：** 继续追 CoreWeave 是否很快补出客户案例、支持的基础设施边界，以及 SUNK Anywhere 与 Kubernetes / training stack 的更细整合。 
+
+### NA-2. [B] **后续** Elon Musk 当庭承认 xAI 部分用 OpenAI 模型训练 Grok：蒸馏争议正式从行业传闻进入法庭记录
+
+**概述：** The Verge 报道 `Elon Musk confirms xAI used OpenAI’s models to train Grok` 发布于 `2026-04-30T18:16:57+00:00`，折算北京时间 `2026-05-01 02:16:57`。报道核心信息非常直接：在 `Musk v. Altman` 审理过程中，Musk 在庭上承认“部分属实”，即 xAI 的确使用过 OpenAI 模型蒸馏/改进 Grok。TechCrunch 同日 11:03 AM PDT 的独立报道也给出同样结论，并把它明确放进 `distillation` 争议框架中。
+
+**技术/产业意义：** 这条值 B，而且必须写成“后续”。蒸馏并不是新概念，但这次的新信息不是“大家都怀疑大厂互相蒸”，而是 **xAI 创始人亲口承认至少在一部分场景里确有其事**。这会直接抬高 OpenAI、Anthropic 等 frontier lab 对 anti-distillation、API 条款和可疑流量监测的重视程度。
+
+**深度分析：** 这条新闻的关键，不在八卦，而在它把一个长期存在于工程圈的灰色常识推进成了公开、可引用、可进入法律与合规讨论的事实层。过去大家默认模型公司之间会互相试探、模仿、借鉴，但一旦“用对手模型蒸馏自己模型”进入法庭陈述，它就不再只是圈内心照不宣的优化手段，而会演化成竞争法、服务条款、出口管制甚至国家安全语境下的更大问题。对 xAI 来说，这也反过来说明 Grok 的竞争压力并不只是训练更多算力，而是追赶头部模型的迭代速度；对 OpenAI/Anthropic 来说，则意味着“防止被蒸馏”正在从 PR 话题变成真成本项。
+
+**评论观察：**
+- 🟢 支持：把蒸馏争议从传闻推进到公开记录，能帮助外界更真实地理解 frontier lab 的竞争方式。
+- 🔴 质疑：目前披露的信息仍不足以判断规模、频率与具体技术路径，后续若无更多法庭材料，结论仍会停留在“部分承认”。
+
+**信源：** https://www.theverge.com/ai-artificial-intelligence/921546/elon-musk-xai-openai-trial-model-distillation
+
+**关联行动：** 继续追法庭文件、OpenAI/Anthropic 的 anti-distillation 对策，以及 xAI 是否会被迫更清楚地解释 Grok 训练数据来源。 
+
+### NA-3. [B] **后续** NVIDIA B300 在中国灰市价格被推到 100 万美元级：04-30 已写架构，今天新增的是出口管制后的真实价差压力
+
+**概述：** Reuters 于 `2026-04-30 06:45:00 UTC` 报道，受美国出口限制与供需错配影响，`NVIDIA B300` 服务器在中国市场报价被推高到 `100 万美元` 级。这里的新信息不是 B300 本身——昨天学术/硬件区已经写过 NVIDIA 企业 AI Factory 与 `HGX B300` 架构——而是 **同一代平台在限制环境下的真实市场价格与稀缺溢价** 开始浮出水面。
+
+**技术/产业意义：** 这条只能按“后续/更新”收，因为 B300 不是今天首发；但新增价格信号很重要。它说明 export controls 对行业的影响，已经不只是“哪些卡能不能卖”，而是同一代 AI 服务器在不同地区会形成多夸张的价差、交付风险与替代动力。
+
+**深度分析：** 过去大家谈出口管制，常容易停留在政策条文；而 100 万美元级报价把问题重新翻译成了企业 CFO 和采购经理听得懂的语言：如果一套顶级系统因为限制而形成极端溢价，那么中国客户会被更强地推向三条路——抢稀缺货、延长旧平台寿命、加速国产替代。对 NVIDIA 来说，这会让 Blackwell 系列的全球叙事出现分叉：在开放市场，它卖的是性能和平台化；在受限市场，它卖的首先变成了稀缺性。对整个 AI 基建链来说，这种价差会进一步刺激本土芯片、系统集成和资源调度层的替代尝试。
+
+**评论观察：**
+- 🟢 支持：把“管制影响”量化到真实报价层，比泛泛谈风险更有产业判断价值。
+- 🔴 质疑：Reuters 报道反映的是特定渠道与时点价格，离官方定价和长期均衡仍有距离，不能机械外推成稳定市场价。
+
+**信源：** https://news.google.com/rss/articles/CBMisAFBVV95cUxNcDl2QjA5cXZYWFFDZ1h4eVd5RHd1UlFkX2E1R1lnZ1lkemVzX3BETTNMMGVoRzZkRVNueVdlR1I5OFZLRk9tUmY2YU9qU1RCUUstNGt3YXBMVlYxN2ZxbF9SVGR1TUFGSTI0ZlVGQk81X3BXUjdNamhRRUxfbVFoYnpTTEtCUzBPQzdPbm5NUmVDaTczeW15ZkRNb2w1SEdrZXRMdDZaMlJkakdWRG9PYQ?oc=5
+
+**关联行动：** 继续追 Reuters 原文是否补出更多渠道细节，以及中国本地系统商、国产替代和租赁市场会不会很快给出更明确应对。 
+
+## 📊 KOL 观点精选
+
+> 本轮补扫了 Tier 1/2/3 KOL 与官方账号的公开可抓取动态。考虑到 X 原站可访问性不稳定，实际核查主要依赖公开镜像与被媒体二次引用的原帖内容；严格按 24 小时窗口与 A/B 级过滤后，最终保留 4 条最硬信号。没有硬更新的 Tier 1 / Tier 2 / Tier 3 账号不强行凑数。
+
+### K-1. ⭐ [A] Sam Altman 预告 `GPT-5.5-Cyber` 将在几天内向关键网络防守方 rollout：OpenAI 安全线从文章走向实配给
+
+**概述：** 公开镜像显示，Sam Altman 于北京时间 `2026-04-30 12:46` 发文称：`GPT-5.5-Cyber` 将在接下来的几天内向 `critical cyber defenders` rollout，并强调这是与生态伙伴和政府协同推动的受控开放。这意味着 04-30 日报里还停留在官方 cyber 文章层的叙事，今天已经开始有了更具体的“谁先拿到、按什么方式开放”的产品化信号。
+
+**信号意义：** 这比再转一篇安全博客有用得多，因为它说明 OpenAI 准备把最强安全相关模型能力按受信访问模式向特定防守方投放。若后续继续扩到更广企业安全团队，OpenAI 很可能在 AI cyber defense 赛道占住一个相对强的先发位置。
+
+**独立解读：** Sam 这里最值得注意的不是 `GPT-5.5-Cyber` 四个字本身，而是 rollout 对象被限制在 `critical cyber defenders`。这暗示 OpenAI 正把 frontier cyber 能力当成“受控高价值资源”，而不是面向全市场一键开放的普通 SKU。未来很可能会出现更细的 access policy、合作认证与滥用监测框架。
+
+**信源：** https://nitter.net/sama/status/2049712078836170843#m
+
+### K-2. [A] Satya Nadella 在财报线程里把 Microsoft 的 AI 商业化锚点说透：20M 付费 Copilot 席位 + 新增 1GW 容量
+
+**概述：** 公开镜像显示，Satya Nadella 于北京时间 `2026-04-30 06:52` 发布 FY2026 Q3 财报线程，核心 AI 口径包括：`20M+ paid Microsoft 365 Copilot seats`，以及微软在季度内又新增 `1 gigawatt` 数据中心容量。对市场来说，这不是抽象愿景，而是把 AI 业务同时锚在 **付费席位增长** 和 **基础设施继续扩容** 两条硬指标上。
+
+**信号意义：** 这条值 A，因为它直接告诉外界：微软今天最看重的，不是再发一个 Copilot demo，而是证明“企业席位真的在付费、背后电力和容量真的在跟着长”。这比任何单点功能更新都更能说明 AI 商业化进展。
+
+**独立解读：** `20M+` 付费席位说明 Copilot 已经不是实验性 upsell，而是开始进入真正的规模化企业软件收入池；`1GW` 则意味着微软对需求增长的判断依旧激进。把这两个数字并列看，本质是在对市场宣告：AI 不是拉高估值的故事线，而是在拉高 OPEX、CapEx 和 seat monetization 的真实生意。
+
+**信源：** https://nitter.net/satyanadella/status/2049622812680409373#m
+
+### K-3. [A] GoogleDeepMind 抛出 `AI co-clinician` 研究线程：多模态临床助手开始主动对标安全框架与医生基准
+
+**概述：** 公开镜像显示，GoogleDeepMind 于北京时间 `2026-04-30 23:02` 发出 `AI co-clinician` 线程，明确将其定义为一个多模态临床支持研究方向，并把 `safety framing` 与对比医生/基准测试的表述放在前台。虽然这还不是可商用医疗产品发布，但它表明 GoogleDeepMind 正继续把多模态 agent 能力往高责任场景推进。
+
+**信号意义：** 医疗是最不容许“聊天机器人凑合”的垂直场景之一。GoogleDeepMind 今天仍愿意公开把 co-clinician 线索拿出来，说明其多模态 agent 竞争重点，已经不仅是通用生产力或搜索，而是更高门槛的专业辅助系统。
+
+**独立解读：** 值得盯的不是“医疗助手”这个泛概念，而是它是否继续公开 benchmark、风险控制与人机分工边界。如果 DeepMind 后续把这条线与 Gemini / Med-PaLM 资产重新整合，医疗很可能会成为 Google 多模态 agent 最容易建立护城河的高壁垒行业之一。
+
+**信源：** https://nitter.net/GoogleDeepMind/status/2049867061279457761#m
+
+### K-4. [B] Greg Brockman 透露 `chronicle gives codex passive memory`：coding agent 的工作区记忆层开始从“会话内”往“行为轨迹级”迁移
+
+**概述：** 公开镜像显示，Greg Brockman 于北京时间 `2026-04-30 21:33` 发文称，`chronicle gives codex passive memory over what you do on your computer`。这句话的信息密度很高：Codex 的记忆能力不再只局限于 prompt 上下文，而是在朝“读取你在电脑上做过什么”的被动记忆层走。
+
+**信号意义：** 这条值 B，因为它还不是完整产品发布说明，但它暴露了 coding agent 的真实演进方向：谁能把屏幕、文件、命令历史和操作轨迹转成稳定记忆，谁就更可能从“一次性回答器”升级成长期协作工具。
+
+**独立解读：** “passive memory” 这个表述尤其重要。主动记忆通常要求用户手动保存、手动总结；被动记忆则意味着系统默认把用户轨迹转译成可调用上下文。这个方向一旦做实，会极大提升 coding agent 连续性，但也会立刻引出更尖锐的隐私、权限与记忆治理问题。
+
+**信源：** https://nitter.net/gdb/status/2049844703793688991#m
+
 ## 下期追踪问题
 
-1. **DeepSeek 识图模式会不会在 24-72 小时内补出官方模型卡、开放范围、API 计划或更系统的多模态 benchmark？** 重点盯 DeepSeek 官方网页、技术报告镜像、开发者文档与研究员公开发声。
-2. **阿里 QoderWake 邀测之后，会不会很快公开岗位模板、权限边界、企业客户案例和更细的自进化 / Harness 设计？** 重点盯阿里云、Qoder 官网、产品邀测页与后续媒体专访。
-3. **小红书把 AI 升为一级部门 Dots 后，第一批真正可见的产品动作会落在哪：搜索、推荐、电商、广告还是内容创作工具？** 重点盯小红书组织变动后 24-72 小时内的产品试水、招聘、对外口径与客户端更新。
-4. **德国 SPRIND 的 Next Frontier AI 挑战会不会很快公布首批入围团队、算力资源与评审标准？** 重点盯 SPRIND 官方公告、德国科技媒体与参与团队公开发声。
-5. **Featherless.ai 这类“开源模型中立推理层”会不会在接下来几天公布更细的吞吐、硬件适配与企业案例，进而带动欧洲开源 AI 基础设施叙事升温？** 重点盯 Featherless.ai 官方博客、合作伙伴口径与 AMD / Airbus 相关投资信息。
+1. **OpenAI 的 Advanced Account Security 会不会很快补出企业管理员策略、硬件密钥强制、恢复审计和与 ChatGPT / Codex 工作区联动的更细说明？** 重点盯 OpenAI 正文补齐、帮助中心、企业安全文档与官方账号后续说明。
+2. **Gemini Embedding 2 会不会在 24-72 小时内补出更细 benchmark、价格、Vertex/AI Studio 集成与企业多模态检索案例？** 重点盯 Google Developers Blog、产品文档、Gemini API 与开发者演示内容。
+3. **xAI 承认用 OpenAI 模型训练 Grok 之后，OpenAI / Anthropic 会不会进一步加码 anti-distillation 检测、条款执法或 API 访问限制？** 重点盯法庭文件、官方政策更新、研究博客与开发者条款变化。
