@@ -161,8 +161,210 @@ description: "[占位]"
 
 **关联行动：** 继续追小红书、抖音、豆包、微信等平台是否很快推出更强的原生 AI 搜索或问答产品来守入口。
 
+## 🇪🇺 欧洲区
+
+> 本轮按欧洲公司、KOL、政策与融资清单逐项做了两路以上检索：直接抓取 Mistral / DeepMind / Hugging Face / Poolside / Wayve / Synthesia / Photoroom 等官方入口，外加 Bing News / DuckDuckGo / Tech.eu / Sifted / 150Sec 交叉查证；KOL 侧补查了 Yann LeCun、Thomas Wolf、Clément Delangue、Peter Steinberger、Demis Hassabis、Jeff Dean 的公开 X 资料页与新闻索引；政策侧检查了 EU AI Act、GDPR+AI、英国 AISI、欧洲主权 AI 与欧洲投融资。严格按北京时间 2026-05-01 03:00 轮次窗口、过去 7 天去重与 A/B 级过滤后，今日欧洲区保留 5 条硬增量。需要说明：Mistral Medium 3.5 / Remote Agents 已在 04-30 日报作为“后续”收录，因此本轮不重复入库；DeepMind、Hugging Face、Stability、Aleph、Wayve 等官方页今天未见比媒体报道更硬的 24h 新发布。
+
+### EU-1. ⭐ [A] 德国 SPRIND 推出 1.25 亿欧元 Next Frontier AI 挑战，欧洲开始用“国家级挑战赛”补前沿模型断层
+
+**概述：** 德国联邦创新机构 SPRIND 在 04-30 正式启动 `Next Frontier AI` 挑战赛，计划从全欧洲遴选最多 10 支队伍，整体投入规模达 `€125M`。官方口径非常直接：欧洲顶尖 AI 人才很多，但真正能在前沿模型层面对打中美的公司太少，因此要用公共资本把“新范式 AI 公司”硬生生催出来。
+
+**技术/产业意义：** 这条够 A，因为它不是又一个地方基金或泛泛扶持计划，而是欧洲首次把“下一代 AI 范式”本身当成竞赛对象来资助。它释放的信号很清楚：欧洲已经接受“只做应用层和合规层不够，必须重新下注基础模型与新架构”。
+
+**深度分析：** SPRIND 这次最关键的不是金额本身，而是资助目标明确写成“超越现有范式”，刻意把方向从简单调参、行业套壳、现成模型应用拉回到底层方法创新。对欧洲来说，这相当于在承认现实：本土在训练资本、算力规模和商业闭环上落后于美国与中国，但仍希望通过更激进的研究驱动机制，在 world model、效率架构、推理新范式、可信系统等更上游位置重新卡位。如果后续真能把公共资金、创业机制和科研转化绑成一条线，这会比单纯再扶持几个“欧洲版 Copilot”更有战略价值。
+
+**评论观察：**
+- 🟢 支持：公开承认欧洲在 frontier model 层面掉队，并把资金瞄准新范式，而不是继续撒胡椒面，是少见的务实动作。
+- 🔴 质疑：挑战赛能否转化成真正的前沿公司，最终仍取决于算力、数据、创业速度和后续商业化土壤，光有 grant 不够。
+
+**信源：** https://tech.eu/2026/04/30/sprind-launches-eur125m-next-frontier-ai-challenge-to-back-new-ai-paradigms-in-europe/
+
+**关联行动：** 持续跟踪首批入围团队名单、技术方向分布，以及德国/欧盟是否同步给到算力和数据配套。 ⭐ 待深度解读
+
+### EU-2. [B] Featherless.ai 获 2000 万美元 Series A，欧洲开始押注“开源模型的中立推理层”
+
+**概述：** Tech.eu 04-30 报道，Featherless.ai 完成 `2000 万美元` Series A，由 `AMD Ventures` 与 `Airbus Ventures` 领投，平台定位是面向开源 AI 的 serverless inference 层。公司称自己已支持 `3 万+` 开源模型，并被描述为 Hugging Face 最快增长的推理合作伙伴之一。
+
+**技术/产业意义：** 这条值 B，因为它打的是一个非常关键但容易被忽视的位置：不是再卷一个模型，而是卷“谁来做开源模型的中立部署底座”。如果企业不想被单一 hyperscaler 或闭源 API 绑定，这类 inference fabric 的战略价值会持续上升。
+
+**深度分析：** Featherless.ai 的卖点不是“模型更强”，而是“让大量开源权重以 serverless 方式生产可用”。这意味着两层博弈：第一层，它试图把模型选择权从云厂和封闭平台手里夺回来，让企业能在语言、视觉、语音模型之间快速切换；第二层，它与 AMD Ventures 的组合本身就说明硬件生态也想借这类中立层切入推理市场，削弱 NVIDIA/CUDA 单栈锁定。长期看，谁能把模型路由、成本控制、SLA 和兼容性做好，谁就可能吃到开源 AI 普及后的“卖水人”位置。
+
+**评论观察：**
+- 🟢 支持：投的是基础设施而不是又一个应用壳，说明欧洲投资人开始看重开源 AI 的真实落地层。
+- 🔴 质疑：支持 3 万模型听起来很强，但企业最终看的是稳定性、治理与成本，不是模型目录长度。
+
+**信源：** https://tech.eu/2026/04/30/featherlessai-secures-20m-to-expand-serverless-platform-for-open-source-ai/
+
+**关联行动：** 继续追 Featherless.ai 是否公布更细的吞吐、延迟、硬件适配与企业客户案例。
+
+### EU-3. [B] Mosaic SoC 完成 380 万美元 pre-seed，低功耗感知芯片开始瞄准“永远在线”的空间智能终端
+
+**概述：** 荷兰芯片创业公司 Mosaic SoC 于 04-30 完成 `380 万美元` pre-seed，由 Founderful 领投，目标是做面向空间计算设备的 dedicated perception chips。公司聚焦的不是大服务器训练，而是让 AR 眼镜、always-on 视觉设备与边缘终端在极低功耗下完成实时感知。
+
+**技术/产业意义：** 这条值 B，因为它踩中了一个很实在的硬件缺口：当前很多设备加得起摄像头和传感器，却加不起持续理解世界的功耗预算。谁能把 perception compute 做进小功耗芯片，谁就更接近下一代可穿戴与边缘 AI 的入口。
+
+**深度分析：** Mosaic SoC 瞄准的是“空间智能不是缺模型，而是缺能常驻运行的硅”。今天很多多模态/视觉能力之所以还主要活在手机 SoC 或云端，是因为端侧实时感知太吃功耗、散热和电池。专用 perception chip 如果做成，意义不只是省电，而是让更多产品形态成立：AR 眼镜可以更轻，工业视觉设备可以更持久，机器人与车载传感也能在不堆大算力的情况下保持环境理解。它的难点也很清楚：必须在功耗、内存带宽、模型兼容、开发工具链之间做极致平衡，否则很容易变成 demo 芯片而不是生态芯片。
+
+**评论观察：**
+- 🟢 支持：在边缘设备 AI 真正爆发前先抢感知芯片位，是比追热点模型更底层的赌注。
+- 🔴 质疑：pre-seed 阶段仍然很早，离量产、设计赢单和软件生态成熟还有长路。
+
+**信源：** https://tech.eu/2026/04/30/mosaic-soc-raises-38m-pre-seed-to-build-low-power-perception-chips-for-spatial-computing/
+
+**关联行动：** 继续跟踪其首代芯片规格、目标客户与是否支持主流视觉/多模态模型编译链。
+
+### EU-4. [B] 意大利 AGCM 结束对 Mistral 等聊天机器人的调查，欧洲开始把“幻觉提示义务”做成可执行合规模板
+
+**概述：** The Next Web 04-30 报道，意大利竞争与消费者保护机构 `AGCM` 已结束对 DeepSeek、Mistral Le Chat 和 Nova AI 的消费者保护调查，前提是三家公司接受了具有约束力的整改承诺。核心要求是：必须更清晰、更即时地向用户提示模型可能生成不准确、误导或凭空捏造的内容，并给出 `120 天` 合规落地窗口。
+
+**技术/产业意义：** 这条值 B，因为它把欧洲 AI 合规从抽象原则推进到了产品交互细节：不是泛泛而谈“要透明”，而是明确追问“你有没有在用户做决策前提醒 hallucination 风险”。这类先例一旦固化，很可能外溢到更多聊天产品和更多欧洲司法辖区。
+
+**深度分析：** AGCM 这次实际上在做一件很有代表性的事：把生成式 AI 的“系统性不确定性”纳入传统消费者保护框架，而不是等专门 AI 法律慢慢落地。对 Mistral 这类欧洲代表性公司来说，这既是监管压力，也是一个路线信号——未来产品设计不能只卷模型能力，还得把提示、边界、免责声明、场景化风险沟通前置到 UX 和 onboarding。长期看，欧洲的模型公司很可能被迫先把“风险披露产品化”做好，再把功能往高风险行业扩张。
+
+**评论观察：**
+- 🟢 支持：比起空泛争论 AI 要不要监管，AGCM 这种要求用户提示到位的做法更可执行。
+- 🔴 质疑：单靠提示并不能消除用户误用，若没有更细的场景限制和可验证机制，容易滑向“多加几句免责声明”。
+
+**信源：** https://thenextweb.com/news/agcm-deepseek-mistral-nova-ai-hallucination-probes
+
+**关联行动：** 持续关注 AGCM 120 天窗口后是否抽查执行情况，以及其他欧洲监管机构会不会照抄这套模板。
+
+### EU-5. [B] Legora Series D 扩至 6 亿美元，法律 AI 开始从“助手”跨进企业软件超级估值区间
+
+**概述：** Tech.eu 04-30 报道，法律 AI 公司 Legora 将此前宣布的 Series D 扩大至 `6 亿美元`，投后估值升至 `56 亿美元`，新增投资方包括 Atlassian 与 NVIDIA 旗下 `NVentures`。公司称其 ARR 已突破 `1 亿美元`，客户规模从 200 家扩大到 1000+ 组织。
+
+**技术/产业意义：** 这条值 B，因为它说明 AI 垂直应用里最先跑出大商业化闭环的，仍然是高客单价、强文档工作流、合规容忍度相对清晰的专业服务行业。法律 AI 不再只是“写合同助手”，而是在资本市场上被当成新一代 enterprise platform 估值。
+
+**深度分析：** Legora 的价值不只是融资额，而是它验证了一个更大的判断：AI 在专业服务行业的商业化速度，可能比通用办公助手更快。原因很现实——法律工作本来就高度文本化、可审计、以小时计费，而且 ROI 容易量化。Tech.eu 引述的数据里，法务团队和律所已经能看到非计费时间减少、拿单能力增强，这说明法律 AI 的价值开始从“节省几分钟草稿时间”升级到“改变组织收入结构”。NVentures 和 Atlassian 同时加码，也意味着上游基础设施和企业软件分发渠道都在看这条赛道。
+
+**评论观察：**
+- 🟢 支持：从估值、ARR 到客户扩张都表明法律 AI 不是虚火，而是率先跑出真钱的垂直场景之一。
+- 🔴 质疑：高增长阶段的客户留存、模型责任边界和国际法域扩张难度，仍可能压缩未来估值叙事。
+
+**信源：** https://tech.eu/2026/04/30/legora-extends-series-d-to-600m-with-backing-from-atlassian-and-nventures-reaching-56b-valuation/
+
+**关联行动：** 继续盯 Legora 是否披露更多产品模块、法域扩张节奏，以及法律 AI 是否向审计、咨询等相邻专业服务外溢。
+
+## 🌐 学术/硬件
+
+> 本轮实际访问了 arXiv 七个分类 recent 页面（cs.AI / cs.CL / cs.LG / cs.CV / cs.MA / cs.SE / cs.RO）、Hugging Face Papers、Papers With Code、Reddit 三个子版块入口、Raschka / The Batch / Import AI / The Gradient / Lilian Weng / AI Snake Oil，以及 NVIDIA / AMD / Intel / TSMC / AI infra 相关检索。今天 arXiv 分类页没有给出比 04-30 更近的新分组，因此学术区主要保留“05-01 的 HF Papers 社区热度信号 + 对应论文摘要/关键数字”，并只收录对 agent、多模态、推理效率和系统层有明显参考价值的条目。
+
+### AH-1. ⭐ [A] GLM-5V-Turbo 冲上今日 HF Papers 热榜头部，多模态 Agent 基座开始把网页、文档、GUI 直接并入推理主干
+
+**概述：** Hugging Face Papers 05-01 页面显示，`GLM-5V-Turbo` 位居今日热榜头部，页面给出的社区热度达到 `2.29k`。论文核心主张很明确：多模态感知不应只是 LLM 外挂接口，而应该被并入 reasoning、planning、tool use 与 execution 的主链路，目标是把图像、视频、网页、文档和 GUI 全部纳入原生 agent 基座。
+
+**技术/产业意义：** 这条自动 A 级，因为它不是“再堆一个能看图的 VLM”，而是明确把 multimodal agent 当作 foundation model 的下一形态。行业现在对 agent 最大的抱怨之一就是感知层太脆弱，GLM-5V-Turbo 这类路线正是在回答这个问题。
+
+**深度分析：** 从摘要看，作者把优化重点放在五层：模型设计、多模态训练、强化学习、工具链扩展和与 agent framework 的集成。这意味着它想解决的不只是视觉问答，而是端到端执行时的感知—推理耦合问题。若这条路线成立，未来 agent 能力的分水岭不再只是 code benchmark，而是能否稳定读网页、理解 GUI、处理文档，再把这些感知结果真实喂给计划和工具调用。HF 热度冲到 2.29k，本质上也说明社区已经把“纯文本 agent”视为上一阶段，而把原生多模态执行系统视为下一阶段主战场。
+
+**评论观察：**
+- 🟢 支持：把视觉/网页/GUI 作为推理主干而非外挂，是当前 agent 真正需要的升级方向。
+- 🔴 质疑：摘要给出了方向，但还没看到公开 benchmark 全面证明它在真实浏览器与复杂 GUI 上的鲁棒性。
+
+**信源：** https://huggingface.co/papers/2604.26752
+
+**关联行动：** 值得继续跟踪其公开 benchmark、工具调用基准和是否放出更完整的 agent evaluation 细节。 ⭐ 待深度解读
+
+### AH-2. [B] TIDE 用跨架构蒸馏把 diffusion LLM 压到 0.6B，代码任务增益尤其明显
+
+**概述：** HF Papers 05-01 热榜中，`Turning the TIDE` 获得 `56` 票关注。论文提出首个面向 diffusion LLM 的跨架构蒸馏框架 `TIDE`，把 `8B dense` 与 `16B MoE` 教师蒸馏到 `0.6B` 学生模型，在 8 个 benchmark 上平均提升 `1.53` 分，HumanEval 达到 `48.78`，显著高于 `32.3` 的自回归基线。
+
+**技术/产业意义：** 这条值 B，因为 diffusion LLM 如果想真正进入主流，不只要证明并行解码概念成立，还要证明能被压缩、被迁移、被工程化。TIDE 瞄准的正是 diffusion 路线目前最现实的门槛。
+
+**深度分析：** 论文的关键不是普通 distillation，而是解决 teacher 与 student 在 architecture、attention、tokenizer 都不同的情况下如何迁移知识。作者把方案拆成 TIDAL、CompDemo、Reverse CALM 三块，分别处理噪声可靠性、重掩码场景下的上下文补偿、以及跨 tokenizer 的稳定对齐。对产业的意义在于：如果 diffusion LLM 能在小模型上保住代码和语言能力，就有机会在低延迟、高并行推理场景上形成与自回归模型不同的工程价值。
+
+**评论观察：**
+- 🟢 支持：不仅谈理论，还给出具体 benchmark 提升，特别是代码任务的增益很有说服力。
+- 🔴 质疑：diffusion LLM 的生态、工具链和开发者心智仍远落后于自回归路线，单篇蒸馏论文还不足以改写主流栈。
+
+**信源：** https://huggingface.co/papers/2604.26951
+
+**关联行动：** 继续跟踪其开源代码和社区复现，看 dLLM 是否会在 2026 年形成第二条可用推理路线。
+
+### AH-3. [B] RADIO-ViPE 把 open-vocabulary semantic SLAM 拉到动态环境，机器人终于开始认真处理“世界会动”这件事
+
+**概述：** `RADIO-ViPE` 在 05-01 HF Papers 热榜中获得 `50` 票关注。论文提出一个在线 semantic SLAM 系统，能够把自然语言查询与动态场景中的 3D 区域/物体对齐，而且只依赖 `monocular RGB video`，不需要预先标定的 RGB-D 输入、深度传感器或 pose 初始化。
+
+**技术/产业意义：** 这条值 B，因为很多 open-vocabulary grounding 工作默认场景是静态、已标定、离线处理，离真实机器人部署差一大截。RADIO-ViPE 的价值，在于它开始逼近“机器人在一个会动、会乱、会被人改动物品位置的世界里持续建图并理解语言”。
+
+**深度分析：** 摘要里最硬的地方有两个：一是把视觉/语言嵌入与几何优化真正耦合进初始化、优化和 factor graph；二是针对 moving objects 和 scene rearrangement 做了自适应 robust kernel。换句话说，它不是拿 foundation model 做标签器，而是把多模态语义真正拉进 SLAM 主循环。这对具身 AI 很关键，因为真实世界的问题从来不是“识别出杯子”，而是“在人走来走去、家具变化、相机姿态漂移时还能把杯子定位给你”。
+
+**评论观察：**
+- 🟢 支持：直接正面解决动态环境，是从实验室视觉走向真实机器人部署的重要一步。
+- 🔴 质疑：论文 benchmark 漂亮，但长期运行稳定性、算力开销和真实机器人系统整合成本仍待验证。
+
+**信源：** https://huggingface.co/papers/2604.26067
+
+**关联行动：** 值得继续跟踪其项目页、代码发布和是否被机器人/AR 团队拿去做真实系统集成。
+
+### AH-4. ⭐ [B] ClawGym 把个人工作流 Agent 训练流程系统化，13.5K 合成任务 + 200 条 benchmark 直接补训练数据缺口
+
+**概述：** `ClawGym` 进入 05-01 HF Papers 热榜，页面显示约 `36` 票热度。论文围绕 Claw-style 个人 agent 场景，构建了 `13.5K` 条过滤后的合成任务数据集 `ClawGym-SynData`、一套黑盒 rollout 监督微调流程，以及 `200` 条 benchmark 组成的 `ClawGym-Bench`。
+
+**技术/产业意义：** 这条值 B，而且值得打星，因为它踩中当前 personal agent 最核心的上游痛点：不是没人会做 demo，而是缺少可验证训练数据、真实 workspace、统一评测和可复用 pipeline。没有这些，agent 迭代全靠手搓样例和玄学 prompt。
+
+**深度分析：** ClawGym 的方法论相当工程化：用 persona-driven intents + skill-grounded operations 合成任务，再配 realistic mock workspaces 和混合验证机制，最后把 agent 训练与诊断评测连成闭环。这个框架的意义，不在于它今天把某个单模型推到多高，而在于它试图把“个人智能体开发”从 artisanal craft 变成可流水线化的 ML 过程。如果这条线被社区吃透，未来各类桌面 agent、终端 agent、浏览器 agent 的训练成本会明显下降。
+
+**评论观察：**
+- 🟢 支持：终于有人不只卷 agent 案例，而是卷训练数据、验证和 benchmark 这一层硬基础设施。
+- 🔴 质疑：合成任务再多，也未必能完全代表真实用户 workspace 的脏数据、权限和长尾行为。
+
+**信源：** https://huggingface.co/papers/2604.26904
+
+**关联行动：** 继续盯它是否开源完整数据与 benchmark；若开源质量高，值得拿来对比 Lighthouse / 浏览器 agent 训练思路。 ⭐ 待深度解读
+
+### AH-5. [B] ESamp 用“潜表示蒸馏误差”当探索信号，试图打破 LLM 多样性与一致性的老矛盾
+
+**概述：** `Large Language Models Explore by Latent Distilling` 在 05-01 HF Papers 热榜获得 `11` 票关注。论文提出 `Exploratory Sampling (ESamp)`，在测试时训练一个轻量 Distiller 去预测深层隐藏表示，再把预测误差当成 novelty signal 重加权候选 token；作者声称最坏开销低于 `5%`，优化版仅 `1.2%`，同时能提升 reasoning model 的 Pass@k 效率。
+
+**技术/产业意义：** 这条值 B，因为 test-time scaling 现在不缺“多采样”，缺的是更聪明的探索。ESamp 的核心价值在于尝试把“语义探索”从词面随机性里拉出来，转成可计算的潜空间新颖性。
+
+**深度分析：** 传统随机采样常常只是在词面上绕圈，生成了很多不同说法，却没有真正走向更远的语义路径。ESamp 通过深浅层表示映射误差来估计“模型是否进入陌生语义区域”，本质上是在构造一种在线探索启发式。对代码、数学和科学任务来说，这很重要，因为有效 test-time scaling 的关键从来不是多想，而是别总在同一个错误解附近打转。若这类方法成熟，未来推理模型的搜索层会更像启发式探索系统，而不是单纯温度采样器。
+
+**评论观察：**
+- 🟢 支持：把潜表示误差转成探索信号，是对“采样=乱抽”思路的一次有趣升级。
+- 🔴 质疑：需要更多外部复现来证明这种 novelty signal 在不同架构、不同任务上都稳定可靠。
+
+**信源：** https://huggingface.co/papers/2604.24927
+
+**关联行动：** 持续跟踪其代码与复现实验，看它是否真能成为推理模型 test-time scaling 的通用插件。
+
+### AH-6. [B] NVIDIA 把 speculative decoding 接进 RL 后训练系统，235B 级训练吞吐有望提升到 2.5x
+
+**概述：** `Accelerating RL Post-Training Rollouts via System-Integrated Speculative Decoding` 进入今日 HF Papers 页面。论文来自 NVIDIA 等作者，研究如何把 speculative decoding 作为 `lossless` 加速原语，直接接入 NeMo-RL + vLLM 的 RL rollout 管线；在 `8B` 规模同步 RL 中，rollout 吞吐提升 `1.8x`，模拟结果显示在 `235B` 规模配合异步 RL 时可达到 `2.5x` 端到端训练提速。
+
+**技术/产业意义：** 这条值 B，因为 RL 后训练正越来越受 rollout 生成速度卡脖子。只要推理生成还贵，RL 就会被系统成本锁死，而 speculative decoding 若能无损接入训练环节，会直接改变后训练 economics。
+
+**深度分析：** 之前 speculative decoding 更多用于推理服务；这篇工作的意义，是把它前移到 RL training loop 内部。对大模型公司来说，这相当关键：如果 rollout 生成能在不改目标分布的前提下显著提速，很多原本算不过来的 reasoning post-training 方案 suddenly 变得可承受。换句话说，这不是单篇“推理优化小技巧”，而是可能改变后训练可行边界的系统层 work。
+
+**评论观察：**
+- 🟢 支持：给出了具体吞吐数字，而且直接连到 NeMo-RL / vLLM 这类现实栈，工程味很浓。
+- 🔴 质疑：2.5x 的大模型提速目前来自模拟投影，真实超大规模集群上是否稳定复现还需要更多公开数据。
+
+**信源：** https://huggingface.co/papers/2604.26779
+
+**关联行动：** 值得继续盯 NVIDIA 是否把该方案更完整地下放到 NeMo-RL/vLLM 生产实践文档中。
+
+### AH-7. [B] FAMA 用“失败感知元智能体”给开源工具型 Agent 补救，开放模型在多轮工具调用里终于不再只靠硬扛
+
+**概述：** `FAMA` 进入 05-01 HF Papers 列表。论文针对 open-source LLM 在多轮工具使用环境中容易累积错误的问题，提出 `Failure-Aware Meta-Agentic` 框架：先分析 baseline failure trajectories，再按最常见失败模式激活最小化的专用 agent 子集，在关键决策前注入针对性上下文。作者报告相对标准基线可带来最高 `27%` 的性能提升。
+
+**技术/产业意义：** 这条值 B，因为它说明 agent 可靠性优化正在从“换更大模型”转向“显式识别失败模式并做结构化补救”。对开源模型尤其重要——参数不够大时，系统设计往往比盲目加 token 更关键。
+
+**深度分析：** FAMA 的方法很像把 agent 系统调参从经验主义拉向 error taxonomy：先找出失败簇，再决定什么时候唤起哪个辅助 agent。它的启发在于，很多工具型任务失败并不是因为模型完全不会，而是因为某一类误判反复级联，例如读错上下文、忘记约束、或在工具调用前缺少针对性提醒。若这类 failure-aware orchestration 被证明稳定有效，未来小模型 agent 的性价比会明显提升。
+
+**评论观察：**
+- 🟢 支持：比单纯喊“multi-agent 更强”更进一步，真正把失败模式和补救机制对应起来。
+- 🔴 质疑：专用 agent 越多，系统复杂度和调度成本也会同步上升，真实收益要看 orchestration 开销能否压住。
+
+**信源：** https://huggingface.co/papers/2604.25135
+
+**关联行动：** 继续跟踪其开源实现与 ACL 2026 Findings 后续讨论，看 failure-aware agent 设计是否成为开放模型标配。
+
 ## 下期追踪问题
 
 1. **DeepSeek 识图模式会不会在 24-72 小时内补出官方模型卡、开放范围、API 计划或更系统的多模态 benchmark？** 重点盯 DeepSeek 官方网页、技术报告镜像、开发者文档与研究员公开发声。
 2. **阿里 QoderWake 邀测之后，会不会很快公开岗位模板、权限边界、企业客户案例和更细的自进化 / Harness 设计？** 重点盯阿里云、Qoder 官网、产品邀测页与后续媒体专访。
 3. **小红书把 AI 升为一级部门 Dots 后，第一批真正可见的产品动作会落在哪：搜索、推荐、电商、广告还是内容创作工具？** 重点盯小红书组织变动后 24-72 小时内的产品试水、招聘、对外口径与客户端更新。
+4. **德国 SPRIND 的 Next Frontier AI 挑战会不会很快公布首批入围团队、算力资源与评审标准？** 重点盯 SPRIND 官方公告、德国科技媒体与参与团队公开发声。
+5. **Featherless.ai 这类“开源模型中立推理层”会不会在接下来几天公布更细的吞吐、硬件适配与企业案例，进而带动欧洲开源 AI 基础设施叙事升温？** 重点盯 Featherless.ai 官方博客、合作伙伴口径与 AMD / Airbus 相关投资信息。
