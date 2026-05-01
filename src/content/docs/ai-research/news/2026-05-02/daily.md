@@ -148,6 +148,112 @@ description: "[占位]"
 
 **关联行动：** 继续追“灵境造物”是否公布真实科研案例、任务成功率与更多学科方向的验证结果。
 
+## 🇪🇺 欧洲区
+
+> 本轮实际补扫了 Mistral、DeepMind、Hugging Face、Stability AI、Aleph Alpha、Poolside、Synthesia、Wayve、Builder.ai、Helsing、Photoroom，以及欧洲 AI 融资线；并交叉检查了 Yann LeCun、Thomas Wolf、Clément Delangue、Peter Steinberger、Demis Hassabis、Jeff Dean 的公开动态入口，以及 EU AI Act、GDPR 与 AI、英国 AISI、欧洲数字主权、欧洲 AI 投融资话题。严格执行 24 小时铁律、过去 7 天去重与追踪链规则后，今日欧洲区只保留 4 条 A/B 级硬增量；其余候选要么缺明确发布时间、要么落在 24 小时窗口外、要么只是旧闻二次转述。
+
+### EU-1. [B] Hugging Face / ClawHub 被用于分发恶意载荷，欧洲开源 AI 分发层暴露供应链新风险
+
+**概述：** SecurityWeek 引述 Acronis 称，攻击者正利用 Hugging Face 仓库与 ClawHub 技能市场分发带有隐藏指令的恶意文件；其中 ClawHub 一侧识别出 13 个开发者账号、近 600 个恶意 skills，负载覆盖 trojan、cryptominer、infostealer，并利用间接 prompt injection 与社工链路诱导用户下载执行。
+
+**技术/产业意义：** 这不是单点漏洞，而是 AI 分发平台开始出现类似 npm / PyPI 式的供应链污染模式。对欧洲开源生态来说，风险已从‘模型能不能跑’转向‘模型仓库、agent marketplace 和外部资源是否可信’。
+
+**深度分析：** Hugging Face 和 ClawHub 的共同问题不在于核心平台被攻破，而在于它们天然鼓励共享代码、技能与外部依赖，正好给攻击者提供了借信任链投毒的入口。Acronis 点出的重点是，攻击者不一定直接黑 agent，而是让 agent 去读取带隐藏指令的资源，再把下载与执行动作包装成正常能力扩展。这意味着 2026 年 AI 安全的主战场之一，已经从模型 jailbreak 扩展到 model/skill distribution、prompt-supply-chain 和 developer trust graph。若平台不尽快补仓库信誉、skill 审核、执行权限隔离和 provenance 机制，开源 agent 生态越繁荣，投毒面也会越大。
+
+**评论观察：**
+- 🟢 支持：近 600 个恶意 skills 和跨 Windows/macOS/Linux/Android 的负载分布，说明这已不是零星滥用，而是成规模的生态层攻击信号。
+- 🔴 质疑：当前核心证据主要来自 Acronis 第三方研究与平台样本扫描，尚未看到 Hugging Face 或 ClawHub 发布更完整的官方处置数字，因此真实覆盖面可能高于或低于现有披露。
+
+**信源：** https://www.securityweek.com/hugging-face-clawhub-abused-for-malware-distribution/
+
+**关联行动：** 继续追 Hugging Face / ClawHub 是否公布下架数量、账号处置、skill 签名 / provenance / 沙箱隔离方案，以及 Acronis 是否补充 IOC 与更完整样本统计。
+
+### EU-2. [B] 更新：EU AI Act Omnibus 谈判继续停摆，但高风险系统合规时钟并未暂停
+
+**概述：** National Law Review 5 月 1 日跟进称，欧盟围绕 Digital Omnibus on AI 的修法谈判在周三再次无果而终。文中点明，若修正案最终通过，Annex III 高风险 AI 系统的合规节点拟从 2026-08-02 延后至 2027-12-02，Annex I 既有受监管产品拟延至 2028-08-02；但在达成妥协前，现行 2026 年 8 月时点仍然有效。
+
+**技术/产业意义：** 这条对欧洲 AI 公司和部署方的现实意义高于一般政策评论，因为它直接决定 2026 下半年产品上线、法务预算、文档准备和销售承诺要按哪个时间表执行。
+
+**深度分析：** 相比 4 月底那条‘谈判卡壳’信号，这篇更新把最关键的执行变量写得更清楚：一是两类高风险系统可能对应两档延期；二是谈判暂停并不自动带来监管宽限，企业仍需按最保守口径准备 2026-08-02。对欧洲厂商而言，最昂贵的不是规则严格，而是规则可能放松但当前还没正式放松，因此产品、合规、采购和客户沟通都得双轨准备。若未来一个月 trilogue 仍不能出文本，很多中小 AI 公司会被迫提前投入本该在 2027 年后才需要的治理资源。
+
+**评论观察：**
+- 🟢 支持：文章给出了具体延期日期和 Annex I / Annex III 的差异化路径，比此前只谈‘卡壳’更接近企业可执行信息。
+- 🔴 质疑：这仍是法律观察口径而非欧盟官方公告；最终是否延期、哪些产品会被排除在 Annex I 之外，仍取决于后续政治妥协文本。
+
+**信源：** https://natlawreview.com/article/eu-ai-act-update-omnibus-talks-stall-clock-still-ticking
+
+**关联行动：** 继续追下一轮 trilogue 时间点、折中文本是否保留 2027/2028 两档延期，以及欧盟是否就医疗器械等 Annex I 产品给出更明确边界。
+
+**去重备注：** /tmp/Lighthouse/src/content/docs/ai-research/news/2026-04-30/daily.md#EU-3；/tmp/Lighthouse/src/content/docs/ai-research/news/2026-04-08/daily.md#EU-2
+
+### EU-3. [B] DeepMind alumni 正在变成欧洲 AI 创业‘母体’，18 个月内已有 112 人创业或转入 stealth
+
+**概述：** Tech.eu 援引 Evertrace 数据称，过去 18 个月里共有 112 名 DeepMind alumni 已创办或计划创办新公司；其中 38 家已正式启动，74 人转入 stealth 角色。地域上 70 家在美国、28 家在英国，其余分布在西班牙、瑞士、德国、奥地利、波兰等地，多数与 AI 相关。
+
+**技术/产业意义：** 这条不是融资 headline，但它说明 DeepMind 对欧洲 AI 的真实外溢影响，正在从‘一家明星实验室’升级为‘连续创业人才工厂’。对欧洲竞争力而言，人才再分配比单个项目新闻更接近中长期基本盘。
+
+**深度分析：** 欧洲 AI 一直被质疑缺少足够多的创业飞轮和连续成功团队，而 DeepMind alumni 网络正在补这块短板。最重要的不是 David Silver 那笔 $1.1B 种子轮本身，而是它背后还有 100+ 名离开 DeepMind 后继续创业或 stealth 的研究、工程和产品骨干。若这条趋势持续，英国和欧洲未来 12-24 个月会更像‘从一个前沿实验室分叉出多条创业支线’，而不是继续依赖 Mistral、Wayve、Synthesia 这类少数明星公司撑门面。对资本方而言，这会改变 deal sourcing 结构；对政策方而言，则说明留住和放大 founder-factory 型机构，可能比单次补贴更有效。
+
+**评论观察：**
+- 🟢 支持：112 名 alumni、28 家英国项目、38 家已正式成立公司，这些数字把 DeepMind 的创业外溢从印象流变成了可量化现象。
+- 🔴 质疑：Evertrace 的口径把大量 stealth 角色也算进来，且并非每个 stealth 项目都已被 Tech.eu 独立核实为完整创业公司，因此实际成活率与融资质量还要继续观察。
+
+**信源：** https://tech.eu/2026/05/01/over/
+
+**关联行动：** 继续追 Evertrace 或其他数据库是否补出更细名单、融资状态与赛道分布，尤其盯英国 Sovereign AI 资本是否持续押注 ex-DeepMind founder cohort。
+
+### EU-4. [B] Amsterdam AI 基建公司 Nebius 斥资 6.43 亿美元收购 Eigen AI，欧洲云侧开始补齐推理优化层
+
+**概述：** Tech.eu 报道，Amsterdam 总部的 AI 基础设施公司 Nebius 以约 6.43 亿美元现金加股票收购旧金山推理优化初创 Eigen AI。Nebius 表示将把 Eigen AI 的优化层整合进自家 Token Factory，目标是提升开源模型 inference token yield、吞吐与单位成本；交易同时带来约 20 人的推理研究团队。
+
+**技术/产业意义：** 这条的价值不只是跨境并购金额大，而是它显示欧洲 AI infra 玩家开始从‘卖 GPU 容量’往‘卖推理效率’上移一层。对于欧洲主权 AI 叙事来说，真正稀缺的不只是数据中心，还有能把 inference economics 做薄的系统软件能力。
+
+**深度分析：** Nebius 过去更像 neocloud / GPU infra 供给方，这次收购说明它已经意识到未来护城河不在单纯机柜规模，而在推理单位经济学。Eigen AI 被 Nebius 看中的核心不是模型品牌，而是把 memory、routing、compute bottleneck 压低的 inference optimisation layer。若整合顺利，Nebius 将不只是‘欧洲可替代算力’供应商，而会更像一家同时控制算力、路由和 token 产出的全栈 AI 云。放在欧洲市场看，这类并购比单一融资更有信号：欧洲公司开始用资本把美国效率团队并入自己的 infra stack，而不是只当下游客户购买技术。
+
+**评论观察：**
+- 🟢 支持：6.43 亿美元现金+股票、20 人研究团队、直接整合进 Token Factory，这些都表明 Nebius 不是财务投资，而是在为推理层竞争提前锁关键能力。
+- 🔴 质疑：文章中的性能与成本改善仍主要来自 Nebius 自述；跨境整合后能否真正转化成客户侧更高吞吐和更低 cost per inference，还需要产品化与财务指标验证。
+
+**信源：** https://tech.eu/2026/05/01/nebius-announces-construction-of-one-of-europes-largest-data-centres/
+
+**关联行动：** 继续追 Nebius 何时完成交易交割、Token Factory 是否公布量化性能对比，以及欧洲企业客户是否把该优化层视为迁移到 Nebius 的新理由。
+
+## 🌐 学术/硬件
+
+> 本轮实际访问并复核了 arXiv 七类、Hugging Face Papers、Papers With Code、r/MachineLearning、r/LocalLLaMA、r/artificial，以及 Raschka、The Batch、Import AI、The Gradient、Lilian Weng、AI Snake Oil、NVIDIA/AMD/Intel/TSMC/AI infrastructure 公开入口。按“必须有明确日期且落在 24 小时窗口内”的铁律过滤后，今日学术论文池没有新增可落入主条的 A/B 级论文；最终仅保留 2 条博客/基础设施向硬增量，其余 HF Papers / arXiv 热门虽有讨论度，但原始发布日期普遍早于本轮时间窗，故不强行灌水入稿。
+
+### AH-1. [B] The Batch Issue 351：一篇 newsletter 同时给出 GPT-5.5、Kimi K2.6 与 AI 数据中心排放压力的可写增量
+
+**概述：** deeplearning.ai 于 2026-05-01 发布 The Batch 第 351 期，明确覆盖三条高价值线索：OpenAI GPT-5.5 在多项客观 benchmark 领先但 hallucination 更高；Moonshot 的 Kimi K2.6 作为 1T 参数开源权重 VLM/agent 模型继续推高长时 coding 与多 agent orchestration；以及大型 AI 公司为追赶数据中心电力需求，正让既有碳减排承诺承压。
+
+**技术/产业意义：** 这不是单一新闻，而是把‘模型能力跃迁 + 开源阵营追赶 + 基础设施电力约束’放进同一篇编辑筛选里，适合作为北美轮的高密度博客候选。尤其其中的排放/电力段落，把 AI 竞争重新落回真实基础设施瓶颈。
+
+**深度分析：** 对日报来说，第 351 期最有价值的不是把 OpenAI 或 Moonshot 的发布重复一遍，而是它把 2026 年模型竞赛的三个层次摆在一起：一是闭源旗舰继续刷新 agent/coding benchmark，但可靠性问题仍未解决；二是开源权重阵营通过更长时执行和 agent swarm 设计逼近生产可用性；三是当模型推理从 prompt 调用升级到持续运行的 agents，真正的约束开始从参数规模转向电力、机房和碳排放。作为 newsletter，它提供了一个很好的框架性入口。
+
+**评论观察：**
+- 🟢 支持：页面含明确日期 May 01, 2026；正文可直接验证三条子议题：GPT-5.5 Outperforms, Hallucinates、Big AI’s Plans Strain CO2 Pledges、Kimi K2.6 Challenges Open-Weights Champs。
+- 🔴 质疑：The Batch 本质是 curated newsletter，不是原始披露源；如果主稿采用，最好把其中最重要的二级事实再回指到对应原始发布或权威报道。
+
+**信源：** https://www.deeplearning.ai/the-batch/issue-351/
+
+**关联行动：** 可在总稿中把它作为‘北美 newsletter 综述型候选’，重点抽出基础设施电力压力与模型可靠性这两个比单纯产品发布更耐写的角度。
+
+### AH-2. [B] NVIDIA 用 NemoClaw 参考实现把 OpenClaw 长时自治 agent 往企业安全部署框架里收编
+
+**概述：** NVIDIA Blog 2026-04-30 发布《Nemotron Labs: What OpenClaw Agents Mean for Every Organization》，明确提出与 OpenClaw 社区合作改进安全性，并推出 NemoClaw 参考实现，把 OpenClaw、NVIDIA OpenShell 安全运行时和 Nemotron 开放模型打包为企业部署蓝图。文中还给出 NVIDIA 对自治 agent 基建需求的判断：reasoning 相比 generative AI 已把 inference demand 放大约 100 倍，而持续运行的 autonomous agents 还会在此基础上再推高约 1000 倍。
+
+**技术/产业意义：** 这条的价值不在‘又一篇 NVIDIA 博客’，而在于它把 NVIDIA 的角色从 GPU/模型供应商延伸到 agent runtime、安全默认配置和企业治理层，等于试图占住下一代 AI 基础设施的软件入口。
+
+**深度分析：** OpenClaw 爆红后，行业真正缺的不是再做一个 demo agent，而是如何把持续运行、会调 API、会接本地数据的自治系统安全地塞进企业 IT。NVIDIA 的做法很典型：一边借 OpenClaw 热度进入开发者工作流，一边用 OpenShell、Nemotron 和 hardened defaults 把部署基线收紧，再顺手把计算需求叙事升级为‘agent 会把 inference economics 再放大三个数量级’。如果这个方向成立，未来企业买的不只是模型或 GPU，而是带治理、隔离和运行时默认值的整套 agent infrastructure。
+
+**评论观察：**
+- 🟢 支持：页面含明确日期 April 30, 2026；正文明确写到与 OpenClaw 社区合作、推出 NemoClaw 参考实现，以及 autonomous agents 将使推理需求较 reasoning AI 再增 1000x 的判断。
+- 🔴 质疑：100x/1000x 的需求倍数属于 NVIDIA 在自家叙事中的框架化估算，不是独立审计数据；NemoClaw 目前也更像参考实现和生态抓手，距离被大规模企业采用仍有执行落差。
+
+**信源：** https://blogs.nvidia.com/blog/what-openclaw-agents-mean-for-every-organization/
+
+**关联行动：** 若进入成稿，建议把它放在硬件/基础设施段，强调‘企业级 agent 部署栈开始成形’而非简单写成 OpenClaw 热度新闻。
+
 ## 下期追踪问题
 
 1. **DeepSeek 多模态灰度开放之后，会不会很快补出官方 API、模型卡、正式产品文档或更明确的商业化入口？** 重点盯 DeepSeek 官方文档、GitHub、产品页与开发者社区。
