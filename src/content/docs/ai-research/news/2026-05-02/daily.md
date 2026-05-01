@@ -1,6 +1,6 @@
 ---
-title: "2026-05-02 AI 日报：[占位，最后由北美采集轮填写]"
-description: "[占位]"
+title: "2026-05-02 AI 日报：Z.ai 公开 GLM-5 推理故障根因，Nebius 把开放模型推理优化做成平台能力"
+description: "Z.ai Scaling Pain、Nebius x Eigen AI、NVIDIA NemoClaw、EU AI Act、Hugging Face 供应链风险、国产算力适配"
 ---
 
 # 2026-05-02 AI 日报
