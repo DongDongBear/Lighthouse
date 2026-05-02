@@ -1,0 +1,69 @@
+[
+  {
+    "section": "company",
+    "title": "Hugging Face / ClawHub 被用于分发恶意载荷，欧洲开源 AI 分发层暴露供应链新风险",
+    "grade": "B",
+    "published_at": "2026-05-01T08:41:57+00:00",
+    "source_url": "https://www.securityweek.com/hugging-face-clawhub-abused-for-malware-distribution/",
+    "company_or_topic": "Hugging Face",
+    "summary": "SecurityWeek 引述 Acronis 称，攻击者正利用 Hugging Face 仓库与 ClawHub 技能市场分发带有隐藏指令的恶意文件；其中 ClawHub 一侧识别出 13 个开发者账号、近 600 个恶意 skills，负载覆盖 trojan、cryptominer、infostealer，并利用间接 prompt injection 与社工链路诱导用户下载执行。",
+    "significance": "这不是单点漏洞，而是 AI 分发平台开始出现类似 npm / PyPI 式的供应链污染模式。对欧洲开源生态来说，风险已从‘模型能不能跑’转向‘模型仓库、agent marketplace 和外部资源是否可信’。",
+    "analysis": "Hugging Face 和 ClawHub 的共同问题不在于核心平台被攻破，而在于它们天然鼓励共享代码、技能与外部依赖，正好给攻击者提供了借信任链投毒的入口。Acronis 点出的重点是，攻击者不一定直接黑 agent，而是让 agent 去读取带隐藏指令的资源，再把下载与执行动作包装成正常能力扩展。这意味着 2026 年 AI 安全的主战场之一，已经从模型 jailbreak 扩展到 model/skill distribution、prompt-supply-chain 和 developer trust graph。若平台不尽快补仓库信誉、skill 审核、执行权限隔离和 provenance 机制，开源 agent 生态越繁荣，投毒面也会越大。",
+    "support": "近 600 个恶意 skills 和跨 Windows/macOS/Linux/Android 的负载分布，说明这已不是零星滥用，而是成规模的生态层攻击信号。",
+    "skepticism": "当前核心证据主要来自 Acronis 第三方研究与平台样本扫描，尚未看到 Hugging Face 或 ClawHub 发布更完整的官方处置数字，因此真实覆盖面可能高于或低于现有披露。",
+    "action": "继续追 Hugging Face / ClawHub 是否公布下架数量、账号处置、skill 签名 / provenance / 沙箱隔离方案，以及 Acronis 是否补充 IOC 与更完整样本统计。",
+    "followup": false,
+    "prior_refs": []
+  },
+  {
+    "section": "policy",
+    "title": "EU AI Act Omnibus 谈判继续停摆，但高风险系统合规时钟并未暂停",
+    "grade": "B",
+    "published_at": "2026-05-01T00:27:05+00:00",
+    "source_url": "https://natlawreview.com/article/eu-ai-act-update-omnibus-talks-stall-clock-still-ticking",
+    "company_or_topic": "EU AI Act",
+    "summary": "National Law Review 5 月 1 日跟进称，欧盟围绕 Digital Omnibus on AI 的修法谈判在周三再次无果而终。文中点明，若修正案最终通过，Annex III 高风险 AI 系统的合规节点拟从 2026-08-02 延后至 2027-12-02，Annex I 既有受监管产品拟延至 2028-08-02；但在达成妥协前，现行 2026 年 8 月时点仍然有效。",
+    "significance": "这条对欧洲 AI 公司和部署方的现实意义高于一般政策评论，因为它直接决定 2026 下半年产品上线、法务预算、文档准备和销售承诺要按哪个时间表执行。",
+    "analysis": "相比 4 月底那条‘谈判卡壳’信号，这篇更新把最关键的执行变量写得更清楚：一是两类高风险系统可能对应两档延期；二是谈判暂停并不自动带来监管宽限，企业仍需按最保守口径准备 2026-08-02。对欧洲厂商而言，最昂贵的不是规则严格，而是规则可能放松但当前还没正式放松，因此产品、合规、采购和客户沟通都得双轨准备。若未来一个月 trilogue 仍不能出文本，很多中小 AI 公司会被迫提前投入本该在 2027 年后才需要的治理资源。",
+    "support": "文章给出了具体延期日期和 Annex I / Annex III 的差异化路径，比此前只谈‘卡壳’更接近企业可执行信息。",
+    "skepticism": "这仍是法律观察口径而非欧盟官方公告；最终是否延期、哪些产品会被排除在 Annex I 之外，仍取决于后续政治妥协文本。",
+    "action": "继续追下一轮 trilogue 时间点、折中文本是否保留 2027/2028 两档延期，以及欧盟是否就医疗器械等 Annex I 产品给出更明确边界。",
+    "followup": true,
+    "prior_refs": [
+      "/tmp/Lighthouse/src/content/docs/ai-research/news/2026-04-30/daily.md#EU-3",
+      "/tmp/Lighthouse/src/content/docs/ai-research/news/2026-04-08/daily.md#EU-2"
+    ]
+  },
+  {
+    "section": "ecosystem",
+    "title": "DeepMind alumni 正在变成欧洲 AI 创业‘母体’，18 个月内已有 112 人创业或转入 stealth",
+    "grade": "B",
+    "published_at": "2026-05-01T08:17:00+00:00",
+    "source_url": "https://tech.eu/2026/05/01/over/",
+    "company_or_topic": "DeepMind",
+    "summary": "Tech.eu 援引 Evertrace 数据称，过去 18 个月里共有 112 名 DeepMind alumni 已创办或计划创办新公司；其中 38 家已正式启动，74 人转入 stealth 角色。地域上 70 家在美国、28 家在英国，其余分布在西班牙、瑞士、德国、奥地利、波兰等地，多数与 AI 相关。",
+    "significance": "这条不是融资 headline，但它说明 DeepMind 对欧洲 AI 的真实外溢影响，正在从‘一家明星实验室’升级为‘连续创业人才工厂’。对欧洲竞争力而言，人才再分配比单个项目新闻更接近中长期基本盘。",
+    "analysis": "欧洲 AI 一直被质疑缺少足够多的创业飞轮和连续成功团队，而 DeepMind alumni 网络正在补这块短板。最重要的不是 David Silver 那笔 $1.1B 种子轮本身，而是它背后还有 100+ 名离开 DeepMind 后继续创业或 stealth 的研究、工程和产品骨干。若这条趋势持续，英国和欧洲未来 12-24 个月会更像‘从一个前沿实验室分叉出多条创业支线’，而不是继续依赖 Mistral、Wayve、Synthesia 这类少数明星公司撑门面。对资本方而言，这会改变 deal sourcing 结构；对政策方而言，则说明留住和放大 founder-factory 型机构，可能比单次补贴更有效。",
+    "support": "112 名 alumni、28 家英国项目、38 家已正式成立公司，这些数字把 DeepMind 的创业外溢从印象流变成了可量化现象。",
+    "skepticism": "Evertrace 的口径把大量 stealth 角色也算进来，且并非每个 stealth 项目都已被 Tech.eu 独立核实为完整创业公司，因此实际成活率与融资质量还要继续观察。",
+    "action": "继续追 Evertrace 或其他数据库是否补出更细名单、融资状态与赛道分布，尤其盯英国 Sovereign AI 资本是否持续押注 ex-DeepMind founder cohort。",
+    "followup": false,
+    "prior_refs": []
+  },
+  {
+    "section": "funding",
+    "title": "Amsterdam AI 基建公司 Nebius 斥资 6.43 亿美元收购 Eigen AI，欧洲云侧开始补齐推理优化层",
+    "grade": "B",
+    "published_at": "2026-05-01T13:14:11+00:00",
+    "source_url": "https://tech.eu/2026/05/01/nebius-announces-construction-of-one-of-europes-largest-data-centres/",
+    "company_or_topic": "European AI startup funding",
+    "summary": "Tech.eu 报道，Amsterdam 总部的 AI 基础设施公司 Nebius 以约 6.43 亿美元现金加股票收购旧金山推理优化初创 Eigen AI。Nebius 表示将把 Eigen AI 的优化层整合进自家 Token Factory，目标是提升开源模型 inference token yield、吞吐与单位成本；交易同时带来约 20 人的推理研究团队。",
+    "significance": "这条的价值不只是跨境并购金额大，而是它显示欧洲 AI infra 玩家开始从‘卖 GPU 容量’往‘卖推理效率’上移一层。对于欧洲主权 AI 叙事来说，真正稀缺的不只是数据中心，还有能把 inference economics 做薄的系统软件能力。",
+    "analysis": "Nebius 过去更像 neocloud / GPU infra 供给方，这次收购说明它已经意识到未来护城河不在单纯机柜规模，而在推理单位经济学。Eigen AI 被 Nebius 看中的核心不是模型品牌，而是把 memory、routing、compute bottleneck 压低的 inference optimisation layer。若整合顺利，Nebius 将不只是‘欧洲可替代算力’供应商，而会更像一家同时控制算力、路由和 token 产出的全栈 AI 云。放在欧洲市场看，这类并购比单一融资更有信号：欧洲公司开始用资本把美国效率团队并入自己的 infra stack，而不是只当下游客户购买技术。",
+    "support": "6.43 亿美元现金+股票、20 人研究团队、直接整合进 Token Factory，这些都表明 Nebius 不是财务投资，而是在为推理层竞争提前锁关键能力。",
+    "skepticism": "文章中的性能与成本改善仍主要来自 Nebius 自述；跨境整合后能否真正转化成客户侧更高吞吐和更低 cost per inference，还需要产品化与财务指标验证。",
+    "action": "继续追 Nebius 何时完成交易交割、Token Factory 是否公布量化性能对比，以及欧洲企业客户是否把该优化层视为迁移到 Nebius 的新理由。",
+    "followup": false,
+    "prior_refs": []
+  }
+]

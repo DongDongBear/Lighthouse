@@ -1,0 +1,38 @@
+[
+  {
+    "section": "blog",
+    "title": "The Batch Issue 351：一篇 newsletter 同时给出 GPT-5.5、Kimi K2.6 与 AI 数据中心排放压力的可写增量",
+    "grade": "B",
+    "published_at": "2026-05-01T09:46:57-07:00",
+    "source_url": "https://www.deeplearning.ai/the-batch/issue-351/",
+    "topic": "The Batch / model releases / AI infrastructure",
+    "arxiv_id": "",
+    "summary": "deeplearning.ai 于 2026-05-01 发布 The Batch 第 351 期，明确覆盖三条高价值线索：OpenAI GPT-5.5 在多项客观 benchmark 领先但 hallucination 更高；Moonshot 的 Kimi K2.6 作为 1T 参数开源权重 VLM/agent 模型继续推高长时 coding 与多 agent orchestration；以及大型 AI 公司为追赶数据中心电力需求，正让既有碳减排承诺承压。",
+    "significance": "这不是单一新闻，而是把‘模型能力跃迁 + 开源阵营追赶 + 基础设施电力约束’放进同一篇编辑筛选里，适合作为北美轮的高密度博客候选。尤其其中的排放/电力段落，把 AI 竞争重新落回真实基础设施瓶颈。",
+    "analysis": "对日报来说，第 351 期最有价值的不是把 OpenAI 或 Moonshot 的发布重复一遍，而是它把 2026 年模型竞赛的三个层次摆在一起：一是闭源旗舰继续刷新 agent/coding benchmark，但可靠性问题仍未解决；二是开源权重阵营通过更长时执行和 agent swarm 设计逼近生产可用性；三是当模型推理从 prompt 调用升级到持续运行的 agents，真正的约束开始从参数规模转向电力、机房和碳排放。作为 newsletter，它提供了一个很好的框架性入口。",
+    "support": "页面含明确日期 May 01, 2026；正文可直接验证三条子议题：GPT-5.5 Outperforms, Hallucinates、Big AI’s Plans Strain CO2 Pledges、Kimi K2.6 Challenges Open-Weights Champs。",
+    "skepticism": "The Batch 本质是 curated newsletter，不是原始披露源；如果主稿采用，最好把其中最重要的二级事实再回指到对应原始发布或权威报道。",
+    "action": "可在总稿中把它作为‘北美 newsletter 综述型候选’，重点抽出基础设施电力压力与模型可靠性这两个比单纯产品发布更耐写的角度。",
+    "star": false,
+    "followup": false,
+    "prior_refs": []
+  },
+  {
+    "section": "hardware",
+    "title": "NVIDIA 用 NemoClaw 参考实现把 OpenClaw 长时自治 agent 往企业安全部署框架里收编",
+    "grade": "B",
+    "published_at": "2026-04-30T20:00:39+00:00",
+    "source_url": "https://blogs.nvidia.com/blog/what-openclaw-agents-mean-for-every-organization/",
+    "topic": "NVIDIA / AI infrastructure / agent runtime",
+    "arxiv_id": "",
+    "summary": "NVIDIA Blog 2026-04-30 发布《Nemotron Labs: What OpenClaw Agents Mean for Every Organization》，明确提出与 OpenClaw 社区合作改进安全性，并推出 NemoClaw 参考实现，把 OpenClaw、NVIDIA OpenShell 安全运行时和 Nemotron 开放模型打包为企业部署蓝图。文中还给出 NVIDIA 对自治 agent 基建需求的判断：reasoning 相比 generative AI 已把 inference demand 放大约 100 倍，而持续运行的 autonomous agents 还会在此基础上再推高约 1000 倍。",
+    "significance": "这条的价值不在‘又一篇 NVIDIA 博客’，而在于它把 NVIDIA 的角色从 GPU/模型供应商延伸到 agent runtime、安全默认配置和企业治理层，等于试图占住下一代 AI 基础设施的软件入口。",
+    "analysis": "OpenClaw 爆红后，行业真正缺的不是再做一个 demo agent，而是如何把持续运行、会调 API、会接本地数据的自治系统安全地塞进企业 IT。NVIDIA 的做法很典型：一边借 OpenClaw 热度进入开发者工作流，一边用 OpenShell、Nemotron 和 hardened defaults 把部署基线收紧，再顺手把计算需求叙事升级为‘agent 会把 inference economics 再放大三个数量级’。如果这个方向成立，未来企业买的不只是模型或 GPU，而是带治理、隔离和运行时默认值的整套 agent infrastructure。",
+    "support": "页面含明确日期 April 30, 2026；正文明确写到与 OpenClaw 社区合作、推出 NemoClaw 参考实现，以及 autonomous agents 将使推理需求较 reasoning AI 再增 1000x 的判断。",
+    "skepticism": "100x/1000x 的需求倍数属于 NVIDIA 在自家叙事中的框架化估算，不是独立审计数据；NemoClaw 目前也更像参考实现和生态抓手，距离被大规模企业采用仍有执行落差。",
+    "action": "若进入成稿，建议把它放在硬件/基础设施段，强调‘企业级 agent 部署栈开始成形’而非简单写成 OpenClaw 热度新闻。",
+    "star": false,
+    "followup": false,
+    "prior_refs": []
+  }
+]

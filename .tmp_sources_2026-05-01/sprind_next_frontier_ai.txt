@@ -1,0 +1,205 @@
+SPRIND | Next Frontier AI Challenge
+Home
+Actions
+Challenges
+Next Frontier Ai
+DE
+EN
+Open for applications
+Your Challenge:
+Next Frontier AI
+Topic
+Goal
+Participate
+FAQ
+Contact
+We are looking for the leap to the next S-curve of artificial intelligence. Disruptive approaches with the potential to fundamentally surpass the capabilities of today's systems. We need bold teams. We need you.
+Europe's competitiveness in AI innovation remains far behind that of the USA and China. While OpenAI, Anthropic, and DeepSeek invest billions in foundation models, Europe lacks the industrial backbone to independently develop, operate, and scale next-generation AI systems. The consequence: strategic dependency in key sectors – industry, healthcare, public administration, security.
+The SPRIND Challenge
+Next Frontier AI
+aims to change that: a structured, three-stage innovation competition over 24 months that bridges the gap between cutting-edge research and commercialisation. The goal is not the incremental development of existing models – we are looking for creative approaches that push the algorithmic boundaries of today and have the potential to far surpass the expected evolution of existing AI approaches.
+The Challenge identifies approaches that, with sufficient funding, can lead to genuine breakthroughs, while simultaneously ensuring the development of talented teams with high-performance processes. The result: not just technologically relevant artefacts, but commercial entities with research, deployment, and operational excellence – the seeds of European Frontier AI Labs.
+Play video
+00:00
+The challenge: to transform conceptual frontier approaches into European AI Labs with validated technologies – within 24 months.
+The Challenge pursues a technology- and application-agnostic approach, deliberately excluding incremental optimisations of existing architectures. We are looking for disruptive model architectures, novel training paradigms, innovative modalities, or systemic multi-agent approaches – with a clear go-to-market strategy and operational excellence.
+The strategic goal: three European Frontier AI Labs that, following successful scale-up financing, operate competitively on the international stage – technologically, operationally, and financially.
+We support:
+Potential breakthrough innovations
+The Challenge spans 24 months across three stages. A jury of internationally recognised experts – including Frontier Lab veterans, leading researchers, and deep-tech investors – assists SPRIND in evaluating and selecting teams.
+Teams participating in this Challenge will be pushed to their full potential. SPRIND provides individualised support at every stage, including financial backing, direct access to a network of experts and potential collaborators, and a coaching and company-building programme. After each stage, the jury reviews results and evaluates which teams demonstrate the greatest breakthrough innovation potential. For Stage 1, up to ten teams can each receive up to €3 million (plus VAT). Up to six teams advance to Stage 2, with funding of up to €8 million (plus VAT) per team. Up to three champions reach Stage 3, with up to €15.5 million (plus VAT) per team.
+The Competition
+Detailed information can be found in the call for submissions and the participation agreement.
+Call for Submissions & Participation Agreement
+Application
+The application period runs until June 1, 2026 (12:00 pm CET). All applications submitted by this deadline will be considered.
+Apply Now
+FAQ
+What’s the timeline?
+Our Timeline
+30 April 2026 Application period opens
+01 June 2026 Application deadline
+24/25 June 2026 In-person pitches in front of jury
+June 2026 Proposal screening and pitch
+July 2026 Up to 10 teams are funded
+How does the €125M challenge work?
+€125M non-dilutive funding for 10 teams following three stages:
+Stage 1:
+10 Teams / 7 months / €3M per team
+Stage 2:
+6 Teams / 8 months / €8M per team
+Stage 3:
+3 Teams / 9 months / €15.5M per team
+We host a series of events in major cities across Europe where you can learn more about the initiative, hear from frontier AI experts, and connect with potential partners in person. Whether you’re looking for tech expertise, strategic thinking, or operational experience, this is where you find the right team.
+1. Proposal + pitch: up to 10 teams selected
+Submit your application by June 1th 2026
+Pitch your idea to the jury on June 24th/25th 2026
+The jury then selects up to 10 teams to enter the funded build phase.
+2. Funded build phase (July 2026–Autumn 2028)
+The 10 selected teams get serious funding, compute and hands-on support. This is real lab-building capital, not a stipend.
+You move through staged gates with down-selection until up to 3 winners remain. At each gate, the jury looks at research agenda, metrics, infra, MLOps, evals, safety, early pilots.
+3. Outcome of the challenge
+The goal is not a single winning lab, but up to 3 venture-ready labs with pilots, eval suites, infra, teams, and investment-grade data rooms.
+What are the key milestones and deliverables at each stage?
+Stage 1
+Most importantly: First technological proof points for the frontier hypothesis (e.g. technical report or paper preprint)
+Artefacts (model families, experimental codebases, open-source contributions) showing a potential scaling dimension or new emergent phenomena
+Updated roadmap for Stage 2, justified by technological and operational learnings
+Scalable R&D processes demonstrated
+New connections into academic and economic ecosystems
+Overview of resource utilisation and implemented FinOps controls
+Stage 2
+Scalable, production-ready engineering processes demonstrated
+Fast translation of experiments into production established
+Scaling dimensions and emergent phenomena validated or falsified
+First technical secrets identified, leading to 5–10x optimisation on relevant KPIs
+Proprietary datasets in scaling phase
+Partnerships for long-term compute procurement initiated
+Qualified conversations with commercial R&D departments
+Stage 3
+Frontier system prototype implemented, demonstrating the lab's vision
+User applications in testing phase (GUI/API)
+Multiple technical secrets successfully identified and implemented
+Scaling laws clearly recognisable and understood
+First long-term industry partnerships established
+Long-term compute resources secured
+Investment-grade data room ready for large-scale investors
+At each gate, the jury makes go / pivot / stop decisions based on milestone evidence, technical reports, and updated roadmaps.
+How does the jury evaluate applications?
+The jury evaluates you across four dimensions:
+Approach: Potential to become a disruptive innovation. Does your thesis target the next S-curve, not just optimise the current one?
+Implementation: Effectiveness of the proposed work plan. Is the roadmap realistic? Are milestones concrete and measurable?
+Team: Ability to execute. Does the team combine deep technical expertise with operational competence? Evidence of shipped systems?
+Economic Viability: Cost-effectiveness and resource realism. Are time, compute, and budget estimates consistent?
+What makes a strong application?
+Credible path to frontier-grade performance: Why your approach, given sufficient scale-up funding, can produce systems matching or exceeding today's leading models. Grounded in theoretical reasoning, preliminary evidence, or well-founded analogies.
+Broad applicability as a technological platform: The system must address a broad application spectrum and create significant automation potential in economically relevant areas.
+Sustainable developability: The system must be operable and improvable in a commercial environment, with the highest standards of R&D, deployment, and operational excellence.
+Demonstrable leapfrog potential: Not merely an optimisation of the status quo but a genuine capability discontinuity.
+What do applicants need to submit?
+The form is designed to be lean and focused. In addition to standard administrative details (contact and institutional information), applicants complete a small set of short content entries describing their idea, its technical maturity, the planned work, and the team. The form includes narrative fields with clear character limits (ranging from 500 to 9,000 characters depending on the section), a high-level cost estimate, and links to existing artefacts. Applicants are also asked to upload three supporting documents (CVs of key personnel, a detailed cost overview, and a sanctions declaration).
+How are submissions evaluated?
+Our experienced team of technical analysts reviews each submission against the evaluation criteria outlined in the call for submissions. From this review, a shortlist of teams will be invited to pitch before our independent jury of world-leading experts. Shortlisted teams' application documents will be shared with jury members in advance. The jury reaches its final decision by mutual consensus after the pitches at the end of June 2026.
+What technical directions are in scope?
+The challenge is architecturally open. We make zero hard technical assumptions. Illustrative directions include:
+Alternative model architectures (state-space models, energy-based transformers, diffusion LLMs, hierarchical reasoning models, JEPA-style objectives, Titans architectures, or entirely novel frameworks)
+Agentic systems and multi-agent architectures (fundamentally new orchestration approaches based on innovative theory, not conventional tool-use wrappers)
+Embodied AI and world models (end-to-end robotics foundation models, generative world models for sim-to-real transfer)
+Neuro-symbolic and hybrid approaches (neural + symbolic, formal verification, compositional generalisation)
+Scientific and industrial foundation models (protein design, material science, drug discovery)
+Systems-level breakthroughs (novel data engines, evaluation frameworks, sparsity/MoE innovations)
+Novel training paradigms (alternatives to pre-train + RLHF, test-time training, meta-learning)
+What we are NOT looking for:
+Incremental transformer optimisation without fundamentally new capability horizons
+Reproduction or derivatives of established models (e.g. rebuilding OpenAI, Llama, Qwen)
+Incremental efficiency gains (better quantisation, leaner MoE routing)
+Conventional agent architectures without systemic innovation
+Domain-specific fine-tuning without foundational innovation
+Brute-force scaling as the primary innovation thesis
+Hardware-software co-design (exception if it fits into our 7/8/9 month challenge cycles)
+What can you expect?
+Competition meets collaboration: you run in parallel with other labs, see what they're doing, sometimes share insights – and still push to outrun them.
+Freedom over bureaucracy: we cut paperwork where we can. Funding follows progress, not slide decks.
+Results drive decisions: if your system learns faster, scales better, or shifts real-world metrics, you advance.
+Who can apply? What background are you looking for?
+Anyone with ambition, technical expertise, and the drive to build something genuinely new can apply – whether you're an individual, a duo with a shared vision, or an established team ready to scale. You don't need a polished pitch or a complete team from day one.
+Don't have a team yet?
+We'll help you find co-founders and partners through active matchmaking events that connect complementary technical, strategic and operational skills. Visit our on-site roadshows in several European cities, or join virtual meet-ups from February to April 2026.
+Do I need a specific legal form?
+Exact rules will be explained in the application process, but you should assume:
+you'll need a European legal entity (UG, GmbH, SAS, Oy, S.r.l., etc.) by the time funding flows,
+and the lab must be effectively headquartered in European Union, the European Free Trade Association (EFTA), Israel or the United Kingdom.
+We'll provide templates and support for cap tables, governance, and contracts, so a lack of prior startup experience is not a blocker.
+Which teams are eligible to apply?
+Teams of all backgrounds are eligible to apply, including established companies, start-ups, incubators, universities, and non-university research institutions. Applying prior to creating a dedicated legal entity is possible; however, the legal entity should be created promptly within Stage 1 of the Challenge. The team’s application should reflect a corresponding intention to do so.
+Teams are eligible to apply if they are headquartered in the European Union, the European Free Trade Association (EFTA), Israel or the United Kingdom. Individual team members or collaboration partners may be based outside of this region.
+Do we have to buy compute ourselves, or do you provide it?
+Compute is part of the challenge budget. The plan is: we try to negotiate bulk deals with (preferably European) HPC / cloud providers. If that's not possible, we will fund you directly.
+We prioritise European providers where viable, but we are not dogmatic. If the best option for your setup is a hyperscaler, that’s fine – the goal is to make the labs win, not enforce ideology.
+We have little / no entrepreneurial experience. Can you help?
+Yes. That's a core design feature, not an afterthought.
+Next Frontier AI and our partners provide company-building support:
+templates for legal structures, equity, IP,
+help with hiring, HR and finance basics,
+governance, boards, non-executive advisors,
+GTM coaching and commercial strategy support,
+safety & compliance playbooks,
+support in recruiting MLOps, security, data, product, etc.
+We don't expect every PI or staff engineer to suddenly become a perfect CEO. We care that the lab becomes investable and operationally excellent; we'll help you get there.
+Can I combine your funding with other (private or public) funding?
+In principle: yes, as long as it doesn't break state-aid rules, double-fund the same cost block, or create impossible governance.
+You can have existing grants, VC money or corporate collaborations; we'll just need transparency so contracts don't conflict.
+For follow-on, we explicitly want you to combine: venture capital, strategic corporates, public instruments (EIB, national programs), and other non-dilutive sources.
+The exact rules and combinations are spelt out in the application and contracts.
+How agile and iterative is Next Frontier AI?
+The whole endeavour is built around iterative, milestone-driven progress:
+You'll run many experiments rather than a single moonshot.
+Milestones tighten over time: agenda + teams → first scaled runs + evals → pilots → data room + financing.
+Funding follows progress; we keep room for pivots as long as your thesis remains frontier-relevant and technically credible.
+If you're used to
+ship, measure, iterate
+rather than
+five-year grant and a PDF
+, you'll be at home.
+What should I know about SPRIND’s IP provisions?
+As a federally owned limited liability company (GmbH), SPRIND is subject to specific regulatory requirements. To implement SPRIND Challenges, SPRIND relies on the European instrument of Pre-Commercial Procurement (PCP). This instrument enables fast and flexible funding with a comparatively low administrative burden. Due to EU State aid law requirements, provisions on the use of IP must be agreed, granting certain rights to the public contracting authority. We recommend you read the IP FAQs here before applying:
+DE Version
+ENG Version
+Do you have any questions about the Challenge? Write to us at
+nfai@sprind.org
+.
+Jano Costard, Challenge Officer
+More about this topic
+Magazine Articles
+4/7/2026
+NEXT FRONTIER AI ROADSHOW IN ZURICH, WARSAW AND AMSTERDAM
+The roadshow brings together open discussions with European AI experts, insights into the initiative, and guidance on the structure and process of the challenge.
+Read More
+12/3/2025
+Launching the Next Frontier AI Initiative
+SPRIND announces a new initiative with the ambitious goal of building at least three European Frontier AI Labs.
+Read More
+More Challenges and Funken
+Anti-Drone Response 2.0
+1st stage SPRIND Funke
+A fully autonomous system is to be developed, capable of neutralizing small and micro UAVs of up to 25 kg and 200 km/h autonomously, precisely, and non-destructively in real time.
+View challenge
+Next Frontier AI Concepts
+2nd stage SPRIND Funke
+Within a few months visionary concepts are to be developed in the Funke that will serve as the foundation for a European Frontier AI Lab in the future.
+View challenge
+Newsletter
+Email-Adresse
+*
+Sign Up
+When signing up for the SPRIND newsletter, our general
+privacy statement
+applies.
+FAQ
+Accessibility
+Corporate Governance
+Our Privacy Policy
+Imprint
+Press
+Contact
+SprinD GmbH, Lagerhofstr. 4, 04103 Leipzig, info@sprind.org

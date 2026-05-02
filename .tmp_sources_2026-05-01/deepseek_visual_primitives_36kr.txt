@@ -1,0 +1,68 @@
+DeepSeek Unveils Multimodal Technology Paradigm: Thinking with Visual Primitives
+English
+中文
+Deutsch
+Home
+Article
+DeepSeek unveils its multimodal technology paradigm, thinking with visual primitives
+机器之心
+2026-04-30 21:12
+Thinking with Visual Primitives
+Better late than never. As the May Day holiday is approaching, DeepSeek is unveiling new technologies to the public.
+Yesterday, a post on X by Chen Xiaokang of DeepSeek caught the public's attention on DeepSeek's multimodal capabilities.
+Subsequently, some users have been able to experience its multimodal capabilities on the DeepSeek website and app.
+Just now, DeepSeek officially released its multimodal model on Github and published the technical report behind it.
+It's brand - new and represents a groundbreaking inference paradigm.
+Project address: https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
+Technical report: https://github.com/deepseek-ai/Thinking-with-Visual-Primitives/blob/main/Thinking_with_Visual_Primitives.pdf
+Based on this technical report from DeepSeek, let's take a closer look at the wonders created by DeepSeek, Peking University, and Tsinghua University.
+This paper is titled "Thinking with Visual Primitives". The problem it poses hits the soft underbelly of almost all current multimodal large models: these models can "see", but they may not be able to "think clearly".
+If you show a photo of a dense crowd to GPT - 5.4 and ask "How many people are there in the picture?", it's very likely to count wrong. If you show a complex circuit diagram to Claude Sonnet 4.6 and ask "Is the red capacitor on the left to the left or right of the inductor on the right?", its answer is often vague or even self - contradictory. This is not a problem of the model not being able to see the picture clearly, but rather that the model can't grasp the visual objects it wants to talk about when "thinking".
+DeepSeek named this problem the "Reference Gap" and provided a complete solution.
+Background: "Seeing clearly" and "thinking clearly" are two different things
+To understand this problem, imagine describing a complex chessboard layout to a friend who can't see your screen. You say "The piece on the left is going to capture the piece slightly to the right of the center", but your friend has no idea which two pieces you're referring to.
+This is exactly the situation of existing multimodal large models during reasoning. They use natural language to build a "Chain of Thought" (CoT), but natural language is inherently ambiguous: descriptions like "the big one on the left" or "the red object near the center" can't accurately locate objects in a dense scene. The model's attention gradually "drifts" during the reasoning process, getting more and more confused and finally reaching a wrong conclusion.
+Previous academic solutions mainly focused on making the model "see more clearly": high - resolution cutting and dynamic partitioning of the picture to ensure the model can perceive details. This addresses the "Perception Gap".
+However, DeepSeek's paper points out that strong perception ability can't replace precise "referential ability". "Seeing" and "being able to clearly say what you're referring to" are two different things.
+Architecture: Standing on the shoulders of V4 - Flash
+This work uses the newly released V4 - Flash from DeepSeek as the language backbone. It is a Mixture of Experts (MoE) model with a total of 284B parameters and 13B parameters activated during inference. The visual encoding part uses DeepSeek's self - developed ViT (Visual Transformer), which supports input of any resolution.
+Notably, the core contribution of this team is to propose a complete "training philosophy": how to teach the model to precisely refer to visual objects during reasoning with very few visual tokens.
+Core Innovation 1: Transforming coordinates into "thinking units"
+The core idea of this paper can be summarized in one sentence: transform point coordinates and bounding boxes into basic units of reasoning and intersperse them in the chain of thought like text.
+In traditional approaches, bounding boxes are part of the output: the model first thinks clearly and then tells you "The target is at the coordinates [100,200,300,400] in the top - left corner of the picture". This is post - annotation, not a thinking tool.
+DeepSeek's approach is different. During the reasoning process, whenever the model mentions a visual object, it simultaneously outputs its coordinates:
+"Scan the picture for bears. Found one <|ref|> bear <|/ref|><|box|>[[452,23,804,411]]<|/box|>. It's climbing a tree, not on the ground, so it's excluded. Looking further down and to the left, found another <|ref|> bear <|/ref|><|box|>[[50,447,647,771]]<|/box|> standing on the edge of a rock, which meets the criteria."
+This is like how humans use their fingers to count things one by one. Coordinates are no longer just the answer but "anchor points" to eliminate ambiguity during the reasoning process. The model's logical chain is fixed to the physical coordinates of the picture and won't drift.
+This mechanism has two types of "primitives": bounding boxes (<|box|>) for objects that require location and size information; point coordinates (<|point|>) for more abstract spatial references, such as maze exploration trajectories or curve - tracing paths.
+Core Innovation 2: 7056 - fold visual compression
+Another impressive technological innovation comes from architectural - level compression.
+For a 756×756 picture, traditional solutions require a large number of visual tokens to be fed into the language model. DeepSeek's process is as follows: the picture is first processed by ViT, generating 2916 image - block tokens; then, through 3×3 spatial compression, these are merged into 324 tokens and input into the language model; finally, the "Compressed Sparse Attention" (CSA) mechanism built into V4 - Flash further compresses the KV cache by a factor of 4, leaving only 81 visual KV entries in the end.
+From the original pixels to the final cache entries, the overall compression ratio is 7056 times.
+This means that for an 800×800 picture, this model only needs about 90 KV cache entries, while Claude Sonnet 4.6 needs about 870, and Gemini - 3 - Flash needs about 1100. The paper argues that precise spatial referential ability can, to some extent, make up for the shortage of visual tokens. The model doesn't need to "see more" but rather "point more accurately".
+Core Innovation 3: Careful design of cold - start data
+The third dimension of technological innovation lies in the way of constructing training data.
+The team first crawled nearly 100,000 datasets related to object detection. After two rounds of strict screening (semantic review and geometric quality review), about 31,700 high - quality data sources were finally retained, generating over 40 million training samples.
+For the special cold - start data of "thinking with visual primitives", the team designed four types of tasks.
+The first type is counting, which is divided into two categories: coarse - grained ("How many people are there in the picture") and fine - grained ("How many people are wearing blue clothes"). For coarse - grained counting, the model learns to "lock in batches" - frame all candidate objects at once and then count; for fine - grained counting, it learns to scan and check attributes one by one. These two strategies correspond to different cognitive loads and are trained separately.
+The second type is spatial reasoning and visual question - answering. A large number of multi - hop reasoning samples are generated using the GQA dataset (natural scenes) and the CLEVR toolchain (controllable synthetic scenes), forcing the model to lock in the relevant objects with bounding boxes at each step of reasoning.
+The third type is maze navigation, with a total of 460,000 samples generated. The team used DFS (Depth - First Search), Prim, and Kruskal algorithms to generate mazes with three topological structures: rectangular, circular, and hexagonal. They also specifically designed mazes that seem solvable but are actually unsolvable to train the model's robustness. The model needs to use point coordinates to record each step of the exploration trajectory and mark the excluded paths with coordinates during backtracking.
+The fourth type is path tracing, with a total of 125,000 samples. Given a picture with multiple intersecting Bezier curves, the model is required to trace the curve from a specified starting point to the end point. The key challenge is "cross - ambiguity resolution": when two lines intersect, the model must determine which one is the continuation of the target curve, rather than taking shortcuts by using color - a test version with all curves of the same color was specifically designed.
+Training process: "Separate first, then combine"
+In the post - training stage, the team adopted a strategy of "specializing first, then unifying".
+First, two expert models (FTwG and FTwP) are trained with bounding - box data and point - coordinate data respectively to avoid interference between the two modalities when the data volume is small.
+Second, reinforcement learning (RL) is performed on each of the two expert models using the GRPO algorithm. The reward design is very detailed: format reward (whether the output format is correct), quality reward (whether the thinking content and the answer are consistent as judged by the LLM), and precision reward (task - specific) are carried out in parallel. For the counting task, a smooth exponential decay reward is used instead of binary right - or - wrong judgment. For the maze task, the reward is decomposed into five sub - items (causal exploration progress, exploration completeness, wall - penetration penalty, path validity, answer correctness), all aiming to provide the model with dense and information - rich learning signals.
+Third, unified reinforcement fine - tuning (Unified RFT) is carried out using the rollout data of the two expert models, and then training starts from the re - initialization of the pre - trained model to obtain the unified model F.
+Fourth, On - Policy Distillation is used to bridge the performance gap between the unified model and the expert models - let the student model generate its own trajectories and then minimize the KL divergence between its output distribution and the expert distribution.
+Experimental results: Surpassing GPT - 5.4 in the "hardest type of questions"
+The paper was evaluated on 11 benchmark tests and compared with mainstream models such as Gemini - 3 - Flash, GPT - 5.4, Claude Sonnet 4.6, Gemma4 - 31B, and Qwen3 - VL - 235B (all frontier models were evaluated through the API using a unified prompt).
+The summary of the results is as follows:
+In the counting task, this model scored 89.2% on Pixmo - Count (exact match), exceeding Gemini - 3 - Flash's 88.2% and significantly leading GPT - 5.4's 76.6% and Claude Sonnet 4.6's 68.7%. In fine - grained counting (DS_Finegrained_Counting), it ranked first with 88.7%, surpassing Qwen3 - VL's 87.2%.
+In multiple benchmarks of spatial reasoning, its overall performance was on par with or slightly better than that of the leading models, ranking first on MIHBench (85.3%) and SpatialMQA (69.4%).
+The most representative gap appears in the topological reasoning task. In maze navigation (DS_Maze_Navigation), this model scored 66.9%, while GPT - 5.4 scored 50.6%, Gemini - 3 - Flash scored 49.4%, and Claude Sonnet 4.6 scored 48.9% - all frontier models could only answer about half of the questions correctly, while this model improved by about 17 percentage points. In path tracing (DS_Path_Tracing), this model scored 56.7% compared to GPT - 5.4's 46.5% and Gemini - 3 - Flash's 41.4%, with a similarly large gap.
+The paper honestly points out that "all frontier models perform poorly in topological reasoning tasks, indicating that there is still considerable room for improvement in the reasoning ability of multimodal large models."
+Here are some qualitative examples:
+该文观点仅代表作者本人，36氪平台仅提供信息存储空间服务。
+For media inquiries, interview requests, business collaboration and Recruit global ecological partners, please contact mohaiying@36kr.com.
+Partner：startuprad.io
+36kr Europe (eu.36kr.com) delivers global business and markets news, data, analysis, and video to the world, dedicated to building value and providing business service for companies’ global expansion.
+© 2024 36kr.com. All rights reserved.
